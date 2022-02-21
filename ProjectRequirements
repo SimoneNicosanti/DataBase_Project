@@ -1,0 +1,19 @@
+Project Assignment System.
+
+This program has received a request confirmation. Please find the assignment below.
+
+Sistema di gestione di corsi di lingue straniere
+
+Si progetti un sistema informativo per la gestione dei corsi di lingua inglese, tenuti presso un instituto di insegnamento. Tutte le informazioni fanno riferimento ad un solo anno scolastico in corso, e non viene richiesto di mantenere le informazioni relative agli anni scolastici precedenti (è quindi necessario prevedere un’opportuna funzionalità per indicare che si vuole riconfigurare il sistema per l’avvio di un nuovo anno scolastico). La base dati deve avere le seguenti caratteristiche e mantenere le seguenti informazioni.
+
+I corsi sono organizzati per livelli. Ciascun livello è identificato dal nome del livello stesso (ad esempio Elementary, Intermediate, First Certificate, Advanced, Proficiency); inoltre è specificato il nome del libro di testo e se viene richiesto di sostenere un esame finale.
+
+I corsi sono identificati univocamente dal nome del livello cui afferiscono e da un codice progressivo, necessario per distinguere corsi che fanno riferimento allo stesso livello. Per ciascun corso sono note la data di attivazione, il numero e le informazioni anagrafiche degli iscritti e l’elenco dei giorni ed orari in cui è tenuto.
+
+Per gli insegnanti sono noti il nome, l’indirizzo, la nazione di provenienza, ed i corsi a cui sono stati assegnati. Ad un corso può essere assegnato più di un insegnante, assicurandosi che in una determinata fascia oraria un insegnante sia assegnato ad un solo corso.
+
+Per gli allievi sono noti il nome, un recapito, il corso a cui sono iscritti, la data di iscrizione al corso e il numero di assenze fatte finora (è di interesse tenere traccia dei giorni specifici in cui un allievo è stato assente). Gli allievi possono anche prenotare lezioni private, qualora vogliano approfondire alcuni aspetti della lingua inglese. Si vuole tener traccia di tutte le lezioni private eventualmente richieste da un allievo, in quale data e con quale insegnante. La prenotazione di una lezione individuale non può avvenire in concomitanza di un altro impegno di un insegnante.
+
+La scuola organizza anche un insieme di attività culturali. Ciascuna attività è identificata da un codice progressivo, e sono noti il giorno e l’ora in cui verrà tenuta. Nel caso di proiezioni in lingua originale, sono noti il nome del film ed il nome del regista. Nel caso di conferenze, sono noti l’argomento che verrà trattato ed il nome del conferenziere. Per poter partecipare alle attività gli allievi devono iscriversi.
+
+Il personale amministrativo della scuola deve poter inserire all’interno del sistema informativo tutte le informazioni legate ai corsi ed agli insegnanti e possono generare dei report indicanti, su base mensile, quali attività hanno svolto gli insegnanti. Il personale di segreteria gestisce le iscrizioni degli utenti della scuola ai corsi. Gli insegnanti possono generare dei report indicanti la propria agenda, su base settimanale.
