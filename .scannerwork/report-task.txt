@@ -1,7 +1,0 @@
-organization=simonenicosanti
-projectKey=SimoneNicosanti_DataBase_Project
-serverUrl=https://sonarcloud.io
-serverVersion=8.0.0.26933
-dashboardUrl=https://sonarcloud.io/dashboard?id=SimoneNicosanti_DataBase_Project
-ceTaskId=AX8cUxurKE0MGiWm3MxA
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AX8cUxurKE0MGiWm3MxA

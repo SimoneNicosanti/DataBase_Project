@@ -1,6 +1,6 @@
-##### Script Shell Per Commit Automatico #####
-# @Param $1 : messaggio del commit 
+##### Shell Script for Authomatic Commit #####
+# @Param $1 -> Commit Message
 
 git add . ;
-git commit -m "$1" ;
+git commit -m "$*" ;
 git push origin main ;
