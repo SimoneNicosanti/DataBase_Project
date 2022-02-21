@@ -1,5 +1,3 @@
-
-
 int main(char *args[]) {
     
 }
