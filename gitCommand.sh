@@ -1,5 +1,5 @@
 ##### Shell Script for Authomatic Commit #####
-# @Param $1 -> Commit Message
+# @Param $* -> All strings after ./gitCommand.sh
 
 git add . ;
 git commit -m "$*" ;
