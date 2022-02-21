@@ -1,7 +1,7 @@
 Project Assignment System.
 
 This program has received a request confirmation. Please find the assignment below.
-
+ 
 Sistema di gestione di corsi di lingue straniere
 
 Si progetti un sistema informativo per la gestione dei corsi di lingua inglese, tenuti presso un instituto di insegnamento. Tutte le informazioni fanno riferimento ad un solo anno scolastico in corso, e non viene richiesto di mantenere le informazioni relative agli anni scolastici precedenti (è quindi necessario prevedere un’opportuna funzionalità per indicare che si vuole riconfigurare il sistema per l’avvio di un nuovo anno scolastico). La base dati deve avere le seguenti caratteristiche e mantenere le seguenti informazioni.
