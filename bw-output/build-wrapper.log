@@ -1,292 +1,292 @@
-Mon Feb 21 15:46:50 2022: build-wrapper, version 6.30 (linux-x86)
-Mon Feb 21 15:46:50 2022: System name: Linux Nodename: alexandre-dumas Release: 5.13.0-28-generic Version: #31-Ubuntu SMP Thu Jan 13 17:41:06 UTC 2022 Machine: x86_64
-Mon Feb 21 15:46:50 2022: socket path: /tmp/build-wrapper-socket.8F7UZ4
-Mon Feb 21 15:46:50 2022: dynamic library found: /home/edmond-dantes/SonarScanner/BuildWrapper/libinterceptor-i686.so
-Mon Feb 21 15:46:50 2022: dynamic library found: /home/edmond-dantes/SonarScanner/BuildWrapper/libinterceptor-x86_64.so
-Mon Feb 21 15:46:50 2022: dynamic library found: /home/edmond-dantes/SonarScanner/BuildWrapper/libinterceptor-haswell.so
-Mon Feb 21 15:46:50 2022: cwd: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: command executed as: </home/edmond-dantes/SonarScanner/BuildWrapper/buildWrapper --out-dir bw-output>
-Mon Feb 21 15:46:50 2022: out-dir absolute path: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project/bw-output>
-Mon Feb 21 15:46:50 2022: command line received: <gcc ./src/main.c -o ./out/main.out>
-Mon Feb 21 15:46:50 2022: env 0: <G_ENABLE_DIAGNOSTIC=0>
-Mon Feb 21 15:46:50 2022: env 1: <GNOME_SHELL_SESSION_MODE=ubuntu>
-Mon Feb 21 15:46:50 2022: env 2: <SSH_AGENT_LAUNCHER=gnome-keyring>
-Mon Feb 21 15:46:50 2022: env 3: <WINDOWPATH=2>
-Mon Feb 21 15:46:50 2022: env 4: <QT_ACCESSIBILITY=1>
-Mon Feb 21 15:46:50 2022: env 5: <PWD=/home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: env 6: <XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop>
-Mon Feb 21 15:46:50 2022: env 7: <LANG=it_IT.UTF-8>
-Mon Feb 21 15:46:50 2022: env 8: <XAUTHORITY=/run/user/1000/gdm/Xauthority>
-Mon Feb 21 15:46:50 2022: env 9: <GNOME_TERMINAL_SERVICE=:1.133>
-Mon Feb 21 15:46:50 2022: env 10: <MAKEFLAGS=>
-Mon Feb 21 15:46:50 2022: env 11: <LESSOPEN=| /usr/bin/lesspipe %s>
-Mon Feb 21 15:46:50 2022: env 12: <MFLAGS=>
-Mon Feb 21 15:46:50 2022: env 13: <SSH_AUTH_SOCK=/run/user/1000/keyring/ssh>
-Mon Feb 21 15:46:50 2022: env 14: <XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg>
-Mon Feb 21 15:46:50 2022: env 15: <XDG_SESSION_DESKTOP=ubuntu>
-Mon Feb 21 15:46:50 2022: env 16: <XDG_SESSION_TYPE=x11>
-Mon Feb 21 15:46:50 2022: env 17: <SESSION_MANAGER=local/alexandre-dumas:@/tmp/.ICE-unix/2017,unix/alexandre-dumas:/tmp/.ICE-unix/2017>
-Mon Feb 21 15:46:50 2022: env 18: <DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus>
-Mon Feb 21 15:46:50 2022: env 19: <GNOME_DESKTOP_SESSION_ID=this-is-deprecated>
-Mon Feb 21 15:46:50 2022: env 20: <SHELL=/bin/bash>
-Mon Feb 21 15:46:50 2022: env 21: <XMODIFIERS=@im=ibus>
-Mon Feb 21 15:46:50 2022: env 22: <SHLVL=2>
-Mon Feb 21 15:46:50 2022: env 23: <GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/68847f61_840b_42d1_9f5c_4a803f1ec13c>
-Mon Feb 21 15:46:50 2022: env 24: <PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin>
-Mon Feb 21 15:46:50 2022: env 25: <INVOCATION_ID=65c4b7e8244c4a7caaf4bffd317d377a>
-Mon Feb 21 15:46:50 2022: env 26: <SONAR_TOKEN=fe649effdffc39c9971b8d741ba8dd7ca1914e5f>
-Mon Feb 21 15:46:50 2022: env 27: <USERNAME=edmond-dantes>
-Mon Feb 21 15:46:50 2022: env 28: <LESSCLOSE=/usr/bin/lesspipe %s %s>
-Mon Feb 21 15:46:50 2022: env 29: <XDG_CURRENT_DESKTOP=ubuntu:GNOME>
-Mon Feb 21 15:46:50 2022: env 30: <LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:>
-Mon Feb 21 15:46:50 2022: env 31: <DESKTOP_SESSION=ubuntu>
-Mon Feb 21 15:46:50 2022: env 32: <LOGNAME=edmond-dantes>
-Mon Feb 21 15:46:50 2022: env 33: <SYSTEMD_EXEC_PID=3712>
-Mon Feb 21 15:46:50 2022: env 34: <DISPLAY=:1>
-Mon Feb 21 15:46:50 2022: env 35: <GTK_MODULES=gail:atk-bridge>
-Mon Feb 21 15:46:50 2022: env 36: <USER=edmond-dantes>
-Mon Feb 21 15:46:50 2022: env 37: <MANAGERPID=1771>
-Mon Feb 21 15:46:50 2022: env 38: <_=/usr/bin/make>
-Mon Feb 21 15:46:50 2022: env 39: <MAKE_TERMOUT=/dev/pts/0>
-Mon Feb 21 15:46:50 2022: env 40: <XDG_RUNTIME_DIR=/run/user/1000>
-Mon Feb 21 15:46:50 2022: env 41: <GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1>
-Mon Feb 21 15:46:50 2022: env 42: <COLORTERM=truecolor>
-Mon Feb 21 15:46:50 2022: env 43: <JOURNAL_STREAM=8:41455>
-Mon Feb 21 15:46:50 2022: env 44: <MAKE_TERMERR=/dev/pts/0>
-Mon Feb 21 15:46:50 2022: env 45: <XDG_SESSION_CLASS=user>
-Mon Feb 21 15:46:50 2022: env 46: <HOME=/home/edmond-dantes>
-Mon Feb 21 15:46:50 2022: env 47: <QT_IM_MODULE=ibus>
-Mon Feb 21 15:46:50 2022: env 48: <TERM=xterm-256color>
-Mon Feb 21 15:46:50 2022: env 49: <IM_CONFIG_PHASE=1>
-Mon Feb 21 15:46:50 2022: env 50: <VTE_VERSION=6402>
-Mon Feb 21 15:46:50 2022: env 51: <XDG_MENU_PREFIX=gnome->
-Mon Feb 21 15:46:50 2022: env 52: <GDMSESSION=ubuntu>
-Mon Feb 21 15:46:50 2022: env 53: <MAKELEVEL=1>
-Mon Feb 21 15:46:50 2022: executing: <gcc ./src/main.c -o ./out/main.out>
-Mon Feb 21 15:46:50 2022: initializing json file
-Mon Feb 21 15:46:50 2022: process created with pid: 4978
-Mon Feb 21 15:46:50 2022: parent pid: 4977
-Mon Feb 21 15:46:50 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: executable: </home/edmond-dantes/SonarScanner/BuildWrapper/buildWrapper>
-Mon Feb 21 15:46:50 2022: argv[0]: </home/edmond-dantes/SonarScanner/BuildWrapper/buildWrapper>
-Mon Feb 21 15:46:50 2022: argv[1]: <-c>
-Mon Feb 21 15:46:50 2022: argv[2]: <>
-Mon Feb 21 15:46:50 2022: argv[3]: <gcc>
-Mon Feb 21 15:46:50 2022: argv[4]: <./src/main.c>
-Mon Feb 21 15:46:50 2022: argv[5]: <-o>
-Mon Feb 21 15:46:50 2022: argv[6]: <./out/main.out>
-Mon Feb 21 15:46:50 2022: skipping process with pid: 4978
-Mon Feb 21 15:46:50 2022: process created with pid: 4979
-Mon Feb 21 15:46:50 2022: parent pid: 4978
-Mon Feb 21 15:46:50 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: executable: </usr/bin/x86_64-linux-gnu-gcc-11>
-Mon Feb 21 15:46:50 2022: argv[0]: <gcc>
-Mon Feb 21 15:46:50 2022: argv[1]: <./src/main.c>
-Mon Feb 21 15:46:50 2022: argv[2]: <-o>
-Mon Feb 21 15:46:50 2022: argv[3]: <./out/main.out>
-Mon Feb 21 15:46:50 2022: envp[0]: <SQ_WRAPPER_SOCKET=/tmp/build-wrapper-socket.8F7UZ4>
-Mon Feb 21 15:46:50 2022: envp[1]: <SQ_WRAPPER_LIBRARY=/home/edmond-dantes/SonarScanner/BuildWrapper/libinterceptor-${PLATFORM}.so>
-Mon Feb 21 15:46:50 2022: envp[2]: <G_ENABLE_DIAGNOSTIC=0>
-Mon Feb 21 15:46:50 2022: envp[3]: <GNOME_SHELL_SESSION_MODE=ubuntu>
-Mon Feb 21 15:46:50 2022: envp[4]: <SSH_AGENT_LAUNCHER=gnome-keyring>
-Mon Feb 21 15:46:50 2022: envp[5]: <WINDOWPATH=2>
-Mon Feb 21 15:46:50 2022: envp[6]: <QT_ACCESSIBILITY=1>
-Mon Feb 21 15:46:50 2022: envp[7]: <PWD=/home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: envp[8]: <XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop>
-Mon Feb 21 15:46:50 2022: envp[9]: <LANG=it_IT.UTF-8>
-Mon Feb 21 15:46:50 2022: envp[10]: <XAUTHORITY=/run/user/1000/gdm/Xauthority>
-Mon Feb 21 15:46:50 2022: envp[11]: <GNOME_TERMINAL_SERVICE=:1.133>
-Mon Feb 21 15:46:50 2022: envp[12]: <MAKEFLAGS=>
-Mon Feb 21 15:46:50 2022: envp[13]: <LESSOPEN=| /usr/bin/lesspipe %s>
-Mon Feb 21 15:46:50 2022: envp[14]: <MFLAGS=>
-Mon Feb 21 15:46:50 2022: envp[15]: <SSH_AUTH_SOCK=/run/user/1000/keyring/ssh>
-Mon Feb 21 15:46:50 2022: envp[16]: <XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg>
-Mon Feb 21 15:46:50 2022: envp[17]: <XDG_SESSION_DESKTOP=ubuntu>
-Mon Feb 21 15:46:50 2022: envp[18]: <XDG_SESSION_TYPE=x11>
-Mon Feb 21 15:46:50 2022: envp[19]: <SESSION_MANAGER=local/alexandre-dumas:@/tmp/.ICE-unix/2017,unix/alexandre-dumas:/tmp/.ICE-unix/2017>
-Mon Feb 21 15:46:50 2022: envp[20]: <DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus>
-Mon Feb 21 15:46:50 2022: envp[21]: <GNOME_DESKTOP_SESSION_ID=this-is-deprecated>
-Mon Feb 21 15:46:50 2022: envp[22]: <SHELL=/bin/bash>
-Mon Feb 21 15:46:50 2022: envp[23]: <XMODIFIERS=@im=ibus>
-Mon Feb 21 15:46:50 2022: envp[24]: <SHLVL=2>
-Mon Feb 21 15:46:50 2022: envp[25]: <GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/68847f61_840b_42d1_9f5c_4a803f1ec13c>
-Mon Feb 21 15:46:50 2022: envp[26]: <PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin>
-Mon Feb 21 15:46:50 2022: envp[27]: <INVOCATION_ID=65c4b7e8244c4a7caaf4bffd317d377a>
-Mon Feb 21 15:46:50 2022: envp[28]: <SONAR_TOKEN=fe649effdffc39c9971b8d741ba8dd7ca1914e5f>
-Mon Feb 21 15:46:50 2022: envp[29]: <USERNAME=edmond-dantes>
-Mon Feb 21 15:46:50 2022: envp[30]: <LESSCLOSE=/usr/bin/lesspipe %s %s>
-Mon Feb 21 15:46:50 2022: envp[31]: <XDG_CURRENT_DESKTOP=ubuntu:GNOME>
-Mon Feb 21 15:46:50 2022: envp[32]: <LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:>
-Mon Feb 21 15:46:50 2022: envp[33]: <DESKTOP_SESSION=ubuntu>
-Mon Feb 21 15:46:50 2022: envp[34]: <LOGNAME=edmond-dantes>
-Mon Feb 21 15:46:50 2022: envp[35]: <SYSTEMD_EXEC_PID=3712>
-Mon Feb 21 15:46:50 2022: envp[36]: <DISPLAY=:1>
-Mon Feb 21 15:46:50 2022: envp[37]: <GTK_MODULES=gail:atk-bridge>
-Mon Feb 21 15:46:50 2022: envp[38]: <USER=edmond-dantes>
-Mon Feb 21 15:46:50 2022: envp[39]: <MANAGERPID=1771>
-Mon Feb 21 15:46:50 2022: envp[40]: <_=/usr/bin/make>
-Mon Feb 21 15:46:50 2022: envp[41]: <MAKE_TERMOUT=/dev/pts/0>
-Mon Feb 21 15:46:50 2022: envp[42]: <XDG_RUNTIME_DIR=/run/user/1000>
-Mon Feb 21 15:46:50 2022: envp[43]: <GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1>
-Mon Feb 21 15:46:50 2022: envp[44]: <COLORTERM=truecolor>
-Mon Feb 21 15:46:50 2022: envp[45]: <JOURNAL_STREAM=8:41455>
-Mon Feb 21 15:46:50 2022: envp[46]: <MAKE_TERMERR=/dev/pts/0>
-Mon Feb 21 15:46:50 2022: envp[47]: <XDG_SESSION_CLASS=user>
-Mon Feb 21 15:46:50 2022: envp[48]: <HOME=/home/edmond-dantes>
-Mon Feb 21 15:46:50 2022: envp[49]: <QT_IM_MODULE=ibus>
-Mon Feb 21 15:46:50 2022: envp[50]: <TERM=xterm-256color>
-Mon Feb 21 15:46:50 2022: envp[51]: <IM_CONFIG_PHASE=1>
-Mon Feb 21 15:46:50 2022: envp[52]: <VTE_VERSION=6402>
-Mon Feb 21 15:46:50 2022: envp[53]: <XDG_MENU_PREFIX=gnome->
-Mon Feb 21 15:46:50 2022: envp[54]: <GDMSESSION=ubuntu>
-Mon Feb 21 15:46:50 2022: envp[55]: <MAKELEVEL=1>
-Mon Feb 21 15:46:50 2022: envp[56]: <LD_PRELOAD=>
-Mon Feb 21 15:46:50 2022: process created with pid: 4980
-Mon Feb 21 15:46:50 2022: parent pid: 4979
-Mon Feb 21 15:46:50 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: executable: </usr/lib/gcc/x86_64-linux-gnu/11/cc1>
-Mon Feb 21 15:46:50 2022: argv[0]: </usr/lib/gcc/x86_64-linux-gnu/11/cc1>
-Mon Feb 21 15:46:50 2022: argv[1]: <-quiet>
-Mon Feb 21 15:46:50 2022: argv[2]: <-imultiarch>
-Mon Feb 21 15:46:50 2022: argv[3]: <x86_64-linux-gnu>
-Mon Feb 21 15:46:50 2022: argv[4]: <./src/main.c>
-Mon Feb 21 15:46:50 2022: argv[5]: <-quiet>
-Mon Feb 21 15:46:50 2022: argv[6]: <-dumpdir>
-Mon Feb 21 15:46:50 2022: argv[7]: <./out/main.out->
-Mon Feb 21 15:46:50 2022: argv[8]: <-dumpbase>
-Mon Feb 21 15:46:50 2022: argv[9]: <main.c>
-Mon Feb 21 15:46:50 2022: argv[10]: <-dumpbase-ext>
-Mon Feb 21 15:46:50 2022: argv[11]: <.c>
-Mon Feb 21 15:46:50 2022: argv[12]: <-mtune=generic>
-Mon Feb 21 15:46:50 2022: argv[13]: <-march=x86-64>
-Mon Feb 21 15:46:50 2022: argv[14]: <-fasynchronous-unwind-tables>
-Mon Feb 21 15:46:50 2022: argv[15]: <-fstack-protector-strong>
-Mon Feb 21 15:46:50 2022: argv[16]: <-Wformat>
-Mon Feb 21 15:46:50 2022: argv[17]: <-Wformat-security>
-Mon Feb 21 15:46:50 2022: argv[18]: <-fstack-clash-protection>
-Mon Feb 21 15:46:50 2022: argv[19]: <-fcf-protection>
-Mon Feb 21 15:46:50 2022: argv[20]: <-o>
-Mon Feb 21 15:46:50 2022: argv[21]: </tmp/ccZahg5Q.s>
-Mon Feb 21 15:46:50 2022: skipping process with pid: 4980
-Mon Feb 21 15:46:50 2022: process created with pid: 4981
-Mon Feb 21 15:46:50 2022: parent pid: 4979
-Mon Feb 21 15:46:50 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: executable: </usr/bin/x86_64-linux-gnu-as>
-Mon Feb 21 15:46:50 2022: argv[0]: <as>
-Mon Feb 21 15:46:50 2022: argv[1]: <--64>
-Mon Feb 21 15:46:50 2022: argv[2]: <-o>
-Mon Feb 21 15:46:50 2022: argv[3]: </tmp/ccD4ib2U.o>
-Mon Feb 21 15:46:50 2022: argv[4]: </tmp/ccZahg5Q.s>
-Mon Feb 21 15:46:50 2022: skipping process with pid: 4981
-Mon Feb 21 15:46:50 2022: process created with pid: 4982
-Mon Feb 21 15:46:50 2022: parent pid: 4979
-Mon Feb 21 15:46:50 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: executable: </usr/lib/gcc/x86_64-linux-gnu/11/collect2>
-Mon Feb 21 15:46:50 2022: argv[0]: </usr/lib/gcc/x86_64-linux-gnu/11/collect2>
-Mon Feb 21 15:46:50 2022: argv[1]: <-plugin>
-Mon Feb 21 15:46:50 2022: argv[2]: </usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so>
-Mon Feb 21 15:46:50 2022: argv[3]: <-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper>
-Mon Feb 21 15:46:50 2022: argv[4]: <-plugin-opt=-fresolution=/tmp/cctLhXsG.res>
-Mon Feb 21 15:46:50 2022: argv[5]: <-plugin-opt=-pass-through=-lgcc>
-Mon Feb 21 15:46:50 2022: argv[6]: <-plugin-opt=-pass-through=-lgcc_s>
-Mon Feb 21 15:46:50 2022: argv[7]: <-plugin-opt=-pass-through=-lc>
-Mon Feb 21 15:46:50 2022: argv[8]: <-plugin-opt=-pass-through=-lgcc>
-Mon Feb 21 15:46:50 2022: argv[9]: <-plugin-opt=-pass-through=-lgcc_s>
-Mon Feb 21 15:46:50 2022: argv[10]: <--build-id>
-Mon Feb 21 15:46:50 2022: argv[11]: <--eh-frame-hdr>
-Mon Feb 21 15:46:50 2022: argv[12]: <-m>
-Mon Feb 21 15:46:50 2022: argv[13]: <elf_x86_64>
-Mon Feb 21 15:46:50 2022: argv[14]: <--hash-style=gnu>
-Mon Feb 21 15:46:50 2022: argv[15]: <--as-needed>
-Mon Feb 21 15:46:50 2022: argv[16]: <-dynamic-linker>
-Mon Feb 21 15:46:50 2022: argv[17]: </lib64/ld-linux-x86-64.so.2>
-Mon Feb 21 15:46:50 2022: argv[18]: <-pie>
-Mon Feb 21 15:46:50 2022: argv[19]: <-z>
-Mon Feb 21 15:46:50 2022: argv[20]: <now>
-Mon Feb 21 15:46:50 2022: argv[21]: <-z>
-Mon Feb 21 15:46:50 2022: argv[22]: <relro>
-Mon Feb 21 15:46:50 2022: argv[23]: <-o>
-Mon Feb 21 15:46:50 2022: argv[24]: <./out/main.out>
-Mon Feb 21 15:46:50 2022: argv[25]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o>
-Mon Feb 21 15:46:50 2022: argv[26]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o>
-Mon Feb 21 15:46:50 2022: argv[27]: </usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o>
-Mon Feb 21 15:46:50 2022: argv[28]: <-L/usr/lib/gcc/x86_64-linux-gnu/11>
-Mon Feb 21 15:46:50 2022: argv[29]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu>
-Mon Feb 21 15:46:50 2022: argv[30]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib>
-Mon Feb 21 15:46:50 2022: argv[31]: <-L/lib/x86_64-linux-gnu>
-Mon Feb 21 15:46:50 2022: argv[32]: <-L/lib/../lib>
-Mon Feb 21 15:46:50 2022: argv[33]: <-L/usr/lib/x86_64-linux-gnu>
-Mon Feb 21 15:46:50 2022: argv[34]: <-L/usr/lib/../lib>
-Mon Feb 21 15:46:50 2022: argv[35]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..>
-Mon Feb 21 15:46:50 2022: argv[36]: </tmp/ccD4ib2U.o>
-Mon Feb 21 15:46:50 2022: argv[37]: <-lgcc>
-Mon Feb 21 15:46:50 2022: argv[38]: <--push-state>
-Mon Feb 21 15:46:50 2022: argv[39]: <--as-needed>
-Mon Feb 21 15:46:50 2022: argv[40]: <-lgcc_s>
-Mon Feb 21 15:46:50 2022: argv[41]: <--pop-state>
-Mon Feb 21 15:46:50 2022: argv[42]: <-lc>
-Mon Feb 21 15:46:50 2022: argv[43]: <-lgcc>
-Mon Feb 21 15:46:50 2022: argv[44]: <--push-state>
-Mon Feb 21 15:46:50 2022: argv[45]: <--as-needed>
-Mon Feb 21 15:46:50 2022: argv[46]: <-lgcc_s>
-Mon Feb 21 15:46:50 2022: argv[47]: <--pop-state>
-Mon Feb 21 15:46:50 2022: argv[48]: </usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o>
-Mon Feb 21 15:46:50 2022: argv[49]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o>
-Mon Feb 21 15:46:50 2022: skipping process with pid: 4982
-Mon Feb 21 15:46:50 2022: process created with pid: 4983
-Mon Feb 21 15:46:50 2022: parent pid: 4982
-Mon Feb 21 15:46:50 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
-Mon Feb 21 15:46:50 2022: executable: </usr/bin/x86_64-linux-gnu-ld.bfd>
-Mon Feb 21 15:46:50 2022: argv[0]: </usr/bin/ld>
-Mon Feb 21 15:46:50 2022: argv[1]: <-plugin>
-Mon Feb 21 15:46:50 2022: argv[2]: </usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so>
-Mon Feb 21 15:46:50 2022: argv[3]: <-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper>
-Mon Feb 21 15:46:50 2022: argv[4]: <-plugin-opt=-fresolution=/tmp/cctLhXsG.res>
-Mon Feb 21 15:46:50 2022: argv[5]: <-plugin-opt=-pass-through=-lgcc>
-Mon Feb 21 15:46:50 2022: argv[6]: <-plugin-opt=-pass-through=-lgcc_s>
-Mon Feb 21 15:46:50 2022: argv[7]: <-plugin-opt=-pass-through=-lc>
-Mon Feb 21 15:46:50 2022: argv[8]: <-plugin-opt=-pass-through=-lgcc>
-Mon Feb 21 15:46:50 2022: argv[9]: <-plugin-opt=-pass-through=-lgcc_s>
-Mon Feb 21 15:46:50 2022: argv[10]: <--build-id>
-Mon Feb 21 15:46:50 2022: argv[11]: <--eh-frame-hdr>
-Mon Feb 21 15:46:50 2022: argv[12]: <-m>
-Mon Feb 21 15:46:50 2022: argv[13]: <elf_x86_64>
-Mon Feb 21 15:46:50 2022: argv[14]: <--hash-style=gnu>
-Mon Feb 21 15:46:50 2022: argv[15]: <--as-needed>
-Mon Feb 21 15:46:50 2022: argv[16]: <-dynamic-linker>
-Mon Feb 21 15:46:50 2022: argv[17]: </lib64/ld-linux-x86-64.so.2>
-Mon Feb 21 15:46:50 2022: argv[18]: <-pie>
-Mon Feb 21 15:46:50 2022: argv[19]: <-z>
-Mon Feb 21 15:46:50 2022: argv[20]: <now>
-Mon Feb 21 15:46:50 2022: argv[21]: <-z>
-Mon Feb 21 15:46:50 2022: argv[22]: <relro>
-Mon Feb 21 15:46:50 2022: argv[23]: <-o>
-Mon Feb 21 15:46:50 2022: argv[24]: <./out/main.out>
-Mon Feb 21 15:46:50 2022: argv[25]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o>
-Mon Feb 21 15:46:50 2022: argv[26]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o>
-Mon Feb 21 15:46:50 2022: argv[27]: </usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o>
-Mon Feb 21 15:46:50 2022: argv[28]: <-L/usr/lib/gcc/x86_64-linux-gnu/11>
-Mon Feb 21 15:46:50 2022: argv[29]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu>
-Mon Feb 21 15:46:50 2022: argv[30]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib>
-Mon Feb 21 15:46:50 2022: argv[31]: <-L/lib/x86_64-linux-gnu>
-Mon Feb 21 15:46:50 2022: argv[32]: <-L/lib/../lib>
-Mon Feb 21 15:46:50 2022: argv[33]: <-L/usr/lib/x86_64-linux-gnu>
-Mon Feb 21 15:46:50 2022: argv[34]: <-L/usr/lib/../lib>
-Mon Feb 21 15:46:50 2022: argv[35]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..>
-Mon Feb 21 15:46:50 2022: argv[36]: </tmp/ccD4ib2U.o>
-Mon Feb 21 15:46:50 2022: argv[37]: <-lgcc>
-Mon Feb 21 15:46:50 2022: argv[38]: <--push-state>
-Mon Feb 21 15:46:50 2022: argv[39]: <--as-needed>
-Mon Feb 21 15:46:50 2022: argv[40]: <-lgcc_s>
-Mon Feb 21 15:46:50 2022: argv[41]: <--pop-state>
-Mon Feb 21 15:46:50 2022: argv[42]: <-lc>
-Mon Feb 21 15:46:50 2022: argv[43]: <-lgcc>
-Mon Feb 21 15:46:50 2022: argv[44]: <--push-state>
-Mon Feb 21 15:46:50 2022: argv[45]: <--as-needed>
-Mon Feb 21 15:46:50 2022: argv[46]: <-lgcc_s>
-Mon Feb 21 15:46:50 2022: argv[47]: <--pop-state>
-Mon Feb 21 15:46:50 2022: argv[48]: </usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o>
-Mon Feb 21 15:46:50 2022: argv[49]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o>
-Mon Feb 21 15:46:50 2022: skipping process with pid: 4983
-Mon Feb 21 15:46:50 2022: finalizing json file
-Mon Feb 21 15:46:50 2022: returned with code: 0
+Mon Feb 21 16:56:51 2022: build-wrapper, version 6.30 (linux-x86)
+Mon Feb 21 16:56:51 2022: System name: Linux Nodename: alexandre-dumas Release: 5.13.0-28-generic Version: #31-Ubuntu SMP Thu Jan 13 17:41:06 UTC 2022 Machine: x86_64
+Mon Feb 21 16:56:51 2022: socket path: /tmp/build-wrapper-socket.M0am6b
+Mon Feb 21 16:56:51 2022: dynamic library found: /home/edmond-dantes/SonarScanner/BuildWrapper/libinterceptor-i686.so
+Mon Feb 21 16:56:51 2022: dynamic library found: /home/edmond-dantes/SonarScanner/BuildWrapper/libinterceptor-x86_64.so
+Mon Feb 21 16:56:51 2022: dynamic library found: /home/edmond-dantes/SonarScanner/BuildWrapper/libinterceptor-haswell.so
+Mon Feb 21 16:56:51 2022: cwd: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: command executed as: </home/edmond-dantes/SonarScanner/BuildWrapper/buildWrapper --out-dir bw-output>
+Mon Feb 21 16:56:51 2022: out-dir absolute path: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project/bw-output>
+Mon Feb 21 16:56:51 2022: command line received: <gcc ./src/main.c -o ./out/main.out>
+Mon Feb 21 16:56:51 2022: env 0: <G_ENABLE_DIAGNOSTIC=0>
+Mon Feb 21 16:56:51 2022: env 1: <GNOME_SHELL_SESSION_MODE=ubuntu>
+Mon Feb 21 16:56:51 2022: env 2: <SSH_AGENT_LAUNCHER=gnome-keyring>
+Mon Feb 21 16:56:51 2022: env 3: <WINDOWPATH=2>
+Mon Feb 21 16:56:51 2022: env 4: <QT_ACCESSIBILITY=1>
+Mon Feb 21 16:56:51 2022: env 5: <PWD=/home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: env 6: <XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop>
+Mon Feb 21 16:56:51 2022: env 7: <LANG=it_IT.UTF-8>
+Mon Feb 21 16:56:51 2022: env 8: <XAUTHORITY=/run/user/1000/gdm/Xauthority>
+Mon Feb 21 16:56:51 2022: env 9: <GNOME_TERMINAL_SERVICE=:1.242>
+Mon Feb 21 16:56:51 2022: env 10: <MAKEFLAGS=>
+Mon Feb 21 16:56:51 2022: env 11: <LESSOPEN=| /usr/bin/lesspipe %s>
+Mon Feb 21 16:56:51 2022: env 12: <MFLAGS=>
+Mon Feb 21 16:56:51 2022: env 13: <SSH_AUTH_SOCK=/run/user/1000/keyring/ssh>
+Mon Feb 21 16:56:51 2022: env 14: <XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg>
+Mon Feb 21 16:56:51 2022: env 15: <XDG_SESSION_DESKTOP=ubuntu>
+Mon Feb 21 16:56:51 2022: env 16: <XDG_SESSION_TYPE=x11>
+Mon Feb 21 16:56:51 2022: env 17: <SESSION_MANAGER=local/alexandre-dumas:@/tmp/.ICE-unix/2017,unix/alexandre-dumas:/tmp/.ICE-unix/2017>
+Mon Feb 21 16:56:51 2022: env 18: <DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus>
+Mon Feb 21 16:56:51 2022: env 19: <GNOME_DESKTOP_SESSION_ID=this-is-deprecated>
+Mon Feb 21 16:56:51 2022: env 20: <SHELL=/bin/bash>
+Mon Feb 21 16:56:51 2022: env 21: <XMODIFIERS=@im=ibus>
+Mon Feb 21 16:56:51 2022: env 22: <SHLVL=2>
+Mon Feb 21 16:56:51 2022: env 23: <GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/8c3dd70c_6f79_4c63_8c03_630b743efab2>
+Mon Feb 21 16:56:51 2022: env 24: <PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin>
+Mon Feb 21 16:56:51 2022: env 25: <INVOCATION_ID=095a5689e148424a807896716de4b0ad>
+Mon Feb 21 16:56:51 2022: env 26: <SONAR_TOKEN=fe649effdffc39c9971b8d741ba8dd7ca1914e5f>
+Mon Feb 21 16:56:51 2022: env 27: <USERNAME=edmond-dantes>
+Mon Feb 21 16:56:51 2022: env 28: <LESSCLOSE=/usr/bin/lesspipe %s %s>
+Mon Feb 21 16:56:51 2022: env 29: <XDG_CURRENT_DESKTOP=ubuntu:GNOME>
+Mon Feb 21 16:56:51 2022: env 30: <LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:>
+Mon Feb 21 16:56:51 2022: env 31: <DESKTOP_SESSION=ubuntu>
+Mon Feb 21 16:56:51 2022: env 32: <LOGNAME=edmond-dantes>
+Mon Feb 21 16:56:51 2022: env 33: <SYSTEMD_EXEC_PID=11034>
+Mon Feb 21 16:56:51 2022: env 34: <DISPLAY=:1>
+Mon Feb 21 16:56:51 2022: env 35: <GTK_MODULES=gail:atk-bridge>
+Mon Feb 21 16:56:51 2022: env 36: <USER=edmond-dantes>
+Mon Feb 21 16:56:51 2022: env 37: <MANAGERPID=1771>
+Mon Feb 21 16:56:51 2022: env 38: <_=/usr/bin/make>
+Mon Feb 21 16:56:51 2022: env 39: <MAKE_TERMOUT=/dev/pts/0>
+Mon Feb 21 16:56:51 2022: env 40: <XDG_RUNTIME_DIR=/run/user/1000>
+Mon Feb 21 16:56:51 2022: env 41: <GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1>
+Mon Feb 21 16:56:51 2022: env 42: <COLORTERM=truecolor>
+Mon Feb 21 16:56:51 2022: env 43: <JOURNAL_STREAM=8:70195>
+Mon Feb 21 16:56:51 2022: env 44: <MAKE_TERMERR=/dev/pts/0>
+Mon Feb 21 16:56:51 2022: env 45: <XDG_SESSION_CLASS=user>
+Mon Feb 21 16:56:51 2022: env 46: <HOME=/home/edmond-dantes>
+Mon Feb 21 16:56:51 2022: env 47: <QT_IM_MODULE=ibus>
+Mon Feb 21 16:56:51 2022: env 48: <TERM=xterm-256color>
+Mon Feb 21 16:56:51 2022: env 49: <IM_CONFIG_PHASE=1>
+Mon Feb 21 16:56:51 2022: env 50: <VTE_VERSION=6402>
+Mon Feb 21 16:56:51 2022: env 51: <XDG_MENU_PREFIX=gnome->
+Mon Feb 21 16:56:51 2022: env 52: <GDMSESSION=ubuntu>
+Mon Feb 21 16:56:51 2022: env 53: <MAKELEVEL=1>
+Mon Feb 21 16:56:51 2022: executing: <gcc ./src/main.c -o ./out/main.out>
+Mon Feb 21 16:56:51 2022: initializing json file
+Mon Feb 21 16:56:51 2022: process created with pid: 11114
+Mon Feb 21 16:56:51 2022: parent pid: 11113
+Mon Feb 21 16:56:51 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: executable: </home/edmond-dantes/SonarScanner/BuildWrapper/buildWrapper>
+Mon Feb 21 16:56:51 2022: argv[0]: </home/edmond-dantes/SonarScanner/BuildWrapper/buildWrapper>
+Mon Feb 21 16:56:51 2022: argv[1]: <-c>
+Mon Feb 21 16:56:51 2022: argv[2]: <>
+Mon Feb 21 16:56:51 2022: argv[3]: <gcc>
+Mon Feb 21 16:56:51 2022: argv[4]: <./src/main.c>
+Mon Feb 21 16:56:51 2022: argv[5]: <-o>
+Mon Feb 21 16:56:51 2022: argv[6]: <./out/main.out>
+Mon Feb 21 16:56:51 2022: skipping process with pid: 11114
+Mon Feb 21 16:56:51 2022: process created with pid: 11115
+Mon Feb 21 16:56:51 2022: parent pid: 11114
+Mon Feb 21 16:56:51 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: executable: </usr/bin/x86_64-linux-gnu-gcc-11>
+Mon Feb 21 16:56:51 2022: argv[0]: <gcc>
+Mon Feb 21 16:56:51 2022: argv[1]: <./src/main.c>
+Mon Feb 21 16:56:51 2022: argv[2]: <-o>
+Mon Feb 21 16:56:51 2022: argv[3]: <./out/main.out>
+Mon Feb 21 16:56:51 2022: envp[0]: <SQ_WRAPPER_SOCKET=/tmp/build-wrapper-socket.M0am6b>
+Mon Feb 21 16:56:51 2022: envp[1]: <SQ_WRAPPER_LIBRARY=/home/edmond-dantes/SonarScanner/BuildWrapper/libinterceptor-${PLATFORM}.so>
+Mon Feb 21 16:56:51 2022: envp[2]: <G_ENABLE_DIAGNOSTIC=0>
+Mon Feb 21 16:56:51 2022: envp[3]: <GNOME_SHELL_SESSION_MODE=ubuntu>
+Mon Feb 21 16:56:51 2022: envp[4]: <SSH_AGENT_LAUNCHER=gnome-keyring>
+Mon Feb 21 16:56:51 2022: envp[5]: <WINDOWPATH=2>
+Mon Feb 21 16:56:51 2022: envp[6]: <QT_ACCESSIBILITY=1>
+Mon Feb 21 16:56:51 2022: envp[7]: <PWD=/home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: envp[8]: <XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop>
+Mon Feb 21 16:56:51 2022: envp[9]: <LANG=it_IT.UTF-8>
+Mon Feb 21 16:56:51 2022: envp[10]: <XAUTHORITY=/run/user/1000/gdm/Xauthority>
+Mon Feb 21 16:56:51 2022: envp[11]: <GNOME_TERMINAL_SERVICE=:1.242>
+Mon Feb 21 16:56:51 2022: envp[12]: <MAKEFLAGS=>
+Mon Feb 21 16:56:51 2022: envp[13]: <LESSOPEN=| /usr/bin/lesspipe %s>
+Mon Feb 21 16:56:51 2022: envp[14]: <MFLAGS=>
+Mon Feb 21 16:56:51 2022: envp[15]: <SSH_AUTH_SOCK=/run/user/1000/keyring/ssh>
+Mon Feb 21 16:56:51 2022: envp[16]: <XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg>
+Mon Feb 21 16:56:51 2022: envp[17]: <XDG_SESSION_DESKTOP=ubuntu>
+Mon Feb 21 16:56:51 2022: envp[18]: <XDG_SESSION_TYPE=x11>
+Mon Feb 21 16:56:51 2022: envp[19]: <SESSION_MANAGER=local/alexandre-dumas:@/tmp/.ICE-unix/2017,unix/alexandre-dumas:/tmp/.ICE-unix/2017>
+Mon Feb 21 16:56:51 2022: envp[20]: <DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus>
+Mon Feb 21 16:56:51 2022: envp[21]: <GNOME_DESKTOP_SESSION_ID=this-is-deprecated>
+Mon Feb 21 16:56:51 2022: envp[22]: <SHELL=/bin/bash>
+Mon Feb 21 16:56:51 2022: envp[23]: <XMODIFIERS=@im=ibus>
+Mon Feb 21 16:56:51 2022: envp[24]: <SHLVL=2>
+Mon Feb 21 16:56:51 2022: envp[25]: <GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/8c3dd70c_6f79_4c63_8c03_630b743efab2>
+Mon Feb 21 16:56:51 2022: envp[26]: <PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin>
+Mon Feb 21 16:56:51 2022: envp[27]: <INVOCATION_ID=095a5689e148424a807896716de4b0ad>
+Mon Feb 21 16:56:51 2022: envp[28]: <SONAR_TOKEN=fe649effdffc39c9971b8d741ba8dd7ca1914e5f>
+Mon Feb 21 16:56:51 2022: envp[29]: <USERNAME=edmond-dantes>
+Mon Feb 21 16:56:51 2022: envp[30]: <LESSCLOSE=/usr/bin/lesspipe %s %s>
+Mon Feb 21 16:56:51 2022: envp[31]: <XDG_CURRENT_DESKTOP=ubuntu:GNOME>
+Mon Feb 21 16:56:51 2022: envp[32]: <LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:>
+Mon Feb 21 16:56:51 2022: envp[33]: <DESKTOP_SESSION=ubuntu>
+Mon Feb 21 16:56:51 2022: envp[34]: <LOGNAME=edmond-dantes>
+Mon Feb 21 16:56:51 2022: envp[35]: <SYSTEMD_EXEC_PID=11034>
+Mon Feb 21 16:56:51 2022: envp[36]: <DISPLAY=:1>
+Mon Feb 21 16:56:51 2022: envp[37]: <GTK_MODULES=gail:atk-bridge>
+Mon Feb 21 16:56:51 2022: envp[38]: <USER=edmond-dantes>
+Mon Feb 21 16:56:51 2022: envp[39]: <MANAGERPID=1771>
+Mon Feb 21 16:56:51 2022: envp[40]: <_=/usr/bin/make>
+Mon Feb 21 16:56:51 2022: envp[41]: <MAKE_TERMOUT=/dev/pts/0>
+Mon Feb 21 16:56:51 2022: envp[42]: <XDG_RUNTIME_DIR=/run/user/1000>
+Mon Feb 21 16:56:51 2022: envp[43]: <GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1>
+Mon Feb 21 16:56:51 2022: envp[44]: <COLORTERM=truecolor>
+Mon Feb 21 16:56:51 2022: envp[45]: <JOURNAL_STREAM=8:70195>
+Mon Feb 21 16:56:51 2022: envp[46]: <MAKE_TERMERR=/dev/pts/0>
+Mon Feb 21 16:56:51 2022: envp[47]: <XDG_SESSION_CLASS=user>
+Mon Feb 21 16:56:51 2022: envp[48]: <HOME=/home/edmond-dantes>
+Mon Feb 21 16:56:51 2022: envp[49]: <QT_IM_MODULE=ibus>
+Mon Feb 21 16:56:51 2022: envp[50]: <TERM=xterm-256color>
+Mon Feb 21 16:56:51 2022: envp[51]: <IM_CONFIG_PHASE=1>
+Mon Feb 21 16:56:51 2022: envp[52]: <VTE_VERSION=6402>
+Mon Feb 21 16:56:51 2022: envp[53]: <XDG_MENU_PREFIX=gnome->
+Mon Feb 21 16:56:51 2022: envp[54]: <GDMSESSION=ubuntu>
+Mon Feb 21 16:56:51 2022: envp[55]: <MAKELEVEL=1>
+Mon Feb 21 16:56:51 2022: envp[56]: <LD_PRELOAD=>
+Mon Feb 21 16:56:51 2022: process created with pid: 11116
+Mon Feb 21 16:56:51 2022: parent pid: 11115
+Mon Feb 21 16:56:51 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: executable: </usr/lib/gcc/x86_64-linux-gnu/11/cc1>
+Mon Feb 21 16:56:51 2022: argv[0]: </usr/lib/gcc/x86_64-linux-gnu/11/cc1>
+Mon Feb 21 16:56:51 2022: argv[1]: <-quiet>
+Mon Feb 21 16:56:51 2022: argv[2]: <-imultiarch>
+Mon Feb 21 16:56:51 2022: argv[3]: <x86_64-linux-gnu>
+Mon Feb 21 16:56:51 2022: argv[4]: <./src/main.c>
+Mon Feb 21 16:56:51 2022: argv[5]: <-quiet>
+Mon Feb 21 16:56:51 2022: argv[6]: <-dumpdir>
+Mon Feb 21 16:56:51 2022: argv[7]: <./out/main.out->
+Mon Feb 21 16:56:51 2022: argv[8]: <-dumpbase>
+Mon Feb 21 16:56:51 2022: argv[9]: <main.c>
+Mon Feb 21 16:56:51 2022: argv[10]: <-dumpbase-ext>
+Mon Feb 21 16:56:51 2022: argv[11]: <.c>
+Mon Feb 21 16:56:51 2022: argv[12]: <-mtune=generic>
+Mon Feb 21 16:56:51 2022: argv[13]: <-march=x86-64>
+Mon Feb 21 16:56:51 2022: argv[14]: <-fasynchronous-unwind-tables>
+Mon Feb 21 16:56:51 2022: argv[15]: <-fstack-protector-strong>
+Mon Feb 21 16:56:51 2022: argv[16]: <-Wformat>
+Mon Feb 21 16:56:51 2022: argv[17]: <-Wformat-security>
+Mon Feb 21 16:56:51 2022: argv[18]: <-fstack-clash-protection>
+Mon Feb 21 16:56:51 2022: argv[19]: <-fcf-protection>
+Mon Feb 21 16:56:51 2022: argv[20]: <-o>
+Mon Feb 21 16:56:51 2022: argv[21]: </tmp/cc0sRUKj.s>
+Mon Feb 21 16:56:51 2022: skipping process with pid: 11116
+Mon Feb 21 16:56:51 2022: process created with pid: 11117
+Mon Feb 21 16:56:51 2022: parent pid: 11115
+Mon Feb 21 16:56:51 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: executable: </usr/bin/x86_64-linux-gnu-as>
+Mon Feb 21 16:56:51 2022: argv[0]: <as>
+Mon Feb 21 16:56:51 2022: argv[1]: <--64>
+Mon Feb 21 16:56:51 2022: argv[2]: <-o>
+Mon Feb 21 16:56:51 2022: argv[3]: </tmp/ccMQdcEn.o>
+Mon Feb 21 16:56:51 2022: argv[4]: </tmp/cc0sRUKj.s>
+Mon Feb 21 16:56:51 2022: skipping process with pid: 11117
+Mon Feb 21 16:56:51 2022: process created with pid: 11118
+Mon Feb 21 16:56:51 2022: parent pid: 11115
+Mon Feb 21 16:56:51 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: executable: </usr/lib/gcc/x86_64-linux-gnu/11/collect2>
+Mon Feb 21 16:56:51 2022: argv[0]: </usr/lib/gcc/x86_64-linux-gnu/11/collect2>
+Mon Feb 21 16:56:51 2022: argv[1]: <-plugin>
+Mon Feb 21 16:56:51 2022: argv[2]: </usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so>
+Mon Feb 21 16:56:51 2022: argv[3]: <-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper>
+Mon Feb 21 16:56:51 2022: argv[4]: <-plugin-opt=-fresolution=/tmp/ccDHofAC.res>
+Mon Feb 21 16:56:51 2022: argv[5]: <-plugin-opt=-pass-through=-lgcc>
+Mon Feb 21 16:56:51 2022: argv[6]: <-plugin-opt=-pass-through=-lgcc_s>
+Mon Feb 21 16:56:51 2022: argv[7]: <-plugin-opt=-pass-through=-lc>
+Mon Feb 21 16:56:51 2022: argv[8]: <-plugin-opt=-pass-through=-lgcc>
+Mon Feb 21 16:56:51 2022: argv[9]: <-plugin-opt=-pass-through=-lgcc_s>
+Mon Feb 21 16:56:51 2022: argv[10]: <--build-id>
+Mon Feb 21 16:56:51 2022: argv[11]: <--eh-frame-hdr>
+Mon Feb 21 16:56:51 2022: argv[12]: <-m>
+Mon Feb 21 16:56:51 2022: argv[13]: <elf_x86_64>
+Mon Feb 21 16:56:51 2022: argv[14]: <--hash-style=gnu>
+Mon Feb 21 16:56:51 2022: argv[15]: <--as-needed>
+Mon Feb 21 16:56:51 2022: argv[16]: <-dynamic-linker>
+Mon Feb 21 16:56:51 2022: argv[17]: </lib64/ld-linux-x86-64.so.2>
+Mon Feb 21 16:56:51 2022: argv[18]: <-pie>
+Mon Feb 21 16:56:51 2022: argv[19]: <-z>
+Mon Feb 21 16:56:51 2022: argv[20]: <now>
+Mon Feb 21 16:56:51 2022: argv[21]: <-z>
+Mon Feb 21 16:56:51 2022: argv[22]: <relro>
+Mon Feb 21 16:56:51 2022: argv[23]: <-o>
+Mon Feb 21 16:56:51 2022: argv[24]: <./out/main.out>
+Mon Feb 21 16:56:51 2022: argv[25]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o>
+Mon Feb 21 16:56:51 2022: argv[26]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o>
+Mon Feb 21 16:56:51 2022: argv[27]: </usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o>
+Mon Feb 21 16:56:51 2022: argv[28]: <-L/usr/lib/gcc/x86_64-linux-gnu/11>
+Mon Feb 21 16:56:51 2022: argv[29]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu>
+Mon Feb 21 16:56:51 2022: argv[30]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib>
+Mon Feb 21 16:56:51 2022: argv[31]: <-L/lib/x86_64-linux-gnu>
+Mon Feb 21 16:56:51 2022: argv[32]: <-L/lib/../lib>
+Mon Feb 21 16:56:51 2022: argv[33]: <-L/usr/lib/x86_64-linux-gnu>
+Mon Feb 21 16:56:51 2022: argv[34]: <-L/usr/lib/../lib>
+Mon Feb 21 16:56:51 2022: argv[35]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..>
+Mon Feb 21 16:56:51 2022: argv[36]: </tmp/ccMQdcEn.o>
+Mon Feb 21 16:56:51 2022: argv[37]: <-lgcc>
+Mon Feb 21 16:56:51 2022: argv[38]: <--push-state>
+Mon Feb 21 16:56:51 2022: argv[39]: <--as-needed>
+Mon Feb 21 16:56:51 2022: argv[40]: <-lgcc_s>
+Mon Feb 21 16:56:51 2022: argv[41]: <--pop-state>
+Mon Feb 21 16:56:51 2022: argv[42]: <-lc>
+Mon Feb 21 16:56:51 2022: argv[43]: <-lgcc>
+Mon Feb 21 16:56:51 2022: argv[44]: <--push-state>
+Mon Feb 21 16:56:51 2022: argv[45]: <--as-needed>
+Mon Feb 21 16:56:51 2022: argv[46]: <-lgcc_s>
+Mon Feb 21 16:56:51 2022: argv[47]: <--pop-state>
+Mon Feb 21 16:56:51 2022: argv[48]: </usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o>
+Mon Feb 21 16:56:51 2022: argv[49]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o>
+Mon Feb 21 16:56:51 2022: skipping process with pid: 11118
+Mon Feb 21 16:56:51 2022: process created with pid: 11119
+Mon Feb 21 16:56:51 2022: parent pid: 11118
+Mon Feb 21 16:56:51 2022: working directory: </home/edmond-dantes/Scrivania/Università/Basi di Dati/DataBase_Project>
+Mon Feb 21 16:56:51 2022: executable: </usr/bin/x86_64-linux-gnu-ld.bfd>
+Mon Feb 21 16:56:51 2022: argv[0]: </usr/bin/ld>
+Mon Feb 21 16:56:51 2022: argv[1]: <-plugin>
+Mon Feb 21 16:56:51 2022: argv[2]: </usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so>
+Mon Feb 21 16:56:51 2022: argv[3]: <-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper>
+Mon Feb 21 16:56:51 2022: argv[4]: <-plugin-opt=-fresolution=/tmp/ccDHofAC.res>
+Mon Feb 21 16:56:51 2022: argv[5]: <-plugin-opt=-pass-through=-lgcc>
+Mon Feb 21 16:56:51 2022: argv[6]: <-plugin-opt=-pass-through=-lgcc_s>
+Mon Feb 21 16:56:51 2022: argv[7]: <-plugin-opt=-pass-through=-lc>
+Mon Feb 21 16:56:51 2022: argv[8]: <-plugin-opt=-pass-through=-lgcc>
+Mon Feb 21 16:56:51 2022: argv[9]: <-plugin-opt=-pass-through=-lgcc_s>
+Mon Feb 21 16:56:51 2022: argv[10]: <--build-id>
+Mon Feb 21 16:56:51 2022: argv[11]: <--eh-frame-hdr>
+Mon Feb 21 16:56:51 2022: argv[12]: <-m>
+Mon Feb 21 16:56:51 2022: argv[13]: <elf_x86_64>
+Mon Feb 21 16:56:51 2022: argv[14]: <--hash-style=gnu>
+Mon Feb 21 16:56:51 2022: argv[15]: <--as-needed>
+Mon Feb 21 16:56:51 2022: argv[16]: <-dynamic-linker>
+Mon Feb 21 16:56:51 2022: argv[17]: </lib64/ld-linux-x86-64.so.2>
+Mon Feb 21 16:56:51 2022: argv[18]: <-pie>
+Mon Feb 21 16:56:51 2022: argv[19]: <-z>
+Mon Feb 21 16:56:51 2022: argv[20]: <now>
+Mon Feb 21 16:56:51 2022: argv[21]: <-z>
+Mon Feb 21 16:56:51 2022: argv[22]: <relro>
+Mon Feb 21 16:56:51 2022: argv[23]: <-o>
+Mon Feb 21 16:56:51 2022: argv[24]: <./out/main.out>
+Mon Feb 21 16:56:51 2022: argv[25]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o>
+Mon Feb 21 16:56:51 2022: argv[26]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o>
+Mon Feb 21 16:56:51 2022: argv[27]: </usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o>
+Mon Feb 21 16:56:51 2022: argv[28]: <-L/usr/lib/gcc/x86_64-linux-gnu/11>
+Mon Feb 21 16:56:51 2022: argv[29]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu>
+Mon Feb 21 16:56:51 2022: argv[30]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib>
+Mon Feb 21 16:56:51 2022: argv[31]: <-L/lib/x86_64-linux-gnu>
+Mon Feb 21 16:56:51 2022: argv[32]: <-L/lib/../lib>
+Mon Feb 21 16:56:51 2022: argv[33]: <-L/usr/lib/x86_64-linux-gnu>
+Mon Feb 21 16:56:51 2022: argv[34]: <-L/usr/lib/../lib>
+Mon Feb 21 16:56:51 2022: argv[35]: <-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..>
+Mon Feb 21 16:56:51 2022: argv[36]: </tmp/ccMQdcEn.o>
+Mon Feb 21 16:56:51 2022: argv[37]: <-lgcc>
+Mon Feb 21 16:56:51 2022: argv[38]: <--push-state>
+Mon Feb 21 16:56:51 2022: argv[39]: <--as-needed>
+Mon Feb 21 16:56:51 2022: argv[40]: <-lgcc_s>
+Mon Feb 21 16:56:51 2022: argv[41]: <--pop-state>
+Mon Feb 21 16:56:51 2022: argv[42]: <-lc>
+Mon Feb 21 16:56:51 2022: argv[43]: <-lgcc>
+Mon Feb 21 16:56:51 2022: argv[44]: <--push-state>
+Mon Feb 21 16:56:51 2022: argv[45]: <--as-needed>
+Mon Feb 21 16:56:51 2022: argv[46]: <-lgcc_s>
+Mon Feb 21 16:56:51 2022: argv[47]: <--pop-state>
+Mon Feb 21 16:56:51 2022: argv[48]: </usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o>
+Mon Feb 21 16:56:51 2022: argv[49]: </usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o>
+Mon Feb 21 16:56:51 2022: skipping process with pid: 11119
+Mon Feb 21 16:56:51 2022: finalizing json file
+Mon Feb 21 16:56:51 2022: returned with code: 0
