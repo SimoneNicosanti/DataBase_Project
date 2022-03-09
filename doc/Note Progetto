@@ -5,7 +5,7 @@
 	- Se stessi per lo stesso livello il libro è attributo del corso
 	- Se variabili il libro è attributo del corso attivato
 	
-✅. "I corsi sono organizzati per livelli. Ciascun livello è identificato dal nome del livello stesso (ad esempio Elementary, Intermediate, First Certificate, Advanced, Proficiency); inoltre è specificato
+❓ "I corsi sono organizzati per livelli. Ciascun livello è identificato dal nome del livello stesso (ad esempio Elementary, Intermediate, First Certificate, Advanced, Proficiency); inoltre è specificato
   il nome del libro di testo e se viene richiesto di sostenere un esame finale."
   	* Informazioni relative al Corso oppure al Livello??
   		+ è il corso che ha un libro e si distingue per esame o non esame, oppure è il livello che ha un libro e ha questa distinzione
@@ -17,24 +17,37 @@
 		  si distinguerebbe SOLO per la data di attivazione
 		  POCO SENSO 
 		  
-✅. - Uno studente è iscritto ad un UNICO corso ad un certo istante?? Credo di si perché "Per gli allievi sono noti il nome, un recapito, il corso a cui sono iscritti..."
+❓ - Uno studente è iscritto ad un UNICO corso ad un certo istante?? Credo di si perché "Per gli allievi sono noti il nome, un recapito, il corso a cui sono iscritti..."
 
-✅. Ci sono altre attività culturali oltre a Proiezioni e Conferenze, oppure sono solo di questi tipi
+❓ Ci sono altre attività culturali oltre a Proiezioni e Conferenze, oppure sono solo di questi tipi
 	* Se sono solo di questo tipo ho una generalizzazione totale
 	* Se ce ne sono di altri tipi allora la generalizzazione è parziale
 	
 - Chiedere se possibile utilizzare UML almeno per i pezzi parziali dello schema??
 
-✅. Chiedere la natura del recapito dello studente!! è un numero di telefono, un indirizzo o altro ancora?
+❓ Chiedere la natura del recapito dello studente!! è un numero di telefono, un indirizzo o altro ancora?
 
 - Devo mantenere informazioni sulla gestione degli esami oppure solo se essi sono richiesti o meno?? Sembra solo se sono richiesti o meno, visto che dell'esame non sono specificate
   altre informazioni significative!! Credo che sia una scuola per cui per gli esami ci si appoggia ad enti di terze parti: le certificazioni Cambridge vengono fatte dal Cambridge stess
   ma ci sono scuole che offrono la preparazione per essi
   
   
-✅. C'è un limite di posti per gli eventi organizzati?? Sembra di no da quello che indica la specifica, semplicemente gli studenti si iscrivono alla partecipazione
+❓ C'è un limite di posti per gli eventi organizzati?? Sembra di no da quello che indica la specifica, semplicemente gli studenti si iscrivono alla partecipazione
 
 - Specificare o non specificare il numero di iscritti?? è ricavabile tramite operazione su concetto quindi in teoria non è da specificare
 	* vedere Esercizio 2001-07-09: situazione simile con il costo del banchetto, però il costo è a posteriori... AIUTO!!!
 
-✅. Un corso può avere molteplici lezioni nello stesso giorno?? Mi serve per capire se la lezione deve essere identificata oltre che dal giorno anche dall'orario
+❓ Un corso può avere molteplici lezioni nello stesso giorno?? Mi serve per capire se la lezione deve essere identificata oltre che dal giorno anche dall'orario
+
+❗ IL CORSO HA GLI STESSI DOCENTI TRA ANNI DIVERSI OPPURE POSSONO CAMBIARE DI ANNO IN ANNO?? (POSSIBILE STORICIZZAZIONE)
+
+❗L'iscrizione degli studenti nella parte sulle attivtà culturali è relativa all'iscrizione degli studenti all'attivtà OPPURE all'iscrizione degli studenti ad un corso offerto dalla scuola
+	ad indicare quindi che solo gli iscritti ai corsi possono accedere alle attività culturali????
+	
+❗Lasciare l'indirizzo come attributo multivalore o no??
+
+- LASCIARE ID Di Lezione Privata con Insegnante????
+
+🔹Vincolo di Integrità: un insegnante NON DEVE avere più di un corso assegnato nella stessa fascia oraria
+🔹Vincolo di Integrità: una lezione privata NON DEVE essere prenotata allo stesso orario di un altro impegno di un insegnante
+🔹Vincolo di Integrità: un Insegnante DEVE avere lezioni solo di un Corso di cui è docente
