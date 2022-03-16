@@ -1,26 +1,30 @@
-- "Per ciascun corso sono note la data di attivazione..." Ha senso fare una distinzione tra corso e corso attivato??
- 	* Ha senso distinguere il corso tra "Corso Attivato" e "Corso" come distinguerei tra Volo e Volo Reale??
- 		+ Il "Corso" ha un livello
- 		+ Però il codice progressivo che distingue tra corsi del medesimo livello sarebbe relativo al corso attivato; oppure sarebbe relativo al corso e il corso attivato
-		  si distinguerebbe SOLO per la data di attivazione
-		  POCO SENSO 
-		  
-	
 - Chiedere se possibile utilizzare UML almeno per i pezzi parziali dello schema??
  
-- Specificare o non specificare il numero di iscritti?? è ricavabile tramite operazione su concetto quindi in teoria non è da specificare
-	* vedere Esercizio 2001-07-09: situazione simile con il costo del banchetto, però il costo è a posteriori... AIUTO!!!
-	* SIIII!!! a livello concettuale va mantenuto anche se ricavabile da altri concetti ( Ristrutturazione di ER )
 
-❓ Un corso può avere molteplici lezioni nello stesso giorno?? Mi serve per capire se la lezione deve essere identificata oltre che dal giorno anche dall'orario
+❓ Un corso può avere molteplici lezioni nello stesso giorno?? Mi serve per capire se la lezione deve essere identificata oltre che dal giorno anche dall'orario: SIIIIIIIIIIIIIII
 
+
+
+🔻Regola Aziendale: un Allievo NON DEVE prenotare Lezioni Private diverse in fasce orarie che collidono
+
+
+◽REGOLE INSEGNANTE
+	🔹un insegnante NON DEVE avere più di un corso assegnato nella stessa fascia oraria
+	🔹un Insegnante DEVE avere lezioni solo di un Corso di cui è docente
 	
-❗Lasciare l'indirizzo come attributo composto o no??
 
-- LASCIARE ID Di Lezione Privata con Insegnante????
-🔹Regola Aziendale: un insegnante NON DEVE avere più di un corso assegnato nella stessa fascia oraria
-🔹Regola Aziendale: una lezione privata NON DEVE essere prenotata allo stesso orario di un altro impegno di un insegnante
-🔹Regola Aziendale: un Insegnante DEVE avere lezioni solo di un Corso di cui è docente
-🔹Regola Aziendale: un Corso NON DEVE avere lezioni nello stesso giorno e in orari che collidono
-🔹Regola Aziendale: un'Assenza DEVE avvenire in una data il cui giorno coincide con quello della Lezione del Corso a cui si è assenti
-	* Nel caso in cui si voglia tracciare la specifica lezione a cui un allievo è stato assente
+◽REGOLE LEZIONE PRIVATA
+	🔹una lezione privata NON DEVE collidere con un altro impegno(Lezione di un corso o Lezione Privata) dell'insegnante
+		
+		
+◽REGOLE CORSO
+	🔹un Corso NON DEVE avere lezioni nello stesso giorno e in orari che collidono
+	
+
+◽REGOLE ASSENZA
+	🔹un'Assenza DEVE avere una data il cui giorno coincide con quello della Lezione del Corso a cui si è assenti
+	🔹un'Assenza DEVE essere ad una Lezione di un Corso a cui l'Allievo è iscritto
+	
+	
+◽REGOLE ALLIEVO
+	🔻un Allievo NON DEVE prenotare Lezioni Private diverse in fasce orarie che collidono
