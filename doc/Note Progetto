@@ -1,13 +1,6 @@
 - Chiedere se possibile utilizzare UML almeno per i pezzi parziali dello schema??
  
-
-❓ Un corso può avere molteplici lezioni nello stesso giorno?? Mi serve per capire se la lezione deve essere identificata oltre che dal giorno anche dall'orario: SIIIIIIIIIIIIIII
-
-
-
-🔻Regola Aziendale: un Allievo NON DEVE prenotare Lezioni Private diverse in fasce orarie che collidono
-
-
+ 
 ◽REGOLE INSEGNANTE
 	🔹un insegnante NON DEVE avere più di un corso assegnato nella stessa fascia oraria
 	🔹un Insegnante DEVE avere lezioni solo di un Corso di cui è docente

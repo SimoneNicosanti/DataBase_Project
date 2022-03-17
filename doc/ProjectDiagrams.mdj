@@ -16818,7 +16818,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 644,
-									"width": 79.380859375,
+									"width": 71.3125,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdKnd68="
@@ -17006,7 +17006,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 708,
-									"width": 79.380859375,
+									"width": 71.3125,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdKxlzI="
@@ -17194,7 +17194,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 764,
-									"width": 79.380859375,
+									"width": 71.3125,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdK7r0M="
@@ -17382,7 +17382,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 820,
-									"width": 92.013671875,
+									"width": 82.685546875,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdLFvrI="
@@ -17570,7 +17570,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 876,
-									"width": 79.380859375,
+									"width": 71.3125,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdLPEuI="
@@ -18498,7 +18498,7 @@
 									"containerExtending": true,
 									"left": 740,
 									"top": 60,
-									"width": 120.396484375,
+									"width": 112.427734375,
 									"height": 22
 								},
 								{
@@ -18655,7 +18655,7 @@
 									"containerExtending": true,
 									"left": 740,
 									"top": 96,
-									"width": 79.380859375,
+									"width": 71.3125,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXtMCyaI="
@@ -18843,7 +18843,7 @@
 									"containerExtending": true,
 									"left": 740,
 									"top": 148,
-									"width": 79.380859375,
+									"width": 71.3125,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXtMMaks="
@@ -28377,7 +28377,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF/k5Cqf16tUYg="
 							},
-							"name": "data"
+							"name": "data",
+							"type": ""
 						}
 					]
 				}
@@ -34901,7 +34902,7 @@
 											"top": 991,
 											"width": 211,
 											"height": 16,
-											"text": "+ora {id}",
+											"text": "+ora inizio {id}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -35022,9 +35023,9 @@
 										"$ref": "AAAAAAF/b+lPoEaWNxg="
 									},
 									"font": "Times New Roman;16;0",
-									"left": 1040,
+									"left": 1031,
 									"top": 839,
-									"width": 97.890625,
+									"width": 114.3203125,
 									"height": 16,
 									"alpha": 1.6058695412898423,
 									"distance": 57.0350769263968,
@@ -35032,7 +35033,7 @@
 										"$ref": "AAAAAAF/b+lPoEaa7Hs="
 									},
 									"edgePosition": 1,
-									"text": "+composizione"
+									"text": "+orario scolastico"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -37414,7 +37415,7 @@
 											"top": 1171,
 											"width": 211,
 											"height": 16,
-											"text": "+ora {id}",
+											"text": "+ora inizio {id}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -39482,6 +39483,19 @@
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAF/k3KKaFZqisk="
 							}
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF/mPGmREh6s7w=",
+							"_parent": {
+								"$ref": "AAAAAAF/b+F8jD6OUc8="
+							},
+							"font": "Times New Roman;16;0",
+							"left": 760,
+							"top": 1180,
+							"width": 106.21875,
+							"height": 140,
+							"text": "SCEGLIERE COSA FARE CON L'ID DELLA LEZIONE PRIVATA"
 						}
 					]
 				},
@@ -39608,7 +39622,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF/b+UOb0Iy2SM="
 							},
-							"name": "composizione",
+							"name": "orario scolastico",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAF/b+lPoEaXjQY=",
@@ -39719,8 +39733,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF/b+krAEZNNrQ="
 							},
-							"name": "ora",
-							"type": "",
+							"name": "ora inizio",
 							"isID": true
 						},
 						{
@@ -40110,8 +40123,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF/b/QkJ1u/Rh8="
 							},
-							"name": "ora",
-							"type": "",
+							"name": "ora inizio",
 							"isID": true
 						},
 						{
@@ -41480,6 +41492,7 @@
 								"$ref": "AAAAAAF/k5GK3mCaGgs="
 							},
 							"name": "nome",
+							"type": "",
 							"isID": true
 						}
 					]
@@ -41533,6 +41546,7 @@
 								"$ref": "AAAAAAF/k5GcxGDEQYw="
 							},
 							"name": "data",
+							"type": "",
 							"isID": true
 						}
 					]
@@ -41553,6 +41567,7 @@
 								"$ref": "AAAAAAF/k5G4q2DuSZo="
 							},
 							"name": "giorno",
+							"type": "",
 							"isID": true
 						},
 						{
@@ -41562,6 +41577,7 @@
 								"$ref": "AAAAAAF/k5G4q2DuSZo="
 							},
 							"name": "ora",
+							"type": "",
 							"isID": true
 						}
 					]
