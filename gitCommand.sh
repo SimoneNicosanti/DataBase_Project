@@ -3,5 +3,4 @@
  
 git add . ;
 git commit -m "$*" ;
-git push origin main ;
-printf "SimoneNicosanti\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" | ./gitCommand.sh
+git push origin main https://SimoneNicosanti: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@github.com/SimoneNicosanti/DataBase_Project.git;
