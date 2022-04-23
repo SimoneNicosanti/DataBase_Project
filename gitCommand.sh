@@ -3,4 +3,4 @@
  
 git add . ;
 git commit -m "$*" ;
-git push https://SimoneNicosanti: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@github.com/SimoneNicosanti/DataBase_Project.git origin main ;
+git push origin main https://SimoneNicosanti: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@github.com/SimoneNicosanti/DataBase_Project.git ;
