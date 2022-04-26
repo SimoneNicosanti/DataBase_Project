@@ -7035,7 +7035,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 644,
-									"width": 71.3125,
+									"width": 79.380859375,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdKnd68="
@@ -7223,7 +7223,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 708,
-									"width": 71.3125,
+									"width": 79.380859375,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdKxlzI="
@@ -7411,7 +7411,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 764,
-									"width": 71.3125,
+									"width": 79.380859375,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdK7r0M="
@@ -7599,7 +7599,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 820,
-									"width": 82.685546875,
+									"width": 92.013671875,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdLFvrI="
@@ -7787,7 +7787,7 @@
 									"containerExtending": true,
 									"left": 236,
 									"top": 876,
-									"width": 71.3125,
+									"width": 79.380859375,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXdLPEuI="
@@ -8715,7 +8715,7 @@
 									"containerExtending": true,
 									"left": 740,
 									"top": 60,
-									"width": 112.427734375,
+									"width": 120.396484375,
 									"height": 22
 								},
 								{
@@ -8872,7 +8872,7 @@
 									"containerExtending": true,
 									"left": 740,
 									"top": 96,
-									"width": 71.3125,
+									"width": 79.380859375,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXtMCyaI="
@@ -9060,7 +9060,7 @@
 									"containerExtending": true,
 									"left": 740,
 									"top": 148,
-									"width": 71.3125,
+									"width": 79.380859375,
 									"height": 36,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/JgpGXtMMaks="
