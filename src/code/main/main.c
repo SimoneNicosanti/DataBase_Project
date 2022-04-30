@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdio.h>
+
 #include "MainHeader.h"
+#include "code/config/EnvironmentSetter.h"
 
 
 
-int main() {
+void main() {
     showAppHeader() ;
+    if (!loadConfiguration()) {
+        exitWithError() ;
+    }
     /* if (connectToDatabase() == true) {
         showLoginView() ;
     } */
@@ -15,7 +21,7 @@ int main() {
 
 void showAppHeader() {
     char appTitleHeader[100] ;
-    sprintf(appTitleHeader, "| %s |", appTitle) ;
+    sprintf(appTitleHeader, "| %s |", APP_TITLE) ;
 
     printHeaderLine(strlen(appTitleHeader)) ;
     printf("\n%s\n", appTitleHeader) ;
@@ -29,3 +35,4 @@ void printHeaderLine(int headerLenght) {
         else putchar('-') ;
     }
 }
+
