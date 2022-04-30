@@ -4,18 +4,19 @@
 #include <stdio.h>
 
 #include "MainHeader.h"
-#include "code/config/EnvironmentSetter.h"
+#include "../config/EnvironmentSetter.h"
+#include "../db/Connector.h"
+#include "../view/LoginView.h"
 
 
-
-void main() {
+int main() {
     showAppHeader() ;
     if (!loadConfiguration()) {
-        exitWithError() ;
+        //exitWithError() ;
     }
-    /* if (connectToDatabase() == true) {
+    if (connectToDatabase() == true) {
         showLoginView() ;
-    } */
+    } 
 }
 
 
