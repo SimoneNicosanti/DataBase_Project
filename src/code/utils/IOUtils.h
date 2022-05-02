@@ -1,3 +1,5 @@
+#pragma once
+
 #define RED_TEXT_MARK 31 
 #define GREEN_TEXT_MARK 32 
 

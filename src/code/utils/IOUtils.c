@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 #include "IOUtils.h"
 #include "SystemUtilsHeader.h"
@@ -13,7 +14,10 @@ void printError(char *errorMessage) {
 
 
 char *getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
-    //Function to get userinput from stdinput
+    /*
+        Function to get userinput from stdinput.
+        Takes max buffer size from stdin and put them in resultBuffer
+    */
 
     printf("%s", requestString) ;
 

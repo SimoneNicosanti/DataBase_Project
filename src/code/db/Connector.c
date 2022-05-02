@@ -1,6 +1,10 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <mysql/mysql.h>
+#include "../utils/IOUtils.h"
+#include "Connector.h"
+#include "../controller/LoginControllerHeader.h"
+#include "DatabaseUtilsHeader.h"
 
 const char *DB_HOST = "DB.HOST" ;
 const char *DB_PORT = "DB.PORT" ;
@@ -8,7 +12,35 @@ const char *DB_NAME = "DB.NAME" ;
 const char *DB_LOGIN_USER = "LOGIN.USER" ;
 const char *DB_LOGIN_PASSWD = "LOGIN.PASSWD" ;
 
-static MYSQL *conn ;
+
+MYSQL *conn ;
+MYSQL_STMT *loginProcedure ;
+
+
+
+bool initializePreparedStatement(Role role) {
+    
+    switch (role) {
+        case LOGIN :
+            if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ;", conn)) {
+                printError("Impossibile Preparare Procedura di Login") ;
+                return false ;
+            }
+            break ;
+    
+        case AMMINISTRAZIONE :
+            break ;
+
+        case SEGRETERIA :
+            break ;
+
+        case INSEGNANTE :
+            break ;
+
+    }
+
+    return true ;
+}
 
 bool connectToDatabase() {
     char *host = getenv(DB_HOST) ;
@@ -40,5 +72,9 @@ bool connectToDatabase() {
             return false ;
         }    
 
-    return true ;
+    return initializePreparedStatement(LOGIN) ;
 }
+
+
+
+

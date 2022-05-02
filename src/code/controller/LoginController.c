@@ -10,7 +10,7 @@
 
 
 void loginController() {
-
+    //Vedere se allocare dinamicamente o su stack
     LoginCredentials *loginCredentialsPtr = (LoginCredentials *) malloc(sizeof(LoginCredentials)) ;
     if (loginCredentialsPtr == NULL) {
         exitWithError("Errore Allocazione Memoria") ;
@@ -18,18 +18,25 @@ void loginController() {
 
     memset(loginCredentialsPtr, 0, sizeof(LoginCredentials)) ;
     
-    bool loginResult = false ;
+    Role loginRole = LOGIN ;
     do {
         showLoginView(loginCredentialsPtr) ;
         
         if ((int) strlen(loginCredentialsPtr->username) == 0 || (int) strlen(loginCredentialsPtr->password) == 0) {
             printError("Username e/o Password Vuoti") ;
-            loginResult = false ;
+            loginRole = LOGIN ;
         }
         else {
-            loginResult = attemptLogin(loginCredentialsPtr) ;
+            loginRole = attemptLogin(loginCredentialsPtr) ;
         }
-    } while (!loginResult) ;
+    } while (loginRole == LOGIN) ;
 
-
+    switch (loginRole) {
+        case AMMINISTRAZIONE :
+            break ;
+        case SEGRETERIA :
+            break ;
+        case INSEGNANTE :
+            break ;
+    }
 }

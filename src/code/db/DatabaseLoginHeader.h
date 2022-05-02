@@ -4,4 +4,6 @@
 #include "../controller/LoginControllerHeader.h"
 #include "DatabaseUtilsHeader.h"
 
-bool attemptLogin(LoginCredentials *loginDredentialsPtr) ;
+Role attemptLogin(LoginCredentials *loginDredentialsPtr) ;
+
+void switchRole(Role newRole) ;

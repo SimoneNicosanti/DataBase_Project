@@ -6,9 +6,6 @@
 #include "../utils/IOUtils.h"
 #include "../utils/SystemUtilsHeader.h"
 
-#define USERNAME_MAX_SIZE 9
-#define PASSWORD_MAX_SIZE 9
-
 
 void showLoginView(LoginCredentials *loginCredentialsPtr) {
 
@@ -28,10 +25,7 @@ void showLoginView(LoginCredentials *loginCredentialsPtr) {
         exitWithError("Errore Allocazione Memoria") ;
     }
 
-    getUserInput("Username: ", usernameBuffer, usernameBufferSize) ;
-    getUserInput("Password: ", passwordBuffer, passwordBufferSize) ;
-
-    loginCredentialsPtr->username = usernameBuffer ;
-    loginCredentialsPtr->password = passwordBuffer ;
+    getUserInput("Username: ", loginCredentialsPtr->username, usernameBufferSize) ;
+    getUserInput("Password: ", loginCredentialsPtr->password, passwordBufferSize) ;
 
 }
