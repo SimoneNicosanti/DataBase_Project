@@ -4,27 +4,29 @@
 
 #include "../code/config/EnvironmentSetter.h"
 #include "../code/db/Connector.h"
-#include "TestUtils.h"
+#include "Test.h"
+
+
 
 void testWithEnvironment() {
     printf("Test Connessione Con Ambiente Configurato\n") ;
     loadConfiguration() ;
 
     if (connectToDatabase()) {
-        printResponse(true) ;
+        printSuccess() ;
     }
     else {
-        printResponse(false) ;
+        printFailure() ;
     }
 }
 
 void testWithNoEnvironment() {
     printf("Test Connessione Senza Ambiente Configurato\n") ;
     if (!connectToDatabase()) {
-        printResponse(true) ;
+        printSuccess() ;
     }
     else {
-        printResponse(false) ;
+        printFailure() ;
     }
     
 }

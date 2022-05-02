@@ -3,14 +3,14 @@
 #include <errno.h>
 
 #include "../code/config/EnvironmentSetter.h"
-#include "TestUtils.h"
+#include "Test.h"
 
 int main() {
     printf("Test Impostazione Ambiente\n") ;
     if (loadConfiguration() == true) {
-        printResponse(true) ;
+        printSuccess() ;
     }
     else {
-        printResponse(true) ;
+        printFailure() ;
     }
 }

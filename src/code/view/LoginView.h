@@ -1,2 +1,5 @@
+#pragma once
 
-void showLoginView() ;
+#include "../controller/LoginControllerHeader.h"
+
+void showLoginView(LoginCredentials *loginCredentialsPtr) ;

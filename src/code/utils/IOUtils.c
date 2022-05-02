@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "IOUtils.h"
+#include "SystemUtilsHeader.h"
+
+
+void printError(char *errorMessage) {
+    colorPrint(errorMessage, RED_TEXT) ;
+    printf("\n\n") ;
+}
+
+
+char *getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
+    //Function to get userinput from stdinput
+
+    printf("%s", requestString) ;
+
+    //Alloco un buffer di dimensione pari alla massima dimensione valida per l'input più uno per lo \n
+    char *inputBuffer = (char *) malloc(sizeof(char) * (bufferSize + 1)) ;
+    if (inputBuffer == NULL) {
+        exitWithError("Errore Allocazione Memoria Buffer di Input") ;
+        return NULL ;
+    } 
+    //Lettura al massimo di inputMaxSize - 1 caratteri incluso, se lo trova, il \n
+    if (fgets(inputBuffer, bufferSize + 1, stdin) == NULL) {
+        printError("Errore Scansione Input") ;
+        return NULL ;
+    }
+
+    //Rimozione eventuale \n letto da fgets
+    for (int i = 0 ; i < (int) strlen(inputBuffer) ; i++) if (inputBuffer[i] == '\n') inputBuffer[i] = '\0' ;
+
+    /*
+        Se ho una lunghezza di ciò che ho letto pari al massimo leggibile, 
+        significa che sul canale di input è rimasto ALMENO lo \n,
+        quindi devo rimuovere il resto dell'input per non leggerlo alla lettura successiva.
+        Significa inoltre che ho letto almeno un carattere in più della dimensione massima prevista e quindi l'input
+        non è valido
+    */
+    if ((int) strlen(inputBuffer) == bufferSize) {
+        while(getchar() != '\n') ;
+        printError("Input Inserito Troppo Lungo\n") ;
+        free(inputBuffer) ;
+        return NULL ;
+    }
+
+    strcpy(resultBuffer, inputBuffer) ;
+
+    free(inputBuffer) ;
+
+    return resultBuffer ;
+}
+
+
+void colorPrint(char *printText , TextColorEnum colorEnum) {
+    int color = 0 ;
+    switch (colorEnum) {
+        case (RED_TEXT) :
+            color = RED_TEXT_MARK ;
+            break;
+        case (GREEN_TEXT) :
+            color = GREEN_TEXT_MARK ;
+            break ;
+        case (RED_HIGH) :
+            color = RED_HIGH_TEXT_MARK ;
+            break ;
+        case (GREEN_HIGH) :
+            color = GREEN_HIGH_TEXT_MARK ;
+            break;
+    }
+
+    printf("\033[%dm%s\033[m", color, printText) ;
+} 

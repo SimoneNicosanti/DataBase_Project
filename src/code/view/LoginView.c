@@ -3,46 +3,35 @@
 #include <string.h>
 
 #include "LoginView.h"
+#include "../utils/IOUtils.h"
+#include "../utils/SystemUtilsHeader.h"
 
-char *getUserInput(char *requestString, char *inputBuffer, int inputMaxSize) {
-    //Function to get userinput from stdinput
-    printf("%s", requestString) ;
-    if (fgets(inputBuffer, inputMaxSize, stdin) == NULL) {
-        printf("Errore Scansione Input\n") ;
-        return NULL ;
-    }
+#define USERNAME_MAX_SIZE 9
+#define PASSWORD_MAX_SIZE 9
+
+
+void showLoginView(LoginCredentials *loginCredentialsPtr) {
 
     /*
-        Rimuove \n letto con fgets
-        Se lo \n non è presente nella stringa significa che ho letto un input troppo lungo:
-        devo quindi flushare lo stdout
+        ATTENTO!! Per permettere la lettura di esattamente un massimo di x byte, imposta una dimensione +2 da riservare
+        per il terminatore di stringa \0
     */
-    char *parsedInput = strtok(inputBuffer, "\n") ;
-
-    //Free stdin
-    if (strlen(inputBuffer) + 1 == inputMaxSize || parsedInput == NULL) {
-        while(getchar() != '\n') ;
-        printf("Input Inserito Troppo lungo\n") ;
-        return NULL ;
-    }
-}
-
-void showLoginView() {
-
-    int usernameMaxSize = 10 ;
-    int passwordMaxSize = 10 ;
+    int usernameBufferSize = USERNAME_MAX_SIZE + 1 ;
+    int passwordBufferSize = PASSWORD_MAX_SIZE + 1 ;
 
     printf("Inserire Credenziali Di Accesso\n") ;
 
-    char *usernameBuffer = malloc(sizeof(char) * usernameMaxSize) ;
-    char *passwordBuffer = malloc(sizeof(char) * passwordMaxSize) ;
+    char *usernameBuffer = malloc(sizeof(char) * usernameBufferSize) ;
+    char *passwordBuffer = malloc(sizeof(char) * passwordBufferSize) ;
 
     if (usernameBuffer == NULL || passwordBuffer == NULL) {
-        printf("ERRORE ALLOCAZIONE MEMORIA\n") ;
-        return ;
+        exitWithError("Errore Allocazione Memoria") ;
     }
 
-    getUserInput("Username: ", usernameBuffer, usernameMaxSize) ;
-    getUserInput("Password: ", passwordBuffer, passwordMaxSize) ;
-}
+    getUserInput("Username: ", usernameBuffer, usernameBufferSize) ;
+    getUserInput("Password: ", passwordBuffer, passwordBufferSize) ;
 
+    loginCredentialsPtr->username = usernameBuffer ;
+    loginCredentialsPtr->password = passwordBuffer ;
+
+}

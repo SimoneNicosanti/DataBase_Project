@@ -6,7 +6,7 @@
 #include "MainHeader.h"
 #include "../config/EnvironmentSetter.h"
 #include "../db/Connector.h"
-#include "../view/LoginView.h"
+#include "../controller/LoginControllerHeader.h"
 
 
 int main() {
@@ -15,7 +15,7 @@ int main() {
         //exitWithError() ;
     }
     if (connectToDatabase() == true) {
-        showLoginView() ;
+        loginController() ;
     } 
 }
 

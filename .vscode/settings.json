@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "stdbool.h": "c",
+        "databaseloginheader.h": "c",
+        "stdlib.h": "c",
+        "loginview.h": "c"
+    }
+}
