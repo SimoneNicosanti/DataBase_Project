@@ -6,4 +6,4 @@
 
 Role attemptLogin(LoginCredentials *loginDredentialsPtr) ;
 
-void switchRole(Role newRole) ;
+bool switchRole(Role newRole) ;

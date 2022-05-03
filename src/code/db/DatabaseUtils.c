@@ -5,13 +5,17 @@
 #include <stdbool.h>
 #include "../utils/IOUtils.h"
 
-void bindParam(MYSQL_BIND *mysqlParam, enum enum_field_types mysqlType, void *paramPtr, unsigned long paramSize) {
+bool is_null = true ;
+
+void bindParam(MYSQL_BIND *mysqlParam, enum enum_field_types mysqlType, void *paramPtr, unsigned long paramSize, bool nullable) {
 
     memset(mysqlParam, 0, sizeof(MYSQL_BIND)) ;
 
     mysqlParam->buffer = paramPtr ;
     mysqlParam->buffer_type = mysqlType ;
     mysqlParam->buffer_length = paramSize ;
+
+    if (nullable) mysqlParam->is_null = &is_null ;
 }
 
 void printMysqlError(MYSQL *conn, char *errorMessage) {
@@ -26,8 +30,23 @@ void printStatementError(MYSQL_STMT *statement, char *errorMessage) {
     printError(statementErrorMessage) ;
 }
 
-void freeStatement(MYSQL_STMT *statement) {
-    
+void freeStatement(MYSQL_STMT *statement, bool freeSet) {
+
+    if (freeSet) {
+        //Consuma Tutti I Possibili Result Set Rimanenti
+        int status = mysql_stmt_fetch(statement) ;
+        do {
+            //Tabella generica del Result Set
+            while (true) {
+                status = mysql_stmt_fetch(statement) ;
+                if (status == 1 || status == MYSQL_NO_DATA) break ;
+            }
+        
+            status = mysql_stmt_next_result(statement) ;
+
+        } while (status == 0) ;
+    }
+
     mysql_stmt_free_result(statement) ;
     mysql_stmt_reset(statement) ;
 }
@@ -52,3 +71,4 @@ bool setupPreparedStatement(MYSQL_STMT **statement, char *statementCommand, MYSQ
 
     return true ;
 }
+

@@ -6,29 +6,28 @@
 #include "../controller/LoginControllerHeader.h"
 #include "DatabaseUtilsHeader.h"
 
-const char *DB_HOST = "DB.HOST" ;
-const char *DB_PORT = "DB.PORT" ;
-const char *DB_NAME = "DB.NAME" ;
-const char *DB_LOGIN_USER = "LOGIN.USER" ;
-const char *DB_LOGIN_PASSWD = "LOGIN.PASSWD" ;
-
 
 MYSQL *conn ;
 MYSQL_STMT *loginProcedure ;
+MYSQL_STMT *restartYearProcedure ;
 
 
 
 bool initializePreparedStatement(Role role) {
-    
+    //TODO Altre procedure
     switch (role) {
         case LOGIN :
             if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ;", conn)) {
-                printError("Impossibile Preparare Procedura di Login") ;
+                printMysqlError(conn, "Impossibile Preparare Procedura di Login") ;
                 return false ;
             }
             break ;
     
         case AMMINISTRAZIONE :
+            if (!setupPreparedStatement(&restartYearProcedure, "CALL riavvia_anno() ;", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura di Riavvio Anno") ;
+                return false ;
+            }
             break ;
 
         case SEGRETERIA :
@@ -38,6 +37,21 @@ bool initializePreparedStatement(Role role) {
             break ;
 
     }
+
+    return true ;
+}
+
+
+bool closeAllStatement() {
+    if (loginProcedure) {
+        mysql_stmt_close(loginProcedure) ;
+        loginProcedure = NULL ;
+    }
+    if (restartYearProcedure) {
+        mysql_stmt_close(restartYearProcedure) ;
+        restartYearProcedure = NULL ;
+    }
+    //TODO Altre Procedure
 
     return true ;
 }
