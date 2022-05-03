@@ -6,6 +6,7 @@
         "loginview.h": "c",
         "systemutilsheader.h": "c",
         "databaseutilsheader.h": "c",
-        "connector.h": "c"
+        "connector.h": "c",
+        "ioutils.h": "c"
     }
 }

@@ -10,6 +10,8 @@
 MYSQL *conn ;
 MYSQL_STMT *loginProcedure ;
 MYSQL_STMT *restartYearProcedure ;
+MYSQL_STMT *addLevelProcedure ;
+MYSQL_STMT *addClassProcedure ;
 
 
 
@@ -26,6 +28,14 @@ bool initializePreparedStatement(Role role) {
         case AMMINISTRAZIONE :
             if (!setupPreparedStatement(&restartYearProcedure, "CALL riavvia_anno() ;", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura di Riavvio Anno") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&addLevelProcedure, "CALL aggiungi_livello(?,?,?) ;", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Precedura di Aggiunta Livello") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&addClassProcedure, "CALL aggiungi_corso(?,?) ;", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura di Aggiunta Corso") ;
                 return false ;
             }
             break ;
@@ -50,6 +60,14 @@ bool closeAllStatement() {
     if (restartYearProcedure) {
         mysql_stmt_close(restartYearProcedure) ;
         restartYearProcedure = NULL ;
+    }
+    if (addLevelProcedure) {
+        mysql_stmt_close(addLevelProcedure) ;
+        addLevelProcedure = NULL ;
+    }
+    if (addClassProcedure) {
+        mysql_stmt_close(addClassProcedure) ;
+        addClassProcedure = NULL ;
     }
     //TODO Altre Procedure
 

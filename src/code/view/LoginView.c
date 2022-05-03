@@ -18,13 +18,6 @@ void showLoginView(LoginCredentials *loginCredentialsPtr) {
 
     printf("Inserire Credenziali Di Accesso\n") ;
 
-    char *usernameBuffer = malloc(sizeof(char) * usernameBufferSize) ;
-    char *passwordBuffer = malloc(sizeof(char) * passwordBufferSize) ;
-
-    if (usernameBuffer == NULL || passwordBuffer == NULL) {
-        exitWithError("Errore Allocazione Memoria") ;
-    }
-
     getUserInput("Username: ", loginCredentialsPtr->username, usernameBufferSize) ;
     getUserInput("Password: ", loginCredentialsPtr->password, passwordBufferSize) ;
 

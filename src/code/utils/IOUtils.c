@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdbool.h>
 
 #include "IOUtils.h"
 #include "SystemUtilsHeader.h"
@@ -13,7 +14,7 @@ void printError(char *errorMessage) {
 }
 
 
-char *getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
+bool getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
     /*
         Function to get userinput from stdinput.
         Takes max buffer size from stdin and put them in resultBuffer
@@ -25,12 +26,12 @@ char *getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
     char *inputBuffer = (char *) malloc(sizeof(char) * (bufferSize + 1)) ;
     if (inputBuffer == NULL) {
         exitWithError("Errore Allocazione Memoria Buffer di Input") ;
-        return NULL ;
+        return false ;
     } 
     //Lettura al massimo di inputMaxSize - 1 caratteri incluso, se lo trova, il \n
     if (fgets(inputBuffer, bufferSize + 1, stdin) == NULL) {
         printError("Errore Scansione Input") ;
-        return NULL ;
+        return false ;
     }
 
     //Rimozione eventuale \n letto da fgets
@@ -47,14 +48,14 @@ char *getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
         while(getchar() != '\n') ;
         printError("Input Inserito Troppo Lungo\n") ;
         free(inputBuffer) ;
-        return NULL ;
+        return false ;
     }
 
     strcpy(resultBuffer, inputBuffer) ;
 
     free(inputBuffer) ;
 
-    return resultBuffer ;
+    return true ;
 }
 
 

@@ -7,6 +7,7 @@
 #include "../db/DatabaseLoginHeader.h"
 #include "../utils/SystemUtilsHeader.h"
 #include "../utils/IOUtils.h"
+#include "AdministrationControllerHeader.h"
 
 
 void successLogin(Role loginRole) ;
@@ -44,9 +45,12 @@ void loginController() {
 void successLogin(Role loginRole) {
     colorPrint("\n\nUsername e Password Validi\n", GREEN_TEXT) ;
 
+    switchRole(loginRole) ;
+
     switch (loginRole) {
         case AMMINISTRAZIONE :
-            colorPrint("Accesso Come Amministrazione\n", GREEN_TEXT) ;    
+            colorPrint("Accesso Come Amministrazione\n", GREEN_TEXT) ;
+            administrationController() ;
             break ;
         case SEGRETERIA :
             colorPrint("Accesso Come Segreteria\n", GREEN_TEXT) ;
@@ -54,7 +58,9 @@ void successLogin(Role loginRole) {
         case INSEGNANTE :
             colorPrint("Accesso Come Insegnante\n", GREEN_TEXT) ;
             break ;
+        case LOGIN :
+            break ;
     }
 
-    bool successRoleSwitch = switchRole(loginRole) ;
+    switchRole(LOGIN) ;
 }

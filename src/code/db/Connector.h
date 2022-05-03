@@ -24,6 +24,8 @@ extern MYSQL *conn ;
 
 extern MYSQL_STMT *loginProcedure ;
 extern MYSQL_STMT *restartYearProcedure ;
+extern MYSQL_STMT *addLevelProcedure ;
+extern MYSQL_STMT *addClassProcedure ;
 
 bool connectToDatabase() ;
 

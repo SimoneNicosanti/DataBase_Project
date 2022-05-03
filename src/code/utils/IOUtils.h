@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 #define RED_TEXT_MARK 31 
 #define GREEN_TEXT_MARK 32 
 
@@ -14,7 +16,7 @@ typedef enum {
 } TextColorEnum ;
 
 
-char *getUserInput(char *requestString, char *inputBuffer, int inputMaxSize) ;
+bool getUserInput(char *requestString, char *inputBuffer, int inputMaxSize) ;
 
 void colorPrint(char *printText, TextColorEnum colorEnum) ;
 

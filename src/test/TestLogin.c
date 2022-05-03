@@ -54,7 +54,7 @@ int main() {
 
     testExistentUser("simo_nico.99", "password") ;
     testExistentUser("simo", "nico") ;
-    //testLongInput("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "shshs") ;
+    //testLongInput("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "shshs") ;
     testNotExistentUser("ciao", "bello") ;
     
     testSwitchUser(AMMINISTRAZIONE) ;
