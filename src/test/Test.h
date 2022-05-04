@@ -1,17 +1,23 @@
 #pragma once
 
-#define SUCCESS_STRING "SUCCESSO"
-#define FAILURE_STRING "FALLIMENTO"
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 #include "../code/utils/IOUtils.h"
-#include <stdio.h>
-
-#include <string.h>
-
+#include "../code/utils/TimeUtils.h"
 #include "../code/config/EnvironmentSetter.h"
 #include "../code/db/Connector.h"
 #include "../code/db/DatabaseLoginHeader.h"
 #include "../code/db/DatabaseUtilsHeader.h"
+#include "../code/controller/AdministrationControllerHeader.h"
+#include "../code/db/AdministrationDatabaseHeader.h"
+
+
+#define SUCCESS_STRING "SUCCESSO"
+#define FAILURE_STRING "FALLIMENTO"
+
 
 void printSuccess() {
     colorPrint(SUCCESS_STRING, GREEN_HIGH) ; 

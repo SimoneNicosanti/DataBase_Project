@@ -6,6 +6,7 @@
 
 enum AdministrationControllerOptions {
     ADD_LEVEL = 0,
+    ADD_CLASS,
     QUIT,
 } ;
 
@@ -17,6 +18,13 @@ void addLevel() {
     }
 }
 
+void addClass() {
+    Class newClass ;
+    if (getClassInfo(&newClass)) {
+        addClassToDatabase(&newClass) ;
+    }
+}
+
 
 void administrationController() {
     
@@ -25,8 +33,11 @@ void administrationController() {
 
         switch (selectedOption) {
             case ADD_LEVEL :
-                printf("Add Level Option\n") ;
                 addLevel() ;
+                break ;
+
+            case ADD_CLASS :
+                addClass() ;
                 break ;
         
             case QUIT :

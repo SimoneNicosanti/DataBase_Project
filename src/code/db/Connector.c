@@ -20,22 +20,22 @@ bool initializePreparedStatement(Role role) {
     switch (role) {
         case LOGIN :
             if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ;", conn)) {
-                printMysqlError(conn, "Impossibile Preparare Procedura di Login") ;
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Login'") ;
                 return false ;
             }
             break ;
     
         case AMMINISTRAZIONE :
             if (!setupPreparedStatement(&restartYearProcedure, "CALL riavvia_anno() ;", conn)) {
-                printMysqlError(conn, "Impossibile Preparare Procedura di Riavvio Anno") ;
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Riavvio Anno'") ;
                 return false ;
             }
             if (!setupPreparedStatement(&addLevelProcedure, "CALL aggiungi_livello(?,?,?) ;", conn)) {
-                printMysqlError(conn, "Impossibile Preparare Precedura di Aggiunta Livello") ;
+                printMysqlError(conn, "Impossibile Preparare Precedura 'Aggiungi Livello'") ;
                 return false ;
             }
             if (!setupPreparedStatement(&addClassProcedure, "CALL aggiungi_corso(?,?) ;", conn)) {
-                printMysqlError(conn, "Impossibile Preparare Procedura di Aggiunta Corso") ;
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Corso'") ;
                 return false ;
             }
             break ;

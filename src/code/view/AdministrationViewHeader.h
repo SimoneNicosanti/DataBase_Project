@@ -6,3 +6,5 @@
 int getAdministrationOption() ;
 
 bool getLevelInfo(Level *levelPtr) ;
+
+bool getClassInfo(Class *classPtr) ;

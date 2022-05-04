@@ -7,14 +7,14 @@
 #include "../config/EnvironmentSetter.h"
 #include "../db/Connector.h"
 #include "../controller/LoginControllerHeader.h"
-
+#include "../utils/TimeUtils.h"
 
 int main() {
     showAppHeader() ;
     if (!loadConfiguration()) {
         //exitWithError() ;
     }
-    if (connectToDatabase() == true) {
+    if (connectToDatabase() && compileRegex()) {
         loginController() ;
     } 
 }

@@ -7,6 +7,10 @@
         "systemutilsheader.h": "c",
         "databaseutilsheader.h": "c",
         "connector.h": "c",
-        "ioutils.h": "c"
+        "ioutils.h": "c",
+        "string.h": "c",
+        "environmentsetter.h": "c",
+        "administrationcontrollerheader.h": "c",
+        "timeutils.h": "c"
     }
 }

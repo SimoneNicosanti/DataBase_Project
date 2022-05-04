@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../utils/IOUtils.h"
+#include "../utils/TimeUtils.h"
 
 bool is_null = true ;
 
@@ -16,6 +17,12 @@ void bindParam(MYSQL_BIND *mysqlParam, enum enum_field_types mysqlType, void *pa
     mysqlParam->buffer_length = paramSize ;
 
     if (nullable) mysqlParam->is_null = &is_null ;
+}
+
+void prepareDateParam(Date *datePtr , MYSQL_TIME *mysqlTime) {
+    mysqlTime->day = datePtr->day ;
+    mysqlTime->month = datePtr->month ;
+    mysqlTime->year = datePtr->year ;
 }
 
 void printMysqlError(MYSQL *conn, char *errorMessage) {

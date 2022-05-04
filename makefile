@@ -19,5 +19,9 @@ test_login :
 	gcc -Wall -Wextra ./src/test/TestLogin.c ./src/code/db/*.c ./src/code/config/*.c ./src/code/utils/*.c `mysql_config --cflags --include --libs` -o ./src/test/test.out
 	./src/test/test.out
 
+test_administration :
+	gcc -Wall -Wextra ./src/test/TestAdministration.c ./src/code/db/*.c ./src/code/config/*.c ./src/code/utils/*.c `mysql_config --cflags --include --libs` -o ./src/test/test.out
+	./src/test/test.out
+
 sonar_compile :
 	/home/simone/SonarScanner/BuildWrapper/buildWrapper --out-dir bw-output gcc ./src/*.c -o ./out/main.out
