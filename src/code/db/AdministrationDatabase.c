@@ -68,3 +68,99 @@ bool addClassToDatabase(Class *classPtr) {
 
     return true ;
 }
+
+bool addTeacherToDatabase(Teacher *teacherPtr) {
+
+    MYSQL_BIND param[3] ;
+    bindParam(&param[0], MYSQL_TYPE_STRING, teacherPtr->teacherName, strlen(teacherPtr->teacherName), false) ;
+    bindParam(&param[1], MYSQL_TYPE_STRING, teacherPtr->teacherNationality, strlen(teacherPtr->teacherNationality), false) ;
+    bindParam(&param[2], MYSQL_TYPE_STRING, teacherPtr->teacherAddress, strlen(teacherPtr->teacherAddress), false) ;
+
+    if (mysql_stmt_bind_param(addTeacherProcedure, param) != 0) {
+        printStatementError(addTeacherProcedure, "Impossibile Bind Parametri di Procedura 'Aggiungi Insegnante'") ;
+        freeStatement(addTeacherProcedure, false) ;
+        return false ;
+    }
+
+    if (mysql_stmt_execute(addTeacherProcedure) != 0) {
+        printStatementError(addTeacherProcedure, "Impossibile Eseguire Procedura 'Aggiungi Insegnante'") ;
+        freeStatement(addTeacherProcedure, false) ;
+        return false ;
+    }
+
+    freeStatement(addTeacherProcedure, false) ;
+
+    return true ;
+}
+
+bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) {
+    
+    MYSQL_BIND param[3] ;
+    bindParam(&param[0], MYSQL_TYPE_LONG, &(classPtr->classCode), sizeof(int), false) ;
+    bindParam(&param[1], MYSQL_TYPE_STRING, classPtr->levelName, strlen(classPtr->levelName), false) ;
+    bindParam(&param[2], MYSQL_TYPE_STRING, teacherPtr->teacherName, strlen(teacherPtr->teacherName), false) ;
+
+    if (mysql_stmt_bind_param(assignClassProcedure, param) != 0) {
+        printStatementError(assignClassProcedure, "Impossibile Bind Parametri di Procedura 'Assegna Corso'") ;
+        freeStatement(assignClassProcedure, false) ;
+        return false ;
+    }
+
+    if (mysql_stmt_execute(assignClassProcedure) != 0) {
+        printStatementError(assignClassProcedure, "Impossibile Eseguire Procedura 'Assegna Corso'") ;
+        freeStatement(assignClassProcedure, false) ;
+        return false ;
+    }
+
+    freeStatement(assignClassProcedure, false) ;
+
+    return true ;
+}
+
+bool organizeActivityInDatabase(CuturalActivity *newActivity) {
+
+    MYSQL_BIND param[7] ;
+
+    MYSQL_TIME activityDate ;
+    prepareDateParam(&(newActivity->activityDate), &activityDate) ;
+    MYSQL_TIME activityTime ;
+    prepareTimeParam(&(newActivity->activityTime), &activityTime) ;
+
+    bindParam(&param[0], MYSQL_TYPE_TIME, &activityDate, sizeof(MYSQL_TIME), false) ;
+    bindParam(&param[1], MYSQL_TYPE_TIME, &activityTime, sizeof(MYSQL_TIME), false) ;
+
+    char *typeString ;
+    if (newActivity->type == FILM) {
+        typeString = "Proiezione" ;
+        bindParam(&param[3], MYSQL_TYPE_STRING, newActivity->filmTitle, strlen(newActivity->filmTitle), false) ;
+        bindParam(&param[4], MYSQL_TYPE_STRING, newActivity->filmDirector, strlen(newActivity->filmDirector), false) ;
+
+        bindParam(&param[5], MYSQL_TYPE_NULL, NULL, sizeof(NULL), true) ;
+        bindParam(&param[6], MYSQL_TYPE_NULL, NULL, sizeof(NULL), true) ;
+    }
+    else {
+        typeString = "Conferenza" ;
+        bindParam(&param[3], MYSQL_TYPE_NULL, NULL, sizeof(NULL), true) ;
+        bindParam(&param[4], MYSQL_TYPE_NULL, NULL, sizeof(NULL), true) ;
+
+        bindParam(&param[5], MYSQL_TYPE_STRING, newActivity->meetingLecturer, strlen(newActivity->meetingLecturer), false) ;
+        bindParam(&param[6], MYSQL_TYPE_STRING, newActivity->meetingArgument, strlen(newActivity->meetingArgument), false) ;
+    }
+    bindParam(&param[2], MYSQL_TYPE_STRING, typeString, strlen(typeString), false) ;
+
+    if (mysql_stmt_bind_param(organizeActivityProcedure, param) != 0) {
+        printStatementError(organizeActivityProcedure, "Impossibile Bind Parametri di Procedura 'Organizza Attività'") ;
+        freeStatement(organizeActivityProcedure, false) ;
+        return false ;
+    }
+
+    if (mysql_stmt_execute(organizeActivityProcedure) != 0) {
+        printStatementError(organizeActivityProcedure, "Impossibile Eseguire Procedura 'Organizza Attività'") ;
+        freeStatement(organizeActivityProcedure, false) ;
+        return false ;
+    }
+
+    freeStatement(organizeActivityProcedure, false) ;
+
+    return true ;
+}

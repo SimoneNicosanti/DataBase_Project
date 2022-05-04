@@ -8,3 +8,7 @@ int getAdministrationOption() ;
 bool getLevelInfo(Level *levelPtr) ;
 
 bool getClassInfo(Class *classPtr) ;
+
+bool getTeacherInfo(Teacher *teacherPtr) ;
+
+bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) ;

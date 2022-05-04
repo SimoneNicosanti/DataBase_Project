@@ -21,4 +21,35 @@ typedef struct {
     int studentsNumber ; 
 } Class ;
 
+
+#define TEACHER_NAME_MAX_LENGHT 100
+#define TEACHER_ADDRESS_MAX_LENGHT 100
+#define TEACHER_NATIONALITY_MAX_LENGHT 100 
+typedef struct {
+    char teacherName[TEACHER_NAME_MAX_LENGHT + 1] ;
+    char teacherNationality[TEACHER_ADDRESS_MAX_LENGHT + 1] ;
+    char teacherAddress[TEACHER_NATIONALITY_MAX_LENGHT + 1] ;
+} Teacher ;
+
+
+enum ActivityType {
+    FILM = 0,
+    MEETING
+} ;
+
+#define FILM_TITLE_MAX_SIZE 100 
+#define FILM_DIRECTOR_NAME_MAX_SIZE 100
+#define MEETING_LECTURER_NAME_MAX_SIZE 100
+#define MEETING_ARGUMENT_MAX_SIZE 100
+typedef struct {
+    int activityCode ;
+    Date activityDate ;
+    Time activityTime ;
+    enum ActivityType type ;
+    char filmTitle[FILM_TITLE_MAX_SIZE + 1] ;
+    char filmDirector[FILM_DIRECTOR_NAME_MAX_SIZE + 1] ;
+    char meetingLecturer[MEETING_LECTURER_NAME_MAX_SIZE + 1] ;
+    char meetingArgument[MEETING_ARGUMENT_MAX_SIZE + 1] ;
+} CuturalActivity ;
+
 void administrationController() ;

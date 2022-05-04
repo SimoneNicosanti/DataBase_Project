@@ -26,6 +26,10 @@ extern MYSQL_STMT *loginProcedure ;
 extern MYSQL_STMT *restartYearProcedure ;
 extern MYSQL_STMT *addLevelProcedure ;
 extern MYSQL_STMT *addClassProcedure ;
+extern MYSQL_STMT *addTeacherProcedure ;
+extern MYSQL_STMT *addClassProcedure ;
+extern MYSQL_STMT *assignClassProcedure ;
+extern MYSQL_STMT *organizeActivityProcedure ;
 
 bool connectToDatabase() ;
 

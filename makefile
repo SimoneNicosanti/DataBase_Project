@@ -6,6 +6,7 @@ test_all :
 	make test_environment
 	make test_connection
 	make test_login
+	make test_administration 
 
 test_environment :
 	gcc -Wall -Wextra ./src/test/TestEnvironmentSetter.c ./src/code/utils/*.c ./src/code/config/EnvironmentSetter.c -o ./src/test/test.out

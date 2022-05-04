@@ -1,11 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 #include "ViewUtilsHeader.h"
 #include "../controller/AdministrationControllerHeader.h"
 #include "../utils/IOUtils.h"
 
-char *administrationMenuOptions[] = {"Aggiungi Livello", "Aggiungi Corso", "Quit"} ;
+char *administrationMenuOptions[] = {
+    "Aggiungi Livello", 
+    "Aggiungi Corso", 
+    "Aggiungi Insegnante", 
+    "Assegna Corso", 
+    "Organizza Attività",
+    "Quit"} ;
+
 
 int getAdministrationOption() {
     showMenu(administrationMenuOptions, sizeof(administrationMenuOptions) / sizeof(char *)) ;
@@ -14,6 +22,10 @@ int getAdministrationOption() {
     getUserInput("", choosenOption, 2) ;
 
     int selectedOption = strtol(choosenOption, NULL, 10) ;
+    if (errno == EINVAL) {
+        selectedOption = -1 ;
+        errno = 0 ;
+    }
     return selectedOption ;
 }
 
@@ -71,6 +83,57 @@ bool getClassInfo(Class *classPtr) {
         printError("Formato della Data Inserita non Valido") ;
         return false ;
     }
+
+    printf("\n") ;
+
+    return true ;
+}
+
+bool getTeacherInfo(Teacher *teacherPtr) {
+    printf("\n") ;
+
+    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LENGHT + 1)) {
+        printError("Errore Inserimento Nome Insegnante") ;
+        return false ;
+    }
+
+    if (!getUserInput("Inserire Nazionalità Insegnante >>> ", teacherPtr->teacherNationality, TEACHER_NATIONALITY_MAX_LENGHT + 1)) {
+        printError("Errore Inserimento Nazionalità") ;
+        return false ;
+    }
+
+    if (!getUserInput("Inserire Indirizzo Insegnante >>> ", teacherPtr->teacherAddress, TEACHER_ADDRESS_MAX_LENGHT + 1)) {
+        printError("Errore Inserimento Indirizzo") ;
+        return false ;
+    }
+
+    printf("\n") ;
+
+    return true ;
+}
+
+bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
+    printf("\n") ;
+
+    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LENGHT + 1)) {
+        printError("Errore Inserimento Nome Insegnante") ;
+        return false ;
+    }
+
+    if (!getUserInput("Inserire Livello Corso >>> ", classPtr->levelName, LEVEL_NAME_MAX_LEN + 1)) {
+        printError("Errore Inserimento Livello Corso") ;
+        return false ;
+    }
+
+    char classCode[10 + 1] ;
+    if (!getUserInput("Inserire Codice Corso >>> ", classCode, 10 + 1)) {
+        printError("Errore Inserimento Codice Corso") ;
+        return false ;
+    }
+
+    classPtr->classCode = (int) strtol(classCode, NULL, 10) ;
+    
+    //TODO Controllo Overflow / Underflow Codice inserito ?? è Necessario o ci pensa il DB??
 
     printf("\n") ;
 

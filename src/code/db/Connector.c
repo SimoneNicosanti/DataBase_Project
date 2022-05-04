@@ -12,6 +12,9 @@ MYSQL_STMT *loginProcedure ;
 MYSQL_STMT *restartYearProcedure ;
 MYSQL_STMT *addLevelProcedure ;
 MYSQL_STMT *addClassProcedure ;
+MYSQL_STMT *addTeacherProcedure ;
+MYSQL_STMT *assignClassProcedure ;
+MYSQL_STMT *organizeActivityProcedure ;
 
 
 
@@ -36,6 +39,18 @@ bool initializePreparedStatement(Role role) {
             }
             if (!setupPreparedStatement(&addClassProcedure, "CALL aggiungi_corso(?,?) ;", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Corso'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&addTeacherProcedure, "CALL aggiungi_insegnante(?,?,?) ;", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Insegnante'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&assignClassProcedure, "CALL assegna_corso(?,?,?) ;", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Assegna Corso'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&organizeActivityProcedure, "CALL organizza_attivita_culturale(?,?,?,?,?,?,?) ;", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Organizza Attività'") ;
                 return false ;
             }
             break ;
@@ -68,6 +83,14 @@ bool closeAllStatement() {
     if (addClassProcedure) {
         mysql_stmt_close(addClassProcedure) ;
         addClassProcedure = NULL ;
+    }
+    if (addTeacherProcedure) {
+        mysql_stmt_close(addTeacherProcedure) ;
+        addTeacherProcedure = NULL ;
+    }
+    if (assignClassProcedure) {
+        mysql_stmt_close(assignClassProcedure) ;
+        assignClassProcedure = NULL ;
     }
     //TODO Altre Procedure
 

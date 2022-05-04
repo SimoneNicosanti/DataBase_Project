@@ -8,6 +8,8 @@ void bindParam(MYSQL_BIND *mysqlParam, enum enum_field_types mysqlType, void *pa
 
 void prepareDateParam(Date *datePtr , MYSQL_TIME *mysqlTime) ;
 
+void prepareTimeParam(Time *timePtr, MYSQL_TIME *mysqlTime) ;
+
 void printMysqlError(MYSQL *conn, char *errorMessage) ;
 
 void printStatementError(MYSQL_STMT *statement, char *errorMessage) ;

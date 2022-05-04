@@ -25,6 +25,12 @@ void prepareDateParam(Date *datePtr , MYSQL_TIME *mysqlTime) {
     mysqlTime->year = datePtr->year ;
 }
 
+void prepareTimeParam(Time *timePtr, MYSQL_TIME *mysqlTime) {
+    mysqlTime->hour = timePtr->hour ;
+    mysqlTime->minute = timePtr->minute ;
+    mysqlTime->second = timePtr->second ;
+}
+
 void printMysqlError(MYSQL *conn, char *errorMessage) {
     char sqlErrorMessage[500] ;
     sprintf(sqlErrorMessage, "%s\nErrore %d : %s", errorMessage, mysql_errno(conn), mysql_error(conn)) ;

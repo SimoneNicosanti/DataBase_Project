@@ -7,6 +7,8 @@
 enum AdministrationControllerOptions {
     ADD_LEVEL = 0,
     ADD_CLASS,
+    ADD_TEACHER,
+    ASSIGN_CLASS, 
     QUIT,
 } ;
 
@@ -25,6 +27,21 @@ void addClass() {
     }
 }
 
+void addTeacher() {
+    Teacher newTeacher ;
+    if (getTeacherInfo(&newTeacher)) {
+        addTeacherToDatabase(&newTeacher) ;
+    }
+}
+
+void assignClass() {
+    Teacher teacher ;
+    Class class ;
+    if (getTeacherAndClassInfo(&teacher, &class)) {
+        assignTeacherToClass(&teacher, &class) ;
+    }
+}
+
 
 void administrationController() {
     
@@ -38,6 +55,14 @@ void administrationController() {
 
             case ADD_CLASS :
                 addClass() ;
+                break ;
+
+            case ADD_TEACHER :
+                addTeacher() ;
+                break ;
+
+            case ASSIGN_CLASS :
+                assignClass() ;
                 break ;
         
             case QUIT :

@@ -35,6 +35,41 @@ void testAddClass() {
 
 }
 
+void testAddTeacher() {
+    Class testClass ;
+    Teacher testTeacher ;
+
+    strcpy(testTeacher.teacherName, "Simone Nicosanti") ;
+    strcpy(testClass.levelName, "Elementary") ;
+    testClass.classCode = 1 ;
+
+    if (assignTeacherToClass(&testTeacher, &testClass)) printSuccess() ;
+    else printFailure() ;
+}
+
+void testOrganizeActivity() {
+    CuturalActivity testActivity ;
+    
+    Date testDate ;
+    testDate.year = 2022 ;
+    testDate.month = 02 ;
+    testDate.day = 18 ;
+
+    Time testTime ;
+    testTime.hour = 12 ;
+    testTime.minute = 30 ;
+    testTime.second = 0 ;
+
+    testActivity.activityDate = testDate ;
+    testActivity.activityTime = testTime ;
+    strcpy(testActivity.filmTitle, "I Segreti di Silente") ;
+    strcpy(testActivity.filmDirector, "Non Lo So") ;
+    testActivity.type = FILM ;
+
+    if (organizeActivityInDatabase(&testActivity)) printSuccess() ;
+    else printFailure() ;
+}
+
 int main() {
 
     loadConfiguration() ;
@@ -43,8 +78,10 @@ int main() {
     switchRole(AMMINISTRAZIONE) ;
     
     testAddLevel() ;
-
     testAddClass() ;
+    testAddTeacher() ;
+
+    testOrganizeActivity() ;
 
     return 0 ;
 }
