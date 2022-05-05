@@ -2,8 +2,8 @@
 #include "../utils/IOUtils.h"
 #include "DatabaseUtilsHeader.h"
 #include <stdbool.h>
-#include "../controller/AdministrationControllerHeader.h"
 #include <string.h>
+#include "AdministrationDatabaseHeader.h"
 
 
 bool addLevelToDatabase(Level *levelPtr) {

@@ -13,6 +13,7 @@
 #include "../code/db/DatabaseUtilsHeader.h"
 #include "../code/controller/AdministrationControllerHeader.h"
 #include "../code/db/AdministrationDatabaseHeader.h"
+#include "../code/db/SecretaryDBHeader.h"
 
 
 #define SUCCESS_STRING "SUCCESSO"

@@ -30,6 +30,7 @@ extern MYSQL_STMT *addTeacherProcedure ;
 extern MYSQL_STMT *addClassProcedure ;
 extern MYSQL_STMT *assignClassProcedure ;
 extern MYSQL_STMT *organizeActivityProcedure ;
+extern MYSQL_STMT *addStudentProcedure ;
 
 bool connectToDatabase() ;
 

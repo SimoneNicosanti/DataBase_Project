@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <errno.h>
 #include "../utils/IOUtils.h"
 
 void showMenu(char **menuOptionsArray, int optionsNumber) {
@@ -20,4 +21,21 @@ void showOptionHeader() {
 void printOptionTitle(char *optionName) {
     colorPrint(optionName, GREEN_TEXT) ;
     printf("\n") ;
+}
+
+int getUserOption(char *menuOption[], int menuLen) {
+    printf("\n\n") ;
+    colorPrint("Cosa Posso Fare Per Te??", GREEN_HIGH) ;
+    printf("\n") ;
+    showMenu(menuOption, menuLen) ;
+
+    char choosenOption[3] ;
+    getUserInput("", choosenOption, 3) ;
+
+    int selectedOption = strtol(choosenOption, NULL, 10) ;
+    if (errno == EINVAL) {
+        selectedOption = -1 ;
+        errno = 0 ;
+    }
+    return selectedOption ;
 }

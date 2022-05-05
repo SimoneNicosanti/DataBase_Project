@@ -17,20 +17,7 @@ char *administrationMenuOptions[] = {
 
 
 int getAdministrationOption() {
-    printf("\n\n") ;
-    colorPrint("Cosa Posso Fare Per Te??", GREEN_HIGH) ;
-    printf("\n") ;
-    showMenu(administrationMenuOptions, sizeof(administrationMenuOptions) / sizeof(char *)) ;
-
-    char choosenOption[2] ;
-    getUserInput("", choosenOption, 2) ;
-
-    int selectedOption = strtol(choosenOption, NULL, 10) ;
-    if (errno == EINVAL) {
-        selectedOption = -1 ;
-        errno = 0 ;
-    }
-    return selectedOption ;
+    return getUserOption(administrationMenuOptions, 6) ;
 }
 
 bool getLevelInfo(Level *levelPtr) {

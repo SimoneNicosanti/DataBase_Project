@@ -9,12 +9,15 @@
 
 MYSQL *conn ;
 MYSQL_STMT *loginProcedure ;
+
 MYSQL_STMT *restartYearProcedure ;
 MYSQL_STMT *addLevelProcedure ;
 MYSQL_STMT *addClassProcedure ;
 MYSQL_STMT *addTeacherProcedure ;
 MYSQL_STMT *assignClassProcedure ;
 MYSQL_STMT *organizeActivityProcedure ;
+
+MYSQL_STMT *addStudentProcedure ;
 
 
 
@@ -56,6 +59,10 @@ bool initializePreparedStatement(Role role) {
             break ;
 
         case SEGRETERIA :
+            if (!setupPreparedStatement(&addStudentProcedure, "CALL aggiungi_allievo(?,?,?,?,?)", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Allievo'") ;
+                return false ;
+            }
             break ;
 
         case INSEGNANTE :
