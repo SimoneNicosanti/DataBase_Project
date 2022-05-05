@@ -10,7 +10,7 @@ int daysInMonth[13][13] = {
 } ;
 
 
-bool compileRegex() {
+bool compileTimeRegex() {
     if (regcomp(&dateRegex, "[0-9]{4}-[0-9]{2}-[0-9]{2}", REG_EXTENDED) != 0) {
         printError("Impossibile Inizializzare Regex di Controllo Data") ;
         return false ;
@@ -31,6 +31,7 @@ int isLeapYear(int year) {
 
 bool isValidDate(Date *verifyDate) {
     //check range of year,month and day
+    //TODO Verificare che sia SQL a fare questo controllo
     if (verifyDate->month < 1 || verifyDate->month > 12) {
         return false ;
     }
@@ -63,7 +64,26 @@ bool verifyAndParseDate(Date *datePtr, char *dateString) {
         datePtr->month = atoi(monthString) ;
         datePtr->day = atoi(dayString) ;
         
-        return isValidDate(datePtr) ;
+        //Verifica su Correttezza rapporto tra mese-giorno e anno è fatta dal DBMS
+        //return isValidDate(datePtr) ;
+        return true ;
+    }
+
+    return false ;
+}
+
+bool verifyAndParseTime(Time *timePtr, char *timeStr) {
+    if (regexec(&timeRegex, timeStr, 0, NULL, 0) != 0) {
+        return false ;
+    }
+
+    char *hourString = strtok(timeStr, ":") ;
+    char *minuteString = strtok(NULL, ":") ;
+
+    if (strlen(hourString) == 2 && strlen(minuteString) == 2) {
+        timePtr->hour = atoi(hourString) ;
+        timePtr->minute = atoi(minuteString) ;
+        return true ;
     }
 
     return false ;

@@ -121,13 +121,13 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) {
 
     MYSQL_BIND param[7] ;
 
-    MYSQL_TIME activityDate ;
-    prepareDateParam(&(newActivity->activityDate), &activityDate) ;
-    MYSQL_TIME activityTime ;
-    prepareTimeParam(&(newActivity->activityTime), &activityTime) ;
+    MYSQL_TIME mysqlDate ;
+    prepareDateParam(&(newActivity->activityDate), &mysqlDate) ;
+    MYSQL_TIME mysqlTime ;
+    prepareTimeParam(&(newActivity->activityTime), &mysqlTime) ;
 
-    bindParam(&param[0], MYSQL_TYPE_TIME, &activityDate, sizeof(MYSQL_TIME), false) ;
-    bindParam(&param[1], MYSQL_TYPE_TIME, &activityTime, sizeof(MYSQL_TIME), false) ;
+    bindParam(&param[0], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
+    bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
 
     char *typeString ;
     if (newActivity->type == FILM) {

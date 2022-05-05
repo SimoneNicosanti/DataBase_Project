@@ -73,7 +73,11 @@ bool getClassInfo(Class *classPtr) {
         return false ;
     }
 
-    char dateString[strlen("yyyy-mm-dd") + 1] ;
+    if (!getDateFromUser(&(classPtr->activationDate), "Inserire Data Attivazione Nuovo Corso [yyyy-mm-dd] >>> ")) {
+        return false ;
+    }
+
+    /* char dateString[strlen("yyyy-mm-dd") + 1] ;
     if (!(getUserInput("Inserire Data Attivazione Nuovo Corso [yyyy-mm-dd] >>> ", dateString, strlen("yyyy-mm-dd") + 1))) {
         printError("Errore Inserimento Data") ;
         return false ;
@@ -82,7 +86,7 @@ bool getClassInfo(Class *classPtr) {
     if (!verifyAndParseDate(&(classPtr->activationDate), dateString)) {
         printError("Formato della Data Inserita non Valido") ;
         return false ;
-    }
+    } */
 
     printf("\n") ;
 
@@ -139,3 +143,48 @@ bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
 
     return true ;
 }
+
+
+bool getActivityInfo(CuturalActivity *activityPtr) {
+    printf("\n") ;
+
+    char activityTypeString[2] ;
+    if (!getUserInput("Inserire Tipo Di Attivita [P-C] >>> ", activityTypeString, 2)) {
+        printError("Errore Inserimento Tipo Attività") ;
+        return false ;
+    }
+
+    if (strcmp(activityTypeString, "P") != 0 && strcmp(activityTypeString, "C") != 0) {
+        printError("Tipo di Attività Non Valido") ;
+        return false ;
+    }
+
+    if (strcmp(activityTypeString, "P") == 0) {
+        activityPtr->type = FILM ;
+
+        if (!getUserInput("Inserire Titolo Film >>> ", activityPtr->filmTitle, FILM_TITLE_MAX_SIZE + 1)) {
+            printError("Errore Inserimento Titolo Film") ;
+            return false ;
+        }
+        if (!getUserInput("Inserire Regista Film >>> ", activityPtr->filmDirector, FILM_DIRECTOR_NAME_MAX_SIZE + 1)) {
+            printError("Errore Inserimento Regista Film") ;
+            return false ;
+        }
+    }
+    else {
+        activityPtr->type = MEETING ;
+
+        if (!getUserInput("Inserire Nome Conferenziere >>> ", activityPtr->meetingLecturer, MEETING_LECTURER_NAME_MAX_SIZE + 1)) {
+            printError("Errore Inserimento Conferenziere") ;
+            return false ;
+        }
+        if (!getUserInput("Inserire Argomento Conferenza >>> ", activityPtr->meetingArgument, MEETING_ARGUMENT_MAX_SIZE + 1)) {
+            printError("Errore Inserimento Argomento Conferenza") ;
+            return false ;
+        }
+    }
+
+    
+
+
+} 

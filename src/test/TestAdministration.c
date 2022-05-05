@@ -49,19 +49,15 @@ void testAddTeacher() {
 
 void testOrganizeActivity() {
     CuturalActivity testActivity ;
-    
-    Date testDate ;
-    testDate.year = 2022 ;
-    testDate.month = 02 ;
-    testDate.day = 18 ;
 
-    Time testTime ;
-    testTime.hour = 12 ;
-    testTime.minute = 30 ;
-    testTime.second = 0 ;
+    testActivity.activityDate.year = 2017 ;
+    testActivity.activityDate.month = 02 ;
+    testActivity.activityDate.day = 18 ;
 
-    testActivity.activityDate = testDate ;
-    testActivity.activityTime = testTime ;
+    testActivity.activityTime.hour = 25 ;
+    testActivity.activityTime.minute = 15 ;
+    testActivity.activityTime.second = 0 ;
+
     strcpy(testActivity.filmTitle, "I Segreti di Silente") ;
     strcpy(testActivity.filmDirector, "Non Lo So") ;
     testActivity.type = FILM ;

@@ -20,15 +20,21 @@ void bindParam(MYSQL_BIND *mysqlParam, enum enum_field_types mysqlType, void *pa
 }
 
 void prepareDateParam(Date *datePtr , MYSQL_TIME *mysqlTime) {
+
+    memset(mysqlTime, 0, sizeof(MYSQL_TIME)) ;
+
     mysqlTime->day = datePtr->day ;
     mysqlTime->month = datePtr->month ;
     mysqlTime->year = datePtr->year ;
 }
 
 void prepareTimeParam(Time *timePtr, MYSQL_TIME *mysqlTime) {
+
+    memset(mysqlTime, 0, sizeof(MYSQL_TIME)) ;
+
     mysqlTime->hour = timePtr->hour ;
     mysqlTime->minute = timePtr->minute ;
-    mysqlTime->second = timePtr->second ;
+    //mysqlTime->second = timePtr->second ;
 }
 
 void printMysqlError(MYSQL *conn, char *errorMessage) {

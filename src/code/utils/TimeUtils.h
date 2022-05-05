@@ -23,4 +23,6 @@ typedef struct {
 
 bool verifyAndParseDate(Date *datePtr, char *stringDate) ;
 
-bool compileRegex() ;
+bool verifyAndParseTime(Time *timePtr, char *stringTime) ;
+
+bool compileTimeRegex() ;

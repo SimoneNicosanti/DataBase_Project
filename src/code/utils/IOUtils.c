@@ -78,3 +78,24 @@ void colorPrint(char *printText , TextColorEnum colorEnum) {
 
     printf("\033[%dm%s\033[m", color, printText) ;
 } 
+
+
+bool getDateFromUser(Date *datePtr, char *requestString) {
+    char dateString[strlen("yyyy-mm-dd") + 1] ;
+    if (!(getUserInput(requestString, dateString, strlen("yyyy-mm-dd") + 1))) {
+        printError("Errore Inserimento Data") ;
+        return false ;
+    }
+
+    if (!verifyAndParseDate(datePtr, dateString)) {
+        printError("Formato della Data Inserita non Valido") ;
+        return false ;
+    }
+
+    return true ;
+}
+
+bool getTimeFromUser(Time *timePtr, char *requestString) {
+
+    
+}

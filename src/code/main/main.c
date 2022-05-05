@@ -14,7 +14,7 @@ int main() {
     if (!loadConfiguration()) {
         //exitWithError() ;
     }
-    if (connectToDatabase() && compileRegex()) {
+    if (connectToDatabase() && compileTimeRegex()) {
         loginController() ;
     } 
 }
