@@ -21,6 +21,8 @@ bool getUserInput(char *requestString, char *inputBuffer, int inputMaxSize) ;
 
 bool getDateFromUser(Date *datePtr, char *requestString) ;
 
+bool getTimeFromUser(Time *timePtr, char *requestString) ;
+
 void colorPrint(char *printText, TextColorEnum colorEnum) ;
 
 void printError(char *errorMessage) ;

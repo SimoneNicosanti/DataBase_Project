@@ -12,3 +12,5 @@ bool getClassInfo(Class *classPtr) ;
 bool getTeacherInfo(Teacher *teacherPtr) ;
 
 bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) ;
+
+bool getActivityInfo(CuturalActivity *activityPtr) ;

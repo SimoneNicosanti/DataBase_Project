@@ -97,5 +97,16 @@ bool getDateFromUser(Date *datePtr, char *requestString) {
 
 bool getTimeFromUser(Time *timePtr, char *requestString) {
 
-    
+    char timeString[strlen("hh:mm") + 1] ;
+    if (!(getUserInput(requestString, timeString, strlen("hh:mm") + 1))) {
+        printError("Errore Inserimento Orario") ;
+        return false ;
+    }
+
+    if (!verifyAndParseTime(timePtr, timeString)) {
+        printError("Formato Orario Inserito non Valido") ;
+        return false ;
+    }
+
+    return true ;
 }

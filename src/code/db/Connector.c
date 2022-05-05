@@ -92,6 +92,10 @@ bool closeAllStatement() {
         mysql_stmt_close(assignClassProcedure) ;
         assignClassProcedure = NULL ;
     }
+    if (organizeActivityProcedure) {
+        mysql_stmt_close(organizeActivityProcedure) ;
+        organizeActivityProcedure = NULL ;
+    }
     //TODO Altre Procedure
 
     return true ;

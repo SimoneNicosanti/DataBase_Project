@@ -12,10 +12,14 @@ char *administrationMenuOptions[] = {
     "Aggiungi Insegnante", 
     "Assegna Corso", 
     "Organizza Attività",
-    "Quit"} ;
+    "Quit"
+    } ;
 
 
 int getAdministrationOption() {
+    printf("\n\n") ;
+    colorPrint("Cosa Posso Fare Per Te??", GREEN_HIGH) ;
+    printf("\n") ;
     showMenu(administrationMenuOptions, sizeof(administrationMenuOptions) / sizeof(char *)) ;
 
     char choosenOption[2] ;
@@ -30,7 +34,7 @@ int getAdministrationOption() {
 }
 
 bool getLevelInfo(Level *levelPtr) {
-    printf("\n\n") ;
+    printOptionTitle(administrationMenuOptions[0]) ;
     
     if (!getUserInput("Inserire Nome Livello >>> ", levelPtr->levelName, LEVEL_NAME_MAX_LEN + 1)) {
         printError("Errore Lettura Nome Livello") ;
@@ -59,14 +63,12 @@ bool getLevelInfo(Level *levelPtr) {
         return false ;
     }
 
-    printf("\n") ;
-
     return true ;
 }
 
 
 bool getClassInfo(Class *classPtr) {
-    printf("\n\n") ;
+    printOptionTitle(administrationMenuOptions[1]) ;
 
     if (!(getUserInput("Inserire Livello del Nuovo Corso >>> ", classPtr->levelName, LEVEL_NAME_MAX_LEN + 1))) {
         printError("Errore Inserimento Nome Livello") ;
@@ -77,24 +79,11 @@ bool getClassInfo(Class *classPtr) {
         return false ;
     }
 
-    /* char dateString[strlen("yyyy-mm-dd") + 1] ;
-    if (!(getUserInput("Inserire Data Attivazione Nuovo Corso [yyyy-mm-dd] >>> ", dateString, strlen("yyyy-mm-dd") + 1))) {
-        printError("Errore Inserimento Data") ;
-        return false ;
-    }
-
-    if (!verifyAndParseDate(&(classPtr->activationDate), dateString)) {
-        printError("Formato della Data Inserita non Valido") ;
-        return false ;
-    } */
-
-    printf("\n") ;
-
     return true ;
 }
 
 bool getTeacherInfo(Teacher *teacherPtr) {
-    printf("\n") ;
+    printOptionTitle(administrationMenuOptions[2]) ;
 
     if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LENGHT + 1)) {
         printError("Errore Inserimento Nome Insegnante") ;
@@ -111,13 +100,11 @@ bool getTeacherInfo(Teacher *teacherPtr) {
         return false ;
     }
 
-    printf("\n") ;
-
     return true ;
 }
 
 bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
-    printf("\n") ;
+    printOptionTitle(administrationMenuOptions[3]) ;
 
     if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LENGHT + 1)) {
         printError("Errore Inserimento Nome Insegnante") ;
@@ -139,14 +126,12 @@ bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
     
     //TODO Controllo Overflow / Underflow Codice inserito ?? è Necessario o ci pensa il DB??
 
-    printf("\n") ;
-
     return true ;
 }
 
 
 bool getActivityInfo(CuturalActivity *activityPtr) {
-    printf("\n") ;
+    printOptionTitle(administrationMenuOptions[4]) ;
 
     char activityTypeString[2] ;
     if (!getUserInput("Inserire Tipo Di Attivita [P-C] >>> ", activityTypeString, 2)) {
@@ -184,7 +169,14 @@ bool getActivityInfo(CuturalActivity *activityPtr) {
         }
     }
 
-    
+    if (!getDateFromUser(&(activityPtr->activityDate), "Inserire Data Attività [yyyy-mm-dd] >>> ")) {
+        return false ;
+    }
 
+    if (!getTimeFromUser(&(activityPtr->activityTime), "Inserire Orario Attività [hh:mm] >>> ")) {
+        return false ;
+    }
+
+    return true ;
 
 } 

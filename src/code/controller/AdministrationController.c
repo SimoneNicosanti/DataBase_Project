@@ -3,12 +3,14 @@
 #include "../view/AdministrationViewHeader.h"
 #include "AdministrationControllerHeader.h"
 #include "../db/AdministrationDatabaseHeader.h"
+#include "../view/ViewUtilsHeader.h"
 
 enum AdministrationControllerOptions {
     ADD_LEVEL = 0,
     ADD_CLASS,
     ADD_TEACHER,
     ASSIGN_CLASS, 
+    ORGANIZE_ACTIVITY,
     QUIT,
 } ;
 
@@ -42,12 +44,21 @@ void assignClass() {
     }
 }
 
+void organizeActivity() {
+    CuturalActivity newActivity ;
+    if (getActivityInfo(&newActivity)) {
+        organizeActivityInDatabase(&newActivity) ;
+    }
+
+}
+
 
 void administrationController() {
     
     do {
         int selectedOption = getAdministrationOption() ;
 
+        showOptionHeader() ;
         switch (selectedOption) {
             case ADD_LEVEL :
                 addLevel() ;
@@ -64,16 +75,21 @@ void administrationController() {
             case ASSIGN_CLASS :
                 assignClass() ;
                 break ;
+
+            case ORGANIZE_ACTIVITY :
+                organizeActivity() ;
+                break ;
         
             case QUIT :
-                printf("QUIT\n") ;
                 goto exit_loop ;
-            
+
             default :
                 printf("INVALID OPTION\n\n") ;
                 break ;
         }
+        showOptionHeader() ;
     } while (true) ;
 
     exit_loop:
+    showOptionHeader() ;
 }
