@@ -8,6 +8,7 @@
 #include "../utils/SystemUtilsHeader.h"
 #include "../utils/IOUtils.h"
 #include "AdministrationControllerHeader.h"
+#include "SecretaryControllerHeader.h"
 
 
 void successLogin(Role loginRole) ;
@@ -54,6 +55,7 @@ void successLogin(Role loginRole) {
             break ;
         case SEGRETERIA :
             colorPrint("Accesso Come Segreteria\n", GREEN_TEXT) ;
+            secretaryController() ;
             break ;
         case INSEGNANTE :
             colorPrint("Accesso Come Insegnante\n", GREEN_TEXT) ;

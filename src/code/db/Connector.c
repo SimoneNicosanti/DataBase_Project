@@ -18,6 +18,7 @@ MYSQL_STMT *assignClassProcedure ;
 MYSQL_STMT *organizeActivityProcedure ;
 
 MYSQL_STMT *addStudentProcedure ;
+MYSQL_STMT *addJoinProcedure ;
 
 
 
@@ -61,6 +62,10 @@ bool initializePreparedStatement(Role role) {
         case SEGRETERIA :
             if (!setupPreparedStatement(&addStudentProcedure, "CALL aggiungi_allievo(?,?,?,?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Allievo'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&addJoinProcedure, "CALL aggiungi_partecipazione(?,?)", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Partecipazione'") ;
                 return false ;
             }
             break ;

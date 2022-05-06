@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "administrationcontrollerheader.h": "c",
-        "secretarycontrollerheader.h": "c"
+        "secretarycontrollerheader.h": "c",
+        "secretaryviewheader.h": "c"
     }
 }

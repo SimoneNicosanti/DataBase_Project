@@ -16,7 +16,7 @@ void printError(char *errorMessage) {
 
 bool getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
     /*
-        Function to get userinput from stdinput.
+        Function to get user input from stdinput.
         Takes max buffer size from stdin and put them in resultBuffer
     */
 
@@ -55,6 +55,11 @@ bool getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
 
     free(inputBuffer) ;
 
+    /*
+        TODO Aggiunta controllo input non vuoto: evito di ricontrollare ogni volta
+        che la funzione viene chiamata. Alla fine se viene chiesto un input all'utente
+        ci si aspetta che esso venga inserito. Se non lo fa c'è un errore
+    */
     return true ;
 }
 
@@ -107,6 +112,18 @@ bool getTimeFromUser(Time *timePtr, char *requestString) {
         printError("Formato Orario Inserito non Valido") ;
         return false ;
     }
+
+    return true ;
+}
+
+bool getClassCodeFromUser(int *classCodePtr) {
+    char classCode[10 + 1] ;
+    if (!getUserInput("Inserire Codice Corso >>> ", classCode, 10 + 1)) {
+        printError("Errore Inserimento Codice Corso") ;
+        return false ;
+    }
+
+    *classCodePtr = (int) strtol(classCode, NULL, 10) ;
 
     return true ;
 }

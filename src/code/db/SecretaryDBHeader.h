@@ -7,3 +7,5 @@
 #include "../model/Student.h"
 
 bool addStudentToDatabase(Student *studentPtr) ;
+
+bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) ;

@@ -30,3 +30,27 @@ bool addStudentToDatabase(Student *studentPtr) {
 
     return true ;
 }
+
+
+bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) {
+
+    MYSQL_BIND param[2] ;
+    bindParam(&param[0], MYSQL_TYPE_LONG, activityCode, sizeof(int), false) ;
+    bindParam(&param[1], MYSQL_TYPE_STRING, studentName, strlen(studentName), false) ;
+
+    if (mysql_stmt_bind_param(addJoinProcedure, param) != 0) {
+        printStatementError(addJoinProcedure, "Bind Parametri Impossibile per 'Aggiungi Partecipazione'") ;
+        freeStatement(addJoinProcedure, false) ;
+        return false ;
+    }
+
+    if (mysql_stmt_execute(addJoinProcedure) != 0) {
+        printStatementError(addJoinProcedure, "Esecuzione Impossibile per 'Aggiungi Partecipazione'") ;
+        freeStatement(addJoinProcedure, false) ;
+        return false ;
+    }
+
+    freeStatement(addJoinProcedure, false) ;
+
+    return true ;
+}

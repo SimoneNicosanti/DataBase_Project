@@ -15,6 +15,8 @@
 #include "../code/db/AdministrationDatabaseHeader.h"
 #include "../code/db/SecretaryDBHeader.h"
 
+#include "../code/view/TablePrinterHeader.h"
+
 
 #define SUCCESS_STRING "SUCCESSO"
 #define FAILURE_STRING "FALLIMENTO"

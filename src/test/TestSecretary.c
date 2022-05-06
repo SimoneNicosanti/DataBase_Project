@@ -1,13 +1,8 @@
 #include "Test.h"
 
 
-int main() {
 
-    loadConfiguration() ;
-    connectToDatabase() ;
-
-    switchRole(SEGRETERIA) ;
-
+void testAddStudent() {
     Student testStudent ;
 
     strcpy(testStudent.studentName, "Simone Nicosanti") ;
@@ -22,4 +17,22 @@ int main() {
 
     if (addStudentToDatabase(&testStudent)) printSuccess() ;
     else printFailure() ;
+}
+
+void testAddJoin() {
+    int activityCode = 3 ;
+    if (addStudentJoinActivityToDatabase("Simone Nicosanti", &activityCode)) printSuccess() ;
+    else printFailure() ;
+}
+
+int main() {
+
+    loadConfiguration() ;
+    connectToDatabase() ;
+
+    switchRole(SEGRETERIA) ;
+
+    testAddStudent() ;
+
+    testAddJoin() ;
 }
