@@ -51,7 +51,7 @@ void printStatementError(MYSQL_STMT *statement, char *errorMessage) {
 
 void freeStatement(MYSQL_STMT *statement, bool freeSet) {
 
-    if (freeSet) {
+    /* if (freeSet) {
         //Consuma Tutti I Possibili Result Set Rimanenti
         int status = mysql_stmt_fetch(statement) ;
         do {
@@ -64,10 +64,33 @@ void freeStatement(MYSQL_STMT *statement, bool freeSet) {
             status = mysql_stmt_next_result(statement) ;
 
         } while (status == 0) ;
+    } */
+    if (freeSet) {
+        //Finisco di Scorrerre Tabella Corrente
+        int status = mysql_stmt_fetch(statement) ;
+        
+        while (status != 1 && status != MYSQL_NO_DATA) status = mysql_stmt_fetch(statement) ;
+        
+        //Finisco di scorrere tutte le possibili tabelle restanti
+        status = mysql_stmt_next_result(statement) ;
+        //printf("Status %d\n", status) ;
+        while (status == 0) {
+            status = mysql_stmt_fetch(statement) ;
+            while (status != 1 && status != MYSQL_NO_DATA) status = mysql_stmt_fetch(statement) ;
+            status = mysql_stmt_next_result(statement) ;
+        }
     }
 
     mysql_stmt_free_result(statement) ;
     mysql_stmt_reset(statement) ;
+}
+
+void skipTable(MYSQL_STMT *statement) {
+    int status = mysql_stmt_next_result(statement) ;
+    if (status == 0) {
+        status = mysql_stmt_fetch(statement) ;
+        while (status != 1 && status != MYSQL_NO_DATA) status = mysql_stmt_fetch(statement) ;
+    }
 }
 
 

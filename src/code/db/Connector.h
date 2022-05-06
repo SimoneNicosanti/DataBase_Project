@@ -34,6 +34,8 @@ extern MYSQL_STMT *organizeActivityProcedure ;
 extern MYSQL_STMT *addStudentProcedure ;
 extern MYSQL_STMT *addJoinProcedure ;
 
+extern MYSQL_STMT *retrieveClassesProcedure ;
+
 bool connectToDatabase() ;
 
 bool initializePreparedStatement(Role role) ;

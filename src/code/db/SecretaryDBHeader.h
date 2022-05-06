@@ -9,3 +9,13 @@
 bool addStudentToDatabase(Student *studentPtr) ;
 
 bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) ;
+
+
+typedef struct {
+    Class **allClasses ;
+    int classNumber ;
+} ClassArray ;
+
+ClassArray *retrieveAllClasses() ;
+
+

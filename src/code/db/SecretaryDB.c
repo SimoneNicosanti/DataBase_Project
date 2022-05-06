@@ -31,6 +31,55 @@ bool addStudentToDatabase(Student *studentPtr) {
     return true ;
 }
 
+ClassArray *retrieveAllClasses() {
+    if (mysql_stmt_execute(retrieveClassesProcedure) != 0) {
+        printStatementError(retrieveClassesProcedure, "Esecuzione Impossibile per 'Recupera Corsi'") ;
+        freeStatement(retrieveClassesProcedure, false) ;
+        return NULL ;
+    }
+
+    //VA FATTO STORE RESULT
+    mysql_stmt_store_result(retrieveClassesProcedure);
+
+    int rowNum = mysql_stmt_num_rows(retrieveClassesProcedure) ;
+
+    MYSQL_BIND resultSetCursor[4] ;
+    ClassArray *classArray = (ClassArray *) malloc(sizeof(ClassArray *) * rowNum) ;
+    if (classArray == NULL) exit(-1) ;
+
+    classArray->allClasses = (Class **) malloc(sizeof(Class *) * rowNum) ;
+    classArray->classNumber = rowNum ;
+
+    for (int rowIndex = 0 ; rowIndex < rowNum ; rowIndex++) {
+        Class *class = (Class *) malloc(sizeof(Class *)) ;
+        if (class == NULL) exit(-1) ;
+
+        MYSQL_TIME time ;
+        bindParam(&resultSetCursor[0], MYSQL_TYPE_LONG, &(class->classCode), sizeof(int), false) ;
+        bindParam(&resultSetCursor[1], MYSQL_TYPE_VAR_STRING, class->levelName, LEVEL_NAME_MAX_LEN + 1, false) ;
+        bindParam(&resultSetCursor[2], MYSQL_TYPE_DATE, &time, sizeof(MYSQL_TIME), false) ;
+        bindParam(&resultSetCursor[3], MYSQL_TYPE_LONG, &(class->studentsNumber), sizeof(int), false) ;
+
+        if (mysql_stmt_bind_result(retrieveClassesProcedure, resultSetCursor) != 0) {
+            printStatementError(retrieveClassesProcedure, "Impossibile Recuperare i Corsi") ;
+            freeStatement(retrieveClassesProcedure, true) ;
+            return NULL ;
+        }
+         
+        if (mysql_stmt_fetch(retrieveClassesProcedure) != 0) {
+            printStatementError(retrieveClassesProcedure, "Errore Recupero Risultato") ;
+            freeStatement(retrieveClassesProcedure, true) ;
+            return NULL ;
+        }
+         
+        (classArray->allClasses)[rowIndex] = class ;
+         
+    }
+    freeStatement(retrieveClassesProcedure, true) ;
+     
+    return classArray ;
+}
+
 
 bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) {
 

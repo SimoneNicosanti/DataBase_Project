@@ -20,6 +20,8 @@ MYSQL_STMT *organizeActivityProcedure ;
 MYSQL_STMT *addStudentProcedure ;
 MYSQL_STMT *addJoinProcedure ;
 
+MYSQL_STMT *retrieveClassesProcedure ;
+
 
 
 bool initializePreparedStatement(Role role) {
@@ -66,6 +68,10 @@ bool initializePreparedStatement(Role role) {
             }
             if (!setupPreparedStatement(&addJoinProcedure, "CALL aggiungi_partecipazione(?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Partecipazione'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&retrieveClassesProcedure, "CALL recupera_corsi() ;", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Recupera Corsi'") ;
                 return false ;
             }
             break ;

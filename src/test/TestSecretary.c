@@ -25,6 +25,18 @@ void testAddJoin() {
     else printFailure() ;
 }
 
+void testGetClasses() {
+    ClassArray *classArray = retrieveAllClasses() ;
+
+    if (classArray != NULL) printSuccess() ;
+    else printFailure() ;
+
+    for (int i = 0 ; i < classArray->classNumber ; i++) {
+        Class *classPtr = (classArray->allClasses)[i] ;
+        printf("%d %s %d\n", classPtr->classCode, classPtr->levelName, classPtr->studentsNumber) ;
+    }
+}
+
 int main() {
 
     loadConfiguration() ;
@@ -32,7 +44,11 @@ int main() {
 
     switchRole(SEGRETERIA) ;
 
-    testAddStudent() ;
+    //testAddStudent() ;
 
-    testAddJoin() ;
+    //testAddJoin() ;
+
+    testGetClasses() ;
+
+    //testGetClasses() ;
 }

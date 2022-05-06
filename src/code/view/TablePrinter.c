@@ -29,9 +29,8 @@ void printSeparator(int *widthArray, int colNum) {
 void printRow(int *widthArray, char **row, int colNum) {
     putchar('|') ;
     for (int colIndex = 0 ; colIndex < colNum ; colIndex++) {
-        //Usato -1 per inserire lo spazio aggiuntivo a dx e dare più visibilità all'output
         printf(" %-*s", widthArray[colIndex] - 1, row[colIndex]) ;
-        
+        //Usato -1 per inserire lo spazio aggiuntivo a dx e dare più visibilità all'output
         putchar('|') ;
     }
     putchar('\n') ;
@@ -43,7 +42,7 @@ void printTable(Table *tablePtr) {
     int maxWidthArray[tablePtr->colsNum] ;
     
     for (int colIndex = 0 ; colIndex < tablePtr->colsNum ; colIndex++) {
-        maxWidthArray[colIndex] = 7 + findColWidth(tablePtr, colIndex) ;
+        maxWidthArray[colIndex] = 5 + findColWidth(tablePtr, colIndex) ;
     }
 
     printSeparator(maxWidthArray, tablePtr->colsNum) ;
