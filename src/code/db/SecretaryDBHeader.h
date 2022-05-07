@@ -14,8 +14,8 @@ bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) ;
 typedef struct {
     Class **allClasses ;
     int classNumber ;
-} ClassArray ;
+} ClassReport ;
 
-ClassArray *retrieveAllClasses() ;
+ClassReport *retrieveAllClasses() ;
 
 

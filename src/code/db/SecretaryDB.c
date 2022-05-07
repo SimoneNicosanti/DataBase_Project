@@ -31,7 +31,8 @@ bool addStudentToDatabase(Student *studentPtr) {
     return true ;
 }
 
-ClassArray *retrieveAllClasses() {
+
+ClassReport *retrieveAllClasses() {
     if (mysql_stmt_execute(retrieveClassesProcedure) != 0) {
         printStatementError(retrieveClassesProcedure, "Esecuzione Impossibile per 'Recupera Corsi'") ;
         freeStatement(retrieveClassesProcedure, false) ;
@@ -44,7 +45,7 @@ ClassArray *retrieveAllClasses() {
     int rowNum = mysql_stmt_num_rows(retrieveClassesProcedure) ;
 
     MYSQL_BIND resultSetCursor[4] ;
-    ClassArray *classArray = (ClassArray *) malloc(sizeof(ClassArray *) * rowNum) ;
+    ClassReport *classArray = (ClassReport *) malloc(sizeof(ClassReport *) * rowNum) ;
     if (classArray == NULL) exit(-1) ;
 
     classArray->allClasses = (Class **) malloc(sizeof(Class *) * rowNum) ;
@@ -73,8 +74,8 @@ ClassArray *retrieveAllClasses() {
         }
          
         (classArray->allClasses)[rowIndex] = class ;
-         
     }
+
     freeStatement(retrieveClassesProcedure, true) ;
      
     return classArray ;

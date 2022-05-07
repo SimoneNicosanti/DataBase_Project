@@ -2,6 +2,8 @@
     "files.associations": {
         "administrationcontrollerheader.h": "c",
         "secretarycontrollerheader.h": "c",
-        "secretaryviewheader.h": "c"
+        "secretaryviewheader.h": "c",
+        "timeutils.h": "c",
+        "tableprinterheader.h": "c"
     }
 }

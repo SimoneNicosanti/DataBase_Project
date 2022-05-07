@@ -8,6 +8,14 @@
 
 bool is_null = true ;
 
+/*
+    Funzione per preparare un paramentro MYSQL_BIND.
+    - mysqlParam : Puntatore al MYSQL_BIND da preparare
+    - mysqlType : Tipo di dato MYSQL da legare
+    - paramPtr : Puntatore al buffer da cui prendere/in cui inserire l'informazione
+    - paramSize : Lunghezza del buffer puntato da paramPtr (strlen / sizeof)
+    - nullable : Indica se il paramPtr è NULL
+*/
 void bindParam(MYSQL_BIND *mysqlParam, enum enum_field_types mysqlType, void *paramPtr, unsigned long paramSize, bool nullable) {
 
     memset(mysqlParam, 0, sizeof(MYSQL_BIND)) ;
@@ -19,6 +27,7 @@ void bindParam(MYSQL_BIND *mysqlParam, enum enum_field_types mysqlType, void *pa
     if (nullable) mysqlParam->is_null = &is_null ;
 }
 
+//Fa la Conversione da Tipo Date a MYSQL_TIME
 void prepareDateParam(Date *datePtr , MYSQL_TIME *mysqlTime) {
 
     memset(mysqlTime, 0, sizeof(MYSQL_TIME)) ;
@@ -28,6 +37,7 @@ void prepareDateParam(Date *datePtr , MYSQL_TIME *mysqlTime) {
     mysqlTime->year = datePtr->year ;
 }
 
+//Conversione da Time a MYSQL_TIME
 void prepareTimeParam(Time *timePtr, MYSQL_TIME *mysqlTime) {
 
     memset(mysqlTime, 0, sizeof(MYSQL_TIME)) ;
@@ -49,22 +59,13 @@ void printStatementError(MYSQL_STMT *statement, char *errorMessage) {
     printError(statementErrorMessage) ;
 }
 
+
+/*
+ Funzione per liberare uno statement dopo l'esecuzione
+    - statement : statement da liberare
+    - freeSet : Indica se deve essere consumato il result set ritornato dallo statement
+ */
 void freeStatement(MYSQL_STMT *statement, bool freeSet) {
-
-    /* if (freeSet) {
-        //Consuma Tutti I Possibili Result Set Rimanenti
-        int status = mysql_stmt_fetch(statement) ;
-        do {
-            //Tabella generica del Result Set
-            while (true) {
-                status = mysql_stmt_fetch(statement) ;
-                if (status == 1 || status == MYSQL_NO_DATA) break ;
-            }
-        
-            status = mysql_stmt_next_result(statement) ;
-
-        } while (status == 0) ;
-    } */
     if (freeSet) {
         //Finisco di Scorrerre Tabella Corrente
         int status = mysql_stmt_fetch(statement) ;
@@ -75,16 +76,17 @@ void freeStatement(MYSQL_STMT *statement, bool freeSet) {
         status = mysql_stmt_next_result(statement) ;
         //printf("Status %d\n", status) ;
         while (status == 0) {
+            
             status = mysql_stmt_fetch(statement) ;
             while (status != 1 && status != MYSQL_NO_DATA) status = mysql_stmt_fetch(statement) ;
             status = mysql_stmt_next_result(statement) ;
         }
     }
-
     mysql_stmt_free_result(statement) ;
     mysql_stmt_reset(statement) ;
 }
 
+// Permette di saltare la prossima tabella di un result set ritornato da statement
 void skipTable(MYSQL_STMT *statement) {
     int status = mysql_stmt_next_result(statement) ;
     if (status == 0) {
@@ -93,7 +95,7 @@ void skipTable(MYSQL_STMT *statement) {
     }
 }
 
-
+//Inizializza uno statement MYSQL
 bool setupPreparedStatement(MYSQL_STMT **statement, char *statementCommand, MYSQL *conn) {
 
     *statement = mysql_stmt_init(conn) ;

@@ -25,7 +25,7 @@ test_administration :
 	./src/test/test.out
 
 test_secretary :
-	gcc -Wall -Wextra ./src/test/TestSecretary.c ./src/code/db/*.c ./src/code/config/*.c ./src/code/utils/*.c `mysql_config --cflags --include --libs` -o ./src/test/test.out
+	gcc -Wall -Wextra ./src/test/TestSecretary.c ./src/code/view/TablePrinter.c ./src/code/db/*.c ./src/code/config/*.c ./src/code/utils/*.c `mysql_config --cflags --include --libs` -o ./src/test/test.out
 	./src/test/test.out
 
 test_table_print :
