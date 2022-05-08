@@ -46,7 +46,9 @@ void loginController() {
 void successLogin(Role loginRole) {
     colorPrint("\n\nUsername e Password Validi\n", GREEN_TEXT) ;
 
-    switchRole(loginRole) ;
+    if (switchRole(loginRole) == false) {
+        return ;
+    }
 
     switch (loginRole) {
         case AMMINISTRAZIONE :

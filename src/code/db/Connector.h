@@ -33,8 +33,8 @@ extern MYSQL_STMT *organizeActivityProcedure ;
 
 extern MYSQL_STMT *addStudentProcedure ;
 extern MYSQL_STMT *addJoinProcedure ;
-
-extern MYSQL_STMT *retrieveClassesProcedure ;
+extern MYSQL_STMT *loadClassesProcedure ;
+extern MYSQL_STMT *loadAllActivitiesProcedure ;
 
 bool connectToDatabase() ;
 

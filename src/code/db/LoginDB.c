@@ -47,11 +47,14 @@ Role attemptLogin(LoginCredentials *loginCredentials) {
     }
 
     //Presa del parametro di OUT
+
     if (mysql_stmt_fetch(loginProcedure) != 0) {
-        printStatementError(loginProcedure, "Impossibile Recuperare Risultato di Login") ;
-        freeStatement(loginProcedure, true) ;
+        printStatementError(loginProcedure, "Impossibile Recuperare Ruolo") ;
         return role ;
     }
+
+    //Consumo resto del resul set attuale
+    while (mysql_stmt_fetch(loginProcedure) == 0) ;
 
     freeStatement(loginProcedure, true) ;
 

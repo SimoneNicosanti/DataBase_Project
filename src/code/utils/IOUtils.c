@@ -116,14 +116,14 @@ bool getTimeFromUser(Time *timePtr, char *requestString) {
     return true ;
 }
 
-bool getClassCodeFromUser(int *classCodePtr) {
-    char classCode[10 + 1] ;
-    if (!getUserInput("Inserire Codice Corso >>> ", classCode, 10 + 1)) {
-        printError("Errore Inserimento Codice Corso") ;
+bool getNumericCode(int *classCodePtr, char *inputMessage) {
+    char classCode[50 + 1] ;
+    if (!getUserInput(inputMessage, classCode, 50 + 1)) {
+        printError("Errore Inserimento Codice Numerico") ;
         return false ;
     }
 
     *classCodePtr = (int) strtol(classCode, NULL, 10) ;
-
+    //TODO Inserire Controllo Conversione codice numerico
     return true ;
 }

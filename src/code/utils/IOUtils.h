@@ -23,7 +23,7 @@ bool getDateFromUser(Date *datePtr, char *requestString) ;
 
 bool getTimeFromUser(Time *timePtr, char *requestString) ;
 
-bool getClassCodeFromUser(int *classCodePtr) ;
+bool getNumericCode(int *classCodePtr, char *requestString) ;
 
 void colorPrint(char *printText, TextColorEnum colorEnum) ;
 

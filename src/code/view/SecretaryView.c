@@ -29,7 +29,7 @@ bool getStudentInfo(Student *studentPtr) {
         if (!isdigit(studentPtr->studentTelephone[i])) return false ;
     }
 
-    if (!getDateFromUser(&(studentPtr->studentSubscribeDate), "Inserire Data di Iscrizione >>> ")) {
+    if (!getDateFromUser(&(studentPtr->studentSubscribeDate), "Inserire Data di Iscrizione [yyyy-mm-dd] >>> ")) {
         return false ;
     }
 
@@ -39,7 +39,7 @@ bool getStudentInfo(Student *studentPtr) {
     }
 
 
-    if (!getClassCodeFromUser(&(studentPtr->studentClass.classCode))) {
+    if (!getNumericCode(&(studentPtr->studentClass.classCode), "Inserire Codice Corso >>> ")) {
         printError("Errore Inserimento Codice Corso") ;
         return false ;
     }
@@ -48,5 +48,16 @@ bool getStudentInfo(Student *studentPtr) {
 }
 
 bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
-    return false ;
+
+    if (!getUserInput("Inserire Nome Allievo >>> ", studentName, STUDENT_NAME_MAX_LEN + 1)) {
+        printError("Errore Presa Nome Allievo") ;
+        return false ;
+    }
+
+    if (!getNumericCode(activityCodePtr, "Inserire Codice Attività >>> ")) {
+        printError("Errore Inserimento Codice Attivita") ;
+        return false ;
+    }
+
+    return true ;
 }

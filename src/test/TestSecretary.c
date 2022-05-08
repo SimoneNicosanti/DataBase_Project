@@ -29,22 +29,51 @@ void testGetClasses() {
     ClassReport *classArray = retrieveAllClasses() ;
 
     if (classArray != NULL) printSuccess() ;
-    else printFailure() ;
+    else {
+        printFailure() ;
+        return ;
+    }
 
-    char *headerArray[3] = {"Codice Corso", "Nome Livello", "Numero Allievi"} ;
-    enum TableFieldType tableField[3] = {INT, STRING, INT} ;
-    Table *table = createTable(classArray->classNumber, 3, headerArray, tableField) ;
+    char *headerArray[] = {"Codice Corso", "Nome Livello", "Numero Allievi", "Data Attivazione"} ;
+    enum TableFieldType tableField[] = {INT, STRING, INT, DATE} ;
+    Table *table = createTable(classArray->classNumber, 4, headerArray, tableField) ;
 
     for (int i = 0 ; i < classArray->classNumber ; i++) {
         Class *classPtr = classArray->allClasses[i] ;
         setTableElem(table, i, 0, &(classPtr->classCode)) ;
         setTableElem(table, i, 1, classPtr->levelName) ;
         setTableElem(table, i, 2, &(classPtr->studentsNumber)) ;
-        printf("%d %s %d\n", classPtr->classCode, classPtr->levelName, classPtr->studentsNumber) ;
+        setTableElem(table, i, 3, &(classPtr->activationDate)) ;
     }
     
     printTable(table) ;
 
+    freeTable(table) ;
+}
+
+void testGetActivities() {
+    ActivitiesReport *activitiesReport = getAllActivitiesFromDatabase() ;
+
+    if (activitiesReport == NULL) return ;
+
+    char *headerArray[] = {"Codice", "Data", "Orario", "Tipo", "Titolo Film", "Regista", "Conferenziere", "Argomento Conferenza"} ;
+    enum TableFieldType typesArray[] = {INT, DATE, TIME, STRING, STRING, STRING, STRING, STRING} ;
+    Table *table = createTable(activitiesReport->number, 8, headerArray, typesArray) ;
+    for (int i = 0 ; i < activitiesReport->number ; i++) {
+        CuturalActivity *activity = activitiesReport->allActivities[i] ;
+        setTableElem(table, i, 0, &(activity->activityCode)) ;
+        setTableElem(table, i, 1, &(activity->activityDate)) ;
+        setTableElem(table, i, 2, &(activity->activityTime)) ;
+        setTableElem(table, i, 4, activity->filmTitle) ;
+        setTableElem(table, i, 5, activity->filmDirector) ;
+        setTableElem(table, i, 6, activity->meetingLecturer) ;
+        setTableElem(table, i, 7, activity->meetingArgument) ;
+
+        if (activity->type == FILM) setTableElem(table, i, 3, "F") ;
+        else setTableElem(table, i, 3, "C") ;
+    }
+
+    printTable(table) ;
     freeTable(table) ;
 }
 
@@ -59,7 +88,9 @@ int main() {
 
     //testAddJoin() ;
 
-    testGetClasses() ;
+    //testGetClasses() ;
 
     testGetClasses() ;
+
+    testGetActivities() ;
 }

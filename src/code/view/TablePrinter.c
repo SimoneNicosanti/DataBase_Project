@@ -118,13 +118,9 @@ Table *createTable(int rowsNum, int colsNum, char **headerArray, enum TableField
     Table *tablePtr = malloc(sizeof(Table)) ;
     if (tablePtr == NULL) exit(-1) ;
 
-    tablePtr->table = (void ***) malloc(sizeof(void **) * rowsNum) ;
-    if (tablePtr->table == NULL) exit(-1) ;
+    tablePtr->table = (void ***) myMalloc(sizeof(void **) * rowsNum) ;
 
-    for (int rowIndex = 0 ; rowIndex < rowsNum ; rowIndex++) {
-        tablePtr->table[rowIndex] = (void **) malloc(sizeof(void *) * colsNum) ;
-        if (tablePtr->table[rowIndex] == NULL) exit(-1) ;
-    }
+    for (int rowIndex = 0 ; rowIndex < rowsNum ; rowIndex++) tablePtr->table[rowIndex] = (void **) myMalloc(sizeof(void *) * colsNum) ;
 
     tablePtr->colsNum = colsNum ;
     tablePtr->rowsNum = rowsNum ;

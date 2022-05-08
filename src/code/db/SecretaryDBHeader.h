@@ -1,10 +1,14 @@
+#pragma once
+
 #include "Connector.h"
 #include "DatabaseUtilsHeader.h"
 #include <stdbool.h>
 #include <string.h>
+#include "../utils/SystemUtilsHeader.h"
 
 
 #include "../model/Student.h"
+#include "../model/Activity.h"
 
 bool addStudentToDatabase(Student *studentPtr) ;
 
@@ -16,6 +20,15 @@ typedef struct {
     int classNumber ;
 } ClassReport ;
 
+typedef struct {
+    CuturalActivity **allActivities ;
+    int number ;
+} ActivitiesReport ;
+
 ClassReport *retrieveAllClasses() ;
+
+ActivitiesReport *getAllActivitiesFromDatabase() ;
+
+
 
 

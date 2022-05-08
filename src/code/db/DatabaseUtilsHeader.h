@@ -17,3 +17,7 @@ void printStatementError(MYSQL_STMT *statement, char *errorMessage) ;
 void freeStatement(MYSQL_STMT *statement, bool freeResultSet) ;
 
 bool setupPreparedStatement(MYSQL_STMT **statement, char *statementCommand, MYSQL *conn) ;
+
+void getDateParam(Date *datePtr, MYSQL_TIME *mysqlTime) ;
+
+void getTimeParam(Time *timePtr, MYSQL_TIME *mysqlTime) ;

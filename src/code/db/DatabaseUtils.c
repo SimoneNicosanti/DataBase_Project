@@ -47,6 +47,20 @@ void prepareTimeParam(Time *timePtr, MYSQL_TIME *mysqlTime) {
     //mysqlTime->second = timePtr->second ;
 }
 
+void getDateParam(Date *datePtr, MYSQL_TIME *mysqlTime) {
+    memset(datePtr, 0, sizeof(Date)) ;
+    datePtr->year = mysqlTime->year ;
+    datePtr->month = mysqlTime->month ;
+    datePtr->day = mysqlTime->day ;
+}
+
+void getTimeParam(Time *timePtr, MYSQL_TIME *mysqlTime) {
+    memset(timePtr, 0, sizeof(Time)) ;
+    timePtr->hour = mysqlTime->hour ;
+    timePtr->minute = mysqlTime->minute ;
+    //timePtr->second = mysqlTime->second ;
+}
+
 void printMysqlError(MYSQL *conn, char *errorMessage) {
     char sqlErrorMessage[500] ;
     sprintf(sqlErrorMessage, "%s\nErrore %d : %s", errorMessage, mysql_errno(conn), mysql_error(conn)) ;
@@ -66,33 +80,9 @@ void printStatementError(MYSQL_STMT *statement, char *errorMessage) {
     - freeSet : Indica se deve essere consumato il result set ritornato dallo statement
  */
 void freeStatement(MYSQL_STMT *statement, bool freeSet) {
-    if (freeSet) {
-        //Finisco di Scorrerre Tabella Corrente
-        int status = mysql_stmt_fetch(statement) ;
-        
-        while (status != 1 && status != MYSQL_NO_DATA) status = mysql_stmt_fetch(statement) ;
-        
-        //Finisco di scorrere tutte le possibili tabelle restanti
-        status = mysql_stmt_next_result(statement) ;
-        //printf("Status %d\n", status) ;
-        while (status == 0) {
-            
-            status = mysql_stmt_fetch(statement) ;
-            while (status != 1 && status != MYSQL_NO_DATA) status = mysql_stmt_fetch(statement) ;
-            status = mysql_stmt_next_result(statement) ;
-        }
-    }
+    if (freeSet) while (mysql_stmt_next_result(statement) == 0) ;
     mysql_stmt_free_result(statement) ;
     mysql_stmt_reset(statement) ;
-}
-
-// Permette di saltare la prossima tabella di un result set ritornato da statement
-void skipTable(MYSQL_STMT *statement) {
-    int status = mysql_stmt_next_result(statement) ;
-    if (status == 0) {
-        status = mysql_stmt_fetch(statement) ;
-        while (status != 1 && status != MYSQL_NO_DATA) status = mysql_stmt_fetch(statement) ;
-    }
 }
 
 //Inizializza uno statement MYSQL

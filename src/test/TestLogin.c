@@ -52,8 +52,8 @@ int main() {
         return 0;
     }
 
-    testExistentUser("simo_nico.99", "password") ;
-    testExistentUser("simo", "nico") ;
+    testExistentUser("amministrazione", "amm") ;
+    testExistentUser("segreteria", "seg") ;
     //testLongInput("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "shshs") ;
     testNotExistentUser("ciao", "bello") ;
     
