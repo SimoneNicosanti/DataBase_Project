@@ -21,6 +21,7 @@ MYSQL_STMT *addStudentProcedure ;
 MYSQL_STMT *addJoinProcedure ;
 MYSQL_STMT *loadClassesProcedure ;
 MYSQL_STMT *loadAllActivitiesProcedure ;
+MYSQL_STMT *addLessonToClassProcedure ;
 
 
 
@@ -57,6 +58,10 @@ bool initializePreparedStatement(Role role) {
             }
             if (!setupPreparedStatement(&organizeActivityProcedure, "CALL organizza_attivita_culturale(?,?,?,?,?,?,?) ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Organizza Attività'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&addLessonToClassProcedure, "CALL aggiungi_lezione(?,?,?,?,?,?)", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Lezione Corso'") ;
                 return false ;
             }
             break ;

@@ -66,6 +66,23 @@ void testOrganizeActivity() {
     else printFailure() ;
 }
 
+void testAddLessonToClass() {
+    ClassLesson testLesson ;
+    testLesson.classCode = 1 ;
+    strcpy(testLesson.classLevel, "Elementary") ;
+    testLesson.dayOfWeek = MONDAY ;
+    testLesson.lessonDuration = 60 ;
+
+    testLesson.startTime.hour = 12 ;
+    testLesson.startTime.minute = 30 ;
+    testLesson.startTime.second = 0 ;
+
+    strcpy(testLesson.teacherName, "Mary Shelley") ;
+
+    if (addClassLessonToDatabase(&testLesson)) printSuccess() ;
+    else printFailure() ;
+}
+
 int main() {
 
     loadConfiguration() ;
@@ -73,11 +90,13 @@ int main() {
 
     switchRole(AMMINISTRAZIONE) ;
     
-    testAddLevel() ;
+    /* testAddLevel() ;
     testAddClass() ;
     testAddTeacher() ;
 
-    testOrganizeActivity() ;
+    testOrganizeActivity() ; */
+
+    testAddLessonToClass() ;
 
     return 0 ;
 }

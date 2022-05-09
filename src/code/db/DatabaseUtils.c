@@ -37,6 +37,8 @@ void prepareDateParam(Date *datePtr , MYSQL_TIME *mysqlTime) {
     mysqlTime->year = datePtr->year ;
 }
 
+
+
 //Conversione da Time a MYSQL_TIME
 void prepareTimeParam(Time *timePtr, MYSQL_TIME *mysqlTime) {
 

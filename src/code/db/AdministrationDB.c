@@ -164,3 +164,65 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) {
 
     return true ;
 }
+
+void prepareDayOfWeekParam(enum DayOfWeek dayOfWeek, char *dayOfWeekString) {
+    switch (dayOfWeek)
+    {
+    case MONDAY :
+        strcpy(dayOfWeekString, "Lun") ;
+        break;
+    case TUESDAY:
+        strcpy(dayOfWeekString, "Mar") ;
+        break;
+    case WEDNESDAY :
+        strcpy(dayOfWeekString, "Mer") ;
+        break ;
+    case THURSDAY :
+        strcpy(dayOfWeekString, "Gio") ;
+        break ;
+    case FRIDAY :
+        strcpy(dayOfWeekString, "Ven") ;
+        break ;
+    case SATURDAY :
+        strcpy(dayOfWeekString, "Sab") ;
+        break ;
+    case SUNDAY :
+        strcpy(dayOfWeekString, "Dom") ;
+        break ;
+    }
+}
+
+bool addClassLessonToDatabase(ClassLesson *newLesson) {
+
+    MYSQL_BIND param[6] ;
+    MYSQL_TIME mysqlTime ;
+
+    char dayOfWeekString[3 + 1] ;
+    prepareDayOfWeekParam(newLesson->dayOfWeek, dayOfWeekString) ;
+    bindParam(&param[0], MYSQL_TYPE_STRING, dayOfWeekString, strlen(dayOfWeekString), false) ;
+    prepareTimeParam(&(newLesson->startTime), &mysqlTime) ;
+    bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
+    bindParam(&param[2], MYSQL_TYPE_LONG, &(newLesson->classCode), sizeof(int), false) ;
+    bindParam(&param[3], MYSQL_TYPE_STRING, newLesson->classLevel, strlen(newLesson->classLevel), false) ;
+    bindParam(&param[4], MYSQL_TYPE_LONG, &(newLesson->lessonDuration), sizeof(int), false) ;
+    bindParam(&param[5], MYSQL_TYPE_STRING, newLesson->teacherName, strlen(newLesson->teacherName) , false) ;
+    
+    
+    if (mysql_stmt_bind_param(addLessonToClassProcedure, param) != 0) {
+        printStatementError(addLessonToClassProcedure, "Bind Parametri Impossibile per 'Aggiungi Lezione Corso'") ;
+        freeStatement(addLessonToClassProcedure, false) ;
+        return false ;
+    }
+
+    
+    if (mysql_stmt_execute(addLessonToClassProcedure) != 0) {
+        printStatementError(addLessonToClassProcedure, "Esecuzione Impossibile Per 'Aggiungi Lezione Corso'") ;
+        freeStatement(addLessonToClassProcedure, false) ;
+        return false ;
+    }
+
+    //freeStatement(addLessonToClassProcedure, true) ;
+    
+
+    return true ;
+}

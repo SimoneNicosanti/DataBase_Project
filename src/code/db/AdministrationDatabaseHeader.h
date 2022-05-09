@@ -6,6 +6,7 @@
 #include "../model/Level.h"
 #include "../model/Student.h"
 #include "../model/Teacher.h"
+#include "../model/Lesson.h"
 
 bool addLevelToDatabase(Level *levelPtr) ;
 
@@ -16,3 +17,5 @@ bool addTeacherToDatabase(Teacher *teacherPtr) ;
 bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) ;
 
 bool organizeActivityInDatabase(CuturalActivity *newActivity) ;
+
+bool addClassLessonToDatabase(ClassLesson *newLesson) ;

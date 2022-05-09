@@ -5,6 +5,8 @@
         "secretaryviewheader.h": "c",
         "timeutils.h": "c",
         "tableprinterheader.h": "c",
-        "secretarydbheader.h": "c"
+        "secretarydbheader.h": "c",
+        "test.h": "c",
+        "administrationdatabaseheader.h": "c"
     }
 }
