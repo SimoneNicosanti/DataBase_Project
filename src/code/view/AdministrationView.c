@@ -5,19 +5,21 @@
 #include "ViewUtilsHeader.h"
 #include "../controller/AdministrationControllerHeader.h"
 #include "../utils/IOUtils.h"
+#include "../model/Lesson.h"
 
 char *administrationMenuOptions[] = {
     "Aggiungi Livello", 
     "Aggiungi Corso", 
     "Aggiungi Insegnante", 
     "Assegna Corso", 
+    "Aggiungi Lezione Corso",
     "Organizza Attività",
     "Quit"
     } ;
 
 
 int getAdministrationOption() {
-    return getUserOption(administrationMenuOptions, 6) ;
+    return getUserOption(administrationMenuOptions, 7) ;
 }
 
 bool getLevelInfo(Level *levelPtr) {
@@ -167,3 +169,32 @@ bool getActivityInfo(CuturalActivity *activityPtr) {
     return true ;
 
 } 
+
+bool getCourseLessonInfo(ClassLesson *newLesson) {
+    if (!getTimeFromUser(&(newLesson->startTime), "Inserire Orario Inizio Lezione [hh:mm] >>> ")) {
+        printError("Errore Presa Data") ;
+        return false ;
+    }
+
+    if (!getNumericCode(&(newLesson->lessonDuration), "Inserire Durata Lezione In Minuti >>> ")) {
+        printError("Impossibile Prendere Durata Lezione") ;
+        return false ;
+    }
+
+    if (!getUserInput(newLesson->teacherName, "Inserire Nome Insegnante >>> ", TEACHER_NAME_MAX_LENGHT + 1)) {
+        printError("Impossibile Prendere Nome Insegnante") ;
+        return false ;
+    }
+
+    if (!getUserInput(newLesson->classLevel, "Inserire Nome Livello >>> ", LEVEL_NAME_MAX_LEN + 1)) {
+        printError("Impossibile Leggere Nome Livello") ;
+        return false ;
+    }
+
+    if (!getNumericCode(&(newLesson->classCode), "Inserire Codice Corso >>> ")) {
+        printError("Impossibile Leggere Codice Corso") ;
+        return false ;
+    }
+
+    //TODO Inserire lettura nome giorno settimana
+}

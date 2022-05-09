@@ -10,6 +10,7 @@ enum AdministrationControllerOptions {
     ADD_CLASS,
     ADD_TEACHER,
     ASSIGN_CLASS, 
+    ADD_LESSON,
     ORGANIZE_ACTIVITY,
     QUIT,
 } ;
@@ -52,6 +53,15 @@ void organizeActivity() {
 
 }
 
+void addLesson() {
+    //Recupera Corso
+    //Recupera Insegnanti
+    //Chiedi Info
+    //Invoca in DB
+    ClassLesson newLesson ;
+    
+}
+
 
 void administrationController() {
     
@@ -74,6 +84,10 @@ void administrationController() {
 
             case ASSIGN_CLASS :
                 assignClass() ;
+                break ;
+
+            case ADD_LESSON :
+                addLesson() ;
                 break ;
 
             case ORGANIZE_ACTIVITY :

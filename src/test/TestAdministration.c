@@ -71,10 +71,10 @@ void testAddLessonToClass() {
     testLesson.classCode = 1 ;
     strcpy(testLesson.classLevel, "Elementary") ;
     testLesson.dayOfWeek = MONDAY ;
-    testLesson.lessonDuration = 60 ;
+    testLesson.lessonDuration = 30 ;
 
     testLesson.startTime.hour = 12 ;
-    testLesson.startTime.minute = 30 ;
+    testLesson.startTime.minute = 35 ;
     testLesson.startTime.second = 0 ;
 
     strcpy(testLesson.teacherName, "Mary Shelley") ;
