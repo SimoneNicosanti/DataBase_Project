@@ -91,6 +91,8 @@ ActivitiesReport *getAllActivitiesFromDatabase() {
         return NULL ;
     }
 
+    mysql_stmt_store_result(loadAllActivitiesProcedure) ;
+
     int activityCode ;
     char activityFilmTitle[FILM_TITLE_MAX_SIZE + 1] ;
     char activityFilmDirector[FILM_DIRECTOR_NAME_MAX_SIZE + 1] ;

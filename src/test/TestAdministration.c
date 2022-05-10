@@ -66,7 +66,7 @@ void testOrganizeActivity() {
     else printFailure() ;
 }
 
-void testAddLessonToClass() {
+void testAddLessonToClass1() {
     ClassLesson testLesson ;
     testLesson.classCode = 1 ;
     strcpy(testLesson.classLevel, "Elementary") ;
@@ -75,6 +75,24 @@ void testAddLessonToClass() {
 
     testLesson.startTime.hour = 12 ;
     testLesson.startTime.minute = 35 ;
+    testLesson.startTime.second = 0 ;
+
+    strcpy(testLesson.teacherName, "Mary Shelley") ;
+
+    if (addClassLessonToDatabase(&testLesson)) printSuccess() ;
+    else printFailure() ;
+}
+
+
+void testAddLessonToClass2() {
+    ClassLesson testLesson ;
+    testLesson.classCode = 1 ;
+    strcpy(testLesson.classLevel, "Elementary") ;
+    testLesson.dayOfWeek = THURSDAY ;
+    testLesson.lessonDuration = 180 ;
+
+    testLesson.startTime.hour = 23 ;
+    testLesson.startTime.minute = 50 ;
     testLesson.startTime.second = 0 ;
 
     strcpy(testLesson.teacherName, "Mary Shelley") ;
@@ -96,7 +114,9 @@ int main() {
 
     testOrganizeActivity() ; */
 
-    testAddLessonToClass() ;
+    testAddLessonToClass1() ;
+
+    testAddLessonToClass2() ;
 
     return 0 ;
 }

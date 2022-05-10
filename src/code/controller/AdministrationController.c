@@ -53,13 +53,33 @@ void organizeActivity() {
 
 }
 
+void printAllTeaching(Teaching **teachingArray) {
+    int arrayLen = 0 ;
+    while (teachingArray[arrayLen] != NULL) arrayLen++ ;
+
+    char *header[] = {"Codice Corso", "Livello Corso", "Nome Insegnante"} ;
+    enum TableFieldType types[] = {INT, STRING, STRING} ;
+    Table *table = createTable(arrayLen, 3, header, types) ;
+    int i = 0 ;
+    while (teachingArray[i] != NULL) {
+        setTableElem(table, i, 0, &(teachingArray[i]->classCode)) ;
+        setTableElem(table, i, 1, teachingArray[i]->levelName) ;
+        setTableElem(table, i, 2, teachingArray[i]->teacherName) ;
+
+        i++ ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+}
+
 void addLesson() {
-    //Recupera Corso
-    //Recupera Insegnanti
-    //Chiedi Info
-    //Invoca in DB
+    Teaching **teachingArray = selectAllTeaching() ;
+    if (teachingArray != NULL) printAllTeaching(teachingArray) ;
     ClassLesson newLesson ;
-    
+    if (getCourseLessonInfo(&newLesson)) {
+        addClassLessonToDatabase(&newLesson) ;
+    }
 }
 
 

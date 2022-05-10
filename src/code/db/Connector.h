@@ -36,6 +36,7 @@ extern MYSQL_STMT *addJoinProcedure ;
 extern MYSQL_STMT *loadClassesProcedure ;
 extern MYSQL_STMT *loadAllActivitiesProcedure ;
 extern MYSQL_STMT *addLessonToClassProcedure ;
+extern MYSQL_STMT *loadAllTachingProcedure ;
 
 bool connectToDatabase() ;
 

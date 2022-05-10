@@ -226,3 +226,51 @@ bool addClassLessonToDatabase(ClassLesson *newLesson) {
 
     return true ;
 }
+
+Teaching **selectAllTeaching() {
+    //Ritorno Array di Teaching NULL terminated
+    if (mysql_stmt_execute(loadAllTachingProcedure) != 0) {
+        printStatementError(loadAllActivitiesProcedure, "Errore Esecuzione Recupero Docenze") ;
+        return NULL ;
+    }
+
+    mysql_stmt_store_result(loadAllTachingProcedure) ;
+
+    int numRows = mysql_stmt_num_rows(loadAllTachingProcedure) ;
+
+    int classCode ;
+    char levelName[LEVEL_NAME_MAX_LEN + 1] ;
+    char teacherName[TEACHER_NAME_MAX_LENGHT + 1] ;
+    MYSQL_BIND returnParam[3] ;
+    bindParam(&returnParam[0], MYSQL_TYPE_LONG, &classCode, sizeof(int), false) ;
+    bindParam(&returnParam[1], MYSQL_TYPE_STRING, levelName, LEVEL_NAME_MAX_LEN , false) ;
+    bindParam(&returnParam[2], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LENGHT, false) ;
+
+    if (mysql_stmt_bind_result(loadAllTachingProcedure, returnParam) != 0) {
+        printStatementError(loadAllTachingProcedure, "Errore Bind Del Risultato") ;
+        freeStatement(loadAllTachingProcedure, false) ;
+        return NULL ;
+    }
+
+    Teaching **teachingArray = (Teaching **) myMalloc(sizeof(Teaching *) * (numRows + 1)) ;
+
+    int hasResult = mysql_stmt_fetch(loadAllTachingProcedure) ;
+    int i = 0 ;
+    while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
+        Teaching *teaching = (Teaching *) myMalloc(sizeof(Teaching)) ;
+        teaching->classCode = classCode ;
+        strcpy(teaching->levelName, levelName) ;
+        strcpy(teaching->teacherName, teacherName) ;
+
+        printf("%d %s %s\n", classCode, levelName, teacherName) ;
+        teachingArray[i] = teaching ;
+        hasResult = mysql_stmt_fetch(loadAllTachingProcedure) ;
+        i++ ;
+    }
+
+    freeStatement(loadAllTachingProcedure, true) ;
+
+    teachingArray[i] = NULL ;
+
+    return teachingArray ;
+}

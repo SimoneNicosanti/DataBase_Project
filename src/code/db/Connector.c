@@ -22,6 +22,7 @@ MYSQL_STMT *addJoinProcedure ;
 MYSQL_STMT *loadClassesProcedure ;
 MYSQL_STMT *loadAllActivitiesProcedure ;
 MYSQL_STMT *addLessonToClassProcedure ;
+MYSQL_STMT *loadAllTachingProcedure ;
 
 
 
@@ -62,6 +63,10 @@ bool initializePreparedStatement(Role role) {
             }
             if (!setupPreparedStatement(&addLessonToClassProcedure, "CALL aggiungi_lezione(?,?,?,?,?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Lezione Corso'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&loadAllTachingProcedure, "CALL recuperaDocenze()", conn)) {
+                printMysqlError(conn, "Impossibie Preparare Procedura 'Recupera Docenze'") ;
                 return false ;
             }
             break ;

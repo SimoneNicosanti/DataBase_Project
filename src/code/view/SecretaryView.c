@@ -39,7 +39,7 @@ bool getStudentInfo(Student *studentPtr) {
     }
 
 
-    if (!getNumericCode(&(studentPtr->studentClass.classCode), "Inserire Codice Corso >>> ")) {
+    if (!getIntegerFromUser(&(studentPtr->studentClass.classCode), "Inserire Codice Corso >>> ")) {
         printError("Errore Inserimento Codice Corso") ;
         return false ;
     }
@@ -54,7 +54,7 @@ bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
         return false ;
     }
 
-    if (!getNumericCode(activityCodePtr, "Inserire Codice Attività >>> ")) {
+    if (!getIntegerFromUser(activityCodePtr, "Inserire Codice Attività >>> ")) {
         printError("Errore Inserimento Codice Attivita") ;
         return false ;
     }

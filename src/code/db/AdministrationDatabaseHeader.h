@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include "../controller/AdministrationControllerHeader.h"
+#include "../utils/SystemUtilsHeader.h"
 
 #include "../model/Activity.h"
 #include "../model/Class.h"
@@ -19,3 +20,5 @@ bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) ;
 bool organizeActivityInDatabase(CuturalActivity *newActivity) ;
 
 bool addClassLessonToDatabase(ClassLesson *newLesson) ;
+
+Teaching **selectAllTeaching() ;

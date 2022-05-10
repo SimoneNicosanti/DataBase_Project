@@ -116,14 +116,14 @@ bool getTimeFromUser(Time *timePtr, char *requestString) {
     return true ;
 }
 
-bool getNumericCode(int *classCodePtr, char *inputMessage) {
-    char classCode[50 + 1] ;
-    if (!getUserInput(inputMessage, classCode, 50 + 1)) {
+bool getIntegerFromUser(int *integerPtr, char *inputMessage) {
+    char integerStringBuff[10 + 1] ;
+    if (!getUserInput(inputMessage, integerStringBuff, 50 + 1)) {
         printError("Errore Inserimento Codice Numerico") ;
         return false ;
     }
 
-    *classCodePtr = (int) strtol(classCode, NULL, 10) ;
+    *integerPtr = (int) strtol(integerStringBuff, NULL, 10) ;
     //TODO Inserire Controllo Conversione codice numerico
     return true ;
 }
