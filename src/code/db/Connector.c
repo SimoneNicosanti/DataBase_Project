@@ -8,21 +8,32 @@
 
 
 MYSQL *conn ;
+
+//Procedure di Login
 MYSQL_STMT *loginProcedure ;
 
+//Procedure Amministrazione
 MYSQL_STMT *restartYearProcedure ;
 MYSQL_STMT *addLevelProcedure ;
 MYSQL_STMT *addClassProcedure ;
 MYSQL_STMT *addTeacherProcedure ;
 MYSQL_STMT *assignClassProcedure ;
 MYSQL_STMT *organizeActivityProcedure ;
+MYSQL_STMT *addLessonToClassProcedure ;
+MYSQL_STMT *loadAllTachingProcedure ;
+MYSQL_STMT *loadTeacherActivitiesProcedure ;
 
+
+//Procedure Segreteria
 MYSQL_STMT *addStudentProcedure ;
 MYSQL_STMT *addJoinProcedure ;
 MYSQL_STMT *loadClassesProcedure ;
 MYSQL_STMT *loadAllActivitiesProcedure ;
-MYSQL_STMT *addLessonToClassProcedure ;
-MYSQL_STMT *loadAllTachingProcedure ;
+MYSQL_STMT *addAbsenceProcedure ;
+
+//Procedure Insegnante
+MYSQL_STMT *generateAgendaProcedure ;
+
 
 
 
@@ -84,9 +95,12 @@ bool initializePreparedStatement(Role role) {
                 printStatementError(loadClassesProcedure, "Impossibile Preparare Procedura 'Recupera Corsi'") ;
                 return false ;
             }
-
             if (!setupPreparedStatement(&loadAllActivitiesProcedure, "CALL recupera_attivita()", conn)) {
                 printStatementError(loadAllActivitiesProcedure, "Impossibile Preparare Procedura 'Recupera Attività'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&addAbsenceProcedure, "CALL aggiungi_assenza(?,?,?)", conn)) {
+                printStatementError(addAbsenceProcedure, "Impossibile Preparare Procedura 'Aggiungi Assenza'") ;
                 return false ;
             }
             

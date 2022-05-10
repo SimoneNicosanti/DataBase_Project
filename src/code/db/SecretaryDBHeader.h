@@ -9,6 +9,7 @@
 
 #include "../model/Student.h"
 #include "../model/Activity.h"
+#include "../model/Absence.h"
 
 bool addStudentToDatabase(Student *studentPtr) ;
 
@@ -29,6 +30,6 @@ ClassReport *retrieveAllClasses() ;
 
 ActivitiesReport *getAllActivitiesFromDatabase() ;
 
-
+bool addAbsenceToDatabase(Absence *newAbsence) ;
 
 

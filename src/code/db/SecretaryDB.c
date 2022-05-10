@@ -182,3 +182,33 @@ bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) {
 
     return true ;
 }
+
+bool addAbsenceToDatabase(Absence *newAbsence) {
+    MYSQL_BIND param[3] ;
+
+    bindParam(&param[0], MYSQL_TYPE_STRING, newAbsence->studentName, strlen(newAbsence->studentName), false) ;
+    
+    MYSQL_TIME mysqlDate ;
+    prepareDateParam(&(newAbsence->absenceDate), &mysqlDate) ;
+    bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlDate, sizeof(MYSQL_TIME), false) ;
+
+    MYSQL_TIME mysqlTime ;
+    prepareTimeParam(&(newAbsence->startTime), &mysqlTime) ;
+    bindParam(&param[2], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
+
+    if (mysql_stmt_bind_param(addAbsenceProcedure, param) != 0) {
+        printStatementError(addAbsenceProcedure, "Bind Parametri Impossibile per 'Aggiungi Assenza'") ;
+        freeStatement(addAbsenceProcedure, false) ;
+        return false ;
+    }
+
+    if (mysql_stmt_execute(addAbsenceProcedure) != 0) {
+        printStatementError(addAbsenceProcedure, "Esecuzione Impossibile per 'Aggiungi Assenza'") ;
+        freeStatement(addAbsenceProcedure, false) ;
+        return false ;
+    }
+
+    freeStatement(addAbsenceProcedure, true) ;
+
+    return true ;
+}

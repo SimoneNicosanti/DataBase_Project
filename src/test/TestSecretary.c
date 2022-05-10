@@ -77,6 +77,21 @@ void testGetActivities() {
     freeTable(table) ;
 }
 
+
+void testAddAbsence() {
+    Absence testAbsence ;
+    strcpy(testAbsence.studentName, "Simone Nicosanti") ;
+    testAbsence.absenceDate.year = 2022 ;
+    testAbsence.absenceDate.month = 5 ;
+    testAbsence.absenceDate.day = 9 ;
+
+    testAbsence.startTime.hour = 9 ;
+    testAbsence.startTime.minute = 0 ;
+
+    if (addAbsenceToDatabase(&testAbsence)) printSuccess() ;
+    else printFailure() ;
+}
+
 int main() {
 
     loadConfiguration() ;
@@ -90,7 +105,9 @@ int main() {
 
     //testGetClasses() ;
 
-    testGetClasses() ;
+    //testGetClasses() ;
 
-    testGetActivities() ;
+    //testGetActivities() ;
+
+    testAddAbsence() ;
 }
