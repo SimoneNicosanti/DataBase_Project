@@ -32,7 +32,7 @@ bool addStudentToDatabase(Student *studentPtr) {
 }
 
 
-ClassReport *retrieveAllClasses() {
+Class **retrieveAllClasses() {
     if (mysql_stmt_execute(loadClassesProcedure) != 0) {
         printStatementError(loadClassesProcedure, "Impossibile Eseguire 'Recupera Corsi'") ;
         return NULL ;
@@ -58,15 +58,13 @@ ClassReport *retrieveAllClasses() {
     }
    
     int rowsNumber = mysql_stmt_num_rows(loadClassesProcedure) ;
-    ClassReport *classReport = (ClassReport *) malloc(sizeof(classReport)) ;
-    classReport->classNumber = rowsNumber ;
-    classReport->allClasses = (Class **) malloc(sizeof(Class *) * rowsNumber) ;
+    Class **classArray = (Class **) myMalloc(sizeof(Class *) * (rowsNumber + 1)) ;
     
     int i = 0 ;
     int hasResult = mysql_stmt_fetch(loadClassesProcedure) ;
     while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
 
-        Class *class = (Class *) malloc(sizeof(Class)) ;
+        Class *class = (Class *) myMalloc(sizeof(Class)) ;
         class->classCode = classCode ;
         strcpy(class->levelName, classLevelName) ;
         class->studentsNumber = classStudentsNumber ;
@@ -75,17 +73,20 @@ ClassReport *retrieveAllClasses() {
         class->activationDate.month = mysqlTime.month ;
         class->activationDate.day = mysqlTime.day ;
 
-        classReport->allClasses[i] = class ;
+        printf("%d\n", class->classCode) ;
+        classArray[i] = class ;
         hasResult = mysql_stmt_fetch(loadClassesProcedure) ;
         i++ ;
     }
 
+    classArray[rowsNumber] = NULL ;
+
     freeStatement(loadClassesProcedure, true) ;
     
-    return classReport ;
+    return classArray ;
 }
 
-ActivitiesReport *getAllActivitiesFromDatabase() {
+CuturalActivity **getAllActivitiesFromDatabase() {
     if (mysql_stmt_execute(loadAllActivitiesProcedure) != 0) {
         printStatementError(loadAllActivitiesProcedure, "Impossibile Eseguire Procedura Recupera Attività") ;
         return NULL ;
@@ -119,9 +120,9 @@ ActivitiesReport *getAllActivitiesFromDatabase() {
         return NULL ;
     }
 
-    ActivitiesReport *activityReport = (ActivitiesReport *) myMalloc(sizeof(ActivitiesReport)) ;
-    //activityReport->number = mysql_stmt_num_rows(loadAllActivitiesProcedure) ; //Senza Store non si può usare
-    activityReport->allActivities = (CuturalActivity **) myMalloc(sizeof(CuturalActivity *) * activityReport->number) ;
+    mysql_stmt_store_result(loadAllActivitiesProcedure) ;
+    int  rowsNum = mysql_stmt_num_rows(loadAllActivitiesProcedure) ; //Senza Store non si può usare
+    CuturalActivity **activityArray = (CuturalActivity **) myMalloc(sizeof(CuturalActivity *) * (rowsNum + 1)) ;
     
     int i = 0 ;
     int hasResult = mysql_stmt_fetch(loadAllActivitiesProcedure) ;
@@ -148,15 +149,16 @@ ActivitiesReport *getAllActivitiesFromDatabase() {
             strcpy(activity->meetingArgument, activityMeetingArgument) ;
         }
 
-        activityReport->allActivities[i] = activity ;
+        activityArray[i] = activity ;
         hasResult = mysql_stmt_fetch(loadAllActivitiesProcedure) ;
         i++ ;
     }
-    activityReport->number = i ;
+    
+    activityArray[rowsNum] = NULL ;
 
     freeStatement(loadAllActivitiesProcedure, true) ;
 
-    return activityReport ;
+    return activityArray ;
 }
 
 

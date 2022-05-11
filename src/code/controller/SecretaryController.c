@@ -1,26 +1,30 @@
 #include "SecretaryControllerHeader.h"
 
 void printAllClasses() {
-    ClassReport *classReport = retrieveAllClasses() ;
-    if (classReport == NULL) return ;
+    Class **classArray = retrieveAllClasses() ;
+    if (classArray == NULL) return ;
 
     char *headerArray[] = {"Codice", "Livello", "Numero Allievi", "Data Attivazione"} ;
     enum TableFieldType tableField[] = {INT, STRING, INT, DATE} ;
-    Table *table = createTable(classReport->classNumber, 4, headerArray, tableField) ;
+    int num = 0 ;
+    while (classArray[num] != NULL) num++ ;
+    Table *table = createTable(num, 4, headerArray, tableField) ;
 
-    for (int i = 0 ; i < classReport->classNumber ; i++) {
-        Class *classPtr = classReport->allClasses[i] ;
+    int i = 0 ;
+    while (classArray[i] != NULL) {
+        Class *classPtr = classArray[i] ;
         setTableElem(table, i, 0, &(classPtr->classCode)) ;
         setTableElem(table, i, 1, classPtr->levelName) ;
         setTableElem(table, i, 2, &(classPtr->studentsNumber)) ;
         setTableElem(table, i, 3, &(classPtr->activationDate)) ;
+
+        i++ ;
     }
     
     printTable(table) ;
     freeTable(table) ;
-    
-    for (int i = 0 ; i < classReport->classNumber ; i++) free(classReport->allClasses[i]) ;
-    free(classReport) ;
+
+    //TODO AGGIUNGERE FREE DEGLI ARRAY RITORNATI
 }
 
 void addStudent() {
@@ -32,15 +36,20 @@ void addStudent() {
 }
 
 void printAllActivities() {
-    ActivitiesReport *activitiesReport = getAllActivitiesFromDatabase() ;
+    CuturalActivity **activityArray = getAllActivitiesFromDatabase() ;
 
-    if (activitiesReport == NULL) return ;
+    if (activityArray == NULL) return ;
+
+    int num = 0 ;
+    while (activityArray[num] != NULL) num++ ;
 
     char *headerArray[] = {"Codice", "Data", "Orario", "Tipo", "Titolo Film", "Regista", "Conferenziere", "Argomento Conferenza"} ;
     enum TableFieldType typesArray[] = {INT, DATE, TIME, STRING, STRING, STRING, STRING, STRING} ;
-    Table *table = createTable(activitiesReport->number, 8, headerArray, typesArray) ;
-    for (int i = 0 ; i < activitiesReport->number ; i++) {
-        CuturalActivity *activity = activitiesReport->allActivities[i] ;
+    Table *table = createTable(num, 8, headerArray, typesArray) ;
+
+    int i = 0 ;
+    while (activityArray[i] != NULL) {
+        CuturalActivity *activity = activityArray[i] ;
         setTableElem(table, i, 0, &(activity->activityCode)) ;
         setTableElem(table, i, 1, &(activity->activityDate)) ;
         setTableElem(table, i, 2, &(activity->activityTime)) ;
@@ -51,6 +60,8 @@ void printAllActivities() {
 
         if (activity->type == FILM) setTableElem(table, i, 3, "F") ;
         else setTableElem(table, i, 3, "C") ;
+
+        i++ ;
     }
 
     printTable(table) ;

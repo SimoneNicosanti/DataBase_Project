@@ -34,3 +34,14 @@ typedef struct {
     char lessonTeacher[TEACHER_NAME_MAX_LENGHT + 1] ;
     char lessonStudent[STUDENT_NAME_MAX_LEN + 1] ;
 } PrivateLesson ;
+
+
+typedef struct {
+    Date lessonDate ;
+    Time startTime ;
+    int lessonDuration ;
+    int lessonType ;
+    int classCode ;
+    char levelName[LEVEL_NAME_MAX_LEN] ;
+    char studentName[STUDENT_NAME_MAX_LEN] ;
+} GeneralLesson ;

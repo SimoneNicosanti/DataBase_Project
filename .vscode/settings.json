@@ -8,6 +8,7 @@
         "secretarydbheader.h": "c",
         "test.h": "c",
         "administrationdatabaseheader.h": "c",
-        "systemutilsheader.h": "c"
+        "systemutilsheader.h": "c",
+        "teacherviewheader.h": "c"
     }
 }

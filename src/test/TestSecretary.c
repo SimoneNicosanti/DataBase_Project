@@ -26,7 +26,7 @@ void testAddJoin() {
 }
 
 void testGetClasses() {
-    ClassReport *classArray = retrieveAllClasses() ;
+    Class **classArray = retrieveAllClasses() ;
 
     if (classArray != NULL) printSuccess() ;
     else {
@@ -36,14 +36,19 @@ void testGetClasses() {
 
     char *headerArray[] = {"Codice Corso", "Nome Livello", "Numero Allievi", "Data Attivazione"} ;
     enum TableFieldType tableField[] = {INT, STRING, INT, DATE} ;
-    Table *table = createTable(classArray->classNumber, 4, headerArray, tableField) ;
+    int num = 0 ;
+    while (classArray[num] != NULL) num++ ;
+    Table *table = createTable(num, 4, headerArray, tableField) ;
 
-    for (int i = 0 ; i < classArray->classNumber ; i++) {
-        Class *classPtr = classArray->allClasses[i] ;
+    int i = 0 ;
+    while (classArray[i] != NULL) {
+        Class *classPtr = classArray[i] ;
         setTableElem(table, i, 0, &(classPtr->classCode)) ;
         setTableElem(table, i, 1, classPtr->levelName) ;
         setTableElem(table, i, 2, &(classPtr->studentsNumber)) ;
         setTableElem(table, i, 3, &(classPtr->activationDate)) ;
+
+        i++ ;
     }
     
     printTable(table) ;
@@ -52,15 +57,19 @@ void testGetClasses() {
 }
 
 void testGetActivities() {
-    ActivitiesReport *activitiesReport = getAllActivitiesFromDatabase() ;
+    CuturalActivity **activityReport = getAllActivitiesFromDatabase() ;
 
-    if (activitiesReport == NULL) return ;
+    if (activityReport == NULL) return ;
 
+    int num = 0 ;
+    while (activityReport[num] != NULL) num++ ;
     char *headerArray[] = {"Codice", "Data", "Orario", "Tipo", "Titolo Film", "Regista", "Conferenziere", "Argomento Conferenza"} ;
     enum TableFieldType typesArray[] = {INT, DATE, TIME, STRING, STRING, STRING, STRING, STRING} ;
-    Table *table = createTable(activitiesReport->number, 8, headerArray, typesArray) ;
-    for (int i = 0 ; i < activitiesReport->number ; i++) {
-        CuturalActivity *activity = activitiesReport->allActivities[i] ;
+    Table *table = createTable(num, 8, headerArray, typesArray) ;
+
+    int i = 0 ;
+    while (activityReport[i] != NULL) {
+        CuturalActivity *activity = activityReport[i] ;
         setTableElem(table, i, 0, &(activity->activityCode)) ;
         setTableElem(table, i, 1, &(activity->activityDate)) ;
         setTableElem(table, i, 2, &(activity->activityTime)) ;
@@ -71,6 +80,8 @@ void testGetActivities() {
 
         if (activity->type == FILM) setTableElem(table, i, 3, "F") ;
         else setTableElem(table, i, 3, "C") ;
+
+        i++ ;
     }
 
     printTable(table) ;
@@ -105,9 +116,9 @@ int main() {
 
     //testGetClasses() ;
 
-    //testGetClasses() ;
+    testGetClasses() ;
 
-    //testGetActivities() ;
+    testGetActivities() ;
 
-    testAddAbsence() ;
+    //testAddAbsence() ;
 }

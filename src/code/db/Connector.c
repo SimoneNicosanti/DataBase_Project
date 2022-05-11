@@ -76,7 +76,7 @@ bool initializePreparedStatement(Role role) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Lezione Corso'") ;
                 return false ;
             }
-            if (!setupPreparedStatement(&loadAllTachingProcedure, "CALL recuperaDocenze()", conn)) {
+            if (!setupPreparedStatement(&loadAllTachingProcedure, "CALL recupera_docenze()", conn)) {
                 printMysqlError(conn, "Impossibie Preparare Procedura 'Recupera Docenze'") ;
                 return false ;
             }

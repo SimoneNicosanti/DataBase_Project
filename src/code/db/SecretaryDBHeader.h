@@ -16,19 +16,10 @@ bool addStudentToDatabase(Student *studentPtr) ;
 bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) ;
 
 
-typedef struct {
-    Class **allClasses ;
-    int classNumber ;
-} ClassReport ;
 
-typedef struct {
-    CuturalActivity **allActivities ;
-    int number ;
-} ActivitiesReport ;
+Class **retrieveAllClasses() ;
 
-ClassReport *retrieveAllClasses() ;
-
-ActivitiesReport *getAllActivitiesFromDatabase() ;
+CuturalActivity **getAllActivitiesFromDatabase() ;
 
 bool addAbsenceToDatabase(Absence *newAbsence) ;
 
