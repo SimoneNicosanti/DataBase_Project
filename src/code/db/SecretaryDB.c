@@ -33,6 +33,15 @@ bool addStudentToDatabase(Student *studentPtr) {
 
 
 Class **retrieveAllClasses() {
+
+    /* 
+        TODO Un altro modo può essere questo:
+            - Passo il doppio puntatore come parametro
+            - La funzione lo imposta aciò che viene dalla myMalloc
+            - Ritorno il numero di entry impostate correttamente
+            --> Evito poi a livello di controller di riprendere di nuovo il numero di righe con il ciclo, cosa che può essere lunga per molte entries
+    */
+
     if (mysql_stmt_execute(loadClassesProcedure) != 0) {
         printStatementError(loadClassesProcedure, "Impossibile Eseguire 'Recupera Corsi'") ;
         return NULL ;
@@ -73,7 +82,6 @@ Class **retrieveAllClasses() {
         class->activationDate.month = mysqlTime.month ;
         class->activationDate.day = mysqlTime.day ;
 
-        printf("%d\n", class->classCode) ;
         classArray[i] = class ;
         hasResult = mysql_stmt_fetch(loadClassesProcedure) ;
         i++ ;

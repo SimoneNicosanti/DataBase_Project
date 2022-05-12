@@ -7,14 +7,18 @@ int findColMaxSize(void ***table, char **headerArray, int rowsNum, int colIndex,
         void *currentElem = table[rowIndex][colIndex] ;
 
         int currentSize ;
-        char intBuff[50] ;
+        char numBuff[50] ;
         switch (colType) {
             case STRING :
                 currentSize = strlen((char *) currentElem) ;
                 break ;
             case INT :
-                sprintf(intBuff, "%d", *((int *)currentElem)) ;
-                currentSize = strlen(intBuff) ;
+                sprintf(numBuff, "%d", *((int *)currentElem)) ;
+                currentSize = strlen(numBuff) ;
+                break ;
+            case FLOAT :
+                sprintf(numBuff, "%.2f", *((float *)currentElem)) ;
+                currentSize = strlen(numBuff) ;
                 break ;
             case DATE : 
                 currentSize = strlen("yyyy-mm-dd") ;
@@ -22,6 +26,7 @@ int findColMaxSize(void ***table, char **headerArray, int rowsNum, int colIndex,
             case TIME :
                 currentSize = strlen("hh:mm") ;
                 break ;
+            
         }
 
         if (maxSize < currentSize) maxSize = currentSize ;
@@ -67,6 +72,9 @@ void printRow(void ***table, int rowIndex, int colNum, int *widthArray, enum Tab
             case INT :
                 printf(" %-*d", fieldSize, *((int *) currentElem)) ;
                 break; ;
+            case FLOAT :
+                printf(" %-*.2f", fieldSize, *((float *) currentElem)) ;
+                break ;
             case DATE :
                 datePtr = (Date *) currentElem ;
                 sprintf(dateBuff, "%d-%02d-%02d", datePtr->year, datePtr->month, datePtr->day) ;

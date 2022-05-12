@@ -1,7 +1,7 @@
 #include "TeacherViewHeader.h"
 
 
-char **teacherMenuOptions = {"Generate Agenda", "Quit"} ;
+char *teacherMenuOptions[] = {"Genera Agenda", "Quit"} ;
 
 int getTeacherOption() {
     return getUserOption(teacherMenuOptions, 2) ;

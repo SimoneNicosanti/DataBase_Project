@@ -9,7 +9,8 @@ enum TableFieldType {
     STRING = 0,
     INT,
     DATE,
-    TIME
+    TIME,
+    FLOAT
 } ;
 
 typedef struct {

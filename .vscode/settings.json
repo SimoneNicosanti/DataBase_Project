@@ -9,6 +9,7 @@
         "test.h": "c",
         "administrationdatabaseheader.h": "c",
         "systemutilsheader.h": "c",
-        "teacherviewheader.h": "c"
+        "teacherviewheader.h": "c",
+        "teachercontrollerheader.h": "c"
     }
 }

@@ -94,7 +94,7 @@ void secretaryController() {
                 addStudentJoinActivity() ;
                 break ;
 
-            case QUIT :
+            case SECRETARY_QUIT :
                 goto exit_loop ;
 
             default :

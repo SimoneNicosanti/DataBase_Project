@@ -12,7 +12,7 @@ enum AdministrationControllerOptions {
     ASSIGN_CLASS, 
     ADD_LESSON,
     ORGANIZE_ACTIVITY,
-    QUIT,
+    ADMINISTRATION_QUIT,
 } ;
 
 
@@ -114,7 +114,7 @@ void administrationController() {
                 organizeActivity() ;
                 break ;
         
-            case QUIT :
+            case ADMINISTRATION_QUIT :
                 goto exit_loop ;
 
             default :

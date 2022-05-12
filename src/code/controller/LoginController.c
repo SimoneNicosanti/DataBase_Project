@@ -9,41 +9,39 @@
 #include "../utils/IOUtils.h"
 #include "AdministrationControllerHeader.h"
 #include "SecretaryControllerHeader.h"
+#include "TeacherControllerHeader.h"
 
 
-void successLogin(Role loginRole) ;
+void successLogin(Role loginRole, char *username) ;
 
 
 void loginController() {
-    //Vedere se allocare dinamicamente o su stack
-    LoginCredentials *loginCredentialsPtr = (LoginCredentials *) malloc(sizeof(LoginCredentials)) ;
-    if (loginCredentialsPtr == NULL) {
-        exitWithError("Errore Allocazione Memoria") ;
-    }
+    LoginCredentials loginCredentials ;
 
-    memset(loginCredentialsPtr, 0, sizeof(LoginCredentials)) ;
     
-    Role loginRole = LOGIN ;
     do {
-        showLoginView(loginCredentialsPtr) ;
+        memset(&loginCredentials, 0, sizeof(LoginCredentials)) ;
+        Role loginRole = LOGIN ;
+
+        showLoginView(&loginCredentials) ;
         
-        if ((int) strlen(loginCredentialsPtr->username) == 0 || (int) strlen(loginCredentialsPtr->password) == 0) {
+        if ((int) strlen(loginCredentials.username) == 0 || (int) strlen(loginCredentials.password) == 0) {
             colorPrint("Username e/o Password Vuoti\n\n", RED_TEXT) ;
             loginRole = LOGIN ;
         }
         else {
-            loginRole = attemptLogin(loginCredentialsPtr) ;
+            loginRole = attemptLogin(&loginCredentials) ;
             if (loginRole == LOGIN) {
                 colorPrint("Username e/o Password Non Valida\n\n", RED_TEXT) ;
             }
             else {
-                successLogin(loginRole) ;
+                successLogin(loginRole, loginCredentials.username) ;
             }
         }
     } while (true) ;    
 }
 
-void successLogin(Role loginRole) {
+void successLogin(Role loginRole, char *username) {
     colorPrint("\n\nUsername e Password Validi\n", GREEN_TEXT) ;
 
     if (switchRole(loginRole) == false) {
@@ -61,6 +59,7 @@ void successLogin(Role loginRole) {
             break ;
         case INSEGNANTE :
             colorPrint("Accesso Come Insegnante\n", GREEN_TEXT) ;
+            teacherController(username) ;
             break ;
         case LOGIN :
             break ;

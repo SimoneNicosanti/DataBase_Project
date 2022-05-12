@@ -36,7 +36,6 @@ MYSQL_STMT *generateAgendaProcedure ;
 
 
 
-
 bool initializePreparedStatement(Role role) {
     //TODO Altre procedure
     switch (role) {
@@ -107,6 +106,10 @@ bool initializePreparedStatement(Role role) {
             break ;
 
         case INSEGNANTE :
+            if (!setupPreparedStatement(&generateAgendaProcedure, "CALL genera_agenda(?,?)", conn)) {
+                printStatementError(generateAgendaProcedure, "Impossibile Preparare Procedura 'Genera Agenda'") ;
+                return false ;
+            }
             break ;
 
     }

@@ -39,6 +39,8 @@ extern MYSQL_STMT *addLessonToClassProcedure ;
 extern MYSQL_STMT *loadAllTachingProcedure ;
 extern MYSQL_STMT *addAbsenceProcedure ;
 
+extern MYSQL_STMT *generateAgendaProcedure ;
+
 bool connectToDatabase() ;
 
 bool initializePreparedStatement(Role role) ;

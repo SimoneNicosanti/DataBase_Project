@@ -36,12 +36,17 @@ typedef struct {
 } PrivateLesson ;
 
 
+enum LessonType {
+    COURSE = 0 ,
+    PRIVATE = 1
+} ;
+
 typedef struct {
     Date lessonDate ;
     Time startTime ;
     int lessonDuration ;
-    int lessonType ;
+    enum LessonType lessonType ;
     int classCode ;
-    char levelName[LEVEL_NAME_MAX_LEN] ;
-    char studentName[STUDENT_NAME_MAX_LEN] ;
+    char levelName[LEVEL_NAME_MAX_LEN + 1] ;
+    char studentName[STUDENT_NAME_MAX_LEN + 1] ;
 } GeneralLesson ;

@@ -9,7 +9,7 @@
 enum SecretaryOption {
     ADD_STUDENT = 0,
     ADD_JOIN_ACTIVITY ,
-    QUIT
+    SECRETARY_QUIT
 } ;
 
 void secretaryController() ;

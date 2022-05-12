@@ -6,10 +6,11 @@
 #include "../view/TeacherViewHeader.h"
 #include "../view/ViewUtilsHeader.h"
 #include "../view/TablePrinterHeader.h"
+#include "../db/TeacherDBHeader.h"
 
 enum TeacherOptions {
     GENERATE_AGENDA = 0,
-    QUIT
+    TEACHER_QUIT
 } ;
 
 

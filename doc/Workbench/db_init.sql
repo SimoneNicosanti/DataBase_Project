@@ -33,7 +33,6 @@ INSERT INTO Insegnante(nomeInsegnante, nazioneInsegnante, indirizzoInsegnante, u
 INSERT INTO Insegnante(nomeInsegnante, nazioneInsegnante, indirizzoInsegnante, username) VALUES ("Tyrion Lannister", "Westeros", "Castel Granito", "tyrion.lannister") ;
 INSERT INTO Insegnante(nomeInsegnante, nazioneInsegnante, indirizzoInsegnante, username) VALUES ("Daenerys Targaryen", "Westeros", "Astapor", "daenerys.targaryen") ;
 
-
 ## Docenze
 INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (8, "Elementary", "Cercei Lannister") ;
 INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (8, "Elementary", "Jon Snow") ;
@@ -44,6 +43,13 @@ INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (11, "Inte
 INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (12, "Pre Advanced", "Cercei Lannister") ;
 INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (13, "Advanced", "Jon Snow") ;
 INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (13, "Advanced", "Catelyn Tully") ;
+
+## Lezione Corso
+INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Lun', '09:00:00', 8, "Elementary", 60, "Cercei Lannister") ;
+INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Lun', '12:30:00', 8, "Elementary", 90, "Cercei Lannister") ;
+INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Mar', '10:30:00', 12, "Pre Advanced", 60, "Cercei Lannister") ;
+INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Mer', '15:30:00', 12, "Pre Advanced", 75, "Cercei Lannister") ;
+INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Dom', '15:30:00', 12, "Pre Advanced", 75, "Cercei Lannister") ;
 
 ## Allievo
 INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Bart Simpson", "3314182627", DEFAULT, NOW(), 8, "Elementary") ;
