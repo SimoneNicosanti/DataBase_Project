@@ -12,15 +12,15 @@ void generateAgenda(char *teacherUsername) {
         int num = 0 ;
         while (lessonArray[num] != NULL) num++ ;
 
-        char *header[] = {"Data", "Orario", "Durata", "Tipo", "Codice Corso", "Livello Corso", "Allievo"} ;
-        enum TableFieldType types[] = {DATE, TIME, INT, STRING, INT, STRING, STRING} ;
+        char *header[] = {"Data", "Inizio", "Fine", "Tipo", "Codice Corso", "Livello Corso", "Allievo"} ;
+        enum TableFieldType types[] = {DATE, TIME, TIME, STRING, INT, STRING, STRING} ;
         Table *table = createTable(num, 7, header, types) ;
 
         for (int i = 0 ; i < num ; i++) {
             GeneralLesson *lesson = lessonArray[i] ;
             setTableElem(table, i, 0, &(lesson->lessonDate)) ;
             setTableElem(table, i, 1, &(lesson->startTime)) ;
-            setTableElem(table, i, 2, &(lesson->lessonDuration)) ;
+            setTableElem(table, i, 2, &(lesson->endTime)) ;
             setTableElem(table, i, 3, &(lesson->lessonType)) ;
             if (lesson->lessonType == COURSE) {
                 setTableElem(table, i, 3, "C") ;

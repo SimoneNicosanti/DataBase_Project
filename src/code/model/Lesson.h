@@ -44,7 +44,7 @@ enum LessonType {
 typedef struct {
     Date lessonDate ;
     Time startTime ;
-    int lessonDuration ;
+    Time endTime ;
     enum LessonType lessonType ;
     int classCode ;
     char levelName[LEVEL_NAME_MAX_LEN + 1] ;

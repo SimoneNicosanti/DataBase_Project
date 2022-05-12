@@ -26,17 +26,17 @@ GeneralLesson **generateAgendaFromDatabase(char *teacherUsername, int weekIndex)
     GeneralLesson **lessonArray = (GeneralLesson **) myMalloc(sizeof(GeneralLesson) * (numRows + 1)) ;
 
     MYSQL_BIND returnParam[7] ;
-    int lessonDurability ;
     char lessonType[5] ;
     int classCode ;
     char classLevel[LEVEL_NAME_MAX_LEN + 1] ;
     char student[STUDENT_NAME_MAX_LEN + 1] ;
     MYSQL_TIME mysqlDate ;
-    MYSQL_TIME mysqlTime ;
+    MYSQL_TIME mysqlStartTime ;
+    MYSQL_TIME mysqlEndTime ;
 
     bindParam(&returnParam[0], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
-    bindParam(&returnParam[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
-    bindParam(&returnParam[2], MYSQL_TYPE_LONG, &lessonDurability, sizeof(int), false) ;
+    bindParam(&returnParam[1], MYSQL_TYPE_TIME, &mysqlStartTime, sizeof(MYSQL_TIME), false) ;
+    bindParam(&returnParam[2], MYSQL_TYPE_TIME, &mysqlEndTime, sizeof(MYSQL_TIME), false) ;
     bindParam(&returnParam[3], MYSQL_TYPE_STRING, lessonType, 5, false) ;
     bindParam(&returnParam[4], MYSQL_TYPE_LONG, &classCode, sizeof(int), true) ;
     bindParam(&returnParam[5], MYSQL_TYPE_STRING, classLevel, LEVEL_NAME_MAX_LEN + 1, true) ;
@@ -55,8 +55,8 @@ GeneralLesson **generateAgendaFromDatabase(char *teacherUsername, int weekIndex)
         memset(lesson, 0, sizeof(GeneralLesson)) ;
 
         getDateParam(&(lesson->lessonDate), &mysqlDate) ;
-        getTimeParam(&(lesson->startTime), &mysqlTime) ;
-        lesson->lessonDuration = lessonDurability ;
+        getTimeParam(&(lesson->startTime), &mysqlStartTime) ;
+        getTimeParam(&(lesson->endTime), &mysqlEndTime) ;
         if (strcmp(lessonType, "C") == 0) lesson->lessonType = COURSE ;
         else lesson->lessonType = PRIVATE ;
         lesson->classCode = classCode ;
