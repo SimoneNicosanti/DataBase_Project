@@ -24,3 +24,4 @@ CuturalActivity **getAllActivitiesFromDatabase() ;
 bool addAbsenceToDatabase(Absence *newAbsence) ;
 
 
+bool bookPrivateLessonInDatabase(PrivateLesson *privateLesson) ;

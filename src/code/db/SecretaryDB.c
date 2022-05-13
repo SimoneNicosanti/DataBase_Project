@@ -222,3 +222,42 @@ bool addAbsenceToDatabase(Absence *newAbsence) {
 
     return true ;
 }
+
+
+bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
+
+    MYSQL_BIND param[5] ;
+    MYSQL_TIME mysqlTime ;
+    MYSQL_TIME mysqlDate ;
+
+    prepareDateParam(&(lesson->lessonDate), &mysqlDate) ;
+    bindParam(&param[0], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
+
+    prepareTimeParam(&(lesson->startTime), &mysqlTime) ;
+    bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
+
+    bindParam(&param[2], MYSQL_TYPE_STRING, lesson->lessonTeacher, strlen(lesson->lessonTeacher), false) ;
+    bindParam(&param[3], MYSQL_TYPE_LONG, &(lesson->lessonDurability), sizeof(int), false) ;
+    bindParam(&param[4], MYSQL_TYPE_STRING, lesson->lessonStudent, strlen(lesson->lessonTeacher), false) ;
+
+    if (mysql_stmt_bind_param(bookPrivateLessonProcedure, param) != 0) {
+        printStatementError(bookPrivateLessonProcedure, "Impossibile Preparare I Parametri Per 'Prenota Lezione'") ;
+        freeStatement(bookPrivateLessonProcedure, false) ;
+        return false ;
+    }
+
+    if (mysql_stmt_execute(bookPrivateLessonProcedure) != 0) {
+        printStatementError(bookPrivateLessonProcedure, "Impossibile Eseguire Procedura 'Prenota Lezione'") ;
+        freeStatement(bookPrivateLessonProcedure, false) ;
+        return false ;
+    }
+
+    freeStatement(bookPrivateLessonProcedure, true) ;
+
+    return true ;
+
+    return true ;
+}
+
+
+//TODO IN TUTTE LE BIND MODIFICA IL TIPO PASSATO: Per la Data da MYSQL_TYPE_TIME a MYSQL_TYPE_DATE !!!!

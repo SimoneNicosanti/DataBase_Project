@@ -64,5 +64,9 @@ INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione,
 INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Ginevra", "3314182627", DEFAULT, NOW(), 13, "Advanced") ;
 
 
+## LezionePrivata
+INSERT INTO LezionePrivata VALUES (NOW(), NOW(), "Cercei Lannister", 45, "Bart Simpson") ;
+INSERT INTO LezionePrivata VALUES (NOW() + INTERVAL 1 DAY, NOW(), "Cercei Lannister", 45, "Bart Simpson") ;
+
 ## Attività
 #INSERT INTO AttivitaCulturale(codiceAttivita, dataAttivita, ) VALUES

@@ -4,12 +4,13 @@
 char *secretaryMenuOption[] = {
     "Aggiungi Allievo",
     "Aggiungi Partecipazione Ad Attività",
+    "Prenota Lezione Privata",
     "Quit"
     } ;
 
 
 int getSecretaryOption() {
-    return getUserOption(secretaryMenuOption, 3) ;
+    return getUserOption(secretaryMenuOption, 4) ;
 }
 
 bool getStudentInfo(Student *studentPtr) {
@@ -56,6 +57,36 @@ bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
 
     if (!getIntegerFromUser(activityCodePtr, "Inserire Codice Attività >>> ")) {
         printError("Errore Inserimento Codice Attivita") ;
+        return false ;
+    }
+
+    return true ;
+}
+
+
+bool getPrivateLessonInfo(PrivateLesson *lesson) {
+    if (!getUserInput("Inserire Nome Allievo >>> ", lesson->lessonStudent, STUDENT_NAME_MAX_LEN + 1)) {
+        printError("Errore Lettura Studente") ;
+        return false ;
+    }
+
+    if (!getUserInput("Inserire Nome Insegnante >>> ", lesson->lessonTeacher, TEACHER_NAME_MAX_LENGHT + 1)) {
+        printError("Errore Lettura Insegnante") ;
+        return false ;
+    }
+
+    if (!getDateFromUser(&(lesson->lessonDate), "Inserire Data Lezione [yyyy-mm-dd] >>> ")) {
+        printError("Errore Lettura Data Lezione") ;
+        return false ;
+    }
+
+    if (!(getTimeFromUser(&(lesson->startTime), "Inserire Orario Lezione [hh:mm] >>> "))) {
+        printError("Errore Lettura Orario Lezione") ;
+        return false ;
+    }
+
+    if (!getIntegerFromUser(&(lesson->lessonDurability), "Inserire Durata Lezione In Minuti >>> ")) {
+        printError("Errore Lettura Durata Lezione") ;
         return false ;
     }
 

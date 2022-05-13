@@ -30,10 +30,13 @@ MYSQL_STMT *addJoinProcedure ;
 MYSQL_STMT *loadClassesProcedure ;
 MYSQL_STMT *loadAllActivitiesProcedure ;
 MYSQL_STMT *addAbsenceProcedure ;
+MYSQL_STMT *bookPrivateLessonProcedure ;
 
 //Procedure Insegnante
 MYSQL_STMT *generateAgendaProcedure ;
 
+
+//TODO In DB trovare il modo di gestire i tempi in modo che sia 23:00 + 2 ore = 01:00 e NON 25 !!!!
 
 
 bool initializePreparedStatement(Role role) {
@@ -102,6 +105,10 @@ bool initializePreparedStatement(Role role) {
                 printStatementError(addAbsenceProcedure, "Impossibile Preparare Procedura 'Aggiungi Assenza'") ;
                 return false ;
             }
+            if (!setupPreparedStatement(&bookPrivateLessonProcedure, "CALL prenota_lezione_privata(?,?,?,?,?)", conn)) {
+                printStatementError(bookPrivateLessonProcedure, "Impossibile Preparare Procedura 'Prenota Lezione Privata'") ;
+                return false ;
+            }
             
             break ;
 
@@ -147,7 +154,7 @@ bool closeAllStatement() {
         mysql_stmt_close(organizeActivityProcedure) ;
         organizeActivityProcedure = NULL ;
     }
-    //TODO Altre Procedure
+    //TODO AGGIUNGERE CHIUSURA DI TUTTE LE PROCEDURE
 
     return true ;
 }

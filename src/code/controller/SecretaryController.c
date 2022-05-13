@@ -78,6 +78,14 @@ void addStudentJoinActivity() {
 }
 
 
+void bookPrivateLesson() {
+    PrivateLesson privateLesson ;
+    if (getPrivateLessonInfo(&privateLesson)) {
+        bookPrivateLessonInDatabase(&privateLesson) ;
+    }
+}
+
+
 void secretaryController() {
 
     do {
@@ -92,6 +100,10 @@ void secretaryController() {
 
             case ADD_JOIN_ACTIVITY :
                 addStudentJoinActivity() ;
+                break ;
+
+            case BOOK_LESSON :
+                bookPrivateLesson() ;
                 break ;
 
             case SECRETARY_QUIT :
