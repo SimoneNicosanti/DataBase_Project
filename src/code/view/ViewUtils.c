@@ -30,9 +30,12 @@ int getUserOption(char *menuOption[], int menuLen) {
     showMenu(menuOption, menuLen) ;
 
     char choosenOption[3] ;
-    getUserInput("", choosenOption, 3) ;
+    if (!getUserInput("", choosenOption, 3)) {
+        return -1 ;
+    }
 
     int selectedOption = strtol(choosenOption, NULL, 10) ;
+    printf("%d\n", selectedOption) ;
     if (errno == EINVAL) {
         selectedOption = -1 ;
         errno = 0 ;

@@ -31,6 +31,7 @@ MYSQL_STMT *loadClassesProcedure ;
 MYSQL_STMT *loadAllActivitiesProcedure ;
 MYSQL_STMT *addAbsenceProcedure ;
 MYSQL_STMT *bookPrivateLessonProcedure ;
+MYSQL_STMT *courseAbsenceReportProcedure ;
 
 //Procedure Insegnante
 MYSQL_STMT *generateAgendaProcedure ;
@@ -107,6 +108,10 @@ bool initializePreparedStatement(Role role) {
             }
             if (!setupPreparedStatement(&bookPrivateLessonProcedure, "CALL prenota_lezione_privata(?,?,?,?,?)", conn)) {
                 printStatementError(bookPrivateLessonProcedure, "Impossibile Preparare Procedura 'Prenota Lezione Privata'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&courseAbsenceReportProcedure, "CALL report_assenze_corso(?,?)", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
                 return false ;
             }
             

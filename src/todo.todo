@@ -1,0 +1,2 @@
+TODO Modificare parametri di tipo TIME in DATETIME : Permette di gestire meglio la somma di orari
+TODO Rimuovi codice assenza da entità assenza: non serve, anzi mi dà problemi sul controllo del fatto che un'assenza sia segnata una soa volta

@@ -10,7 +10,7 @@
 
 void printError(char *errorMessage) {
     colorPrint(errorMessage, RED_TEXT) ;
-    printf("\n\n") ;
+    printf("\n") ;
 }
 
 
@@ -56,10 +56,14 @@ bool getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
     free(inputBuffer) ;
 
     /*
-        TODO Aggiunta controllo input non vuoto: evito di ricontrollare ogni volta
-        che la funzione viene chiamata. Alla fine se viene chiesto un input all'utente
-        ci si aspetta che esso venga inserito. Se non lo fa c'è un errore
+        Aggiunta controllo input non vuoto.
+        Vantaggi:
+            - evito di ricontrollare ogni volta che la funzione viene chiamata
+            - Se viene chiesto un input all'utente ci si aspetta che esso venga inserito. 
+              Se non lo fa c'è un errore e posso ritornare false 
     */
+    if (strlen(resultBuffer) == 0) return false ;
+    
     return true ;
 }
 

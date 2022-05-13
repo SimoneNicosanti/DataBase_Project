@@ -200,7 +200,7 @@ bool addAbsenceToDatabase(Absence *newAbsence) {
     
     MYSQL_TIME mysqlDate ;
     prepareDateParam(&(newAbsence->absenceDate), &mysqlDate) ;
-    bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlDate, sizeof(MYSQL_TIME), false) ;
+    bindParam(&param[1], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
 
     MYSQL_TIME mysqlTime ;
     prepareTimeParam(&(newAbsence->startTime), &mysqlTime) ;
@@ -260,4 +260,60 @@ bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
 }
 
 
-//TODO IN TUTTE LE BIND MODIFICA IL TIPO PASSATO: Per la Data da MYSQL_TYPE_TIME a MYSQL_TYPE_DATE !!!!
+Student **getCourseClassreport(char *levelName, int courseCode) {
+
+    MYSQL_BIND param[2] ;
+    bindParam(&param[0], MYSQL_TYPE_STRING, levelName, strlen(levelName), false) ;
+    bindParam(&param[1], MYSQL_TYPE_LONG, &courseCode, sizeof(int), false) ;
+
+    if (mysql_stmt_bind_param(courseAbsenceReportProcedure, param) != 0) {
+        printStatementError(courseAbsenceReportProcedure, "Impossibile Bind Parametri per 'Report Assenze Corso'") ;
+        freeStatement(courseAbsenceReportProcedure, false) ;
+        return NULL ;
+    }
+
+    if (mysql_stmt_execute(courseAbsenceReportProcedure)) {
+        printStatementError(courseAbsenceReportProcedure, "Impossibile Eseguire 'Report Assenze Corso'") ;
+        freeStatement(courseAbsenceReportProcedure, false) ;
+        return NULL ;
+    }
+
+    if (mysql_stmt_store_result(courseAbsenceReportProcedure) != 0) {
+        printStatementError(courseAbsenceReportProcedure, "Impossibile Salvare Risultato 'Report Assenze Corso'") ;
+        freeStatement(courseAbsenceReportProcedure, true) ;
+        return NULL ;
+    }
+
+    int numRows = mysql_stmt_num_rows(courseAbsenceReportProcedure) ;
+    Student **studentArray = myMalloc(sizeof(Student) * (numRows + 1)) ;
+
+
+    char studentName[STUDENT_NAME_MAX_LEN + 1] ;
+    int absenceNumber ;
+
+    MYSQL_BIND returnParam[2] ;
+    bindParam(&returnParam[0], MYSQL_TYPE_STRING, studentName, STUDENT_NAME_MAX_LEN + 1, false) ;
+    bindParam(&returnParam[1], MYSQL_TYPE_LONG, &absenceNumber, sizeof(int), false) ;
+    if (mysql_stmt_bind_result(courseAbsenceReportProcedure, returnParam) != 0) {
+        printStatementError(courseAbsenceReportProcedure, "Impossibile Recuperare Risultato 'Report Assenze Corso'") ;
+        freeStatement(courseAbsenceReportProcedure, true) ;
+        return NULL ;
+    }
+
+    int hasResult = mysql_stmt_fetch(courseAbsenceReportProcedure) ;
+    int i = 0 ;
+    while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
+        Student *student = myMalloc(sizeof(Student)) ;
+        strcpy(student->studentName, studentName) ;
+        student->studentAbsenceNumber = absenceNumber ;
+
+        studentArray[i] = student ;
+
+        hasResult = mysql_stmt_fetch(courseAbsenceReportProcedure) ;
+        i++ ;
+    }
+
+    freeStatement(courseAbsenceReportProcedure, true) ;
+
+    return studentArray ;
+}

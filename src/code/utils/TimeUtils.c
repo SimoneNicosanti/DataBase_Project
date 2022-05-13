@@ -31,8 +31,6 @@ int isLeapYear(int year) {
 
 
 bool isValidDate(Date *verifyDate) {
-    //check range of year,month and day
-    //TODO Verificare che sia SQL a fare questo controllo
     if (verifyDate->month < 1 || verifyDate->month > 12) {
         return false ;
     }

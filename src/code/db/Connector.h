@@ -37,6 +37,7 @@ extern MYSQL_STMT *loadAllTachingProcedure ;
 extern MYSQL_STMT *loadTeacherActivitiesProcedure ;
 
 
+
 //Procedure Segreteria
 extern MYSQL_STMT *addStudentProcedure ;
 extern MYSQL_STMT *addJoinProcedure ;
@@ -44,6 +45,7 @@ extern MYSQL_STMT *loadClassesProcedure ;
 extern MYSQL_STMT *loadAllActivitiesProcedure ;
 extern MYSQL_STMT *addAbsenceProcedure ;
 extern MYSQL_STMT *bookPrivateLessonProcedure ;
+extern MYSQL_STMT *courseAbsenceReportProcedure ;
 
 //Procedure Insegnante
 extern MYSQL_STMT *generateAgendaProcedure ;
