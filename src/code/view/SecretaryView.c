@@ -5,12 +5,14 @@ char *secretaryMenuOption[] = {
     "Aggiungi Allievo",
     "Aggiungi Partecipazione Ad Attività",
     "Prenota Lezione Privata",
+    "Aggiungi Assenza" ,
+    "Report Assenze Corso",
     "Quit"
     } ;
 
 
 int getSecretaryOption() {
-    return getUserOption(secretaryMenuOption, 4) ;
+    return getUserOption(secretaryMenuOption, 5) ;
 }
 
 bool getStudentInfo(Student *studentPtr) {
@@ -87,6 +89,41 @@ bool getPrivateLessonInfo(PrivateLesson *lesson) {
 
     if (!getIntegerFromUser(&(lesson->lessonDurability), "Inserire Durata Lezione In Minuti >>> ")) {
         printError("Errore Lettura Durata Lezione") ;
+        return false ;
+    }
+
+    return true ;
+}
+
+
+bool getCourseAbsenceReportInfo(char *levelName, int *courseCode) {
+
+    if (!getUserInput("Inserire Nome del Livello >>> ", levelName, LEVEL_NAME_MAX_LEN + 1)) {
+        printError("Errore Lettura Nome Livello") ;
+        return false ;
+    }
+
+    if (!getIntegerFromUser(courseCode, "Inserire Codice Corso >>> ")) {
+        printError("Errore Lettura Codice Corso") ;
+        return false ;
+    }
+
+    return true ;
+}
+
+bool getAbsenceInfo(Absence *absencePtr) {
+    if (!getUserInput("Inserire Nome Allievo >>> ", absencePtr->studentName, STUDENT_NAME_MAX_LEN + 1)) {
+        printError("Errore Lettura Nome Allievo") ;
+        return false ;
+    }
+
+    if (!getDateFromUser(&(absencePtr->absenceDate), "Inserire Data Assenza [yyyy-mm-dd] >>> ")) {
+        printError("Errore Lettura Data Assenza") ;
+        return false ;
+    }
+
+    if (!getTimeFromUser(&(absencePtr->startTime), "Inserire Orario Assenza [hh:m] >>> ")) {
+        printError("Errore Lettura Orario Assenza") ;
         return false ;
     }
 

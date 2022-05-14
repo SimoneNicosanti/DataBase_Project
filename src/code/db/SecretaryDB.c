@@ -260,11 +260,11 @@ bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
 }
 
 
-Student **getCourseClassreport(char *levelName, int courseCode) {
+Student **getCourseAbsenceReportDB(char *levelName, int courseCode) {
 
     MYSQL_BIND param[2] ;
-    bindParam(&param[0], MYSQL_TYPE_STRING, levelName, strlen(levelName), false) ;
-    bindParam(&param[1], MYSQL_TYPE_LONG, &courseCode, sizeof(int), false) ;
+    bindParam(&param[1], MYSQL_TYPE_STRING, levelName, strlen(levelName), false) ;
+    bindParam(&param[0], MYSQL_TYPE_LONG, &courseCode, sizeof(int), false) ;
 
     if (mysql_stmt_bind_param(courseAbsenceReportProcedure, param) != 0) {
         printStatementError(courseAbsenceReportProcedure, "Impossibile Bind Parametri per 'Report Assenze Corso'") ;
@@ -272,7 +272,7 @@ Student **getCourseClassreport(char *levelName, int courseCode) {
         return NULL ;
     }
 
-    if (mysql_stmt_execute(courseAbsenceReportProcedure)) {
+    if (mysql_stmt_execute(courseAbsenceReportProcedure) != 0) {
         printStatementError(courseAbsenceReportProcedure, "Impossibile Eseguire 'Report Assenze Corso'") ;
         freeStatement(courseAbsenceReportProcedure, false) ;
         return NULL ;
@@ -300,7 +300,7 @@ Student **getCourseClassreport(char *levelName, int courseCode) {
         return NULL ;
     }
 
-    int hasResult = mysql_stmt_fetch(courseAbsenceReportProcedure) ;
+    int hasResult = mysql_stmt_fetch(courseAbsenceReportProcedure) ; 
     int i = 0 ;
     while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
         Student *student = myMalloc(sizeof(Student)) ;
@@ -308,10 +308,11 @@ Student **getCourseClassreport(char *levelName, int courseCode) {
         student->studentAbsenceNumber = absenceNumber ;
 
         studentArray[i] = student ;
-
         hasResult = mysql_stmt_fetch(courseAbsenceReportProcedure) ;
         i++ ;
     }
+
+    studentArray[numRows] = NULL ;
 
     freeStatement(courseAbsenceReportProcedure, true) ;
 

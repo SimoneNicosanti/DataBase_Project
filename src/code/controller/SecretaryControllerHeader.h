@@ -10,6 +10,8 @@ enum SecretaryOption {
     ADD_STUDENT = 0,
     ADD_JOIN_ACTIVITY ,
     BOOK_LESSON,
+    ADD_ABSENCE,
+    COURSE_ABSENCE_REPORT,
     SECRETARY_QUIT
 } ;
 

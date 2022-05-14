@@ -25,3 +25,6 @@ bool addAbsenceToDatabase(Absence *newAbsence) ;
 
 
 bool bookPrivateLessonInDatabase(PrivateLesson *privateLesson) ;
+
+Student **getCourseAbsenceReportDB(char *levelName, int courseCode) ;
+

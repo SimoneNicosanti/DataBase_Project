@@ -85,6 +85,38 @@ void bookPrivateLesson() {
     }
 }
 
+void courseAbsenceReport() {
+    char levelName[LEVEL_NAME_MAX_LEN + 1] ;
+    int courseCode ;
+    if (getCourseAbsenceReportInfo(levelName, &courseCode)) {
+        Student **studentArray = getCourseAbsenceReportDB(levelName, courseCode) ;
+
+        if (studentArray == NULL) return ;
+        int num = 0 ;
+        while (studentArray[num] != NULL) num++ ;
+
+        char *header[] = {"Nome Allievo", "Numero Assenze"} ;
+        enum TableFieldType types[] = {STRING, INT} ;
+        Table *table = createTable(num, 2, header, types) ;
+
+        for (int i = 0 ; i < num ; i++) {
+            setTableElem(table, i, 0, studentArray[i]->studentName) ;
+            setTableElem(table, i, 1, &(studentArray[i]->studentAbsenceNumber)) ;
+        }
+
+        printTable(table) ;
+
+        freeTable(table) ;
+    }
+}
+
+void addAbsence() {
+    Absence absence ;
+    if (getAbsenceInfo(&absence)) {
+        addAbsenceToDatabase(&absence) ;
+    }
+}
+
 
 void secretaryController() {
 
@@ -104,6 +136,14 @@ void secretaryController() {
 
             case BOOK_LESSON :
                 bookPrivateLesson() ;
+                break ;
+
+            case ADD_ABSENCE :
+                addAbsence() ;
+                break ;
+
+            case COURSE_ABSENCE_REPORT :
+                courseAbsenceReport() ;
                 break ;
 
             case SECRETARY_QUIT :

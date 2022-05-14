@@ -31,10 +31,11 @@ int isLeapYear(int year) {
 
 
 bool isValidDate(Date *verifyDate) {
+    //TODO Rimuovere : Controllo fatto dal DB per la data
     if (verifyDate->month < 1 || verifyDate->month > 12) {
         return false ;
-    }
-
+    } 
+ 
     if (verifyDate->day < 1 || verifyDate->day > 31) {
         return false ;
     }
