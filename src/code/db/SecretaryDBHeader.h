@@ -10,6 +10,7 @@
 #include "../model/Student.h"
 #include "../model/Activity.h"
 #include "../model/Absence.h"
+#include "../model/Partecipation.h"
 
 bool addStudentToDatabase(Student *studentPtr) ;
 
@@ -29,3 +30,5 @@ bool bookPrivateLessonInDatabase(PrivateLesson *privateLesson) ;
 DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) ;
 
 DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) ;
+
+DatabaseResult *loadActivityParticipantsFromDatabase(int *activityCode) ;

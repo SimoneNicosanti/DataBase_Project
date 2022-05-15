@@ -8,12 +8,13 @@ char *secretaryMenuOption[] = {
     "Aggiungi Assenza" ,
     "Report Assenze Corso",
     "Report Insegnanti Liberi",
+    "Report Partecipanti Attività",
     "Quit"
     } ;
 
 
 int getSecretaryOption() {
-    return getUserOption(secretaryMenuOption, 7) ;
+    return getUserOption(secretaryMenuOption, 8) ;
 }
 
 bool getStudentInfo(Student *studentPtr) {
@@ -29,7 +30,7 @@ bool getStudentInfo(Student *studentPtr) {
         return false ;
     }
 
-    for (int i = 0 ; i < strlen(studentPtr->studentTelephone) ; i++) {
+    for (int i = 0 ; i < (int) strlen(studentPtr->studentTelephone) ; i++) {
         if (!isdigit(studentPtr->studentTelephone[i])) return false ;
     }
 
@@ -145,6 +146,15 @@ bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) {
 
     if (!getIntegerFromUser(durationPtr, "Inserire Durata Impegno >>> ")) {
         printError("Errore Lettura Durata") ;
+        return false ;
+    }
+
+    return true ;
+}
+
+bool getActivityParticipantsReportInfo(int *activityCode) {
+    if (!getIntegerFromUser(activityCode, "Inserire Codice Attività >>> ")) {
+        printError("Errore Lettura Codice Attività") ;
         return false ;
     }
 

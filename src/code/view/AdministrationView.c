@@ -199,4 +199,6 @@ bool getCourseLessonInfo(ClassLesson *newLesson) {
         printError("Errore Giorno Settimana Inserito") ;
         return false ;
     }
+
+    return true ;
 }

@@ -22,3 +22,5 @@ typedef struct {
     char meetingLecturer[MEETING_LECTURER_NAME_MAX_LEN + 1] ;
     char meetingArgument[MEETING_ARGUMENT_MAX_LEN + 1] ;
 } CuturalActivity ;
+
+

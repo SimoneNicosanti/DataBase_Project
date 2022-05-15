@@ -22,3 +22,5 @@ bool getCourseAbsenceReportInfo(char *levelName, int *courseCode) ;
 bool getAbsenceInfo(Absence *absencePtr) ;
 
 bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) ;
+
+bool getActivityParticipantsReportInfo(int *activityCode) ;

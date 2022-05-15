@@ -8,8 +8,6 @@ void printAllClasses() {
     enum TableFieldType tableField[] = {INT, STRING, INT, DATE} ;
     
     Table *table = createTable(result->numRows, 4, headerArray, tableField) ;
-
-    int i = 0 ;
     for(int i = 0 ; i < result->numRows ; i++) {
         Class *classPtr = result->rowsSet[i] ;
         setTableElem(table, i, 0, &(classPtr->classCode)) ;
@@ -135,6 +133,29 @@ void freeTeacherReport() {
     freeDatabaseResult(result) ;
 }
 
+void activityParticipantsReport() {
+    int activityCode ;
+    if (!getActivityParticipantsReportInfo(&activityCode)) return ;
+
+    DatabaseResult *result = loadActivityParticipantsFromDatabase(&activityCode) ;
+    if (result == NULL) return ;
+
+    char *header[] = {"Nome Allievo", "Telefono Allievo"} ;
+    enum TableFieldType types[] = {STRING, STRING} ;
+
+    Table *table = createTable(result->numRows, 2, header, types) ;
+    for (int i = 0 ; i < result->numRows ; i++) {
+        Partecipation *partecipation = (Partecipation *) result->rowsSet[i] ;
+        setTableElem(table, i, 0, partecipation->studentName) ;
+        setTableElem(table, i, 1, partecipation->studentTelephone) ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+
+    freeDatabaseResult(result) ;
+}
+
 
 void secretaryController() {
 
@@ -166,6 +187,10 @@ void secretaryController() {
             
             case FREE_TEACHER_REPORT :
                 freeTeacherReport() ;
+                break ;
+
+            case ACTIVITY_PARTICIPANTS_REPORT :
+                activityParticipantsReport() ;
                 break ;
 
             case SECRETARY_QUIT :

@@ -5,12 +5,6 @@ regex_t dateRegex ;
 regex_t timeRegex ;
 
 
-int daysInMonth[13][13] = {
-    {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31} ,
-    {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
-} ;
-
-
 bool compileTimeRegex() {
     if (regcomp(&dateRegex, "[0-9]{4}-[0-9]{2}-[0-9]{2}", REG_EXTENDED) != 0) {
         printError("Impossibile Inizializzare Regex di Controllo Data") ;
@@ -39,8 +33,6 @@ bool verifyAndParseDate(Date *datePtr, char *dateString) {
         datePtr->year = atoi(yearString) ;
         datePtr->month = atoi(monthString) ;
         datePtr->day = atoi(dayString) ;
-        
-        
         return true ;
     }
 

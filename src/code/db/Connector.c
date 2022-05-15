@@ -33,6 +33,7 @@ MYSQL_STMT *addAbsenceProcedure ;
 MYSQL_STMT *bookPrivateLessonProcedure ;
 MYSQL_STMT *courseAbsenceReportProcedure ;
 MYSQL_STMT *loadFreeTeachersProcedure ;
+MYSQL_STMT *loadActivityParticipantsProcedure ;
 
 //Procedure Insegnante
 MYSQL_STMT *generateAgendaProcedure ;
@@ -116,6 +117,10 @@ bool initializePreparedStatement(Role role) {
             }
             if (!setupPreparedStatement(&loadFreeTeachersProcedure, "CALL recupera_insegnanti_liberi(?,?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
+                return false ;
+            }
+            if (!setupPreparedStatement(&loadActivityParticipantsProcedure, "CALL recupera_partecipanti_attivita(?)", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Recupera Partecipanti'") ;
                 return false ;
             }
             

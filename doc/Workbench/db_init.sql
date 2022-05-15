@@ -69,4 +69,20 @@ INSERT INTO LezionePrivata VALUES (NOW(), NOW(), "Cercei Lannister", 45, "Bart S
 INSERT INTO LezionePrivata VALUES (NOW() + INTERVAL 1 DAY, NOW(), "Cercei Lannister", 45, "Bart Simpson") ;
 
 ## Attività
-#INSERT INTO AttivitaCulturale(codiceAttivita, dataAttivita, ) VALUES
+INSERT INTO AttivitaCulturale VALUES (100, '2022-09-23', '09:00', 'Proiezione', 'Animali Fantastici, Dove Trovarli', 'Non Lo So', NULL, NULL) ;
+INSERT INTO AttivitaCulturale VALUES (101, '2022-09-23', '09:00', 'Proiezione', 'Animali Fantastici, I Crimini Di Grinderwald', 'Non Lo So', NULL, NULL) ;
+INSERT INTO AttivitaCulturale VALUES (102, '2022-09-23', '09:00', 'Proiezione', 'Animali Fantastici, I Segreti di Silente', 'Non Lo So', NULL, NULL) ;
+INSERT INTO AttivitaCulturale VALUES (103, '2022-09-23', '09:00', 'Conferenza', NULL, NULL, 'Conferenza 1', 'Argomento 1') ;
+INSERT INTO AttivitaCulturale VALUES (104, '2022-09-23', '09:00', 'Conferenza', NULL, NULL, 'Conferenza 2', 'Argomento 2') ;
+INSERT INTO AttivitaCulturale VALUES (105, '2022-09-23', '09:00', 'Conferenza', NULL, NULL, 'Conferenza 3', 'Argomento 3') ;
+INSERT INTO AttivitaCulturale VALUES (106, '2022-09-23', '09:00', 'Conferenza', NULL, NULL, 'Conferenza 4', 'Argomento 4') ;
+
+
+## Partecipazione
+INSERT INTO Partecipazione VALUES(100, 'Bart Simpson') ;
+INSERT INTO Partecipazione VALUES(100, 'Lancillotto') ;
+INSERT INTO Partecipazione VALUES(100, 'Ginevra') ;
+INSERT INTO Partecipazione VALUES(101, 'Homer Simpson') ;
+INSERT INTO Partecipazione VALUES(101, 'Morgana') ;
+INSERT INTO Partecipazione VALUES(102, 'Viviana') ;
+INSERT INTO Partecipazione VALUES(102, 'Maggie Simpson') ;
