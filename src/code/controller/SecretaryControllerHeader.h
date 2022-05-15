@@ -12,6 +12,7 @@ enum SecretaryOption {
     BOOK_LESSON,
     ADD_ABSENCE,
     COURSE_ABSENCE_REPORT,
+    FREE_TEACHER_REPORT,
     SECRETARY_QUIT
 } ;
 

@@ -34,8 +34,6 @@ bool getLevelInfo(Level *levelPtr) {
         return false ;
     }
 
-    //TODO Controllo Input NON VUOTO
-
     char hasExamString[2] ;
     if (!getUserInput("Il Livello Ha Un Esame?? [y-n] >>> ", hasExamString, 2)) {
         printError("Errore Lettura Esame") ;
@@ -74,17 +72,17 @@ bool getClassInfo(Class *classPtr) {
 bool getTeacherInfo(Teacher *teacherPtr) {
     printOptionTitle(administrationMenuOptions[2]) ;
 
-    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LENGHT + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LEN + 1)) {
         printError("Errore Inserimento Nome Insegnante") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Nazionalità Insegnante >>> ", teacherPtr->teacherNationality, TEACHER_NATIONALITY_MAX_LENGHT + 1)) {
+    if (!getUserInput("Inserire Nazionalità Insegnante >>> ", teacherPtr->teacherNationality, TEACHER_NATIONALITY_MAX_LEN + 1)) {
         printError("Errore Inserimento Nazionalità") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Indirizzo Insegnante >>> ", teacherPtr->teacherAddress, TEACHER_ADDRESS_MAX_LENGHT + 1)) {
+    if (!getUserInput("Inserire Indirizzo Insegnante >>> ", teacherPtr->teacherAddress, TEACHER_ADDRESS_MAX_LEN + 1)) {
         printError("Errore Inserimento Indirizzo") ;
         return false ;
     }
@@ -95,7 +93,7 @@ bool getTeacherInfo(Teacher *teacherPtr) {
 bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
     printOptionTitle(administrationMenuOptions[3]) ;
 
-    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LENGHT + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LEN + 1)) {
         printError("Errore Inserimento Nome Insegnante") ;
         return false ;
     }
@@ -105,15 +103,10 @@ bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
         return false ;
     }
 
-    char classCode[10 + 1] ;
-    if (!getUserInput("Inserire Codice Corso >>> ", classCode, 10 + 1)) {
-        printError("Errore Inserimento Codice Corso") ;
+    if (!getIntegerFromUser(&(classPtr->classCode), "Inserire Codice Corso >>> ")) {
+        printError("Errore Lettura Codice Corso") ;
         return false ;
     }
-
-    classPtr->classCode = (int) strtol(classCode, NULL, 10) ;
-    
-    //TODO Controllo Overflow / Underflow Codice inserito ?? è Necessario o ci pensa il DB??
 
     return true ;
 }
@@ -136,11 +129,11 @@ bool getActivityInfo(CuturalActivity *activityPtr) {
     if (strcmp(activityTypeString, "P") == 0) {
         activityPtr->type = FILM ;
 
-        if (!getUserInput("Inserire Titolo Film >>> ", activityPtr->filmTitle, FILM_TITLE_MAX_SIZE + 1)) {
+        if (!getUserInput("Inserire Titolo Film >>> ", activityPtr->filmTitle, FILM_TITLE_MAX_LEN + 1)) {
             printError("Errore Inserimento Titolo Film") ;
             return false ;
         }
-        if (!getUserInput("Inserire Regista Film >>> ", activityPtr->filmDirector, FILM_DIRECTOR_NAME_MAX_SIZE + 1)) {
+        if (!getUserInput("Inserire Regista Film >>> ", activityPtr->filmDirector, FILM_DIRECTOR_NAME_MAX_LEN + 1)) {
             printError("Errore Inserimento Regista Film") ;
             return false ;
         }
@@ -148,11 +141,11 @@ bool getActivityInfo(CuturalActivity *activityPtr) {
     else {
         activityPtr->type = MEETING ;
 
-        if (!getUserInput("Inserire Nome Conferenziere >>> ", activityPtr->meetingLecturer, MEETING_LECTURER_NAME_MAX_SIZE + 1)) {
+        if (!getUserInput("Inserire Nome Conferenziere >>> ", activityPtr->meetingLecturer, MEETING_LECTURER_NAME_MAX_LEN + 1)) {
             printError("Errore Inserimento Conferenziere") ;
             return false ;
         }
-        if (!getUserInput("Inserire Argomento Conferenza >>> ", activityPtr->meetingArgument, MEETING_ARGUMENT_MAX_SIZE + 1)) {
+        if (!getUserInput("Inserire Argomento Conferenza >>> ", activityPtr->meetingArgument, MEETING_ARGUMENT_MAX_LEN + 1)) {
             printError("Errore Inserimento Argomento Conferenza") ;
             return false ;
         }
@@ -181,7 +174,7 @@ bool getCourseLessonInfo(ClassLesson *newLesson) {
         return false ;
     }
 
-    if (!getUserInput("Inserire Nome Insegnante >>> ", newLesson->teacherName,  TEACHER_NAME_MAX_LENGHT + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", newLesson->teacherName,  TEACHER_NAME_MAX_LEN + 1)) {
         printError("Impossibile Prendere Nome Insegnante") ;
         return false ;
     }

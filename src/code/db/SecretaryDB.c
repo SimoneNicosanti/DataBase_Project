@@ -32,15 +32,7 @@ bool addStudentToDatabase(Student *studentPtr) {
 }
 
 
-Class **retrieveAllClasses() {
-
-    /* 
-        TODO Un altro modo può essere questo:
-            - Passo il doppio puntatore come parametro
-            - La funzione lo imposta aciò che viene dalla myMalloc
-            - Ritorno il numero di entry impostate correttamente
-            --> Evito poi a livello di controller di riprendere di nuovo il numero di righe con il ciclo, cosa che può essere lunga per molte entries
-    */
+DatabaseResult *retrieveAllClasses() {
 
     if (mysql_stmt_execute(loadClassesProcedure) != 0) {
         printStatementError(loadClassesProcedure, "Impossibile Eseguire 'Recupera Corsi'") ;
@@ -66,8 +58,9 @@ Class **retrieveAllClasses() {
         return NULL ;
     }
    
-    int rowsNumber = mysql_stmt_num_rows(loadClassesProcedure) ;
-    Class **classArray = (Class **) myMalloc(sizeof(Class *) * (rowsNumber + 1)) ;
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(loadClassesProcedure) ;
+    result->rowsSet = myMalloc(sizeof(Class *) * result->numRows) ;
     
     int i = 0 ;
     int hasResult = mysql_stmt_fetch(loadClassesProcedure) ;
@@ -82,19 +75,17 @@ Class **retrieveAllClasses() {
         class->activationDate.month = mysqlTime.month ;
         class->activationDate.day = mysqlTime.day ;
 
-        classArray[i] = class ;
+        result->rowsSet[i] = class ;
         hasResult = mysql_stmt_fetch(loadClassesProcedure) ;
         i++ ;
     }
 
-    classArray[rowsNumber] = NULL ;
-
     freeStatement(loadClassesProcedure, true) ;
     
-    return classArray ;
+    return result ;
 }
 
-CuturalActivity **getAllActivitiesFromDatabase() {
+DatabaseResult *getAllActivitiesFromDatabase() {
     if (mysql_stmt_execute(loadAllActivitiesProcedure) != 0) {
         printStatementError(loadAllActivitiesProcedure, "Impossibile Eseguire Procedura Recupera Attività") ;
         return NULL ;
@@ -103,10 +94,10 @@ CuturalActivity **getAllActivitiesFromDatabase() {
     mysql_stmt_store_result(loadAllActivitiesProcedure) ;
 
     int activityCode ;
-    char activityFilmTitle[FILM_TITLE_MAX_SIZE + 1] ;
-    char activityFilmDirector[FILM_DIRECTOR_NAME_MAX_SIZE + 1] ;
-    char activityMeetingLecturer[MEETING_LECTURER_NAME_MAX_SIZE + 1] ;
-    char activityMeetingArgument[MEETING_ARGUMENT_MAX_SIZE + 1] ;
+    char activityFilmTitle[FILM_TITLE_MAX_LEN + 1] ;
+    char activityFilmDirector[FILM_DIRECTOR_NAME_MAX_LEN + 1] ;
+    char activityMeetingLecturer[MEETING_LECTURER_NAME_MAX_LEN + 1] ;
+    char activityMeetingArgument[MEETING_ARGUMENT_MAX_LEN + 1] ;
 
     char activityType[50] ;
 
@@ -117,10 +108,10 @@ CuturalActivity **getAllActivitiesFromDatabase() {
     bindParam(&resultParam[1], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
     bindParam(&resultParam[2], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
     bindParam(&resultParam[3], MYSQL_TYPE_STRING, activityType, 50, false) ;
-    bindParam(&resultParam[4], MYSQL_TYPE_STRING, activityFilmTitle, FILM_TITLE_MAX_SIZE + 1, true) ;
-    bindParam(&resultParam[5], MYSQL_TYPE_STRING, activityFilmDirector, FILM_DIRECTOR_NAME_MAX_SIZE + 1, true) ;
-    bindParam(&resultParam[6], MYSQL_TYPE_STRING, activityMeetingLecturer, MEETING_LECTURER_NAME_MAX_SIZE + 1, true) ;
-    bindParam(&resultParam[7], MYSQL_TYPE_STRING, activityMeetingArgument, MEETING_ARGUMENT_MAX_SIZE + 1, true) ;
+    bindParam(&resultParam[4], MYSQL_TYPE_STRING, activityFilmTitle, FILM_TITLE_MAX_LEN + 1, true) ;
+    bindParam(&resultParam[5], MYSQL_TYPE_STRING, activityFilmDirector, FILM_DIRECTOR_NAME_MAX_LEN + 1, true) ;
+    bindParam(&resultParam[6], MYSQL_TYPE_STRING, activityMeetingLecturer, MEETING_LECTURER_NAME_MAX_LEN + 1, true) ;
+    bindParam(&resultParam[7], MYSQL_TYPE_STRING, activityMeetingArgument, MEETING_ARGUMENT_MAX_LEN + 1, true) ;
 
     if (mysql_stmt_bind_result(loadAllActivitiesProcedure, resultParam) != 0) {
         printStatementError(loadAllActivitiesProcedure, "Impossibile Bind Risultato di Recupera Attività") ;
@@ -129,8 +120,10 @@ CuturalActivity **getAllActivitiesFromDatabase() {
     }
 
     mysql_stmt_store_result(loadAllActivitiesProcedure) ;
-    int  rowsNum = mysql_stmt_num_rows(loadAllActivitiesProcedure) ; //Senza Store non si può usare
-    CuturalActivity **activityArray = (CuturalActivity **) myMalloc(sizeof(CuturalActivity *) * (rowsNum + 1)) ;
+
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(loadAllActivitiesProcedure) ; //Senza Store non si può usare
+    result->rowsSet = myMalloc(sizeof(CuturalActivity *) * result->numRows) ;
     
     int i = 0 ;
     int hasResult = mysql_stmt_fetch(loadAllActivitiesProcedure) ;
@@ -157,16 +150,14 @@ CuturalActivity **getAllActivitiesFromDatabase() {
             strcpy(activity->meetingArgument, activityMeetingArgument) ;
         }
 
-        activityArray[i] = activity ;
+        result->rowsSet[i] = activity ;
         hasResult = mysql_stmt_fetch(loadAllActivitiesProcedure) ;
         i++ ;
     }
-    
-    activityArray[rowsNum] = NULL ;
 
     freeStatement(loadAllActivitiesProcedure, true) ;
 
-    return activityArray ;
+    return result ;
 }
 
 
@@ -238,7 +229,7 @@ bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
 
     bindParam(&param[2], MYSQL_TYPE_STRING, lesson->lessonTeacher, strlen(lesson->lessonTeacher), false) ;
     bindParam(&param[3], MYSQL_TYPE_LONG, &(lesson->lessonDurability), sizeof(int), false) ;
-    bindParam(&param[4], MYSQL_TYPE_STRING, lesson->lessonStudent, strlen(lesson->lessonTeacher), false) ;
+    bindParam(&param[4], MYSQL_TYPE_STRING, lesson->lessonStudent, strlen(lesson->lessonStudent), false) ;
 
     if (mysql_stmt_bind_param(bookPrivateLessonProcedure, param) != 0) {
         printStatementError(bookPrivateLessonProcedure, "Impossibile Preparare I Parametri Per 'Prenota Lezione'") ;
@@ -255,12 +246,10 @@ bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
     freeStatement(bookPrivateLessonProcedure, true) ;
 
     return true ;
-
-    return true ;
 }
 
 
-Student **getCourseAbsenceReportDB(char *levelName, int courseCode) {
+DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) {
 
     MYSQL_BIND param[2] ;
     bindParam(&param[1], MYSQL_TYPE_STRING, levelName, strlen(levelName), false) ;
@@ -284,8 +273,9 @@ Student **getCourseAbsenceReportDB(char *levelName, int courseCode) {
         return NULL ;
     }
 
-    int numRows = mysql_stmt_num_rows(courseAbsenceReportProcedure) ;
-    Student **studentArray = myMalloc(sizeof(Student) * (numRows + 1)) ;
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(courseAbsenceReportProcedure) ;
+    result->rowsSet = myMalloc(sizeof(Student) * result->numRows) ;
 
 
     char studentName[STUDENT_NAME_MAX_LEN + 1] ;
@@ -307,14 +297,77 @@ Student **getCourseAbsenceReportDB(char *levelName, int courseCode) {
         strcpy(student->studentName, studentName) ;
         student->studentAbsenceNumber = absenceNumber ;
 
-        studentArray[i] = student ;
+        result->rowsSet[i] = student ;
         hasResult = mysql_stmt_fetch(courseAbsenceReportProcedure) ;
         i++ ;
     }
 
-    studentArray[numRows] = NULL ;
-
     freeStatement(courseAbsenceReportProcedure, true) ;
 
-    return studentArray ;
+    return result ;
+}
+
+ 
+DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
+
+    MYSQL_TIME mysqlDate ;
+    MYSQL_TIME mysqlTime ;
+
+    prepareDateParam(date, &mysqlDate) ;
+    prepareTimeParam(time, &mysqlTime) ;
+
+    MYSQL_BIND param[3] ;
+    bindParam(&param[0], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
+    bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
+    bindParam(&param[2], MYSQL_TYPE_LONG, duration, sizeof(int), false) ;
+
+    if (mysql_stmt_bind_param(loadFreeTeachersProcedure, param) != 0) {
+        printStatementError(loadFreeTeachersProcedure, "Bind Parametri Impossibile Per 'Recupera Insegnanti Liberi'") ;
+        freeStatement(loadFreeTeachersProcedure, false) ;
+        return NULL ;
+    }
+
+    if (mysql_stmt_execute(loadFreeTeachersProcedure) != 0) {
+        printStatementError(loadFreeTeachersProcedure, "Esecuzione Impossibile Per 'Recupera Insegnanti Liberi'") ;
+        freeStatement(loadFreeTeachersProcedure, false) ;
+        return NULL ;
+    }
+
+    
+
+    mysql_stmt_store_result(loadFreeTeachersProcedure) ;
+
+    DatabaseResult *result = (DatabaseResult *) myMalloc(sizeof(DatabaseResult)) ;
+
+    result->numRows = mysql_stmt_num_rows(loadFreeTeachersProcedure) ;
+    result->rowsSet = (void **) myMalloc(sizeof(char *) * result->numRows) ;
+
+    char teacherName[TEACHER_NAME_MAX_LEN + 1] ;
+
+    MYSQL_BIND resultParam[1] ;
+    bindParam(&resultParam[0], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN + 1, false) ;
+
+    
+
+    if (mysql_stmt_bind_result(loadFreeTeachersProcedure, resultParam) != 0) {
+        printStatementError(loadFreeTeachersProcedure, "Bind Risultato Impossibile Per 'Recupera Insegnanti Liberi'") ;
+        freeStatement(loadFreeTeachersProcedure, false) ;
+        return NULL ;
+    }
+
+    int hasResult = mysql_stmt_fetch(loadFreeTeachersProcedure) ; 
+    int i = 0 ;
+    while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
+        char *teacher = (char *) myMalloc(sizeof(char) * (TEACHER_NAME_MAX_LEN + 1)) ;
+        strcpy(teacher, teacherName) ;
+
+        result->rowsSet[i] = teacher ;
+        printf("%s\n", teacher) ;
+        hasResult = mysql_stmt_fetch(loadFreeTeachersProcedure) ; 
+        i++ ;
+    }
+
+    freeStatement(loadFreeTeachersProcedure, true) ;
+
+    return result ;
 }

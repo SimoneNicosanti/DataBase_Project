@@ -123,8 +123,7 @@ void printTable(Table *tablePtr) {
 
 Table *createTable(int rowsNum, int colsNum, char **headerArray, enum TableFieldType *rowTypes) {
 
-    Table *tablePtr = malloc(sizeof(Table)) ;
-    if (tablePtr == NULL) exit(-1) ;
+    Table *tablePtr = myMalloc(sizeof(Table)) ;
 
     tablePtr->table = (void ***) myMalloc(sizeof(void **) * rowsNum) ;
 

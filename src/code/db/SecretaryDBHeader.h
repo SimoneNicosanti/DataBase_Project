@@ -16,15 +16,16 @@ bool addStudentToDatabase(Student *studentPtr) ;
 bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) ;
 
 
+ 
+DatabaseResult *retrieveAllClasses() ;
 
-Class **retrieveAllClasses() ;
-
-CuturalActivity **getAllActivitiesFromDatabase() ;
+DatabaseResult *getAllActivitiesFromDatabase() ;
 
 bool addAbsenceToDatabase(Absence *newAbsence) ;
 
 
 bool bookPrivateLessonInDatabase(PrivateLesson *privateLesson) ;
 
-Student **getCourseAbsenceReportDB(char *levelName, int courseCode) ;
+DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) ;
 
+DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) ;

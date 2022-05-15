@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdbool.h>
+#include <errno.h>
+#include <ctype.h>
 
 #include "IOUtils.h"
 #include "SystemUtilsHeader.h"
@@ -17,17 +19,15 @@ void printError(char *errorMessage) {
 bool getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
     /*
         Function to get user input from stdinput.
-        Takes max buffer size from stdin and put them in resultBuffer
+        Takes max buffer size from stdin and put them in resultBuffer.
+        bufferSize comprende nel conto lo \n
     */
 
     printf("%s", requestString) ;
 
     //Alloco un buffer di dimensione pari alla massima dimensione valida per l'input più uno per lo \n
-    char *inputBuffer = (char *) malloc(sizeof(char) * (bufferSize + 1)) ;
-    if (inputBuffer == NULL) {
-        exitWithError("Errore Allocazione Memoria Buffer di Input") ;
-        return false ;
-    } 
+    char inputBuffer[bufferSize + 1] ;
+
     //Lettura al massimo di inputMaxSize - 1 caratteri incluso, se lo trova, il \n
     if (fgets(inputBuffer, bufferSize + 1, stdin) == NULL) {
         printError("Errore Scansione Input") ;
@@ -46,14 +46,11 @@ bool getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
     */
     if ((int) strlen(inputBuffer) == bufferSize) {
         while(getchar() != '\n') ;
-        printError("Input Inserito Troppo Lungo\n") ;
-        free(inputBuffer) ;
+        printError("Input Inserito Troppo Lungo") ;
         return false ;
     }
 
     strcpy(resultBuffer, inputBuffer) ;
-
-    free(inputBuffer) ;
 
     /*
         Aggiunta controllo input non vuoto.
@@ -120,14 +117,28 @@ bool getTimeFromUser(Time *timePtr, char *requestString) {
     return true ;
 }
 
+bool verifyIntegerInput(char *integerString) {
+    for (int i = 0 ; i < (int) strlen(integerString) ; i++) {
+        if (!isdigit(integerString[i])) return false ;
+    }
+    return true ;
+}
+
 bool getIntegerFromUser(int *integerPtr, char *inputMessage) {
     char integerStringBuff[10 + 1] ;
-    if (!getUserInput(inputMessage, integerStringBuff, 50 + 1)) {
+    if (!getUserInput(inputMessage, integerStringBuff, 10 + 1)) {
         printError("Errore Inserimento Codice Numerico") ;
         return false ;
     }
 
-    *integerPtr = (int) strtol(integerStringBuff, NULL, 10) ;
-    //TODO Inserire Controllo Conversione codice numerico
+    if (!verifyIntegerInput(integerStringBuff)) return false ;
+    int input = (int) strtol(integerStringBuff, NULL, 10) ;
+    if (errno != 0) {
+        printError("Numero Non Valido") ;
+        errno = 0 ;
+        return false ;
+    }
+    *integerPtr = input ;
+    
     return true ;
 }

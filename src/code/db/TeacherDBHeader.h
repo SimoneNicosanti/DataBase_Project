@@ -6,4 +6,4 @@
 #include "../model/Lesson.h"
 #include "../utils/SystemUtilsHeader.h"
 
-GeneralLesson **generateAgendaFromDatabase(char *teacherUsername, int weekIndex) ;
+DatabaseResult *generateAgendaFromDatabase(char *teacherUsername, int weekIndex) ;

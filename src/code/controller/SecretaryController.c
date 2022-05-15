@@ -1,30 +1,27 @@
 #include "SecretaryControllerHeader.h"
 
 void printAllClasses() {
-    Class **classArray = retrieveAllClasses() ;
-    if (classArray == NULL) return ;
+    DatabaseResult *result = retrieveAllClasses() ;
+    if (result == NULL) return ;
 
     char *headerArray[] = {"Codice", "Livello", "Numero Allievi", "Data Attivazione"} ;
     enum TableFieldType tableField[] = {INT, STRING, INT, DATE} ;
-    int num = 0 ;
-    while (classArray[num] != NULL) num++ ;
-    Table *table = createTable(num, 4, headerArray, tableField) ;
+    
+    Table *table = createTable(result->numRows, 4, headerArray, tableField) ;
 
     int i = 0 ;
-    while (classArray[i] != NULL) {
-        Class *classPtr = classArray[i] ;
+    for(int i = 0 ; i < result->numRows ; i++) {
+        Class *classPtr = result->rowsSet[i] ;
         setTableElem(table, i, 0, &(classPtr->classCode)) ;
         setTableElem(table, i, 1, classPtr->levelName) ;
         setTableElem(table, i, 2, &(classPtr->studentsNumber)) ;
         setTableElem(table, i, 3, &(classPtr->activationDate)) ;
-
-        i++ ;
     }
     
     printTable(table) ;
     freeTable(table) ;
 
-    //TODO AGGIUNGERE FREE DEGLI ARRAY RITORNATI
+    freeDatabaseResult(result) ;
 }
 
 void addStudent() {
@@ -36,20 +33,16 @@ void addStudent() {
 }
 
 void printAllActivities() {
-    CuturalActivity **activityArray = getAllActivitiesFromDatabase() ;
+    DatabaseResult *result = getAllActivitiesFromDatabase() ;
 
-    if (activityArray == NULL) return ;
-
-    int num = 0 ;
-    while (activityArray[num] != NULL) num++ ;
+    if (result == NULL) return ;
 
     char *headerArray[] = {"Codice", "Data", "Orario", "Tipo", "Titolo Film", "Regista", "Conferenziere", "Argomento Conferenza"} ;
     enum TableFieldType typesArray[] = {INT, DATE, TIME, STRING, STRING, STRING, STRING, STRING} ;
-    Table *table = createTable(num, 8, headerArray, typesArray) ;
+    Table *table = createTable(result->numRows, 8, headerArray, typesArray) ;
 
-    int i = 0 ;
-    while (activityArray[i] != NULL) {
-        CuturalActivity *activity = activityArray[i] ;
+    for (int i = 0 ; i < result->numRows ; i++) {
+        CuturalActivity *activity = result->rowsSet[i] ;
         setTableElem(table, i, 0, &(activity->activityCode)) ;
         setTableElem(table, i, 1, &(activity->activityDate)) ;
         setTableElem(table, i, 2, &(activity->activityTime)) ;
@@ -60,12 +53,12 @@ void printAllActivities() {
 
         if (activity->type == FILM) setTableElem(table, i, 3, "F") ;
         else setTableElem(table, i, 3, "C") ;
-
-        i++ ;
     }
 
     printTable(table) ;
     freeTable(table) ;
+
+    freeDatabaseResult(result) ;
 }
 
 void addStudentJoinActivity() {
@@ -88,26 +81,27 @@ void bookPrivateLesson() {
 void courseAbsenceReport() {
     char levelName[LEVEL_NAME_MAX_LEN + 1] ;
     int courseCode ;
-    if (getCourseAbsenceReportInfo(levelName, &courseCode)) {
-        Student **studentArray = getCourseAbsenceReportDB(levelName, courseCode) ;
 
-        if (studentArray == NULL) return ;
-        int num = 0 ;
-        while (studentArray[num] != NULL) num++ ;
+    if (!getCourseAbsenceReportInfo(levelName, &courseCode)) return ;
+   
+    DatabaseResult *result = getCourseAbsenceReportDB(levelName, courseCode) ;
 
-        char *header[] = {"Nome Allievo", "Numero Assenze"} ;
-        enum TableFieldType types[] = {STRING, INT} ;
-        Table *table = createTable(num, 2, header, types) ;
+    if (result == NULL) return ;
 
-        for (int i = 0 ; i < num ; i++) {
-            setTableElem(table, i, 0, studentArray[i]->studentName) ;
-            setTableElem(table, i, 1, &(studentArray[i]->studentAbsenceNumber)) ;
-        }
+    char *header[] = {"Nome Allievo", "Numero Assenze"} ;
+    enum TableFieldType types[] = {STRING, INT} ;
+    Table *table = createTable(result->numRows, 2, header, types) ;
 
-        printTable(table) ;
-
-        freeTable(table) ;
+    for (int i = 0 ; i < result->numRows ; i++) {
+        Student *student = (Student *) result->rowsSet[i] ;
+        setTableElem(table, i, 0, student->studentName) ;
+        setTableElem(table, i, 1, &(student->studentAbsenceNumber)) ;
     }
+
+    printTable(table) ;
+    freeTable(table) ;
+    
+    freeDatabaseResult(result) ;
 }
 
 void addAbsence() {
@@ -115,6 +109,30 @@ void addAbsence() {
     if (getAbsenceInfo(&absence)) {
         addAbsenceToDatabase(&absence) ;
     }
+}
+
+ 
+void freeTeacherReport() {
+    Date date ;
+    Time time ;
+    int duration ;
+
+    if (!getFreeTeacherReportInfo(&date, &time, &duration)) return ;
+    
+    DatabaseResult *result = loadFreeTeachersFromDB(&date, &time, &duration) ;
+    if (result == NULL) return ;
+
+    char *header[] = {"Nome Insegnante"} ;
+    enum TableFieldType types[] = {STRING} ;
+    Table *table = createTable(result->numRows, 1, header, types) ;
+    for (int i = 0 ; i < result->numRows ; i++) {
+        setTableElem(table, i, 0, result->rowsSet[i]) ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+
+    freeDatabaseResult(result) ;
 }
 
 
@@ -144,6 +162,10 @@ void secretaryController() {
 
             case COURSE_ABSENCE_REPORT :
                 courseAbsenceReport() ;
+                break ;
+            
+            case FREE_TEACHER_REPORT :
+                freeTeacherReport() ;
                 break ;
 
             case SECRETARY_QUIT :

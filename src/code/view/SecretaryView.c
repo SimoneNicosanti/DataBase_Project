@@ -7,12 +7,13 @@ char *secretaryMenuOption[] = {
     "Prenota Lezione Privata",
     "Aggiungi Assenza" ,
     "Report Assenze Corso",
+    "Report Insegnanti Liberi",
     "Quit"
     } ;
 
 
 int getSecretaryOption() {
-    return getUserOption(secretaryMenuOption, 5) ;
+    return getUserOption(secretaryMenuOption, 7) ;
 }
 
 bool getStudentInfo(Student *studentPtr) {
@@ -72,7 +73,7 @@ bool getPrivateLessonInfo(PrivateLesson *lesson) {
         return false ;
     }
 
-    if (!getUserInput("Inserire Nome Insegnante >>> ", lesson->lessonTeacher, TEACHER_NAME_MAX_LENGHT + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", lesson->lessonTeacher, TEACHER_NAME_MAX_LEN + 1)) {
         printError("Errore Lettura Insegnante") ;
         return false ;
     }
@@ -124,6 +125,26 @@ bool getAbsenceInfo(Absence *absencePtr) {
 
     if (!getTimeFromUser(&(absencePtr->startTime), "Inserire Orario Assenza [hh:m] >>> ")) {
         printError("Errore Lettura Orario Assenza") ;
+        return false ;
+    }
+
+    return true ;
+}
+
+
+bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) {
+    if (!getDateFromUser(datePtr, "Inserire Data [yyyy-mm-dd] >>> ")) {
+        printError("Errore Lettura Data Lezione") ;
+        return false ;
+    }
+
+    if (!getTimeFromUser(timePtr, "Inserire Orario [hh:mm] >>> ")) {
+        printError("Errore Lettura Orario Lezione") ;
+        return false ;
+    }
+
+    if (!getIntegerFromUser(durationPtr, "Inserire Durata Impegno >>> ")) {
+        printError("Errore Lettura Durata") ;
         return false ;
     }
 

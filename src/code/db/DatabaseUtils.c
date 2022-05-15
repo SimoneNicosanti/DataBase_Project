@@ -1,10 +1,4 @@
-#include <mysql/mysql.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "../utils/IOUtils.h"
-#include "../utils/TimeUtils.h"
+#include "DatabaseUtilsHeader.h"
 
 bool is_null = true ;
 
@@ -108,3 +102,11 @@ bool setupPreparedStatement(MYSQL_STMT **statement, char *statementCommand, MYSQ
     return true ;
 }
 
+void freeDatabaseResult(DatabaseResult *databaseResultPtr) {
+    int numRows = databaseResultPtr->numRows ;
+    for (int i = 0 ; i < numRows ; i++) {
+        free(databaseResultPtr->rowsSet[i]) ;
+    }
+    free(databaseResultPtr->rowsSet) ;
+    free(databaseResultPtr) ;
+}

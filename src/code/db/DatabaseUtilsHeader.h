@@ -3,6 +3,20 @@
 #include <mysql/mysql.h>
 #include <stdbool.h>
 #include "../utils/TimeUtils.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "../utils/IOUtils.h"
+#include "../utils/TimeUtils.h"
+
+//Introduco per evitare di andare a riprendere il numero di righe ogni volta che devo stampare una tabella
+typedef struct {
+    int numRows ;
+    void **rowsSet ;
+} DatabaseResult ;
+
+void freeDatabaseResult(DatabaseResult *databaseResultPtr) ; 
+
 
 void bindParam(MYSQL_BIND *mysqlParam, enum enum_field_types mysqlType, void *paramPtr, unsigned long paramSize, bool nullable) ;
 

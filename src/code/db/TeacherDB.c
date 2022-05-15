@@ -2,7 +2,7 @@
 
 
 
-GeneralLesson **generateAgendaFromDatabase(char *teacherUsername, int weekIndex) {
+DatabaseResult *generateAgendaFromDatabase(char *teacherUsername, int weekIndex) {
 
     MYSQL_BIND param[2] ;
     bindParam(&param[0], MYSQL_TYPE_STRING, teacherUsername, strlen(teacherUsername), false) ;
@@ -21,9 +21,10 @@ GeneralLesson **generateAgendaFromDatabase(char *teacherUsername, int weekIndex)
     }
 
     mysql_stmt_store_result(generateAgendaProcedure) ;
-    int numRows = mysql_stmt_num_rows(generateAgendaProcedure) ;
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(generateAgendaProcedure) ;
 
-    GeneralLesson **lessonArray = (GeneralLesson **) myMalloc(sizeof(GeneralLesson) * (numRows + 1)) ;
+    result->rowsSet = myMalloc(sizeof(GeneralLesson) * result->numRows) ;
 
     MYSQL_BIND returnParam[7] ;
     char lessonType[5] ;
@@ -63,15 +64,13 @@ GeneralLesson **generateAgendaFromDatabase(char *teacherUsername, int weekIndex)
         strcpy(lesson->levelName, classLevel) ;
         strcpy(lesson->studentName, student) ;
 
-        lessonArray[i] = lesson ;
+        result->rowsSet[i] = lesson ;
         hasResult = mysql_stmt_fetch(generateAgendaProcedure) ;
         i++ ;
     }
 
-    lessonArray[numRows] = NULL ;
-
     freeStatement(generateAgendaProcedure, true) ;
 
-    return lessonArray ;
+    return result ;
 
 }

@@ -9,6 +9,12 @@
 #include "../model/Teacher.h"
 #include "../model/Lesson.h"
 
+#include "Connector.h"
+#include "../utils/IOUtils.h"
+#include "DatabaseUtilsHeader.h"
+#include <stdbool.h>
+#include <string.h>
+
 bool addLevelToDatabase(Level *levelPtr) ;
 
 bool addClassToDatabase(Class *classPtr) ;
@@ -21,4 +27,4 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) ;
 
 bool addClassLessonToDatabase(ClassLesson *newLesson) ;
 
-Teaching **selectAllTeaching() ;
+DatabaseResult *selectAllTeaching() ;

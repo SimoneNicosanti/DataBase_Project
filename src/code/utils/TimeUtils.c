@@ -23,34 +23,10 @@ bool compileTimeRegex() {
     return true ;
 }
 
-int isLeapYear(int year) {
-    return (((year % 4 == 0) &&
-             (year % 100 != 0)) ||
-            (year % 400 == 0));
-}
-
-
-bool isValidDate(Date *verifyDate) {
-    //TODO Rimuovere : Controllo fatto dal DB per la data
-    if (verifyDate->month < 1 || verifyDate->month > 12) {
-        return false ;
-    } 
- 
-    if (verifyDate->day < 1 || verifyDate->day > 31) {
-        return false ;
-    }
-
-    if (verifyDate->day > daysInMonth[isLeapYear(verifyDate->year)][verifyDate->month]) {
-        return false ;
-    }
-
-    return true ;
-}
-
 
 
 bool verifyAndParseDate(Date *datePtr, char *dateString) {
-
+    //Verifica su Correttezza rapporto tra mese-giorno e anno è fatta dal DBMS
     if (regexec(&dateRegex, dateString, 0, NULL, 0) != 0) {
         return false ;
     }
@@ -64,8 +40,7 @@ bool verifyAndParseDate(Date *datePtr, char *dateString) {
         datePtr->month = atoi(monthString) ;
         datePtr->day = atoi(dayString) ;
         
-        //Verifica su Correttezza rapporto tra mese-giorno e anno è fatta dal DBMS
-        //return isValidDate(datePtr) ;
+        
         return true ;
     }
 

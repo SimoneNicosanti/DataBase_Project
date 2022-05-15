@@ -32,6 +32,7 @@ MYSQL_STMT *loadAllActivitiesProcedure ;
 MYSQL_STMT *addAbsenceProcedure ;
 MYSQL_STMT *bookPrivateLessonProcedure ;
 MYSQL_STMT *courseAbsenceReportProcedure ;
+MYSQL_STMT *loadFreeTeachersProcedure ;
 
 //Procedure Insegnante
 MYSQL_STMT *generateAgendaProcedure ;
@@ -41,7 +42,6 @@ MYSQL_STMT *generateAgendaProcedure ;
 
 
 bool initializePreparedStatement(Role role) {
-    //TODO Altre procedure
     switch (role) {
         case LOGIN :
             if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ", conn)) {
@@ -114,6 +114,10 @@ bool initializePreparedStatement(Role role) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
                 return false ;
             }
+            if (!setupPreparedStatement(&loadFreeTeachersProcedure, "CALL recupera_insegnanti_liberi(?,?,?)", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
+                return false ;
+            }
             
             break ;
 
@@ -127,6 +131,13 @@ bool initializePreparedStatement(Role role) {
     }
 
     return true ;
+}
+
+void closeProcedure(MYSQL_STMT **procedure) {
+    if (*procedure) {
+        mysql_stmt_close(*procedure) ;
+        *procedure = NULL ;
+    }
 }
 
 

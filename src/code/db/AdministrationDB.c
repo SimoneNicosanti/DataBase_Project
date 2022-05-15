@@ -1,8 +1,3 @@
-#include "Connector.h"
-#include "../utils/IOUtils.h"
-#include "DatabaseUtilsHeader.h"
-#include <stdbool.h>
-#include <string.h>
 #include "AdministrationDatabaseHeader.h"
 
 
@@ -227,7 +222,7 @@ bool addClassLessonToDatabase(ClassLesson *newLesson) {
     return true ;
 }
 
-Teaching **selectAllTeaching() {
+DatabaseResult *selectAllTeaching() {
     //Ritorno Array di Teaching NULL terminated
     if (mysql_stmt_execute(loadAllTachingProcedure) != 0) {
         printStatementError(loadAllActivitiesProcedure, "Errore Esecuzione Recupero Docenze") ;
@@ -236,15 +231,16 @@ Teaching **selectAllTeaching() {
 
     mysql_stmt_store_result(loadAllTachingProcedure) ;
 
-    int numRows = mysql_stmt_num_rows(loadAllTachingProcedure) ;
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(loadAllTachingProcedure) ;
 
     int classCode ;
     char levelName[LEVEL_NAME_MAX_LEN + 1] ;
-    char teacherName[TEACHER_NAME_MAX_LENGHT + 1] ;
+    char teacherName[TEACHER_NAME_MAX_LEN + 1] ;
     MYSQL_BIND returnParam[3] ;
     bindParam(&returnParam[0], MYSQL_TYPE_LONG, &classCode, sizeof(int), false) ;
     bindParam(&returnParam[1], MYSQL_TYPE_STRING, levelName, LEVEL_NAME_MAX_LEN , false) ;
-    bindParam(&returnParam[2], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LENGHT, false) ;
+    bindParam(&returnParam[2], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
 
     if (mysql_stmt_bind_result(loadAllTachingProcedure, returnParam) != 0) {
         printStatementError(loadAllTachingProcedure, "Errore Bind Del Risultato") ;
@@ -252,7 +248,7 @@ Teaching **selectAllTeaching() {
         return NULL ;
     }
 
-    Teaching **teachingArray = (Teaching **) myMalloc(sizeof(Teaching *) * (numRows + 1)) ;
+    result->rowsSet = myMalloc(sizeof(Teaching *) * result->numRows) ;
 
     int hasResult = mysql_stmt_fetch(loadAllTachingProcedure) ;
     int i = 0 ;
@@ -263,14 +259,12 @@ Teaching **selectAllTeaching() {
         strcpy(teaching->teacherName, teacherName) ;
 
         printf("%d %s %s\n", classCode, levelName, teacherName) ;
-        teachingArray[i] = teaching ;
+        result->rowsSet[i] = teaching ;
         hasResult = mysql_stmt_fetch(loadAllTachingProcedure) ;
         i++ ;
     }
 
     freeStatement(loadAllTachingProcedure, true) ;
 
-    teachingArray[i] = NULL ;
-
-    return teachingArray ;
+    return result ;
 }

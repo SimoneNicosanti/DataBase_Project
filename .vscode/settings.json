@@ -10,6 +10,7 @@
         "administrationdatabaseheader.h": "c",
         "systemutilsheader.h": "c",
         "teacherviewheader.h": "c",
-        "teachercontrollerheader.h": "c"
+        "teachercontrollerheader.h": "c",
+        "logincontrollerheader.h": "c"
     }
 }

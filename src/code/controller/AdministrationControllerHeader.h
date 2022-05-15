@@ -13,4 +13,10 @@
 #include "../model/Teacher.h"
 #include "../model/Lesson.h"
 
+#include <stdbool.h>
+#include <stdio.h>
+#include "../view/AdministrationViewHeader.h"
+#include "../db/AdministrationDatabaseHeader.h"
+#include "../view/ViewUtilsHeader.h"
+
 void administrationController() ;

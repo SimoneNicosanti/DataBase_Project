@@ -1,9 +1,5 @@
-#include <stdbool.h>
-#include <stdio.h>
-#include "../view/AdministrationViewHeader.h"
 #include "AdministrationControllerHeader.h"
-#include "../db/AdministrationDatabaseHeader.h"
-#include "../view/ViewUtilsHeader.h"
+
 
 enum AdministrationControllerOptions {
     ADD_LEVEL = 0,
@@ -53,29 +49,28 @@ void organizeActivity() {
 
 }
 
-void printAllTeaching(Teaching **teachingArray) {
-    int arrayLen = 0 ;
-    while (teachingArray[arrayLen] != NULL) arrayLen++ ;
+void printAllTeaching(DatabaseResult *result) {
 
     char *header[] = {"Codice Corso", "Livello Corso", "Nome Insegnante"} ;
     enum TableFieldType types[] = {INT, STRING, STRING} ;
-    Table *table = createTable(arrayLen, 3, header, types) ;
-    int i = 0 ;
-    while (teachingArray[i] != NULL) {
-        setTableElem(table, i, 0, &(teachingArray[i]->classCode)) ;
-        setTableElem(table, i, 1, teachingArray[i]->levelName) ;
-        setTableElem(table, i, 2, teachingArray[i]->teacherName) ;
+    Table *table = createTable(result->numRows, 3, header, types) ;
 
-        i++ ;
+    for (int i = 0 ; i < result->numRows ; i++) {
+        Teaching *teaching = (Teaching *) result->rowsSet[i] ;
+        setTableElem(table, i, 0, &(teaching->classCode)) ;
+        setTableElem(table, i, 1, teaching->levelName) ;
+        setTableElem(table, i, 2, teaching->teacherName) ;
     }
 
     printTable(table) ;
     freeTable(table) ;
+
+    freeDatabaseResult(result) ;
 }
 
 void addLesson() {
-    Teaching **teachingArray = selectAllTeaching() ;
-    if (teachingArray != NULL) printAllTeaching(teachingArray) ;
+    DatabaseResult *result = selectAllTeaching() ;
+    if (result != NULL) printAllTeaching(result) ;
     ClassLesson newLesson ;
     if (getCourseLessonInfo(&newLesson)) {
         addClassLessonToDatabase(&newLesson) ;
