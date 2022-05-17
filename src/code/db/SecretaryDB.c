@@ -362,7 +362,6 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
         strcpy(teacher, teacherName) ;
 
         result->rowsSet[i] = teacher ;
-        printf("%s\n", teacher) ;
         hasResult = mysql_stmt_fetch(loadFreeTeachersProcedure) ; 
         i++ ;
     }

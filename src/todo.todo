@@ -1,1 +1,16 @@
-TODO Modificare parametri di tipo TIME in DATETIME : Permette di gestire meglio la somma di orari
+TODO Modificare parametri di tipo TIME in DATETIME : Permette di gestire meglio la somma di orari.
+        SOLO se Pellegrini dice che devo considerare anche le notturne
+
+TODO Nella valutazione delle ridondanze valuta anche la frequenza delle operazioni per vedere la convenienza di mantenimento e rimozione
+
+TODO Rivedere valutazione generale dei costi delle operazioni, anche in base alle operazioni realmente implementate
+
+TODO Scrivere a Pellegrini
+    - Se posso considerare le lezioni come non conflittuali tra giorni diversi. Devo considerare casi limite del tipo lezine ale 23.59 slitta al giorno dopo e
+        ne esiste una con orario conflittuale il giorno dopo. In breve, posso supporre che la scuola non sia una scuola notturna??
+    - Quali altre operazioni considerare oltre a quelle che sono palesi nella specifica e agli inserimenti
+    - Il report che l'amministrazione può generare è per singolo insegnnate o deve essere per più insegnanti. Con attività svolte si intende un numero di lezioni, le specifiche
+        lezioni tenute da un insegnante o altro??
+    - Il codice del corso è da considerare come inserito dall'utente oppure può essere generato in automatico?? Perché se generato in automatico può essere solo lui
+        identificante anziché nomeLivello + codiceCorso
+    - 

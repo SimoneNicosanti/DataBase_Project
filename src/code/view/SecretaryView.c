@@ -53,6 +53,7 @@ bool getStudentInfo(Student *studentPtr) {
 }
 
 bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
+    printOptionTitle("Aggiungi Partecipazione ad Attività") ;
 
     if (!getUserInput("Inserire Nome Allievo >>> ", studentName, STUDENT_NAME_MAX_LEN + 1)) {
         printError("Errore Presa Nome Allievo") ;
@@ -69,6 +70,8 @@ bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
 
 
 bool getPrivateLessonInfo(PrivateLesson *lesson) {
+    printOptionTitle("Aggiunta Allievo") ;
+
     if (!getUserInput("Inserire Nome Allievo >>> ", lesson->lessonStudent, STUDENT_NAME_MAX_LEN + 1)) {
         printError("Errore Lettura Studente") ;
         return false ;
@@ -99,6 +102,7 @@ bool getPrivateLessonInfo(PrivateLesson *lesson) {
 
 
 bool getCourseAbsenceReportInfo(char *levelName, int *courseCode) {
+    printOptionTitle("Reprt Assenze Corso") ;
 
     if (!getUserInput("Inserire Nome del Livello >>> ", levelName, LEVEL_NAME_MAX_LEN + 1)) {
         printError("Errore Lettura Nome Livello") ;
@@ -114,6 +118,8 @@ bool getCourseAbsenceReportInfo(char *levelName, int *courseCode) {
 }
 
 bool getAbsenceInfo(Absence *absencePtr) {
+    printOptionTitle("Aggiunta Assenza Allievo") ;
+
     if (!getUserInput("Inserire Nome Allievo >>> ", absencePtr->studentName, STUDENT_NAME_MAX_LEN + 1)) {
         printError("Errore Lettura Nome Allievo") ;
         return false ;
@@ -134,6 +140,7 @@ bool getAbsenceInfo(Absence *absencePtr) {
 
 
 bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) {
+    printOptionTitle("Report Insegnanti Liberi") ;
     if (!getDateFromUser(datePtr, "Inserire Data [yyyy-mm-dd] >>> ")) {
         printError("Errore Lettura Data Lezione") ;
         return false ;
@@ -153,6 +160,7 @@ bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) {
 }
 
 bool getActivityParticipantsReportInfo(int *activityCode) {
+    printOptionTitle("Report Allievi Partecipanti ad Attività") ;
     if (!getIntegerFromUser(activityCode, "Inserire Codice Attività >>> ")) {
         printError("Errore Lettura Codice Attività") ;
         return false ;

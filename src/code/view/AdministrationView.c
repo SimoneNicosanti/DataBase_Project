@@ -164,6 +164,8 @@ bool getActivityInfo(CuturalActivity *activityPtr) {
 } 
 
 bool getCourseLessonInfo(ClassLesson *newLesson) {
+    printOptionTitle("Inserimento Lezione Corso") ;
+    
     if (!getTimeFromUser(&(newLesson->startTime), "Inserire Orario Inizio Lezione [hh:mm] >>> ")) {
         printError("Errore Presa Data") ;
         return false ;
