@@ -14,12 +14,13 @@ char *administrationMenuOptions[] = {
     "Assegna Corso", 
     "Aggiungi Lezione Corso",
     "Organizza Attività",
+    "Report Insegnante" ,
     "Quit"
     } ;
 
 
 int getAdministrationOption() {
-    return getUserOption(administrationMenuOptions, 7) ;
+    return getUserOption(administrationMenuOptions, 8) ;
 }
 
 bool getLevelInfo(Level *levelPtr) {
@@ -199,6 +200,27 @@ bool getCourseLessonInfo(ClassLesson *newLesson) {
 
     if (!(strcmp(dayOfWeekStr, "Lun") || strcmp(dayOfWeekStr, "Mar") || strcmp(dayOfWeekStr, "Mer") || strcmp(dayOfWeekStr, "Gio") || strcmp(dayOfWeekStr, "Ven") || strcmp(dayOfWeekStr, "Sab") || strcmp(dayOfWeekStr, "Dom"))) {
         printError("Errore Giorno Settimana Inserito") ;
+        return false ;
+    }
+
+    return true ;
+}
+
+
+bool getTeacherReportInfo(char *teacherName, int *yearPtr, int *monthIndexPtr) {
+    //TODO ATTENTO!! INSERIRE CONTROLLO SULLA CORRETTEZZA DELL'ANNO E DEL MESE. FARLO IN DB
+    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherName, TEACHER_NAME_MAX_LEN + 1)) {
+        printError("Errore Lettura Nome Insegnante") ;
+        return false ;
+    }
+
+    if (!getIntegerFromUser(yearPtr, "Inserire Anno >>> ")) {
+        printError("Errore Lettura Anno") ;
+        return false ;
+    }
+
+    if (!getIntegerFromUser(monthIndexPtr, "Inserire Indice Mese [0=Gen , 1=Feb , 2=Mar ecc] >>> ")) {
+        printError("Errore Lettura Indice Mese") ;
         return false ;
     }
 

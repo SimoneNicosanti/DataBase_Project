@@ -21,7 +21,7 @@ MYSQL_STMT *assignClassProcedure ;
 MYSQL_STMT *organizeActivityProcedure ;
 MYSQL_STMT *addLessonToClassProcedure ;
 MYSQL_STMT *loadAllTachingProcedure ;
-MYSQL_STMT *loadTeacherActivitiesProcedure ;
+MYSQL_STMT *generateTeacherReportProcedure ;
 
 
 //Procedure Segreteria

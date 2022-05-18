@@ -258,7 +258,6 @@ DatabaseResult *selectAllTeaching() {
         strcpy(teaching->levelName, levelName) ;
         strcpy(teaching->teacherName, teacherName) ;
 
-        printf("%d %s %s\n", classCode, levelName, teacherName) ;
         result->rowsSet[i] = teaching ;
         hasResult = mysql_stmt_fetch(loadAllTachingProcedure) ;
         i++ ;
@@ -271,6 +270,7 @@ DatabaseResult *selectAllTeaching() {
 
 
 DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int *monthIndexPtr) {
+
     MYSQL_BIND param[3] ;
     bindParam(&param[0], MYSQL_TYPE_STRING, teacherName, strlen(teacherName), false) ;
     bindParam(&param[1], MYSQL_TYPE_LONG, monthIndexPtr, sizeof(int), false) ;
@@ -311,5 +311,21 @@ DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int
         return NULL ;
     }
 
-    
+    int hasResult = mysql_stmt_fetch(generateTeacherReportProcedure) ;
+    int i = 0 ;
+    while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
+        ReportLesson *lesson = myMalloc(sizeof(ReportLesson)) ;
+        getDateParam(&(lesson->lessonDate), &mysqlDate) ;
+        getTimeParam(&(lesson->startTime), &mysqlTime) ;
+        lesson->duration = lessonDuration ;
+        lesson->lessonType = (strcmp(lessonType, "C") == 0) ? COURSE : PRIVATE ;
+
+        result->rowsSet[i] = lesson ;
+        i++ ;
+        hasResult = mysql_stmt_fetch(generateTeacherReportProcedure) ;
+    }
+
+    freeStatement(generateTeacherReportProcedure, true) ;
+
+    return result ;
 }

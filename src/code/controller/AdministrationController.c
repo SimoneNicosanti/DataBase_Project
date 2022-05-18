@@ -8,6 +8,7 @@ enum AdministrationControllerOptions {
     ASSIGN_CLASS, 
     ADD_LESSON,
     ORGANIZE_ACTIVITY,
+    TEACHER_REPORT,
     ADMINISTRATION_QUIT,
 } ;
 
@@ -77,6 +78,34 @@ void addLesson() {
     }
 }
 
+void generateTeacherReport() {
+    char teacherName[TEACHER_NAME_MAX_LEN + 1] ;
+    int year ;
+    int monthIndex ;
+
+    if (!getTeacherReportInfo(teacherName, &year, &monthIndex)) return ;
+
+    DatabaseResult *result = generateTeacherReportFromDB(teacherName, &year, &monthIndex) ;
+    if (result == NULL) return ;
+
+    char *header[] = {"Data Lezione", "Orario Inizio", "Durata", "Tipo Lezione"} ;
+    enum TableFieldType types[] = {DATE, TIME, INT, STRING} ;
+    Table *table = createTable(result->numRows, 4, header, types) ;
+
+    for (int i = 0 ; i < result->numRows ; i++) {
+        ReportLesson *lesson = (ReportLesson *) result->rowsSet[i] ;
+        setTableElem(table, i, 0, &(lesson->lessonDate)) ;
+        setTableElem(table, i, 1, &(lesson->startTime)) ;
+        setTableElem(table, i, 2, &(lesson->duration)) ;
+        setTableElem(table, i, 3, (lesson->lessonType == COURSE) ? "Corso" : "Privata") ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+
+    freeDatabaseResult(result) ;
+}
+
 
 void administrationController() {
     
@@ -107,6 +136,10 @@ void administrationController() {
 
             case ORGANIZE_ACTIVITY :
                 organizeActivity() ;
+                break ;
+
+            case TEACHER_REPORT :
+                generateTeacherReport() ;
                 break ;
         
             case ADMINISTRATION_QUIT :

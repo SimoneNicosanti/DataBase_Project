@@ -1,6 +1,3 @@
-TODO Modificare parametri di tipo TIME in DATETIME : Permette di gestire meglio la somma di orari.
-        SOLO se Pellegrini dice che devo considerare anche le notturne
-
 TODO Nella valutazione delle ridondanze valuta anche la frequenza delle operazioni per vedere la convenienza di mantenimento e rimozione
 
 TODO Rivedere valutazione generale dei costi delle operazioni, anche in base alle operazioni realmente implementate

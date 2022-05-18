@@ -16,3 +16,5 @@ bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) ;
 bool getActivityInfo(CuturalActivity *activityPtr) ;
 
 bool getCourseLessonInfo(ClassLesson *newLesson) ;
+
+bool getTeacherReportInfo(char *teacherName, int *year, int *monthIndex) ;

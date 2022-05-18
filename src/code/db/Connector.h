@@ -51,6 +51,7 @@ extern MYSQL_STMT *loadActivityParticipantsProcedure ;
 //Procedure Insegnante
 extern MYSQL_STMT *generateAgendaProcedure ;
 
+
 bool connectToDatabase() ;
 
 bool initializePreparedStatement(Role role) ;
