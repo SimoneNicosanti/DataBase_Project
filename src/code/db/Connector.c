@@ -84,6 +84,10 @@ bool initializePreparedStatement(Role role) {
                 printMysqlError(conn, "Impossibie Preparare Procedura 'Recupera Docenze'") ;
                 return false ;
             }
+            if (!setupPreparedStatement(&generateTeacherReportProcedure, "CALL genera_report_insegnante(?,?,?)", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Genera Report Insegnante'") ;
+                return false ;
+            }
             break ;
 
         case SEGRETERIA :

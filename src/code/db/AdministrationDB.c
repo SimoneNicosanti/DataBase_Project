@@ -268,3 +268,48 @@ DatabaseResult *selectAllTeaching() {
 
     return result ;
 }
+
+
+DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int *monthIndexPtr) {
+    MYSQL_BIND param[3] ;
+    bindParam(&param[0], MYSQL_TYPE_STRING, teacherName, strlen(teacherName), false) ;
+    bindParam(&param[1], MYSQL_TYPE_LONG, monthIndexPtr, sizeof(int), false) ;
+    bindParam(&param[2], MYSQL_TYPE_SHORT, yearPtr, sizeof(int), false) ;
+
+    if (mysql_stmt_bind_param(generateTeacherReportProcedure, param) != 0) {
+        printStatementError(generateTeacherReportProcedure, "Bind Parametri Impossibile per 'Genera Report Insegnante'") ;
+        freeStatement(generateTeacherReportProcedure, false) ;
+        return NULL ;
+    }
+
+    if (mysql_stmt_execute(generateTeacherReportProcedure) != 0) {
+        printStatementError(generateTeacherReportProcedure, "Esecuzione Impossibiler Per 'Genera Report Insegnate'") ;
+        return NULL ;
+    }
+
+    mysql_stmt_store_result(generateTeacherReportProcedure) ;
+
+    DatabaseResult *result = (DatabaseResult *) myMalloc(sizeof(DatabaseResult)) ;
+
+    result->numRows = mysql_stmt_num_rows(generateTeacherReportProcedure) ;
+    result->rowsSet = myMalloc(sizeof(ReportLesson) * result->numRows) ;
+
+    MYSQL_BIND returnParam[4] ;
+    MYSQL_TIME mysqlDate ;
+    MYSQL_TIME mysqlTime ;
+    int lessonDuration ;
+    char lessonType[5] ;
+
+    bindParam(&returnParam[0], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
+    bindParam(&returnParam[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
+    bindParam(&returnParam[2], MYSQL_TYPE_LONG, &lessonDuration, sizeof(int), false) ;
+    bindParam(&returnParam[3], MYSQL_TYPE_STRING, lessonType, 5, false) ;
+
+    if (mysql_stmt_bind_result(generateTeacherReportProcedure, returnParam) != 0) {
+        printStatementError(generateTeacherReportProcedure, "Bind Risultato Impossibile Per 'Genera Report Insegnante'") ;
+        freeStatement(generateTeacherReportProcedure, true) ;
+        return NULL ;
+    }
+
+    
+}

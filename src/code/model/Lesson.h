@@ -50,3 +50,10 @@ typedef struct {
     char levelName[LEVEL_NAME_MAX_LEN + 1] ;
     char studentName[STUDENT_NAME_MAX_LEN + 1] ;
 } GeneralLesson ;
+
+typedef struct {
+    Date lessonDate ;
+    Time startTime ;
+    int duration ;
+    enum LessonType lessonType ;
+} ReportLesson ;

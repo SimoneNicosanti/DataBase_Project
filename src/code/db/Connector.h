@@ -34,7 +34,7 @@ extern MYSQL_STMT *assignClassProcedure ;
 extern MYSQL_STMT *organizeActivityProcedure ;
 extern MYSQL_STMT *addLessonToClassProcedure ;
 extern MYSQL_STMT *loadAllTachingProcedure ;
-extern MYSQL_STMT *loadTeacherActivitiesProcedure ;
+extern MYSQL_STMT *generateTeacherReportProcedure ;
 
 
 //Procedure Segreteria
