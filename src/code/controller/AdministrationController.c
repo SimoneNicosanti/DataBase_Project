@@ -1,6 +1,6 @@
 #include "AdministrationControllerHeader.h"
 
-
+ 
 enum AdministrationControllerOptions {
     ADD_LEVEL = 0,
     ADD_CLASS,
@@ -50,28 +50,18 @@ void organizeActivity() {
 
 }
 
-void printAllTeaching(DatabaseResult *result) {
+void getAllTeaching() {
 
-    char *header[] = {"Codice Corso", "Livello Corso", "Nome Insegnante"} ;
-    enum TableFieldType types[] = {INT, STRING, STRING} ;
-    Table *table = createTable(result->numRows, 3, header, types) ;
+    DatabaseResult *result = selectAllTeaching() ;
+    if (result != NULL) return ;
 
-    for (int i = 0 ; i < result->numRows ; i++) {
-        Teaching *teaching = (Teaching *) result->rowsSet[i] ;
-        setTableElem(table, i, 0, &(teaching->classCode)) ;
-        setTableElem(table, i, 1, teaching->levelName) ;
-        setTableElem(table, i, 2, teaching->teacherName) ;
-    }
-
-    printTable(table) ;
-    freeTable(table) ;
+    printAllTeaching((Teaching **) result->rowsSet, result->numRows) ;
 
     freeDatabaseResult(result) ;
 }
 
 void addLesson() {
-    DatabaseResult *result = selectAllTeaching() ;
-    if (result != NULL) printAllTeaching(result) ;
+    getAllTeaching() ;
     ClassLesson newLesson ;
     if (getCourseLessonInfo(&newLesson)) {
         addClassLessonToDatabase(&newLesson) ;
@@ -88,20 +78,7 @@ void generateTeacherReport() {
     DatabaseResult *result = generateTeacherReportFromDB(teacherName, &year, &monthIndex) ;
     if (result == NULL) return ;
 
-    char *header[] = {"Data Lezione", "Orario Inizio", "Durata", "Tipo Lezione"} ;
-    enum TableFieldType types[] = {DATE, TIME, INT, STRING} ;
-    Table *table = createTable(result->numRows, 4, header, types) ;
-
-    for (int i = 0 ; i < result->numRows ; i++) {
-        ReportLesson *lesson = (ReportLesson *) result->rowsSet[i] ;
-        setTableElem(table, i, 0, &(lesson->lessonDate)) ;
-        setTableElem(table, i, 1, &(lesson->startTime)) ;
-        setTableElem(table, i, 2, &(lesson->duration)) ;
-        setTableElem(table, i, 3, (lesson->lessonType == COURSE) ? "Corso" : "Privata") ;
-    }
-
-    printTable(table) ;
-    freeTable(table) ;
+    printTeacherReport((ReportLesson **) result->rowsSet, result->numRows) ;
 
     freeDatabaseResult(result) ;
 }

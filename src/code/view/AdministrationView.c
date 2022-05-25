@@ -206,9 +206,8 @@ bool getCourseLessonInfo(ClassLesson *newLesson) {
     return true ;
 }
 
-
+ 
 bool getTeacherReportInfo(char *teacherName, int *yearPtr, int *monthIndexPtr) {
-    //TODO ATTENTO!! INSERIRE CONTROLLO SULLA CORRETTEZZA DELL'ANNO E DEL MESE. FARLO IN DB
     if (!getUserInput("Inserire Nome Insegnante >>> ", teacherName, TEACHER_NAME_MAX_LEN + 1)) {
         printError("Errore Lettura Nome Insegnante") ;
         return false ;
@@ -225,4 +224,38 @@ bool getTeacherReportInfo(char *teacherName, int *yearPtr, int *monthIndexPtr) {
     }
 
     return true ;
+}
+
+
+void printTeacherReport(ReportLesson **lessonArray, int arrayLen) {
+    char *header[] = {"Data Lezione", "Orario Inizio", "Durata", "Tipo Lezione"} ;
+    enum TableFieldType types[] = {DATE, TIME, INT, STRING} ;
+    Table *table = createTable(arrayLen, 4, header, types) ;
+
+    for (int i = 0 ; i < arrayLen ; i++) {
+        ReportLesson *lesson = lessonArray[i] ;
+        setTableElem(table, i, 0, &(lesson->lessonDate)) ;
+        setTableElem(table, i, 1, &(lesson->startTime)) ;
+        setTableElem(table, i, 2, &(lesson->duration)) ;
+        setTableElem(table, i, 3, (lesson->lessonType == COURSE) ? "Corso" : "Privata") ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+}
+
+void printAllTeaching(Teaching **teachingArray, int arrayLen) {
+    char *header[] = {"Codice Corso", "Livello Corso", "Nome Insegnante"} ;
+    enum TableFieldType types[] = {INT, STRING, STRING} ;
+    Table *table = createTable(arrayLen, 3, header, types) ;
+
+    for (int i = 0 ; i < arrayLen ; i++) {
+        Teaching *teaching = teachingArray[i] ;
+        setTableElem(table, i, 0, &(teaching->classCode)) ;
+        setTableElem(table, i, 1, teaching->levelName) ;
+        setTableElem(table, i, 2, teaching->teacherName) ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
 }

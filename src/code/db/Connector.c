@@ -35,11 +35,12 @@ MYSQL_STMT *courseAbsenceReportProcedure ;
 MYSQL_STMT *loadFreeTeachersProcedure ;
 MYSQL_STMT *loadActivityParticipantsProcedure ;
 
+
 //Procedure Insegnante
 MYSQL_STMT *generateAgendaProcedure ;
 
+//TODO Spostare inizializzazione e chiusura degli statement all'interno della funzione che lo avvia
 
-//TODO In DB trovare il modo di gestire i tempi in modo che sia 23:00 + 2 ore = 01:00 e NON 25 !!!!
 
 
 bool initializePreparedStatement(Role role) {

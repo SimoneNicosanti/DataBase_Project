@@ -145,7 +145,7 @@ bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) {
         printError("Errore Lettura Data Lezione") ;
         return false ;
     }
-
+ 
     if (!getTimeFromUser(timePtr, "Inserire Orario [hh:mm] >>> ")) {
         printError("Errore Lettura Orario Lezione") ;
         return false ;
@@ -167,4 +167,87 @@ bool getActivityParticipantsReportInfo(int *activityCode) {
     }
 
     return true ;
+}
+
+void printActivityParticipantsReport(Partecipation **partecipationArray, int arrayLen) {
+    char *header[] = {"Nome Allievo", "Telefono Allievo"} ;
+    enum TableFieldType types[] = {STRING, STRING} ;
+
+    Table *table = createTable(arrayLen, 2, header, types) ;
+    for (int i = 0 ; i < arrayLen ; i++) {
+        Partecipation *partecipation = partecipationArray[i] ;
+        setTableElem(table, i, 0, partecipation->studentName) ;
+        setTableElem(table, i, 1, partecipation->studentTelephone) ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+}
+
+void printFreeTeacherReport(char **teacherNameArray, int arrayLen) {
+    char *header[] = {"Nome Insegnante"} ;
+    enum TableFieldType types[] = {STRING} ;
+    Table *table = createTable(arrayLen, 1, header, types) ;
+    for (int i = 0 ; i < arrayLen ; i++) {
+        setTableElem(table, i, 0, teacherNameArray[i]) ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+}
+
+
+void printCourseAbsenceReport(Student **studentArray, int arrayLen) {
+    char *header[] = {"Nome Allievo", "Numero Assenze"} ;
+    enum TableFieldType types[] = {STRING, INT} ;
+    Table *table = createTable(arrayLen, 2, header, types) ;
+
+    for (int i = 0 ; i < arrayLen ; i++) {
+        Student *student = studentArray[i] ;
+        setTableElem(table, i, 0, student->studentName) ;
+        setTableElem(table, i, 1, &(student->studentAbsenceNumber)) ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+}
+
+void printAllActivities(CuturalActivity **activityArray, int arrayLen) {
+    char *headerArray[] = {"Codice", "Data", "Orario", "Tipo", "Titolo Film", "Regista", "Conferenziere", "Argomento Conferenza"} ;
+    enum TableFieldType typesArray[] = {INT, DATE, TIME, STRING, STRING, STRING, STRING, STRING} ;
+    Table *table = createTable(arrayLen, 8, headerArray, typesArray) ;
+
+    for (int i = 0 ; i < arrayLen ; i++) {
+        CuturalActivity *activity = activityArray[i] ;
+        setTableElem(table, i, 0, &(activity->activityCode)) ;
+        setTableElem(table, i, 1, &(activity->activityDate)) ;
+        setTableElem(table, i, 2, &(activity->activityTime)) ;
+        setTableElem(table, i, 4, activity->filmTitle) ;
+        setTableElem(table, i, 5, activity->filmDirector) ;
+        setTableElem(table, i, 6, activity->meetingLecturer) ;
+        setTableElem(table, i, 7, activity->meetingArgument) ;
+
+        if (activity->type == FILM) setTableElem(table, i, 3, "F") ;
+        else setTableElem(table, i, 3, "C") ;
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+}
+
+void printAllClasses(Class **classArray, int arrayLen) {
+    char *headerArray[] = {"Codice", "Livello", "Numero Allievi", "Data Attivazione"} ;
+    enum TableFieldType tableField[] = {INT, STRING, INT, DATE} ;
+    
+    Table *table = createTable(arrayLen, 4, headerArray, tableField) ;
+    for(int i = 0 ; i < arrayLen ; i++) {
+        Class *classPtr = classArray[i] ;
+        setTableElem(table, i, 0, &(classPtr->classCode)) ;
+        setTableElem(table, i, 1, classPtr->levelName) ;
+        setTableElem(table, i, 2, &(classPtr->studentsNumber)) ;
+        setTableElem(table, i, 3, &(classPtr->activationDate)) ;
+    }
+    
+    printTable(table) ;
+    freeTable(table) ;
 }
