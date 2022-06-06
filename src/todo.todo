@@ -3,4 +3,4 @@ TODO Nella valutazione delle ridondanze valuta anche la frequenza delle operazio
 TODO Rivedere valutazione generale dei costi delle operazioni, anche in base alle operazioni realmente implementate
 
 TODO correggere tipo di attività e converti da enum di stringhe in enum di int
-TODO correggere tipo anche per altre enum!!
+TODO correggere tipo anche per altre enum!! 
