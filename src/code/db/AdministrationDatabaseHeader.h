@@ -17,7 +17,7 @@
 
 bool addLevelToDatabase(Level *levelPtr) ;
 
-bool addClassToDatabase(Class *classPtr) ;
+int *addClassToDatabase(Class *classPtr) ;
 
 bool addTeacherToDatabase(Teacher *teacherPtr) ;
 

@@ -27,9 +27,9 @@ bool addLevelToDatabase(Level *levelPtr) {
 }
 
 
-bool addClassToDatabase(Class *classPtr) {
+int *addClassToDatabase(Class *classPtr) {
 
-    MYSQL_BIND param[2] ;
+    MYSQL_BIND param[3] ;
 
     bindParam(&param[0], MYSQL_TYPE_STRING, classPtr->levelName, strlen(classPtr->levelName), false) ;
 
@@ -38,31 +38,45 @@ bool addClassToDatabase(Class *classPtr) {
 
     bindParam(&param[1], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
 
+    int newClassCode = 0 ;
+    bindParam(&param[2], MYSQL_TYPE_LONG, &newClassCode, sizeof(int), false) ;
+
     if (mysql_stmt_bind_param(addClassProcedure, param) != 0) {
         printStatementError(addClassProcedure, "Impossibile Fare Parametri Procedura 'Aggiungi Corso'") ;
         freeStatement(addClassProcedure, false) ;
-        return false ;
+        return NULL ;
     }
 
     if (mysql_stmt_execute(addClassProcedure) != 0) {
         printStatementError(addClassProcedure, "Impossibile Eseguire Procedura 'Aggiungi Corso'") ;
         freeStatement(addClassProcedure, false) ;
-        return false ;
+        return NULL ;
     }
 
-    classPtr->classCode = mysql_stmt_insert_id(addClassProcedure) ;
-    /* if (classPtr->classCode == 0) {
-        printStatementError(addClassProcedure, "Impossibile Recuperare ID Corso Aggiunto") ;
-        freeStatement(addClassProcedure, false) ;
-        return false ;
-    } */
+    mysql_stmt_store_result(addClassProcedure) ;
+    
+    MYSQL_BIND resultParam ;
+    bindParam(&resultParam, MYSQL_TYPE_LONG, &newClassCode, sizeof(int), false) ;
 
-    //TODO Aggiunta ripresa ID ultimo corso inserito
+    if (mysql_stmt_bind_result(addClassProcedure, &resultParam) != 0) {
+        printStatementError(addClassProcedure, "Errore Recupero Codice Nuovo Corso") ;
+        freeStatement(addClassProcedure, true) ;
+        return NULL ;
+    }
 
-    freeStatement(addLevelProcedure, false) ;
+    if (mysql_stmt_fetch(addClassProcedure) != 0) {
+        printStatementError(addClassProcedure, "Errore Fetch del Risultato") ;
+        freeStatement(addClassProcedure, true) ;
+        return NULL ;
+    }
+    
+    freeStatement(addLevelProcedure, true) ;
 
-    return true ;
+    int *returnCode = myMalloc(sizeof(int)) ;
+    *returnCode = newClassCode ;
+    return returnCode ;
 }
+
 
 bool addTeacherToDatabase(Teacher *teacherPtr) {
 

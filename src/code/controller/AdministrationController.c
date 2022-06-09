@@ -22,9 +22,15 @@ void addLevel() {
 
 void addClass() {
     Class newClass ;
-    if (getClassInfo(&newClass)) {
-        addClassToDatabase(&newClass) ;
-    }
+    if (!getClassInfo(&newClass)) return ;
+    
+    int *newClassCode = addClassToDatabase(&newClass) ;
+
+    if (newClassCode == NULL) return ;
+
+    printNewClassCode(newClassCode) ;
+
+    free(newClassCode) ;
 }
 
 void addTeacher() {

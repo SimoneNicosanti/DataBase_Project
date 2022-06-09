@@ -61,7 +61,7 @@ bool initializePreparedStatement(Role role) {
                 printMysqlError(conn, "Impossibile Preparare Precedura 'Aggiungi Livello'") ;
                 return false ;
             }
-            if (!setupPreparedStatement(&addClassProcedure, "CALL aggiungi_corso(?,?) ", conn)) {
+            if (!setupPreparedStatement(&addClassProcedure, "CALL aggiungi_corso(?,?,?) ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Corso'") ;
                 return false ;
             }

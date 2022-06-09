@@ -259,3 +259,14 @@ void printAllTeaching(Teaching **teachingArray, int arrayLen) {
     printTable(table) ;
     freeTable(table) ;
 }
+
+void printNewClassCode(int *newClassCode) {
+    char *header[] = {"Codice Nuovo Corso"} ;
+    enum TableFieldType types[] = {INT} ;
+
+    Table *table = createTable(1, 1, header, types) ;
+    setTableElem(table, 0, 0, newClassCode) ;
+
+    printTable(table) ;
+    freeTable(table) ;
+}
