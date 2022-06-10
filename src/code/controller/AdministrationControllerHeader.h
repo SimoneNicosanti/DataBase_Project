@@ -19,4 +19,4 @@
 #include "../db/AdministrationDatabaseHeader.h"
 #include "../view/ViewUtilsHeader.h"
 
-void administrationController() ;
+void administrationController() ;  

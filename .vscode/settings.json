@@ -11,6 +11,7 @@
         "systemutilsheader.h": "c",
         "teacherviewheader.h": "c",
         "teachercontrollerheader.h": "c",
-        "logincontrollerheader.h": "c"
+        "logincontrollerheader.h": "c",
+        "stdio.h": "c"
     }
 }
