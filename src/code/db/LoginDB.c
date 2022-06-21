@@ -8,6 +8,11 @@
 #include "../utils/IOUtils.h"
 
 Role attemptLogin(LoginCredentials *loginCredentials) {
+    MYSQL_STMT *loginProcedure ;
+    if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ", conn)) {
+                printMysqlError(conn, "Impossibile Preparare Procedura 'Login'") ;
+                return false ;
+            }
     /*
         La procedura di Login ritorna un'unica tabella nel result set contenente
         il Terzo parametro che è un parametro di OUT: questo parametro è un codice numerico associato
@@ -57,6 +62,8 @@ Role attemptLogin(LoginCredentials *loginCredentials) {
     while (mysql_stmt_fetch(loginProcedure) == 0) ;
 
     freeStatement(loginProcedure, true) ;
+
+    mysql_stmt_close(loginProcedure) ;
 
     return role ;
 

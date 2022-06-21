@@ -42,6 +42,8 @@ void loginController() {
 }
 
 void successLogin(Role loginRole, char *username) {
+    clearScreen() ;
+    showAppHeader() ;
     colorPrint("\n\nUsername e Password Validi\n", GREEN_TEXT) ;
 
     if (switchRole(loginRole) == false) {
@@ -66,4 +68,6 @@ void successLogin(Role loginRole, char *username) {
     }
 
     switchRole(LOGIN) ;
+    clearScreen() ;
+    showAppHeader() ;
 }

@@ -3,6 +3,12 @@
 
 
 DatabaseResult *generateAgendaFromDatabase(char *teacherUsername, int weekIndex) {
+    MYSQL_STMT *generateAgendaProcedure ;
+
+    if (!setupPreparedStatement(&generateAgendaProcedure, "CALL genera_agenda(?,?)", conn)) {
+        printStatementError(generateAgendaProcedure, "Impossibile Preparare Procedura 'Genera Agenda'") ;
+        return false ;
+    }
 
     MYSQL_BIND param[2] ;
     bindParam(&param[0], MYSQL_TYPE_STRING, teacherUsername, strlen(teacherUsername), false) ;
@@ -70,6 +76,8 @@ DatabaseResult *generateAgendaFromDatabase(char *teacherUsername, int weekIndex)
     }
 
     freeStatement(generateAgendaProcedure, true) ;
+
+    mysql_stmt_close(generateAgendaProcedure) ;
 
     return result ;
 

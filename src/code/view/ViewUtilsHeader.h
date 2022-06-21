@@ -6,3 +6,7 @@ void showOptionHeader() ;
 void printOptionTitle(char *optionName) ;
 
 int getUserOption(char *menuOption[], int menuLen) ;
+
+void clearScreen() ;
+
+void showAppHeader() ;

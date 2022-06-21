@@ -2,10 +2,10 @@
 
 #include <mysql/mysql.h>
 #include <stdbool.h>
-#include "../utils/TimeUtils.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../utils/TimeUtils.h"
 #include "../utils/IOUtils.h"
 #include "../utils/TimeUtils.h"
 

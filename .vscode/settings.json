@@ -12,6 +12,11 @@
         "teacherviewheader.h": "c",
         "teachercontrollerheader.h": "c",
         "logincontrollerheader.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "mainheader.h": "c",
+        "string.h": "c",
+        "databaseutilsheader.h": "c",
+        "databaseloginheader.h": "c",
+        "loginview.h": "c"
     }
 }

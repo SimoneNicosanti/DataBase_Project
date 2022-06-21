@@ -3,4 +3,9 @@ TODO Nella valutazione delle ridondanze valuta anche la frequenza delle operazio
 TODO Rivedere valutazione generale dei costi delle operazioni, anche in base alle operazioni realmente implementate
 
 TODO correggere tipo di attività e converti da enum di stringhe in enum di int
-TODO correggere tipo anche per altre enum!! 
+TODO correggere tipo anche per altre enum in cui hai valutazione di ridondanza!! 
+
+TODO Aggingere inserimento dello username dell'insegnante:
+    1. Per username, Prendi campo nome, fai REPLACE, ' ' --> '.'
+    2. Per password, fai stessa cosa
+    3. Aggiungi operazione utente per cambio password

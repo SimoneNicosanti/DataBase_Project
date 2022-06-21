@@ -23,7 +23,7 @@
 extern MYSQL *conn ;
 
 //Procedure di Login
-extern MYSQL_STMT *loginProcedure ;
+//extern MYSQL_STMT *loginProcedure ;
 
 //Procedure Amministrazione
 extern MYSQL_STMT *restartYearProcedure ;
@@ -49,7 +49,7 @@ extern MYSQL_STMT *loadFreeTeachersProcedure ;
 extern MYSQL_STMT *loadActivityParticipantsProcedure ;
 
 //Procedure Insegnante
-extern MYSQL_STMT *generateAgendaProcedure ;
+//extern MYSQL_STMT *generateAgendaProcedure ;
 
 
 bool connectToDatabase() ;

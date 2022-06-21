@@ -10,7 +10,7 @@
 MYSQL *conn ;
 
 //Procedure di Login
-MYSQL_STMT *loginProcedure ;
+//MYSQL_STMT *loginProcedure ;
 
 //Procedure Amministrazione
 MYSQL_STMT *restartYearProcedure ;
@@ -37,7 +37,7 @@ MYSQL_STMT *loadActivityParticipantsProcedure ;
 
 
 //Procedure Insegnante
-MYSQL_STMT *generateAgendaProcedure ;
+//MYSQL_STMT *generateAgendaProcedure ;
 
 //TODO Spostare inizializzazione e chiusura degli statement all'interno della funzione che lo avvia
 
@@ -46,10 +46,10 @@ MYSQL_STMT *generateAgendaProcedure ;
 bool initializePreparedStatement(Role role) {
     switch (role) {
         case LOGIN :
-            if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ", conn)) {
+            /* if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Login'") ;
                 return false ;
-            }
+            } */
             break ;
     
         case AMMINISTRAZIONE :
@@ -132,10 +132,10 @@ bool initializePreparedStatement(Role role) {
             break ;
 
         case INSEGNANTE :
-            if (!setupPreparedStatement(&generateAgendaProcedure, "CALL genera_agenda(?,?)", conn)) {
+            /* if (!setupPreparedStatement(&generateAgendaProcedure, "CALL genera_agenda(?,?)", conn)) {
                 printStatementError(generateAgendaProcedure, "Impossibile Preparare Procedura 'Genera Agenda'") ;
                 return false ;
-            }
+            } */
             break ;
 
     }
@@ -152,10 +152,10 @@ void closeProcedure(MYSQL_STMT **procedure) {
 
 
 bool closeAllStatement() {
-    if (loginProcedure) {
+    /* if (loginProcedure) {
         mysql_stmt_close(loginProcedure) ;
         loginProcedure = NULL ;
-    }
+    } */
     if (restartYearProcedure) {
         mysql_stmt_close(restartYearProcedure) ;
         restartYearProcedure = NULL ;
