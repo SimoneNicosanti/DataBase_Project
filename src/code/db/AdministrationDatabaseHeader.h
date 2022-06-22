@@ -30,3 +30,5 @@ bool addClassLessonToDatabase(ClassLesson *newLesson) ;
 DatabaseResult *selectAllTeaching() ;
 
 DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *year, int *monthIndex) ;
+
+bool restartYearDB() ;

@@ -10,9 +10,9 @@
 Role attemptLogin(LoginCredentials *loginCredentials) {
     MYSQL_STMT *loginProcedure ;
     if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ", conn)) {
-                printMysqlError(conn, "Impossibile Preparare Procedura 'Login'") ;
-                return false ;
-            }
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Login'") ;
+        return false ;
+    }
     /*
         La procedura di Login ritorna un'unica tabella nel result set contenente
         il Terzo parametro che è un parametro di OUT: questo parametro è un codice numerico associato
@@ -104,6 +104,5 @@ bool switchRole(Role role) {
         return false ;
     }
 
-    closeAllStatement() ;
-    return initializePreparedStatement(role) ;
+    return true ;
 }

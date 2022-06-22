@@ -32,13 +32,12 @@ void printAgenda(GeneralLesson **lessonArray, int arrayLen) {
             setTableElem(table, i, 3, "C") ;
             setTableElem(table, i, 4, &(lesson->classCode)) ;
             setTableElem(table, i, 5, lesson->levelName) ;
-            setTableElem(table, i, 6, "****") ;
+            setTableElem(table, i, 6, NULL) ;
         }
         else {
-            int notCourse = -1 ;
             setTableElem(table, i, 3, "P") ;
-            setTableElem(table, i, 4, &notCourse) ;
-            setTableElem(table, i, 5, "****") ;
+            setTableElem(table, i, 4, NULL) ;
+            setTableElem(table, i, 5, NULL) ;
             setTableElem(table, i, 6, lesson->studentName) ;
         }
     }

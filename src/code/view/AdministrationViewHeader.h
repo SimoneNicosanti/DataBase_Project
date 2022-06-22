@@ -23,3 +23,7 @@ void printTeacherReport(ReportLesson **lessonArray, int arrayLen) ;
 void printAllTeaching(Teaching **teachingArray, int arrayLen) ;
 
 void printNewClassCode(int *newClassCode) ;
+
+bool askRestartConfirm() ;
+
+void printRestartSuccess() ;

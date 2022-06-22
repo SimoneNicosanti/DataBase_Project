@@ -9,6 +9,7 @@ enum AdministrationControllerOptions {
     ADD_LESSON,
     ORGANIZE_ACTIVITY,
     TEACHER_REPORT,
+    RESTART_YEAR,
     ADMINISTRATION_QUIT,
 } ;
 
@@ -90,6 +91,14 @@ void generateTeacherReport() {
 }
 
 
+void restartYear() {
+    if (!askRestartConfirm()) return ;
+
+    if (!restartYearDB()) return ;
+
+    printRestartSuccess() ;
+}
+
 void administrationController() {
     
     do {
@@ -123,6 +132,10 @@ void administrationController() {
 
             case TEACHER_REPORT :
                 generateTeacherReport() ;
+                break ;
+
+            case RESTART_YEAR :
+                restartYear() ;
                 break ;
         
             case ADMINISTRATION_QUIT :

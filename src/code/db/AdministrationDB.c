@@ -2,6 +2,11 @@
 
 
 bool addLevelToDatabase(Level *levelPtr) {
+    MYSQL_STMT *addLevelProcedure ;
+    if (!setupPreparedStatement(&addLevelProcedure, "CALL aggiungi_livello(?,?,?) ", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Precedura 'Aggiungi Livello'") ;
+        return false ;
+    }
 
     MYSQL_BIND param[3] ;
 
@@ -23,11 +28,18 @@ bool addLevelToDatabase(Level *levelPtr) {
 
     freeStatement(addLevelProcedure, false) ;
 
+    mysql_stmt_close(addLevelProcedure) ;
+
     return true ;
 }
 
 
 int *addClassToDatabase(Class *classPtr) {
+    MYSQL_STMT *addClassProcedure ;
+    if (!setupPreparedStatement(&addClassProcedure, "CALL aggiungi_corso(?,?,?) ", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Corso'") ;
+        return NULL ;
+    }
 
     MYSQL_BIND param[3] ;
 
@@ -70,7 +82,9 @@ int *addClassToDatabase(Class *classPtr) {
         return NULL ;
     }
     
-    freeStatement(addLevelProcedure, true) ;
+    freeStatement(addClassProcedure, true) ;
+
+    mysql_stmt_close(addClassProcedure) ;
 
     int *returnCode = myMalloc(sizeof(int)) ;
     *returnCode = newClassCode ;
@@ -79,6 +93,11 @@ int *addClassToDatabase(Class *classPtr) {
 
 
 bool addTeacherToDatabase(Teacher *teacherPtr) {
+    MYSQL_STMT *addTeacherProcedure ;
+    if (!setupPreparedStatement(&addTeacherProcedure, "CALL aggiungi_insegnante(?,?,?) ", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Insegnante'") ;
+        return false ;
+    }
 
     MYSQL_BIND param[3] ;
     bindParam(&param[0], MYSQL_TYPE_STRING, teacherPtr->teacherName, strlen(teacherPtr->teacherName), false) ;
@@ -99,10 +118,17 @@ bool addTeacherToDatabase(Teacher *teacherPtr) {
 
     freeStatement(addTeacherProcedure, false) ;
 
+    mysql_stmt_close(addTeacherProcedure) ;
+
     return true ;
 }
 
 bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) {
+    MYSQL_STMT *assignClassProcedure ;
+    if (!setupPreparedStatement(&assignClassProcedure, "CALL assegna_corso(?,?,?) ", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Assegna Corso'") ;
+        return false ;
+    }
     
     MYSQL_BIND param[3] ;
     bindParam(&param[0], MYSQL_TYPE_LONG, &(classPtr->classCode), sizeof(int), false) ;
@@ -123,10 +149,17 @@ bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) {
 
     freeStatement(assignClassProcedure, false) ;
 
+    mysql_stmt_close(assignClassProcedure) ;
+
     return true ;
 }
 
 bool organizeActivityInDatabase(CuturalActivity *newActivity) {
+    MYSQL_STMT *organizeActivityProcedure ;
+    if (!setupPreparedStatement(&organizeActivityProcedure, "CALL organizza_attivita_culturale(?,?,?,?,?,?,?) ", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Organizza Attività'") ;
+        return false ;
+    }
 
     MYSQL_BIND param[7] ;
 
@@ -138,9 +171,9 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) {
     bindParam(&param[0], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
     bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
 
-    char *typeString ;
+    int activityType ;
     if (newActivity->type == FILM) {
-        typeString = "Proiezione" ;
+        activityType = 0 ;
         bindParam(&param[3], MYSQL_TYPE_STRING, newActivity->filmTitle, strlen(newActivity->filmTitle), false) ;
         bindParam(&param[4], MYSQL_TYPE_STRING, newActivity->filmDirector, strlen(newActivity->filmDirector), false) ;
 
@@ -148,14 +181,14 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) {
         bindParam(&param[6], MYSQL_TYPE_NULL, NULL, sizeof(NULL), true) ;
     }
     else {
-        typeString = "Conferenza" ;
+        activityType = 1 ;
         bindParam(&param[3], MYSQL_TYPE_NULL, NULL, sizeof(NULL), true) ;
         bindParam(&param[4], MYSQL_TYPE_NULL, NULL, sizeof(NULL), true) ;
 
         bindParam(&param[5], MYSQL_TYPE_STRING, newActivity->meetingLecturer, strlen(newActivity->meetingLecturer), false) ;
         bindParam(&param[6], MYSQL_TYPE_STRING, newActivity->meetingArgument, strlen(newActivity->meetingArgument), false) ;
     }
-    bindParam(&param[2], MYSQL_TYPE_STRING, typeString, strlen(typeString), false) ;
+    bindParam(&param[2], MYSQL_TYPE_TINY, &activityType, sizeof(int), false) ;
 
     if (mysql_stmt_bind_param(organizeActivityProcedure, param) != 0) {
         printStatementError(organizeActivityProcedure, "Impossibile Bind Parametri di Procedura 'Organizza Attività'") ;
@@ -170,6 +203,8 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) {
     }
 
     freeStatement(organizeActivityProcedure, false) ;
+
+    mysql_stmt_close(organizeActivityProcedure) ;
 
     return true ;
 }
@@ -202,6 +237,11 @@ void prepareDayOfWeekParam(enum DayOfWeek dayOfWeek, char *dayOfWeekString) {
 }
 
 bool addClassLessonToDatabase(ClassLesson *newLesson) {
+    MYSQL_STMT *addLessonToClassProcedure ;
+    if (!setupPreparedStatement(&addLessonToClassProcedure, "CALL aggiungi_lezione(?,?,?,?,?,?)", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Lezione Corso'") ;
+        return false ;
+    }
 
     MYSQL_BIND param[6] ;
     MYSQL_TIME mysqlTime ;
@@ -230,16 +270,22 @@ bool addClassLessonToDatabase(ClassLesson *newLesson) {
         return false ;
     }
 
-    //freeStatement(addLessonToClassProcedure, true) ;
+    freeStatement(addLessonToClassProcedure, true) ;
     
+    mysql_stmt_close(addLessonToClassProcedure) ;
 
     return true ;
 }
 
 DatabaseResult *selectAllTeaching() {
-    //Ritorno Array di Teaching NULL terminated
+    MYSQL_STMT *loadAllTachingProcedure ;
+    if (!setupPreparedStatement(&loadAllTachingProcedure, "CALL recupera_docenze()", conn)) {
+        printMysqlError(conn, "Impossibie Preparare Procedura 'Recupera Docenze'") ;
+        return NULL ;
+    }
+    
     if (mysql_stmt_execute(loadAllTachingProcedure) != 0) {
-        printStatementError(loadAllActivitiesProcedure, "Errore Esecuzione Recupero Docenze") ;
+        printStatementError(loadAllTachingProcedure, "Errore Esecuzione Recupero Docenze") ;
         return NULL ;
     }
 
@@ -278,12 +324,19 @@ DatabaseResult *selectAllTeaching() {
     }
 
     freeStatement(loadAllTachingProcedure, true) ;
+    
+    mysql_stmt_close(loadAllTachingProcedure) ;
 
     return result ;
 }
 
 
 DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int *monthIndexPtr) {
+    MYSQL_STMT *generateTeacherReportProcedure ;
+    if (!setupPreparedStatement(&generateTeacherReportProcedure, "CALL genera_report_insegnante(?,?,?)", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Genera Report Insegnante'") ;
+        return NULL ;
+    }
 
     MYSQL_BIND param[3] ;
     bindParam(&param[0], MYSQL_TYPE_STRING, teacherName, strlen(teacherName), false) ;
@@ -341,5 +394,27 @@ DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int
 
     freeStatement(generateTeacherReportProcedure, true) ;
 
+    mysql_stmt_close(generateTeacherReportProcedure) ;
+
     return result ;
+}
+
+
+bool restartYearDB() {
+    MYSQL_STMT *restartYearProcedure ;
+    if (!setupPreparedStatement(&restartYearProcedure, "CALL riavvia_anno() ", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Riavvio Anno'") ;
+        return false ;
+    }
+
+    if (mysql_stmt_execute(restartYearProcedure) != 0) {
+        printStatementError(restartYearProcedure, "Impossile Eseguire Procedura 'Riavvio Anno'") ;
+        return false ;
+    }
+
+    freeStatement(restartYearProcedure, false) ;
+
+    mysql_stmt_close(restartYearProcedure) ;
+
+    return true ;
 }

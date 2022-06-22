@@ -1,6 +1,11 @@
 #include "SecretaryDBHeader.h"
 
 bool addStudentToDatabase(Student *studentPtr) {
+    MYSQL_STMT *addStudentProcedure ;
+    if (!setupPreparedStatement(&addStudentProcedure, "CALL aggiungi_allievo(?,?,?,?,?)", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Allievo'") ;
+        return false ;
+    }
 
     MYSQL_BIND param[5] ;
 
@@ -28,11 +33,18 @@ bool addStudentToDatabase(Student *studentPtr) {
 
     freeStatement(addStudentProcedure, false) ;
 
+    mysql_stmt_close(addStudentProcedure) ;
+
     return true ;
 }
 
 
 DatabaseResult *retrieveAllClasses() {
+    MYSQL_STMT *loadClassesProcedure ;
+    if (!setupPreparedStatement(&loadClassesProcedure, "CALL recupera_corsi()", conn)) {
+        printStatementError(loadClassesProcedure, "Impossibile Preparare Procedura 'Recupera Corsi'") ;
+        return NULL ;
+    }
 
     if (mysql_stmt_execute(loadClassesProcedure) != 0) {
         printStatementError(loadClassesProcedure, "Impossibile Eseguire 'Recupera Corsi'") ;
@@ -81,11 +93,20 @@ DatabaseResult *retrieveAllClasses() {
     }
 
     freeStatement(loadClassesProcedure, true) ;
+
+    mysql_stmt_close(loadClassesProcedure) ;
     
     return result ;
 }
 
 DatabaseResult *getAllActivitiesFromDatabase() {
+
+    MYSQL_STMT *loadAllActivitiesProcedure ;
+    if (!setupPreparedStatement(&loadAllActivitiesProcedure, "CALL recupera_attivita()", conn)) {
+        printStatementError(loadAllActivitiesProcedure, "Impossibile Preparare Procedura 'Recupera Attività'") ;
+        return NULL ;
+    }
+
     if (mysql_stmt_execute(loadAllActivitiesProcedure) != 0) {
         printStatementError(loadAllActivitiesProcedure, "Impossibile Eseguire Procedura Recupera Attività") ;
         return NULL ;
@@ -99,7 +120,7 @@ DatabaseResult *getAllActivitiesFromDatabase() {
     char activityMeetingLecturer[MEETING_LECTURER_NAME_MAX_LEN + 1] ;
     char activityMeetingArgument[MEETING_ARGUMENT_MAX_LEN + 1] ;
 
-    char activityType[50] ;
+    int activityType ;
 
     MYSQL_TIME mysqlDate ;
     MYSQL_TIME mysqlTime ;
@@ -107,7 +128,7 @@ DatabaseResult *getAllActivitiesFromDatabase() {
     bindParam(&resultParam[0], MYSQL_TYPE_LONG, &activityCode, sizeof(int), false) ;
     bindParam(&resultParam[1], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
     bindParam(&resultParam[2], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
-    bindParam(&resultParam[3], MYSQL_TYPE_STRING, activityType, 50, false) ;
+    bindParam(&resultParam[3], MYSQL_TYPE_TINY, &activityType, sizeof(int), false) ;
     bindParam(&resultParam[4], MYSQL_TYPE_STRING, activityFilmTitle, FILM_TITLE_MAX_LEN + 1, true) ;
     bindParam(&resultParam[5], MYSQL_TYPE_STRING, activityFilmDirector, FILM_DIRECTOR_NAME_MAX_LEN + 1, true) ;
     bindParam(&resultParam[6], MYSQL_TYPE_STRING, activityMeetingLecturer, MEETING_LECTURER_NAME_MAX_LEN + 1, true) ;
@@ -133,19 +154,18 @@ DatabaseResult *getAllActivitiesFromDatabase() {
         getDateParam(&(activity->activityDate), &mysqlDate) ;
         getTimeParam(&(activity->activityTime), &mysqlTime) ;
 
-        //Capire un attimo come fare il recupero di valori nulli
-        //
-        if (strcmp(activityType, "Proiezione") == 0) {
+        //TODO Capire un attimo come fare il recupero di valori nulli
+        if (activityType == 0) {
             activity->type = FILM ;
             strcpy(activity->filmTitle, activityFilmTitle) ;
             strcpy(activity->filmDirector, activityFilmDirector) ;
-            strcpy(activity->meetingLecturer, "*****") ;
-            strcpy(activity->meetingArgument, "*****") ;
+            strcpy(activity->meetingLecturer, "") ;
+            strcpy(activity->meetingArgument, "") ;
         }
         else {
             activity->type = MEETING ;
-            strcpy(activity->filmTitle, "*****") ;
-            strcpy(activity->filmDirector, "*****") ;
+            strcpy(activity->filmTitle, "") ;
+            strcpy(activity->filmDirector, "") ;
             strcpy(activity->meetingLecturer, activityMeetingLecturer) ;
             strcpy(activity->meetingArgument, activityMeetingArgument) ;
         }
@@ -157,11 +177,18 @@ DatabaseResult *getAllActivitiesFromDatabase() {
 
     freeStatement(loadAllActivitiesProcedure, true) ;
 
+    mysql_stmt_close(loadAllActivitiesProcedure) ;
+
     return result ;
 }
 
 
 bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) {
+    MYSQL_STMT *addJoinProcedure ;
+    if (!setupPreparedStatement(&addJoinProcedure, "CALL aggiungi_partecipazione(?,?)", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Partecipazione'") ;
+        return false ;
+    }
 
     MYSQL_BIND param[2] ;
     bindParam(&param[0], MYSQL_TYPE_LONG, activityCode, sizeof(int), false) ;
@@ -181,10 +208,18 @@ bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) {
 
     freeStatement(addJoinProcedure, false) ;
 
+    mysql_stmt_close(addJoinProcedure) ;
+
     return true ;
 }
 
 bool addAbsenceToDatabase(Absence *newAbsence) {
+    MYSQL_STMT *addAbsenceProcedure ;
+    if (!setupPreparedStatement(&addAbsenceProcedure, "CALL aggiungi_assenza(?,?,?)", conn)) {
+        printStatementError(addAbsenceProcedure, "Impossibile Preparare Procedura 'Aggiungi Assenza'") ;
+        return false ;
+    }
+
     MYSQL_BIND param[3] ;
 
     bindParam(&param[0], MYSQL_TYPE_STRING, newAbsence->studentName, strlen(newAbsence->studentName), false) ;
@@ -211,11 +246,19 @@ bool addAbsenceToDatabase(Absence *newAbsence) {
 
     freeStatement(addAbsenceProcedure, true) ;
 
+    mysql_stmt_close(addAbsenceProcedure) ;
+
     return true ;
 }
 
 
 bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
+    
+    MYSQL_STMT *bookPrivateLessonProcedure ;
+    if (!setupPreparedStatement(&bookPrivateLessonProcedure, "CALL prenota_lezione_privata(?,?,?,?,?)", conn)) {
+        printStatementError(bookPrivateLessonProcedure, "Impossibile Preparare Procedura 'Prenota Lezione Privata'") ;
+        return false ;
+    }
 
     MYSQL_BIND param[5] ;
     MYSQL_TIME mysqlTime ;
@@ -245,11 +288,18 @@ bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
 
     freeStatement(bookPrivateLessonProcedure, true) ;
 
+    mysql_stmt_close(bookPrivateLessonProcedure) ;
+
     return true ;
 }
 
 
 DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) {
+    MYSQL_STMT *courseAbsenceReportProcedure ;
+    if (!setupPreparedStatement(&courseAbsenceReportProcedure, "CALL report_assenze_corso(?,?)", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
+        return NULL ;
+    }
 
     MYSQL_BIND param[2] ;
     bindParam(&param[1], MYSQL_TYPE_STRING, levelName, strlen(levelName), false) ;
@@ -304,11 +354,18 @@ DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) {
 
     freeStatement(courseAbsenceReportProcedure, true) ;
 
+    mysql_stmt_close(courseAbsenceReportProcedure) ;
+
     return result ;
 }
 
  
 DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
+    MYSQL_STMT *loadFreeTeachersProcedure ;
+    if (!setupPreparedStatement(&loadFreeTeachersProcedure, "CALL recupera_insegnanti_liberi(?,?,?)", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
+        return NULL ;
+    }
 
     MYSQL_TIME mysqlDate ;
     MYSQL_TIME mysqlTime ;
@@ -368,11 +425,18 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
 
     freeStatement(loadFreeTeachersProcedure, true) ;
 
+    mysql_stmt_close(loadFreeTeachersProcedure) ;
+
     return result ;
 }
 
 
 DatabaseResult *loadActivityParticipantsFromDatabase(int *activityCode) {
+    MYSQL_STMT *loadActivityParticipantsProcedure ;
+    if (!setupPreparedStatement(&loadActivityParticipantsProcedure, "CALL recupera_partecipanti_attivita(?)", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Recupera Partecipanti'") ;
+        return NULL ;
+    }
 
     MYSQL_BIND param[1] ;
     bindParam(&param[0], MYSQL_TYPE_LONG, activityCode, sizeof(int), false) ;
@@ -423,6 +487,8 @@ DatabaseResult *loadActivityParticipantsFromDatabase(int *activityCode) {
     }
 
     freeStatement(loadActivityParticipantsProcedure, true) ;
+
+    mysql_stmt_close(loadActivityParticipantsProcedure) ;
 
     return result ;
 }

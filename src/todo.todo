@@ -2,10 +2,26 @@ TODO Nella valutazione delle ridondanze valuta anche la frequenza delle operazio
 
 TODO Rivedere valutazione generale dei costi delle operazioni, anche in base alle operazioni realmente implementate
 
-TODO correggere tipo di attività e converti da enum di stringhe in enum di int
 TODO correggere tipo anche per altre enum in cui hai valutazione di ridondanza!! 
 
 TODO Aggingere inserimento dello username dell'insegnante:
     1. Per username, Prendi campo nome, fai REPLACE, ' ' --> '.'
     2. Per password, fai stessa cosa
     3. Aggiungi operazione utente per cambio password
+
+TODO Chiedere a prof se per aggiunta dell'utenza dll'insegnante è meglio inserire direttamente nella query di aggiunta oppure se è meglio aggiungere operazione in più per amministrazione
+TODO Chiedere a prof come gestire le utenze di amministrazione e segreteria:
+    uica utenza utilizzata da tutti oppure ogni persona fisica che accede ha la sua utenza e quindi devo aggiungere operazione??
+
+TODO Chiedere a prof per il livelli di isolamento di transazioni che operano con degli inserimenti:
+    - Libro dice che è bene che siano serializable per evitare problemi di perdita di aggiornamento; anche repeatable read potrebbe andare perché sfrutta il 2PL stretto che fa lock su singola tupla
+        e non dovendo fare operazioni di aggregazione potrebbe starci??
+    - Cosa fare però se la transazine in questione prevede anche una select oltre ce un aggiornameno
+
+TODO Chiedere a prof se è meglio avere la inizializzazione dello statement localizzata in ogni funzione C che poi la utilizza, oppure avere una funzione apposita che la inizializza una sola volta
+    dopo il login: differenza tra gli esempi dei due anni
+
+
+TODO Gestire bene l' ON DELETE allievo per Lezione Privata
+TODO Gestire bene ON DELETE LezioneCorso per Assenza
+TODO Gestire bene ON DELETE Insegnante per LezioneCorso

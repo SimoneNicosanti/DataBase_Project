@@ -55,6 +55,3 @@ void showAppHeader() {
     printHeaderLine(strlen(appTitleHeader)) ;
     printf("\n\n") ;
 }
-
-
-

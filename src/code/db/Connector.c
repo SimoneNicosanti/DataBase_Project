@@ -9,7 +9,7 @@
 
 MYSQL *conn ;
 
-//Procedure di Login
+/* //Procedure di Login
 //MYSQL_STMT *loginProcedure ;
 
 //Procedure Amministrazione
@@ -39,8 +39,7 @@ MYSQL_STMT *loadActivityParticipantsProcedure ;
 //Procedure Insegnante
 //MYSQL_STMT *generateAgendaProcedure ;
 
-//TODO Spostare inizializzazione e chiusura degli statement all'interno della funzione che lo avvia
-
+ */
 
 
 bool initializePreparedStatement(Role role) {
@@ -53,81 +52,81 @@ bool initializePreparedStatement(Role role) {
             break ;
     
         case AMMINISTRAZIONE :
-            if (!setupPreparedStatement(&restartYearProcedure, "CALL riavvia_anno() ", conn)) {
+            /* if (!setupPreparedStatement(&restartYearProcedure, "CALL riavvia_anno() ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Riavvio Anno'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&addLevelProcedure, "CALL aggiungi_livello(?,?,?) ", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&addLevelProcedure, "CALL aggiungi_livello(?,?,?) ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Precedura 'Aggiungi Livello'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&addClassProcedure, "CALL aggiungi_corso(?,?,?) ", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&addClassProcedure, "CALL aggiungi_corso(?,?,?) ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Corso'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&addTeacherProcedure, "CALL aggiungi_insegnante(?,?,?) ", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&addTeacherProcedure, "CALL aggiungi_insegnante(?,?,?) ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Insegnante'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&assignClassProcedure, "CALL assegna_corso(?,?,?) ", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&assignClassProcedure, "CALL assegna_corso(?,?,?) ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Assegna Corso'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&organizeActivityProcedure, "CALL organizza_attivita_culturale(?,?,?,?,?,?,?) ", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&organizeActivityProcedure, "CALL organizza_attivita_culturale(?,?,?,?,?,?,?) ", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Organizza Attività'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&addLessonToClassProcedure, "CALL aggiungi_lezione(?,?,?,?,?,?)", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&addLessonToClassProcedure, "CALL aggiungi_lezione(?,?,?,?,?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Lezione Corso'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&loadAllTachingProcedure, "CALL recupera_docenze()", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&loadAllTachingProcedure, "CALL recupera_docenze()", conn)) {
                 printMysqlError(conn, "Impossibie Preparare Procedura 'Recupera Docenze'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&generateTeacherReportProcedure, "CALL genera_report_insegnante(?,?,?)", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&generateTeacherReportProcedure, "CALL genera_report_insegnante(?,?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Genera Report Insegnante'") ;
                 return false ;
-            }
+            } */
             break ;
 
-        case SEGRETERIA :
-            if (!setupPreparedStatement(&addStudentProcedure, "CALL aggiungi_allievo(?,?,?,?,?)", conn)) {
+        case SEGRETERIA : 
+            /* if (!setupPreparedStatement(&addStudentProcedure, "CALL aggiungi_allievo(?,?,?,?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Allievo'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&addJoinProcedure, "CALL aggiungi_partecipazione(?,?)", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&addJoinProcedure, "CALL aggiungi_partecipazione(?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Partecipazione'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&loadClassesProcedure, "CALL recupera_corsi()", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&loadClassesProcedure, "CALL recupera_corsi()", conn)) {
                 printStatementError(loadClassesProcedure, "Impossibile Preparare Procedura 'Recupera Corsi'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&loadAllActivitiesProcedure, "CALL recupera_attivita()", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&loadAllActivitiesProcedure, "CALL recupera_attivita()", conn)) {
                 printStatementError(loadAllActivitiesProcedure, "Impossibile Preparare Procedura 'Recupera Attività'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&addAbsenceProcedure, "CALL aggiungi_assenza(?,?,?)", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&addAbsenceProcedure, "CALL aggiungi_assenza(?,?,?)", conn)) {
                 printStatementError(addAbsenceProcedure, "Impossibile Preparare Procedura 'Aggiungi Assenza'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&bookPrivateLessonProcedure, "CALL prenota_lezione_privata(?,?,?,?,?)", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&bookPrivateLessonProcedure, "CALL prenota_lezione_privata(?,?,?,?,?)", conn)) {
                 printStatementError(bookPrivateLessonProcedure, "Impossibile Preparare Procedura 'Prenota Lezione Privata'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&courseAbsenceReportProcedure, "CALL report_assenze_corso(?,?)", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&courseAbsenceReportProcedure, "CALL report_assenze_corso(?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&loadFreeTeachersProcedure, "CALL recupera_insegnanti_liberi(?,?,?)", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&loadFreeTeachersProcedure, "CALL recupera_insegnanti_liberi(?,?,?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
                 return false ;
-            }
-            if (!setupPreparedStatement(&loadActivityParticipantsProcedure, "CALL recupera_partecipanti_attivita(?)", conn)) {
+            } */
+            /* if (!setupPreparedStatement(&loadActivityParticipantsProcedure, "CALL recupera_partecipanti_attivita(?)", conn)) {
                 printMysqlError(conn, "Impossibile Preparare Procedura 'Recupera Partecipanti'") ;
                 return false ;
-            }
+            } */
             
             break ;
 
@@ -143,19 +142,12 @@ bool initializePreparedStatement(Role role) {
     return true ;
 }
 
-void closeProcedure(MYSQL_STMT **procedure) {
-    if (*procedure) {
-        mysql_stmt_close(*procedure) ;
-        *procedure = NULL ;
-    }
-}
 
-
-bool closeAllStatement() {
-    /* if (loginProcedure) {
+/* bool closeAllStatement() {
+    if (loginProcedure) {
         mysql_stmt_close(loginProcedure) ;
         loginProcedure = NULL ;
-    } */
+    } 
     if (restartYearProcedure) {
         mysql_stmt_close(restartYearProcedure) ;
         restartYearProcedure = NULL ;
@@ -180,10 +172,9 @@ bool closeAllStatement() {
         mysql_stmt_close(organizeActivityProcedure) ;
         organizeActivityProcedure = NULL ;
     }
-    //TODO AGGIUNGERE CHIUSURA DI TUTTE LE PROCEDURE
 
     return true ;
-}
+} */
 
 bool connectToDatabase() {
     char *host = getenv(DB_HOST) ;

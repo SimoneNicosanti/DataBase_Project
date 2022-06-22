@@ -15,12 +15,13 @@ char *administrationMenuOptions[] = {
     "Aggiungi Lezione Corso",
     "Organizza Attività",
     "Report Insegnante" ,
+    "Riavvio Anno Scolastico",
     "Quit"
     } ;
 
 
 int getAdministrationOption() {
-    return getUserOption(administrationMenuOptions, 8) ;
+    return getUserOption(administrationMenuOptions, 9) ;
 }
 
 bool getLevelInfo(Level *levelPtr) {
@@ -269,4 +270,20 @@ void printNewClassCode(int *newClassCode) {
 
     printTable(table) ;
     freeTable(table) ;
+}
+
+bool askRestartConfirm() {
+
+    char confirm[2] ;
+    if (!getUserInput("Confermi di voler riavviare l'anno scolastico [y-n] >>> ", confirm, 2)) {
+        printError("Errore lettura conferma") ;
+    }
+
+    if (strcmp(confirm, "y") == 0) return true ;
+    else return false ;
+}
+
+
+void printRestartSuccess() {
+    printf("Riavvio Anno Avvenuto Con Successo") ;
 }

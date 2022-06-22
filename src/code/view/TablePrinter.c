@@ -1,12 +1,20 @@
 #include "TablePrinterHeader.h"
 
+char *nullString = "" ;
+
 int findColMaxSize(void ***table, char **headerArray, int rowsNum, int colIndex, enum TableFieldType colType) {
     int maxSize = strlen(headerArray[colIndex]) ;
 
     for (int rowIndex = 0 ; rowIndex < rowsNum ; rowIndex++) {
         void *currentElem = table[rowIndex][colIndex] ;
-
         int currentSize ;
+
+        if (currentElem == NULL) {
+            currentSize = strlen(nullString) ;
+            if (maxSize < currentSize) maxSize = currentSize ;
+            continue;
+        }
+
         char numBuff[50] ;
         switch (colType) {
             case STRING :
@@ -64,6 +72,12 @@ void printRow(void ***table, int rowIndex, int colNum, int *widthArray, enum Tab
         void *currentElem = table[rowIndex][colIndex] ;
         enum TableFieldType currentType = rowStruct[colIndex] ;
         int fieldSize = widthArray[colIndex] - 1 ;
+
+        if (currentElem == NULL) {
+            printf(" %-*s", fieldSize, nullString) ;
+            putchar('|') ;
+            continue; 
+        }
 
         switch (currentType) {
             case STRING :
