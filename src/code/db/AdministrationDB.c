@@ -302,6 +302,7 @@ DatabaseResult *selectAllTeaching() {
     bindParam(&returnParam[1], MYSQL_TYPE_STRING, levelName, LEVEL_NAME_MAX_LEN , false) ;
     bindParam(&returnParam[2], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
 
+    //TODO Gestisci bene liberazione memoria se si verifica un errore nel bind
     if (mysql_stmt_bind_result(loadAllTachingProcedure, returnParam) != 0) {
         printStatementError(loadAllTachingProcedure, "Errore Bind Del Risultato") ;
         freeStatement(loadAllTachingProcedure, false) ;
@@ -417,4 +418,58 @@ bool restartYearDB() {
     mysql_stmt_close(restartYearProcedure) ;
 
     return true ;
+}
+
+
+DatabaseResult *selectAllLevels() {
+    MYSQL_STMT *preparedStatement ;
+    if (!setupPreparedStatement(&preparedStatement, "CALL recupera_livelli()", conn)) {
+        printMysqlError(conn, "Errore Inizializzazione Procedura 'Recupera Livelli'") ;
+        return NULL ;
+    }
+
+    if (mysql_stmt_execute(preparedStatement) != 0) {
+        printStatementError(preparedStatement, "Impossibile Eseguire Procedura 'Recupera Livelli'") ;
+        freeStatement(preparedStatement, false) ;
+        return NULL ;
+    }
+
+    mysql_stmt_store_result(preparedStatement) ;
+
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(preparedStatement) ;
+    result->rowsSet = myMalloc(sizeof(Level) * result->numRows) ;
+
+    MYSQL_BIND returnParam[3] ;
+    char levelName[LEVEL_NAME_MAX_LEN] ;
+    char bookName[LEVEL_BOOK_NAME_MAX_LEN] ;
+    int hasExam ;
+
+    bindParam(&returnParam[0], MYSQL_TYPE_STRING, levelName, LEVEL_NAME_MAX_LEN, false) ;
+    bindParam(&returnParam[1], MYSQL_TYPE_STRING, bookName, LEVEL_BOOK_NAME_MAX_LEN, false) ;
+    bindParam(&returnParam[2], MYSQL_TYPE_LONG, &hasExam, sizeof(int), false) ;
+
+    if (mysql_stmt_bind_result(preparedStatement, returnParam)) {
+        printStatementError(preparedStatement, "Impossibile Recuperare Risultato 'Recupera Livelli'") ;
+        freeStatement(preparedStatement, false) ;
+        return NULL ;
+    }
+
+    int hasResult = mysql_stmt_fetch(preparedStatement) ;
+    int i = 0 ;
+    if (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
+        Level *level = myMalloc(sizeof(Level)) ;
+        strcpy(level->levelName, levelName) ;
+        strcpy(level->levelBookName, bookName) ;
+        level->levelHasExam = hasExam ;
+
+        result->rowsSet[i] = level ;
+        i++ ;
+
+        hasResult = mysql_stmt_fetch(preparedStatement) ;
+    }
+
+    freeStatement(preparedStatement, true) ;
+
+    return result ;
 }

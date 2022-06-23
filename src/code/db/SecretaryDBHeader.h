@@ -30,5 +30,3 @@ bool bookPrivateLessonInDatabase(PrivateLesson *privateLesson) ;
 DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) ;
 
 DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) ;
-
-DatabaseResult *loadActivityParticipantsFromDatabase(int *activityCode) ;

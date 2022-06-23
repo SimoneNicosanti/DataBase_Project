@@ -82,18 +82,6 @@ void freeTeacherReport() {
     freeDatabaseResult(result) ;
 }
 
-void activityParticipantsReport() {
-    int activityCode ;
-    if (!getActivityParticipantsReportInfo(&activityCode)) return ;
-
-    DatabaseResult *result = loadActivityParticipantsFromDatabase(&activityCode) ;
-    if (result == NULL) return ;
-
-    printActivityParticipantsReport((Partecipation **) result->rowsSet, result->numRows) ;
-
-    freeDatabaseResult(result) ;
-}
-
 
 void secretaryController() {
 
@@ -125,10 +113,6 @@ void secretaryController() {
             
             case FREE_TEACHER_REPORT :
                 freeTeacherReport() ;
-                break ;
-
-            case ACTIVITY_PARTICIPANTS_REPORT :
-                activityParticipantsReport() ;
                 break ;
 
             case SECRETARY_QUIT :

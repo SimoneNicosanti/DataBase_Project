@@ -32,3 +32,5 @@ DatabaseResult *selectAllTeaching() ;
 DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *year, int *monthIndex) ;
 
 bool restartYearDB() ;
+
+DatabaseResult *selectAllLevels() ;

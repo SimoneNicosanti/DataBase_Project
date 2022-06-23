@@ -5,16 +5,15 @@ char *secretaryMenuOption[] = {
     "Aggiungi Allievo",
     "Aggiungi Partecipazione Ad Attività",
     "Prenota Lezione Privata",
-    "Aggiungi Assenza" ,
+    "Aggiungi Assenza",
     "Report Assenze Corso",
     "Report Insegnanti Liberi",
-    "Report Partecipanti Attività",
     "Quit"
     } ;
 
 
 int getSecretaryOption() {
-    return getUserOption(secretaryMenuOption, 8) ;
+    return getUserOption(secretaryMenuOption, 7) ;
 }
 
 bool getStudentInfo(Student *studentPtr) {

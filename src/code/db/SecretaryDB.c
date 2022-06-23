@@ -431,7 +431,7 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
 }
 
 
-DatabaseResult *loadActivityParticipantsFromDatabase(int *activityCode) {
+/* DatabaseResult *loadActivityParticipantsFromDatabase(int *activityCode) {
     MYSQL_STMT *loadActivityParticipantsProcedure ;
     if (!setupPreparedStatement(&loadActivityParticipantsProcedure, "CALL recupera_partecipanti_attivita(?)", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Recupera Partecipanti'") ;
@@ -491,4 +491,4 @@ DatabaseResult *loadActivityParticipantsFromDatabase(int *activityCode) {
     mysql_stmt_close(loadActivityParticipantsProcedure) ;
 
     return result ;
-}
+} */
