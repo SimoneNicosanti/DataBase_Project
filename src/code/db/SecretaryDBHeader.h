@@ -18,7 +18,7 @@ bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) ;
 
 
  
-DatabaseResult *retrieveAllClasses() ;
+DatabaseResult *selectAllCourses() ;
 
 DatabaseResult *getAllActivitiesFromDatabase() ;
 

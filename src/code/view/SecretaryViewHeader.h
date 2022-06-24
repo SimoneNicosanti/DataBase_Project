@@ -37,4 +37,4 @@ void printCourseAbsenceReport(Student **studentArray, int arrayLen) ;
 
 void printAllActivities(CuturalActivity **activityArray, int arrayLen) ;
 
-void printAllClasses(Class **classArray, int arrayLen) ;
+void printAllCourses(Class **classArray, int arrayLen) ;

@@ -23,6 +23,13 @@ void addLevel() {
 
 void addClass() {
     Class newClass ;
+
+    DatabaseResult *result = selectAllLevels() ;
+    if (result != NULL) {
+        printAllLevels((Level **) result->rowsSet, result->numRows) ;
+        freeDatabaseResult(result) ;
+    }
+
     if (!getClassInfo(&newClass)) return ;
     
     int *newClassCode = addClassToDatabase(&newClass) ;
@@ -40,10 +47,16 @@ void addTeacher() {
         addTeacherToDatabase(&newTeacher) ;
     }
 }
-
+ 
 void assignClass() {
     Teacher teacher ;
     Class class ;
+
+    DatabaseResult *courses = selectAllCourses() ;
+    if (courses != NULL) {
+        printAllCourses((Class **) courses->rowsSet, courses->numRows) ;
+        freeDatabaseResult(courses) ;
+    }
     if (getTeacherAndClassInfo(&teacher, &class)) {
         assignTeacherToClass(&teacher, &class) ;
     }
@@ -58,9 +71,8 @@ void organizeActivity() {
 }
 
 void getAllTeaching() {
-
     DatabaseResult *result = selectAllTeaching() ;
-    if (result != NULL) return ;
+    if (result == NULL) return ;
 
     printAllTeaching((Teaching **) result->rowsSet, result->numRows) ;
 
@@ -80,6 +92,7 @@ void generateTeacherReport() {
     int year ;
     int monthIndex ;
 
+    //TODO recupera elenco insegnanti??
     if (!getTeacherReportInfo(teacherName, &year, &monthIndex)) return ;
 
     DatabaseResult *result = generateTeacherReportFromDB(teacherName, &year, &monthIndex) ;

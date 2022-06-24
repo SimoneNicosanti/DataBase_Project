@@ -3,7 +3,7 @@
 #include "../model/Student.h"
 #include "../view/SecretaryViewHeader.h"
 #include "../db/SecretaryDBHeader.h"
-#include "../view/TablePrinterHeader.h"
+#include "../view/CommonViewHeader.h"
 #include <stdio.h>
 
 enum SecretaryOption {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdbool.h>
+#include "CommonViewHeader.h"
  
 int getAdministrationOption() ;
 
@@ -27,3 +28,7 @@ void printNewClassCode(int *newClassCode) ;
 bool askRestartConfirm() ;
 
 void printRestartSuccess() ;
+
+void printAllLevels(Level **levelArray, int num) ;
+
+void printAllCoursesAdministration(Class **classArray, int arrayLen) ;

@@ -1,10 +1,10 @@
 #include "SecretaryControllerHeader.h"
 
 void getAllClasses() {
-    DatabaseResult *result = retrieveAllClasses() ;
+    DatabaseResult *result = selectAllCourses() ;
     if (result == NULL) return ;
 
-    printAllClasses((Class **) result->rowsSet, result->numRows) ;
+    printAllCourses((Class **) result->rowsSet, result->numRows) ;
 
     freeDatabaseResult(result) ;
 }
@@ -19,9 +19,7 @@ void addStudent() {
 
 void getAllActivities() {
     DatabaseResult *result = getAllActivitiesFromDatabase() ;
-
     if (result == NULL) return ;
-
     printAllActivities((CuturalActivity **) result->rowsSet, result->numRows) ;
 
     freeDatabaseResult(result) ;

@@ -360,7 +360,7 @@ DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int
     DatabaseResult *result = (DatabaseResult *) myMalloc(sizeof(DatabaseResult)) ;
 
     result->numRows = mysql_stmt_num_rows(generateTeacherReportProcedure) ;
-    result->rowsSet = myMalloc(sizeof(ReportLesson) * result->numRows) ;
+    result->rowsSet = myMalloc(sizeof(ReportLesson *) * result->numRows) ;
 
     MYSQL_BIND returnParam[4] ;
     MYSQL_TIME mysqlDate ;
@@ -433,12 +433,13 @@ DatabaseResult *selectAllLevels() {
         freeStatement(preparedStatement, false) ;
         return NULL ;
     }
+    
 
     mysql_stmt_store_result(preparedStatement) ;
 
     DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
     result->numRows = mysql_stmt_num_rows(preparedStatement) ;
-    result->rowsSet = myMalloc(sizeof(Level) * result->numRows) ;
+    result->rowsSet = myMalloc(sizeof(Level *) * result->numRows) ;
 
     MYSQL_BIND returnParam[3] ;
     char levelName[LEVEL_NAME_MAX_LEN] ;
@@ -449,27 +450,85 @@ DatabaseResult *selectAllLevels() {
     bindParam(&returnParam[1], MYSQL_TYPE_STRING, bookName, LEVEL_BOOK_NAME_MAX_LEN, false) ;
     bindParam(&returnParam[2], MYSQL_TYPE_LONG, &hasExam, sizeof(int), false) ;
 
-    if (mysql_stmt_bind_result(preparedStatement, returnParam)) {
+    if (mysql_stmt_bind_result(preparedStatement, returnParam) != 0) {
         printStatementError(preparedStatement, "Impossibile Recuperare Risultato 'Recupera Livelli'") ;
         freeStatement(preparedStatement, false) ;
         return NULL ;
     }
+    
 
     int hasResult = mysql_stmt_fetch(preparedStatement) ;
     int i = 0 ;
-    if (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
-        Level *level = myMalloc(sizeof(Level)) ;
+    while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
+        Level *level = (Level *) myMalloc(sizeof(Level)) ;
         strcpy(level->levelName, levelName) ;
         strcpy(level->levelBookName, bookName) ;
         level->levelHasExam = hasExam ;
 
         result->rowsSet[i] = level ;
+
+        hasResult = mysql_stmt_fetch(preparedStatement) ;
+        i++ ;
+    }
+    
+
+    freeStatement(preparedStatement, true) ;
+
+    mysql_stmt_close(preparedStatement) ;
+
+    return result ;
+}
+
+
+DatabaseResult *selectAllTeachers() {
+    MYSQL_STMT *preparedStatement ;
+    if (!setupPreparedStatement(&preparedStatement, "CALL recupera_insegnanti()", conn)) {
+        printMysqlError(conn, "Errore Inizializzazione Procedura 'Recupera Insegnanti'") ;
+        return NULL ;
+    }
+
+    if (mysql_stmt_store_result(preparedStatement) != 0) {
+        printStatementError(preparedStatement, "Impossibile Eseguire Procedura 'Recupera Insegnanti'") ;
+        freeStatement(preparedStatement, false) ;
+        return NULL ;
+    }
+
+    mysql_stmt_store_result(preparedStatement) ;
+
+    char teacherName[TEACHER_NAME_MAX_LEN] ;
+    char teacherAddress[TEACHER_ADDRESS_MAX_LEN] ;
+    char teacherNation[TEACHER_NATIONALITY_MAX_LEN] ;
+    
+    MYSQL_BIND returnParam[3] ;
+    bindParam(&returnParam[0], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
+    bindParam(&returnParam[1], MYSQL_TYPE_STRING, teacherNation, TEACHER_NATIONALITY_MAX_LEN, false) ;
+    bindParam(&returnParam[2], MYSQL_TYPE_STRING, teacherAddress, TEACHER_ADDRESS_MAX_LEN, false) ;
+
+    if (mysql_stmt_bind_result(preparedStatement, returnParam) != 0) {
+        printStatementError(preparedStatement, "Impossibile Recuperare Risultato 'Recupera Insegnanti'") ;
+        freeStatement(preparedStatement, true) ;
+        return NULL ;
+    }
+
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(preparedStatement) ;
+    result->rowsSet = myMalloc(sizeof(Teacher *) * result->numRows) ;
+
+    int hasResult = mysql_stmt_fetch(preparedStatement) ;
+    int i = 0 ;
+    if (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
+        Teacher *teacher = myMalloc(sizeof(Teacher)) ;
+        strcpy(teacher->teacherName, teacherName) ;
+        strcpy(teacher->teacherAddress, teacherAddress) ;
+        strcpy(teacher->teacherNationality, teacherNation) ;
+
+        result->rowsSet[i] = teacher ;
         i++ ;
 
         hasResult = mysql_stmt_fetch(preparedStatement) ;
     }
 
-    freeStatement(preparedStatement, true) ;
+    mysql_stmt_close(preparedStatement) ;
 
     return result ;
-}
+} 

@@ -18,5 +18,6 @@
 #include "../view/AdministrationViewHeader.h"
 #include "../db/AdministrationDatabaseHeader.h"
 #include "../view/ViewUtilsHeader.h"
+#include "../db/CommonDBHeader.h"
 
 void administrationController() ;  

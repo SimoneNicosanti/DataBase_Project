@@ -26,7 +26,7 @@ void testAddJoin() {
 }
 
 void testGetClasses() {
-    Class **classArray = retrieveAllClasses() ;
+    Class **classArray = selectAllCourses() ;
 
     if (classArray != NULL) printSuccess() ;
     else {

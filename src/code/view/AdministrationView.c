@@ -282,8 +282,32 @@ bool askRestartConfirm() {
     if (strcmp(confirm, "y") == 0) return true ;
     else return false ;
 }
-
+ 
 
 void printRestartSuccess() {
     printf("Riavvio Anno Avvenuto Con Successo") ;
+}
+
+
+void printAllLevels(Level **levelsArray , int num) {
+
+    char *header[] = {"Nome Livello", "Esame"} ;
+    enum TableFieldType types[] = {STRING, STRING} ;
+    Table *table = createTable(num, 2, header, types) ;
+    
+    for (int i = 0 ; i < num ; i++) {
+        Level *level = levelsArray[i] ;
+        setTableElem(table, i, 0, level->levelName) ;
+        
+        if (level->levelHasExam == 1) setTableElem(table, i, 1, "SI") ;
+        else setTableElem(table, i, 1, "NO") ;
+
+    }
+
+    printTable(table) ;
+    freeTable(table) ;
+}
+
+void printAllCoursesAdministration(Class **classArray, int arrayLen) {
+    printAllCourses(classArray, arrayLen) ;
 }
