@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
-#include <errno.h>
-#include "../utils/IOUtils.h"
+
+
+#include "ViewUtilsHeader.h"
 
 void showMenu(char **menuOptionsArray, int optionsNumber) {
     for (int i = 0 ; i < optionsNumber ; i++) {

@@ -1,13 +1,5 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <stdbool.h>
-#include <errno.h>
-#include <ctype.h>
-
 #include "IOUtils.h"
-#include "SystemUtilsHeader.h"
+
 
 
 void printError(char *errorMessage) {

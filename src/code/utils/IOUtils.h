@@ -2,6 +2,15 @@
 
 #include <stdbool.h>
 #include "TimeUtils.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <stdbool.h>
+#include <errno.h>
+#include <ctype.h>
+#include "SystemUtilsHeader.h"
+
 
 #define RED_TEXT_MARK 31 
 #define GREEN_TEXT_MARK 32 

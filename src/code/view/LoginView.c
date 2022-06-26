@@ -1,13 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 
 #include "LoginView.h"
-#include "../utils/IOUtils.h"
-#include "../utils/SystemUtilsHeader.h"
 
 
-void showLoginView(LoginCredentials *loginCredentialsPtr) {
+
+void showLoginView(User *loginCredentialsPtr) {
 
     /*
         ATTENTO!! Per permettere la lettura di esattamente un massimo di x byte, imposta una dimensione +2 da riservare

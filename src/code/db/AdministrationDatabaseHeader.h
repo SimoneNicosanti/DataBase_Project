@@ -8,6 +8,7 @@
 #include "../model/Student.h"
 #include "../model/Teacher.h"
 #include "../model/Lesson.h"
+#include "../model/User.h"
 
 #include "Connector.h"
 #include "../utils/IOUtils.h"
@@ -19,7 +20,7 @@ bool addLevelToDatabase(Level *levelPtr) ;
 
 int *addClassToDatabase(Class *classPtr) ;
 
-bool addTeacherToDatabase(Teacher *teacherPtr) ;
+bool addTeacherToDatabase(Teacher *teacherPtr, char *username) ;
 
 bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) ;
 
@@ -34,3 +35,5 @@ DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *year, int *m
 bool restartYearDB() ;
 
 DatabaseResult *selectAllLevels() ;
+
+bool createUserDB(User *newUser, Role userRole) ;

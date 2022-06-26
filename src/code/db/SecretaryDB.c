@@ -33,8 +33,6 @@ bool addStudentToDatabase(Student *studentPtr) {
 
     freeStatement(addStudentProcedure, false) ;
 
-    mysql_stmt_close(addStudentProcedure) ;
-
     return true ;
 }
 
@@ -114,8 +112,6 @@ DatabaseResult *getAllActivitiesFromDatabase() {
 
     freeStatement(loadAllActivitiesProcedure, true) ;
 
-    mysql_stmt_close(loadAllActivitiesProcedure) ;
-
     return result ;
 }
 
@@ -144,8 +140,6 @@ bool addStudentJoinActivityToDatabase(char *studentName, int *activityCode) {
     }
 
     freeStatement(addJoinProcedure, false) ;
-
-    mysql_stmt_close(addJoinProcedure) ;
 
     return true ;
 }
@@ -182,8 +176,6 @@ bool addAbsenceToDatabase(Absence *newAbsence) {
     }
 
     freeStatement(addAbsenceProcedure, true) ;
-
-    mysql_stmt_close(addAbsenceProcedure) ;
 
     return true ;
 }
@@ -224,8 +216,6 @@ bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
     }
 
     freeStatement(bookPrivateLessonProcedure, true) ;
-
-    mysql_stmt_close(bookPrivateLessonProcedure) ;
 
     return true ;
 }
@@ -290,8 +280,6 @@ DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) {
     }
 
     freeStatement(courseAbsenceReportProcedure, true) ;
-
-    mysql_stmt_close(courseAbsenceReportProcedure) ;
 
     return result ;
 }
@@ -361,8 +349,6 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
     }
 
     freeStatement(loadFreeTeachersProcedure, true) ;
-
-    mysql_stmt_close(loadFreeTeachersProcedure) ;
 
     return result ;
 }

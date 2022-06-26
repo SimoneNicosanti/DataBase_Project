@@ -6,8 +6,9 @@
 #include <string.h>
 #include <stdio.h>
 #include "../utils/IOUtils.h"
+#include "../model/User.h"
 
-Role attemptLogin(LoginCredentials *loginCredentials) {
+Role attemptLogin(User *loginCredentials) {
     MYSQL_STMT *loginProcedure ;
     if (!setupPreparedStatement(&loginProcedure, "CALL login(?,?,?) ", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Login'") ;
@@ -62,8 +63,6 @@ Role attemptLogin(LoginCredentials *loginCredentials) {
     while (mysql_stmt_fetch(loginProcedure) == 0) ;
 
     freeStatement(loginProcedure, true) ;
-
-    mysql_stmt_close(loginProcedure) ;
 
     return role ;
 

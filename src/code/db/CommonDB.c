@@ -53,8 +53,6 @@ DatabaseResult *selectAllCourses() {
     }
 
     freeStatement(loadClassesProcedure, true) ;
-
-    mysql_stmt_close(loadClassesProcedure) ;
     
     return result ;
 }

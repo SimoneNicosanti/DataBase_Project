@@ -76,9 +76,12 @@ void printStatementError(MYSQL_STMT *statement, char *errorMessage) {
     - freeSet : Indica se deve essere consumato il result set ritornato dallo statement
  */
 void freeStatement(MYSQL_STMT *statement, bool freeSet) {
+    
     if (freeSet) while (mysql_stmt_next_result(statement) == 0) ;
     mysql_stmt_free_result(statement) ;
     mysql_stmt_reset(statement) ;
+
+    mysql_stmt_close(statement) ;
 }
 
 //Inizializza uno statement MYSQL

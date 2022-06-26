@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <errno.h>
-#include "ViewUtilsHeader.h"
-#include "../controller/AdministrationControllerHeader.h"
-#include "../utils/IOUtils.h"
-#include "../model/Lesson.h"
+#include "AdministrationViewHeader.h"
 
 char *administrationMenuOptions[] = {
     "Aggiungi Livello", 
@@ -71,7 +64,7 @@ bool getClassInfo(Class *classPtr) {
     return true ;
 }
 
-bool getTeacherInfo(Teacher *teacherPtr) {
+bool getTeacherInfo(Teacher *teacherPtr, char *teacherUsername) {
     printOptionTitle(administrationMenuOptions[2]) ;
 
     if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LEN + 1)) {
@@ -86,6 +79,11 @@ bool getTeacherInfo(Teacher *teacherPtr) {
 
     if (!getUserInput("Inserire Indirizzo Insegnante >>> ", teacherPtr->teacherAddress, TEACHER_ADDRESS_MAX_LEN + 1)) {
         printError("Errore Inserimento Indirizzo") ;
+        return false ;
+    }
+
+    if (!getUserInput("Inserire Username Insegnante >>> ", teacherUsername, USERNAME_MAX_SIZE + 1)) {
+        printError("Errore Inserimento Username") ;
         return false ;
     }
 

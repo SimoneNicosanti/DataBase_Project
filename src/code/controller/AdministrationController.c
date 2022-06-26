@@ -10,6 +10,7 @@ enum AdministrationControllerOptions {
     ORGANIZE_ACTIVITY,
     TEACHER_REPORT,
     RESTART_YEAR,
+    //CREATE_USER,
     ADMINISTRATION_QUIT,
 } ;
 
@@ -43,8 +44,9 @@ void addClass() {
 
 void addTeacher() {
     Teacher newTeacher ;
-    if (getTeacherInfo(&newTeacher)) {
-        addTeacherToDatabase(&newTeacher) ;
+    char teacherUsername[USERNAME_MAX_SIZE] ;
+    if (getTeacherInfo(&newTeacher, teacherUsername)) {
+        addTeacherToDatabase(&newTeacher, teacherUsername) ;
     }
 }
  
@@ -112,6 +114,11 @@ void restartYear() {
     printRestartSuccess() ;
 }
 
+void createUser() {
+    User user ;
+    Role userRole ;
+}
+
 void administrationController() {
     
     do {
@@ -150,6 +157,10 @@ void administrationController() {
             case RESTART_YEAR :
                 restartYear() ;
                 break ;
+
+            /* case CREATE_USER :
+                createUser() ;
+                break ; */
         
             case ADMINISTRATION_QUIT :
                 goto exit_loop ;

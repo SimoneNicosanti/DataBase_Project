@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <mysql/mysql.h>
 #include "../controller/LoginControllerHeader.h"
+#include "../model/User.h"
 
 #define DB_HOST "DB.HOST"
 #define DB_PORT "DB.PORT" 

@@ -29,13 +29,13 @@ void printAgenda(GeneralLesson **lessonArray, int arrayLen) {
         setTableElem(table, i, 2, &(lesson->endTime)) ;
         setTableElem(table, i, 3, &(lesson->lessonType)) ;
         if (lesson->lessonType == COURSE) {
-            setTableElem(table, i, 3, "C") ;
+            setTableElem(table, i, 3, "Corso") ;
             setTableElem(table, i, 4, &(lesson->classCode)) ;
             setTableElem(table, i, 5, lesson->levelName) ;
             setTableElem(table, i, 6, NULL) ;
         }
         else {
-            setTableElem(table, i, 3, "P") ;
+            setTableElem(table, i, 3, "Privata") ;
             setTableElem(table, i, 4, NULL) ;
             setTableElem(table, i, 5, NULL) ;
             setTableElem(table, i, 6, lesson->studentName) ;

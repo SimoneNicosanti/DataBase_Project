@@ -28,8 +28,6 @@ bool addLevelToDatabase(Level *levelPtr) {
 
     freeStatement(addLevelProcedure, false) ;
 
-    mysql_stmt_close(addLevelProcedure) ;
-
     return true ;
 }
 
@@ -84,25 +82,24 @@ int *addClassToDatabase(Class *classPtr) {
     
     freeStatement(addClassProcedure, true) ;
 
-    mysql_stmt_close(addClassProcedure) ;
-
     int *returnCode = myMalloc(sizeof(int)) ;
     *returnCode = newClassCode ;
     return returnCode ;
 }
 
 
-bool addTeacherToDatabase(Teacher *teacherPtr) {
+bool addTeacherToDatabase(Teacher *teacherPtr, char *username) {
     MYSQL_STMT *addTeacherProcedure ;
-    if (!setupPreparedStatement(&addTeacherProcedure, "CALL aggiungi_insegnante(?,?,?) ", conn)) {
+    if (!setupPreparedStatement(&addTeacherProcedure, "CALL aggiungi_insegnante(?,?,?,?) ", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Insegnante'") ;
         return false ;
     }
 
-    MYSQL_BIND param[3] ;
+    MYSQL_BIND param[4] ;
     bindParam(&param[0], MYSQL_TYPE_STRING, teacherPtr->teacherName, strlen(teacherPtr->teacherName), false) ;
     bindParam(&param[1], MYSQL_TYPE_STRING, teacherPtr->teacherNationality, strlen(teacherPtr->teacherNationality), false) ;
     bindParam(&param[2], MYSQL_TYPE_STRING, teacherPtr->teacherAddress, strlen(teacherPtr->teacherAddress), false) ;
+    bindParam(&param[3], MYSQL_TYPE_STRING, username, strlen(username), false) ;
 
     if (mysql_stmt_bind_param(addTeacherProcedure, param) != 0) {
         printStatementError(addTeacherProcedure, "Impossibile Bind Parametri di Procedura 'Aggiungi Insegnante'") ;
@@ -117,8 +114,6 @@ bool addTeacherToDatabase(Teacher *teacherPtr) {
     }
 
     freeStatement(addTeacherProcedure, false) ;
-
-    mysql_stmt_close(addTeacherProcedure) ;
 
     return true ;
 }
@@ -148,8 +143,6 @@ bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) {
     }
 
     freeStatement(assignClassProcedure, false) ;
-
-    mysql_stmt_close(assignClassProcedure) ;
 
     return true ;
 }
@@ -203,8 +196,6 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) {
     }
 
     freeStatement(organizeActivityProcedure, false) ;
-
-    mysql_stmt_close(organizeActivityProcedure) ;
 
     return true ;
 }
@@ -271,8 +262,6 @@ bool addClassLessonToDatabase(ClassLesson *newLesson) {
     }
 
     freeStatement(addLessonToClassProcedure, true) ;
-    
-    mysql_stmt_close(addLessonToClassProcedure) ;
 
     return true ;
 }
@@ -325,8 +314,6 @@ DatabaseResult *selectAllTeaching() {
     }
 
     freeStatement(loadAllTachingProcedure, true) ;
-    
-    mysql_stmt_close(loadAllTachingProcedure) ;
 
     return result ;
 }
@@ -395,8 +382,6 @@ DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int
 
     freeStatement(generateTeacherReportProcedure, true) ;
 
-    mysql_stmt_close(generateTeacherReportProcedure) ;
-
     return result ;
 }
 
@@ -414,8 +399,6 @@ bool restartYearDB() {
     }
 
     freeStatement(restartYearProcedure, false) ;
-
-    mysql_stmt_close(restartYearProcedure) ;
 
     return true ;
 }
@@ -471,10 +454,7 @@ DatabaseResult *selectAllLevels() {
         i++ ;
     }
     
-
     freeStatement(preparedStatement, true) ;
-
-    mysql_stmt_close(preparedStatement) ;
 
     return result ;
 }
@@ -528,7 +508,35 @@ DatabaseResult *selectAllTeachers() {
         hasResult = mysql_stmt_fetch(preparedStatement) ;
     }
 
-    mysql_stmt_close(preparedStatement) ;
-
     return result ;
 } 
+
+
+bool createUserDB(User *credentials, Role role) {
+    MYSQL_STMT *storedProcedure ;
+    if (!setupPreparedStatement(&storedProcedure, "CALL crea_utente(?,?,?)", conn)) {
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Crea Utente'") ;
+        return false ;
+    }
+
+    MYSQL_BIND param[3] ;
+    bindParam(&param[0], MYSQL_TYPE_STRING, credentials->username, strlen(credentials->username), false) ;
+    bindParam(&param[1], MYSQL_TYPE_STRING, credentials->password, strlen(credentials->password), false) ;
+    bindParam(&param[2], MYSQL_TYPE_LONG, (int *) &role, sizeof(int), false) ;
+
+    if (mysql_stmt_bind_param(storedProcedure, param) != 0) {
+        printStatementError(storedProcedure, "Bind Parametri Impossibile per Procedura 'Crea Utente'") ;
+        freeStatement(storedProcedure, false) ;
+        return false ;
+    }
+
+    if (mysql_stmt_execute(storedProcedure) != 0) {
+        printStatementError(storedProcedure, "Esecuzione Impossibile per Procedura 'Crea Utente'") ;
+        freeStatement(storedProcedure, false) ;
+        return false ;
+    }
+
+    freeStatement(storedProcedure, true) ;
+
+    return true ;
+}

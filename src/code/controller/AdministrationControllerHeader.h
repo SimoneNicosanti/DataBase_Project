@@ -12,6 +12,7 @@
 #include "../model/Student.h"
 #include "../model/Teacher.h"
 #include "../model/Lesson.h"
+#include "../model/User.h"
 
 #include <stdbool.h>
 #include <stdio.h>

@@ -1,9 +1,3 @@
-TODO Nella valutazione delle ridondanze valuta anche la frequenza delle operazioni per vedere la convenienza di mantenimento e rimozione
-
-TODO Rivedere valutazione generale dei costi delle operazioni, anche in base alle operazioni realmente implementate
-
-TODO correggere tipo anche per altre enum in cui hai valutazione di ridondanza!! 
-
 TODO Aggingere inserimento dello username dell'insegnante:
     1. Per username, Prendi campo nome, fai REPLACE, ' ' --> '.'
     2. Per password, fai stessa cosa
@@ -25,3 +19,10 @@ TODO Chiedere a prof se è meglio avere la inizializzazione dello statement loca
 TODO Gestire bene l' ON DELETE allievo per Lezione Privata
 TODO Gestire bene ON DELETE LezioneCorso per Assenza
 TODO Gestire bene ON DELETE Insegnante per LezioneCorso
+
+TODO GESTIRE BENE AGGIUNTA NUOVO UTENTE
+    - ATTENTO A FARE IN MODO CHE PASSWORD CON MD5()
+    - CHIEDERE ASSOLUTAMENTE AL PROF
+
+
+TODO Decidere se il codice viene inserito da utente o autognerato da DB

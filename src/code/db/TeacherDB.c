@@ -77,8 +77,6 @@ DatabaseResult *generateAgendaFromDatabase(char *teacherUsername, int weekIndex)
 
     freeStatement(generateAgendaProcedure, true) ;
 
-    mysql_stmt_close(generateAgendaProcedure) ;
-
     return result ;
 
 }

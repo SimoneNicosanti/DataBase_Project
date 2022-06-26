@@ -16,11 +16,11 @@ void successLogin(Role loginRole, char *username) ;
 
 
 void loginController() {
-    LoginCredentials loginCredentials ;
+    User loginCredentials ;
 
     
     do {
-        memset(&loginCredentials, 0, sizeof(LoginCredentials)) ;
+        memset(&loginCredentials, 0, sizeof(User)) ;
         Role loginRole = LOGIN ;
 
         showLoginView(&loginCredentials) ;
