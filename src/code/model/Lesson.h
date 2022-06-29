@@ -21,9 +21,9 @@ typedef struct {
     enum DayOfWeek dayOfWeek ;
     Time startTime ;
     int classCode ;
-    char classLevel[LEVEL_NAME_MAX_LEN + 1] ;
+    char classLevel[LEVEL_NAME_MAX_LEN] ;
     int lessonDuration ;
-    char teacherName[TEACHER_NAME_MAX_LEN + 1] ;
+    char teacherName[TEACHER_NAME_MAX_LEN] ;
 } ClassLesson ;
 
 
@@ -31,8 +31,8 @@ typedef struct {
     Date lessonDate ;
     Time startTime ;
     int lessonDurability ;
-    char lessonTeacher[TEACHER_NAME_MAX_LEN + 1] ;
-    char lessonStudent[STUDENT_NAME_MAX_LEN + 1] ;
+    char lessonTeacher[TEACHER_NAME_MAX_LEN] ;
+    char lessonStudent[STUDENT_NAME_MAX_LEN] ;
 } PrivateLesson ;
 
 
@@ -47,8 +47,8 @@ typedef struct {
     Time endTime ;
     enum LessonType lessonType ;
     int classCode ;
-    char levelName[LEVEL_NAME_MAX_LEN + 1] ;
-    char studentName[STUDENT_NAME_MAX_LEN + 1] ;
+    char levelName[LEVEL_NAME_MAX_LEN] ;
+    char studentName[STUDENT_NAME_MAX_LEN] ;
 } GeneralLesson ;
 
 typedef struct {

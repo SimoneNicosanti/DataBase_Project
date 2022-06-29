@@ -52,10 +52,10 @@ DatabaseResult *getAllActivitiesFromDatabase() {
     mysql_stmt_store_result(loadAllActivitiesProcedure) ;
 
     int activityCode ;
-    char activityFilmTitle[FILM_TITLE_MAX_LEN + 1] ;
-    char activityFilmDirector[FILM_DIRECTOR_NAME_MAX_LEN + 1] ;
-    char activityMeetingLecturer[MEETING_LECTURER_NAME_MAX_LEN + 1] ;
-    char activityMeetingArgument[MEETING_ARGUMENT_MAX_LEN + 1] ;
+    char activityFilmTitle[FILM_TITLE_MAX_LEN] ;
+    char activityFilmDirector[FILM_DIRECTOR_NAME_MAX_LEN] ;
+    char activityMeetingLecturer[MEETING_LECTURER_NAME_MAX_LEN] ;
+    char activityMeetingArgument[MEETING_ARGUMENT_MAX_LEN] ;
 
     int activityType ;
 
@@ -66,10 +66,10 @@ DatabaseResult *getAllActivitiesFromDatabase() {
     bindParam(&resultParam[1], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
     bindParam(&resultParam[2], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
     bindParam(&resultParam[3], MYSQL_TYPE_LONG, &activityType, sizeof(int), false) ;
-    bindParam(&resultParam[4], MYSQL_TYPE_STRING, activityFilmTitle, FILM_TITLE_MAX_LEN + 1, true) ;
-    bindParam(&resultParam[5], MYSQL_TYPE_STRING, activityFilmDirector, FILM_DIRECTOR_NAME_MAX_LEN + 1, true) ;
-    bindParam(&resultParam[6], MYSQL_TYPE_STRING, activityMeetingLecturer, MEETING_LECTURER_NAME_MAX_LEN + 1, true) ;
-    bindParam(&resultParam[7], MYSQL_TYPE_STRING, activityMeetingArgument, MEETING_ARGUMENT_MAX_LEN + 1, true) ;
+    bindParam(&resultParam[4], MYSQL_TYPE_STRING, activityFilmTitle, FILM_TITLE_MAX_LEN, true) ;
+    bindParam(&resultParam[5], MYSQL_TYPE_STRING, activityFilmDirector, FILM_DIRECTOR_NAME_MAX_LEN, true) ;
+    bindParam(&resultParam[6], MYSQL_TYPE_STRING, activityMeetingLecturer, MEETING_LECTURER_NAME_MAX_LEN, true) ;
+    bindParam(&resultParam[7], MYSQL_TYPE_STRING, activityMeetingArgument, MEETING_ARGUMENT_MAX_LEN, true) ;
 
     if (mysql_stmt_bind_result(loadAllActivitiesProcedure, resultParam) != 0) {
         printStatementError(loadAllActivitiesProcedure, "Impossibile Bind Risultato di Recupera Attività") ;
@@ -255,11 +255,11 @@ DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) {
     result->rowsSet = myMalloc(sizeof(Student) * result->numRows) ;
 
 
-    char studentName[STUDENT_NAME_MAX_LEN + 1] ;
+    char studentName[STUDENT_NAME_MAX_LEN] ;
     int absenceNumber ;
 
     MYSQL_BIND returnParam[2] ;
-    bindParam(&returnParam[0], MYSQL_TYPE_STRING, studentName, STUDENT_NAME_MAX_LEN + 1, false) ;
+    bindParam(&returnParam[0], MYSQL_TYPE_STRING, studentName, STUDENT_NAME_MAX_LEN, false) ;
     bindParam(&returnParam[1], MYSQL_TYPE_LONG, &absenceNumber, sizeof(int), false) ;
     if (mysql_stmt_bind_result(courseAbsenceReportProcedure, returnParam) != 0) {
         printStatementError(courseAbsenceReportProcedure, "Impossibile Recuperare Risultato 'Report Assenze Corso'") ;
@@ -324,10 +324,10 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
     result->numRows = mysql_stmt_num_rows(loadFreeTeachersProcedure) ;
     result->rowsSet = (void **) myMalloc(sizeof(char *) * result->numRows) ;
 
-    char teacherName[TEACHER_NAME_MAX_LEN + 1] ;
+    char teacherName[TEACHER_NAME_MAX_LEN] ;
 
     MYSQL_BIND resultParam[1] ;
-    bindParam(&resultParam[0], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN + 1, false) ;
+    bindParam(&resultParam[0], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
 
     
 
@@ -340,7 +340,7 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
     int hasResult = mysql_stmt_fetch(loadFreeTeachersProcedure) ; 
     int i = 0 ;
     while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
-        char *teacher = (char *) myMalloc(sizeof(char) * (TEACHER_NAME_MAX_LEN + 1)) ;
+        char *teacher = (char *) myMalloc(sizeof(char) * (TEACHER_NAME_MAX_LEN)) ;
         strcpy(teacher, teacherName) ;
 
         result->rowsSet[i] = teacher ;
@@ -414,7 +414,7 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
     mysql_stmt_close(loadActivityParticipantsProcedure) ;
 
     return result ;
-} */
+}  */
 
 
 

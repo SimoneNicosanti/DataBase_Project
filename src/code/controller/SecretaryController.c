@@ -27,7 +27,7 @@ void getAllActivities() {
 
 void addStudentJoinActivity() {
     getAllActivities() ;
-    char studentName[STUDENT_NAME_MAX_LEN + 1] ;
+    char studentName[STUDENT_NAME_MAX_LEN] ;
     int activityCode ;
     if (getStudentJoinActivityInfo(studentName, &activityCode)) {
         addStudentJoinActivityToDatabase(studentName, &activityCode) ;
@@ -43,7 +43,8 @@ void bookPrivateLesson() {
 }
 
 void courseAbsenceReport() {
-    char levelName[LEVEL_NAME_MAX_LEN + 1] ;
+    getAllClasses() ;
+    char levelName[LEVEL_NAME_MAX_LEN] ;
     int courseCode ;
 
     if (!getCourseAbsenceReportInfo(levelName, &courseCode)) return ;

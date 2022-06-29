@@ -15,14 +15,14 @@ DatabaseResult *selectAllCourses() {
     mysql_stmt_store_result(loadClassesProcedure) ;
      
     int classCode ;
-    char classLevelName[LEVEL_NAME_MAX_LEN + 1] ;
+    char classLevelName[LEVEL_NAME_MAX_LEN] ;
     int classStudentsNumber ;
     MYSQL_TIME mysqlTime ;
     memset(&mysqlTime, 0, sizeof(MYSQL_TIME)) ;
 
     MYSQL_BIND resultParam[4] ;
     bindParam(&resultParam[0], MYSQL_TYPE_LONG, &classCode, sizeof(int), false) ;
-    bindParam(&resultParam[1], MYSQL_TYPE_VAR_STRING, classLevelName, LEVEL_NAME_MAX_LEN + 1, false) ;
+    bindParam(&resultParam[1], MYSQL_TYPE_VAR_STRING, classLevelName, LEVEL_NAME_MAX_LEN, false) ;
     bindParam(&resultParam[3], MYSQL_TYPE_LONG, &classStudentsNumber, sizeof(int), false) ;
     bindParam(&resultParam[2], MYSQL_TYPE_DATE, &mysqlTime, sizeof(MYSQL_TIME), false) ;
 

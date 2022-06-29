@@ -19,12 +19,12 @@ int getSecretaryOption() {
 bool getStudentInfo(Student *studentPtr) {
     printOptionTitle("Inserimento Studente") ;
 
-    if (!getUserInput("Inserire Nome Nuovo Studente >>> ", studentPtr->studentName, STUDENT_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Nuovo Studente >>> ", studentPtr->studentName, STUDENT_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Studente") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Numero di Telefono >>> ", studentPtr->studentTelephone, STUDENT_TELEPHONE_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Numero di Telefono >>> ", studentPtr->studentTelephone, STUDENT_TELEPHONE_MAX_LEN)) {
         printError("Errore Lettura Numero di Telefono") ;
         return false ;
     }
@@ -37,7 +37,7 @@ bool getStudentInfo(Student *studentPtr) {
         return false ;
     }
 
-    if (!getUserInput("Inserire Livello Corso >>> ", (studentPtr->studentClass).levelName, LEVEL_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Livello Corso >>> ", (studentPtr->studentClass).levelName, LEVEL_NAME_MAX_LEN)) {
         printError("Errore Inserimeno Nome Livello") ;
         return false ;
     }
@@ -54,7 +54,7 @@ bool getStudentInfo(Student *studentPtr) {
 bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
     printOptionTitle("Aggiungi Partecipazione ad Attività") ;
 
-    if (!getUserInput("Inserire Nome Allievo >>> ", studentName, STUDENT_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Allievo >>> ", studentName, STUDENT_NAME_MAX_LEN)) {
         printError("Errore Presa Nome Allievo") ;
         return false ;
     }
@@ -71,12 +71,12 @@ bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
 bool getPrivateLessonInfo(PrivateLesson *lesson) {
     printOptionTitle("Aggiunta Allievo") ;
 
-    if (!getUserInput("Inserire Nome Allievo >>> ", lesson->lessonStudent, STUDENT_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Allievo >>> ", lesson->lessonStudent, STUDENT_NAME_MAX_LEN)) {
         printError("Errore Lettura Studente") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Nome Insegnante >>> ", lesson->lessonTeacher, TEACHER_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", lesson->lessonTeacher, TEACHER_NAME_MAX_LEN)) {
         printError("Errore Lettura Insegnante") ;
         return false ;
     }
@@ -103,7 +103,7 @@ bool getPrivateLessonInfo(PrivateLesson *lesson) {
 bool getCourseAbsenceReportInfo(char *levelName, int *courseCode) {
     printOptionTitle("Reprt Assenze Corso") ;
 
-    if (!getUserInput("Inserire Nome del Livello >>> ", levelName, LEVEL_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome del Livello >>> ", levelName, LEVEL_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Livello") ;
         return false ;
     }
@@ -119,7 +119,7 @@ bool getCourseAbsenceReportInfo(char *levelName, int *courseCode) {
 bool getAbsenceInfo(Absence *absencePtr) {
     printOptionTitle("Aggiunta Assenza Allievo") ;
 
-    if (!getUserInput("Inserire Nome Allievo >>> ", absencePtr->studentName, STUDENT_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Allievo >>> ", absencePtr->studentName, STUDENT_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Allievo") ;
         return false ;
     }
@@ -158,7 +158,7 @@ bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) {
     return true ;
 }
 
-bool getActivityParticipantsReportInfo(int *activityCode) {
+/* bool getActivityParticipantsReportInfo(int *activityCode) {
     printOptionTitle("Report Allievi Partecipanti ad Attività") ;
     if (!getIntegerFromUser(activityCode, "Inserire Codice Attività >>> ")) {
         printError("Errore Lettura Codice Attività") ;
@@ -181,7 +181,7 @@ void printActivityParticipantsReport(Partecipation **partecipationArray, int arr
 
     printTable(table) ;
     freeTable(table) ;
-}
+} */
 
 void printFreeTeacherReport(char **teacherNameArray, int arrayLen) {
     char *header[] = {"Nome Insegnante"} ;

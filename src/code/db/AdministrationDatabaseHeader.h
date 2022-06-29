@@ -37,3 +37,5 @@ bool restartYearDB() ;
 DatabaseResult *selectAllLevels() ;
 
 bool createUserDB(User *newUser, Role userRole) ;
+
+DatabaseResult *selectAllTeachers() ;

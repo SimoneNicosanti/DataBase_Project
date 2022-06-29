@@ -284,8 +284,8 @@ DatabaseResult *selectAllTeaching() {
     result->numRows = mysql_stmt_num_rows(loadAllTachingProcedure) ;
 
     int classCode ;
-    char levelName[LEVEL_NAME_MAX_LEN + 1] ;
-    char teacherName[TEACHER_NAME_MAX_LEN + 1] ;
+    char levelName[LEVEL_NAME_MAX_LEN] ;
+    char teacherName[TEACHER_NAME_MAX_LEN] ;
     MYSQL_BIND returnParam[3] ;
     bindParam(&returnParam[0], MYSQL_TYPE_LONG, &classCode, sizeof(int), false) ;
     bindParam(&returnParam[1], MYSQL_TYPE_STRING, levelName, LEVEL_NAME_MAX_LEN , false) ;
@@ -467,7 +467,7 @@ DatabaseResult *selectAllTeachers() {
         return NULL ;
     }
 
-    if (mysql_stmt_store_result(preparedStatement) != 0) {
+    if (mysql_stmt_execute(preparedStatement) != 0) {
         printStatementError(preparedStatement, "Impossibile Eseguire Procedura 'Recupera Insegnanti'") ;
         freeStatement(preparedStatement, false) ;
         return NULL ;
@@ -496,7 +496,7 @@ DatabaseResult *selectAllTeachers() {
 
     int hasResult = mysql_stmt_fetch(preparedStatement) ;
     int i = 0 ;
-    if (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
+    while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
         Teacher *teacher = myMalloc(sizeof(Teacher)) ;
         strcpy(teacher->teacherName, teacherName) ;
         strcpy(teacher->teacherAddress, teacherAddress) ;
@@ -508,35 +508,7 @@ DatabaseResult *selectAllTeachers() {
         hasResult = mysql_stmt_fetch(preparedStatement) ;
     }
 
+    freeStatement(preparedStatement, true) ;
+
     return result ;
 } 
-
-
-bool createUserDB(User *credentials, Role role) {
-    MYSQL_STMT *storedProcedure ;
-    if (!setupPreparedStatement(&storedProcedure, "CALL crea_utente(?,?,?)", conn)) {
-        printMysqlError(conn, "Impossibile Preparare Procedura 'Crea Utente'") ;
-        return false ;
-    }
-
-    MYSQL_BIND param[3] ;
-    bindParam(&param[0], MYSQL_TYPE_STRING, credentials->username, strlen(credentials->username), false) ;
-    bindParam(&param[1], MYSQL_TYPE_STRING, credentials->password, strlen(credentials->password), false) ;
-    bindParam(&param[2], MYSQL_TYPE_LONG, (int *) &role, sizeof(int), false) ;
-
-    if (mysql_stmt_bind_param(storedProcedure, param) != 0) {
-        printStatementError(storedProcedure, "Bind Parametri Impossibile per Procedura 'Crea Utente'") ;
-        freeStatement(storedProcedure, false) ;
-        return false ;
-    }
-
-    if (mysql_stmt_execute(storedProcedure) != 0) {
-        printStatementError(storedProcedure, "Esecuzione Impossibile per Procedura 'Crea Utente'") ;
-        freeStatement(storedProcedure, false) ;
-        return false ;
-    }
-
-    freeStatement(storedProcedure, true) ;
-
-    return true ;
-}

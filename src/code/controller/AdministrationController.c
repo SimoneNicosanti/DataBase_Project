@@ -10,9 +10,17 @@ enum AdministrationControllerOptions {
     ORGANIZE_ACTIVITY,
     TEACHER_REPORT,
     RESTART_YEAR,
-    //CREATE_USER,
     ADMINISTRATION_QUIT,
 } ;
+
+void getAllTeachers() {
+    DatabaseResult *teachers = selectAllTeachers() ;
+
+    if (teachers == NULL) return ;
+    printAllTeachers((Teacher **) teachers->rowsSet, teachers->numRows) ;
+
+    freeDatabaseResult(teachers) ;
+}
 
 
 void addLevel() {
@@ -55,6 +63,8 @@ void assignClass() {
     Class class ;
 
     DatabaseResult *courses = selectAllCourses() ;
+    getAllTeachers() ;
+    
     if (courses != NULL) {
         printAllCourses((Class **) courses->rowsSet, courses->numRows) ;
         freeDatabaseResult(courses) ;
@@ -90,11 +100,11 @@ void addLesson() {
 }
 
 void generateTeacherReport() {
-    char teacherName[TEACHER_NAME_MAX_LEN + 1] ;
+    char teacherName[TEACHER_NAME_MAX_LEN] ;
     int year ;
     int monthIndex ;
 
-    //TODO recupera elenco insegnanti??
+    getAllTeachers() ;
     if (!getTeacherReportInfo(teacherName, &year, &monthIndex)) return ;
 
     DatabaseResult *result = generateTeacherReportFromDB(teacherName, &year, &monthIndex) ;
@@ -108,15 +118,9 @@ void generateTeacherReport() {
 
 void restartYear() {
     if (!askRestartConfirm()) return ;
-
     if (!restartYearDB()) return ;
 
     printRestartSuccess() ;
-}
-
-void createUser() {
-    User user ;
-    Role userRole ;
 }
 
 void administrationController() {
@@ -157,10 +161,6 @@ void administrationController() {
             case RESTART_YEAR :
                 restartYear() ;
                 break ;
-
-            /* case CREATE_USER :
-                createUser() ;
-                break ; */
         
             case ADMINISTRATION_QUIT :
                 goto exit_loop ;

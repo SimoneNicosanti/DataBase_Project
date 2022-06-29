@@ -1,8 +1,3 @@
-TODO Aggingere inserimento dello username dell'insegnante:
-    1. Per username, Prendi campo nome, fai REPLACE, ' ' --> '.'
-    2. Per password, fai stessa cosa
-    3. Aggiungi operazione utente per cambio password
-
 TODO Chiedere a prof se per aggiunta dell'utenza dll'insegnante è meglio inserire direttamente nella query di aggiunta oppure se è meglio aggiungere operazione in più per amministrazione
 TODO Chiedere a prof come gestire le utenze di amministrazione e segreteria:
     uica utenza utilizzata da tutti oppure ogni persona fisica che accede ha la sua utenza e quindi devo aggiungere operazione??

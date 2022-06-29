@@ -20,11 +20,11 @@ int getAdministrationOption() {
 bool getLevelInfo(Level *levelPtr) {
     printOptionTitle(administrationMenuOptions[0]) ;
     
-    if (!getUserInput("Inserire Nome Livello >>> ", levelPtr->levelName, LEVEL_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Livello >>> ", levelPtr->levelName, LEVEL_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Livello") ;
         return false ;
     }
-    if (!getUserInput("Inserire Nome Libro >>> ", levelPtr->levelBookName, LEVEL_BOOK_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Libro >>> ", levelPtr->levelBookName, LEVEL_BOOK_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Libro") ;
         return false ;
     }
@@ -52,7 +52,7 @@ bool getLevelInfo(Level *levelPtr) {
 bool getClassInfo(Class *classPtr) {
     printOptionTitle(administrationMenuOptions[1]) ;
 
-    if (!(getUserInput("Inserire Livello del Nuovo Corso >>> ", classPtr->levelName, LEVEL_NAME_MAX_LEN + 1))) {
+    if (!(getUserInput("Inserire Livello del Nuovo Corso >>> ", classPtr->levelName, LEVEL_NAME_MAX_LEN))) {
         printError("Errore Inserimento Nome Livello") ;
         return false ;
     }
@@ -67,22 +67,22 @@ bool getClassInfo(Class *classPtr) {
 bool getTeacherInfo(Teacher *teacherPtr, char *teacherUsername) {
     printOptionTitle(administrationMenuOptions[2]) ;
 
-    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LEN)) {
         printError("Errore Inserimento Nome Insegnante") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Nazionalità Insegnante >>> ", teacherPtr->teacherNationality, TEACHER_NATIONALITY_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nazionalità Insegnante >>> ", teacherPtr->teacherNationality, TEACHER_NATIONALITY_MAX_LEN)) {
         printError("Errore Inserimento Nazionalità") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Indirizzo Insegnante >>> ", teacherPtr->teacherAddress, TEACHER_ADDRESS_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Indirizzo Insegnante >>> ", teacherPtr->teacherAddress, TEACHER_ADDRESS_MAX_LEN)) {
         printError("Errore Inserimento Indirizzo") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Username Insegnante >>> ", teacherUsername, USERNAME_MAX_SIZE + 1)) {
+    if (!getUserInput("Inserire Username Insegnante >>> ", teacherUsername, USERNAME_MAX_SIZE)) {
         printError("Errore Inserimento Username") ;
         return false ;
     }
@@ -93,12 +93,12 @@ bool getTeacherInfo(Teacher *teacherPtr, char *teacherUsername) {
 bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
     printOptionTitle(administrationMenuOptions[3]) ;
 
-    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LEN)) {
         printError("Errore Inserimento Nome Insegnante") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Livello Corso >>> ", classPtr->levelName, LEVEL_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Livello Corso >>> ", classPtr->levelName, LEVEL_NAME_MAX_LEN)) {
         printError("Errore Inserimento Livello Corso") ;
         return false ;
     }
@@ -129,11 +129,11 @@ bool getActivityInfo(CuturalActivity *activityPtr) {
     if (strcmp(activityTypeString, "P") == 0) {
         activityPtr->type = FILM ;
 
-        if (!getUserInput("Inserire Titolo Film >>> ", activityPtr->filmTitle, FILM_TITLE_MAX_LEN + 1)) {
+        if (!getUserInput("Inserire Titolo Film >>> ", activityPtr->filmTitle, FILM_TITLE_MAX_LEN)) {
             printError("Errore Inserimento Titolo Film") ;
             return false ;
         }
-        if (!getUserInput("Inserire Regista Film >>> ", activityPtr->filmDirector, FILM_DIRECTOR_NAME_MAX_LEN + 1)) {
+        if (!getUserInput("Inserire Regista Film >>> ", activityPtr->filmDirector, FILM_DIRECTOR_NAME_MAX_LEN)) {
             printError("Errore Inserimento Regista Film") ;
             return false ;
         }
@@ -141,11 +141,11 @@ bool getActivityInfo(CuturalActivity *activityPtr) {
     else {
         activityPtr->type = MEETING ;
 
-        if (!getUserInput("Inserire Nome Conferenziere >>> ", activityPtr->meetingLecturer, MEETING_LECTURER_NAME_MAX_LEN + 1)) {
+        if (!getUserInput("Inserire Nome Conferenziere >>> ", activityPtr->meetingLecturer, MEETING_LECTURER_NAME_MAX_LEN)) {
             printError("Errore Inserimento Conferenziere") ;
             return false ;
         }
-        if (!getUserInput("Inserire Argomento Conferenza >>> ", activityPtr->meetingArgument, MEETING_ARGUMENT_MAX_LEN + 1)) {
+        if (!getUserInput("Inserire Argomento Conferenza >>> ", activityPtr->meetingArgument, MEETING_ARGUMENT_MAX_LEN)) {
             printError("Errore Inserimento Argomento Conferenza") ;
             return false ;
         }
@@ -176,12 +176,12 @@ bool getCourseLessonInfo(ClassLesson *newLesson) {
         return false ;
     }
 
-    if (!getUserInput("Inserire Nome Insegnante >>> ", newLesson->teacherName,  TEACHER_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", newLesson->teacherName,  TEACHER_NAME_MAX_LEN)) {
         printError("Impossibile Prendere Nome Insegnante") ;
         return false ;
     }
 
-    if (!getUserInput("Inserire Nome Livello >>> ", newLesson->classLevel,  LEVEL_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Livello >>> ", newLesson->classLevel,  LEVEL_NAME_MAX_LEN)) {
         printError("Impossibile Leggere Nome Livello") ;
         return false ;
     }
@@ -207,7 +207,7 @@ bool getCourseLessonInfo(ClassLesson *newLesson) {
 
  
 bool getTeacherReportInfo(char *teacherName, int *yearPtr, int *monthIndexPtr) {
-    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherName, TEACHER_NAME_MAX_LEN + 1)) {
+    if (!getUserInput("Inserire Nome Insegnante >>> ", teacherName, TEACHER_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Insegnante") ;
         return false ;
     }
@@ -308,4 +308,21 @@ void printAllLevels(Level **levelsArray , int num) {
 
 void printAllCoursesAdministration(Class **classArray, int arrayLen) {
     printAllCourses(classArray, arrayLen) ;
+}
+
+void printAllTeachers(Teacher **teachersArray, int arrayLen) {
+    
+    char *header[] = {"Nome", "Nazione"} ;
+    enum TableFieldType types[] = {STRING, STRING} ;
+    Table *table = createTable(arrayLen, 2, header, types) ;
+
+    for (int i = 0 ; i < arrayLen ; i++) {
+        Teacher *teacher = teachersArray[i] ;
+        setTableElem(table, i, 0, teacher->teacherName) ;
+        setTableElem(table, i, 1, teacher->teacherNationality) ;
+    }
+    
+    printTable(table) ;
+
+    freeTable(table) ;
 }

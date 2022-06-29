@@ -35,8 +35,8 @@ DatabaseResult *generateAgendaFromDatabase(char *teacherUsername, int weekIndex)
     MYSQL_BIND returnParam[7] ;
     char lessonType[5] ;
     int classCode ;
-    char classLevel[LEVEL_NAME_MAX_LEN + 1] ;
-    char student[STUDENT_NAME_MAX_LEN + 1] ;
+    char classLevel[LEVEL_NAME_MAX_LEN] ;
+    char student[STUDENT_NAME_MAX_LEN] ;
     MYSQL_TIME mysqlDate ;
     MYSQL_TIME mysqlStartTime ;
     MYSQL_TIME mysqlEndTime ;
@@ -46,8 +46,8 @@ DatabaseResult *generateAgendaFromDatabase(char *teacherUsername, int weekIndex)
     bindParam(&returnParam[2], MYSQL_TYPE_TIME, &mysqlEndTime, sizeof(MYSQL_TIME), false) ;
     bindParam(&returnParam[3], MYSQL_TYPE_STRING, lessonType, 5, false) ;
     bindParam(&returnParam[4], MYSQL_TYPE_LONG, &classCode, sizeof(int), true) ;
-    bindParam(&returnParam[5], MYSQL_TYPE_STRING, classLevel, LEVEL_NAME_MAX_LEN + 1, true) ;
-    bindParam(&returnParam[6], MYSQL_TYPE_STRING, student, STUDENT_NAME_MAX_LEN + 1, true) ;
+    bindParam(&returnParam[5], MYSQL_TYPE_STRING, classLevel, LEVEL_NAME_MAX_LEN, true) ;
+    bindParam(&returnParam[6], MYSQL_TYPE_STRING, student, STUDENT_NAME_MAX_LEN, true) ;
 
     if (mysql_stmt_bind_result(generateAgendaProcedure, returnParam) != 0) {
         printStatementError(generateAgendaProcedure, "Impossibile Recuperare il risultato da 'Genera Agenda'") ;
