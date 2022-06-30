@@ -2,12 +2,12 @@
 
 bool addStudentToDatabase(Student *studentPtr) {
     MYSQL_STMT *addStudentProcedure ;
-    if (!setupPreparedStatement(&addStudentProcedure, "CALL aggiungi_allievo(?,?,?,?,?)", conn)) {
+    if (!setupPreparedStatement(&addStudentProcedure, "CALL aggiungi_allievo(?,?,?,?)", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Allievo'") ;
         return false ;
     }
 
-    MYSQL_BIND param[5] ;
+    MYSQL_BIND param[4] ;
 
     bindParam(&param[0], MYSQL_TYPE_STRING, studentPtr->studentName, strlen(studentPtr->studentName), false) ;
     bindParam(&param[1], MYSQL_TYPE_STRING, studentPtr->studentTelephone, strlen(studentPtr->studentTelephone), false) ;
@@ -17,7 +17,6 @@ bool addStudentToDatabase(Student *studentPtr) {
     bindParam(&param[2], MYSQL_TYPE_DATE, &mysqlSubscribeDate, sizeof(MYSQL_TIME), false) ;
 
     bindParam(&param[3], MYSQL_TYPE_LONG, &(studentPtr->studentClass.classCode), sizeof(int), false) ;
-    bindParam(&param[4], MYSQL_TYPE_STRING, &(studentPtr->studentClass.levelName), strlen(studentPtr->studentClass.levelName), false) ;
 
     if (mysql_stmt_bind_param(addStudentProcedure, param) != 0) {
         printStatementError(addStudentProcedure, "Bind Parametri Impossibile Per 'Aggiungi Allievo'") ;
@@ -221,15 +220,14 @@ bool bookPrivateLessonInDatabase(PrivateLesson *lesson) {
 }
 
 
-DatabaseResult *getCourseAbsenceReportDB(char *levelName, int courseCode) {
+DatabaseResult *getCourseAbsenceReportDB(int courseCode) {
     MYSQL_STMT *courseAbsenceReportProcedure ;
-    if (!setupPreparedStatement(&courseAbsenceReportProcedure, "CALL report_assenze_corso(?,?)", conn)) {
+    if (!setupPreparedStatement(&courseAbsenceReportProcedure, "CALL report_assenze_corso(?)", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Report Assenze Corso'") ;
         return NULL ;
     }
 
-    MYSQL_BIND param[2] ;
-    bindParam(&param[1], MYSQL_TYPE_STRING, levelName, strlen(levelName), false) ;
+    MYSQL_BIND param[1] ;
     bindParam(&param[0], MYSQL_TYPE_LONG, &courseCode, sizeof(int), false) ;
 
     if (mysql_stmt_bind_param(courseAbsenceReportProcedure, param) != 0) {

@@ -1,5 +1,7 @@
 #include "AdministrationViewHeader.h"
 
+
+
 char *administrationMenuOptions[] = {
     "Aggiungi Livello", 
     "Aggiungi Corso", 
@@ -95,11 +97,6 @@ bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
 
     if (!getUserInput("Inserire Nome Insegnante >>> ", teacherPtr->teacherName, TEACHER_NAME_MAX_LEN)) {
         printError("Errore Inserimento Nome Insegnante") ;
-        return false ;
-    }
-
-    if (!getUserInput("Inserire Livello Corso >>> ", classPtr->levelName, LEVEL_NAME_MAX_LEN)) {
-        printError("Errore Inserimento Livello Corso") ;
         return false ;
     }
 

@@ -120,15 +120,14 @@ bool addTeacherToDatabase(Teacher *teacherPtr, char *username) {
 
 bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) {
     MYSQL_STMT *assignClassProcedure ;
-    if (!setupPreparedStatement(&assignClassProcedure, "CALL assegna_corso(?,?,?) ", conn)) {
+    if (!setupPreparedStatement(&assignClassProcedure, "CALL assegna_corso(?,?) ", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Assegna Corso'") ;
         return false ;
     }
     
-    MYSQL_BIND param[3] ;
+    MYSQL_BIND param[2] ;
     bindParam(&param[0], MYSQL_TYPE_LONG, &(classPtr->classCode), sizeof(int), false) ;
-    bindParam(&param[1], MYSQL_TYPE_STRING, classPtr->levelName, strlen(classPtr->levelName), false) ;
-    bindParam(&param[2], MYSQL_TYPE_STRING, teacherPtr->teacherName, strlen(teacherPtr->teacherName), false) ;
+    bindParam(&param[1], MYSQL_TYPE_STRING, teacherPtr->teacherName, strlen(classPtr->levelName), false) ;
 
     if (mysql_stmt_bind_param(assignClassProcedure, param) != 0) {
         printStatementError(assignClassProcedure, "Impossibile Bind Parametri di Procedura 'Assegna Corso'") ;
@@ -229,12 +228,12 @@ void prepareDayOfWeekParam(enum DayOfWeek dayOfWeek, char *dayOfWeekString) {
 
 bool addClassLessonToDatabase(ClassLesson *newLesson) {
     MYSQL_STMT *addLessonToClassProcedure ;
-    if (!setupPreparedStatement(&addLessonToClassProcedure, "CALL aggiungi_lezione(?,?,?,?,?,?)", conn)) {
+    if (!setupPreparedStatement(&addLessonToClassProcedure, "CALL aggiungi_lezione(?,?,?,?,?)", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Aggiungi Lezione Corso'") ;
         return false ;
     }
 
-    MYSQL_BIND param[6] ;
+    MYSQL_BIND param[5] ;
     MYSQL_TIME mysqlTime ;
 
     char dayOfWeekString[3 + 1] ;
@@ -243,9 +242,8 @@ bool addClassLessonToDatabase(ClassLesson *newLesson) {
     prepareTimeParam(&(newLesson->startTime), &mysqlTime) ;
     bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
     bindParam(&param[2], MYSQL_TYPE_LONG, &(newLesson->classCode), sizeof(int), false) ;
-    bindParam(&param[3], MYSQL_TYPE_STRING, newLesson->classLevel, strlen(newLesson->classLevel), false) ;
-    bindParam(&param[4], MYSQL_TYPE_LONG, &(newLesson->lessonDuration), sizeof(int), false) ;
-    bindParam(&param[5], MYSQL_TYPE_STRING, newLesson->teacherName, strlen(newLesson->teacherName) , false) ;
+    bindParam(&param[3], MYSQL_TYPE_LONG, &(newLesson->lessonDuration), sizeof(int), false) ;
+    bindParam(&param[4], MYSQL_TYPE_STRING, newLesson->teacherName, strlen(newLesson->teacherName) , false) ;
     
     
     if (mysql_stmt_bind_param(addLessonToClassProcedure, param) != 0) {
@@ -286,10 +284,9 @@ DatabaseResult *selectAllTeaching() {
     int classCode ;
     char levelName[LEVEL_NAME_MAX_LEN] ;
     char teacherName[TEACHER_NAME_MAX_LEN] ;
-    MYSQL_BIND returnParam[3] ;
+    MYSQL_BIND returnParam[2] ;
     bindParam(&returnParam[0], MYSQL_TYPE_LONG, &classCode, sizeof(int), false) ;
-    bindParam(&returnParam[1], MYSQL_TYPE_STRING, levelName, LEVEL_NAME_MAX_LEN , false) ;
-    bindParam(&returnParam[2], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
+    bindParam(&returnParam[1], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
 
     //TODO Gestisci bene liberazione memoria se si verifica un errore nel bind
     if (mysql_stmt_bind_result(loadAllTachingProcedure, returnParam) != 0) {

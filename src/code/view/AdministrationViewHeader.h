@@ -1,15 +1,20 @@
 #pragma once
 
 #include <stdbool.h>
-#include "CommonViewHeader.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+
+#include "CommonViewHeader.h"
 #include "ViewUtilsHeader.h"
-#include "../controller/AdministrationControllerHeader.h"
+
 #include "../utils/IOUtils.h"
+
 #include "../model/Lesson.h"
+#include "../model/Activity.h"
+#include "../model/User.h"
  
 int getAdministrationOption() ;
 

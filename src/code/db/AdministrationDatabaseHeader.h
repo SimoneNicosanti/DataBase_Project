@@ -1,6 +1,10 @@
 #include <stdbool.h>
+#include <string.h>
+
 #include "../controller/AdministrationControllerHeader.h"
+
 #include "../utils/SystemUtilsHeader.h"
+#include "../utils/IOUtils.h"
 
 #include "../model/Activity.h"
 #include "../model/Class.h"
@@ -11,10 +15,8 @@
 #include "../model/User.h"
 
 #include "Connector.h"
-#include "../utils/IOUtils.h"
 #include "DatabaseUtilsHeader.h"
-#include <stdbool.h>
-#include <string.h>
+
 
 bool addLevelToDatabase(Level *levelPtr) ;
 

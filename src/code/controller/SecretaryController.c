@@ -44,12 +44,11 @@ void bookPrivateLesson() {
 
 void courseAbsenceReport() {
     getAllClasses() ;
-    char levelName[LEVEL_NAME_MAX_LEN] ;
     int courseCode ;
 
-    if (!getCourseAbsenceReportInfo(levelName, &courseCode)) return ;
+    if (!getCourseAbsenceReportInfo(&courseCode)) return ;
    
-    DatabaseResult *result = getCourseAbsenceReportDB(levelName, courseCode) ;
+    DatabaseResult *result = getCourseAbsenceReportDB(courseCode) ;
 
     if (result == NULL) return ;
 

@@ -10,5 +10,4 @@ typedef struct {
     enum DayOfWeek dayOfWeek ;
     Time startTime ;
     int classCode ;
-    char classLevel[LEVEL_NAME_MAX_LEN] ;
 } Absence ;

@@ -100,13 +100,8 @@ bool getPrivateLessonInfo(PrivateLesson *lesson) {
 }
 
 
-bool getCourseAbsenceReportInfo(char *levelName, int *courseCode) {
+bool getCourseAbsenceReportInfo(int *courseCode) {
     printOptionTitle("Reprt Assenze Corso") ;
-
-    if (!getUserInput("Inserire Nome del Livello >>> ", levelName, LEVEL_NAME_MAX_LEN)) {
-        printError("Errore Lettura Nome Livello") ;
-        return false ;
-    }
 
     if (!getIntegerFromUser(courseCode, "Inserire Codice Corso >>> ")) {
         printError("Errore Lettura Codice Corso") ;

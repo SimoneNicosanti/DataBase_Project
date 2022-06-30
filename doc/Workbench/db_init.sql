@@ -16,13 +16,15 @@ INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALU
 INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALUES (14, "Advanced", NOW(), DEFAULT) ;
 
 ## Utenti
-INSERT INTO Utenti(username, `password`, ruolo ) VALUES("cercei.lannister", "ins", "insegnante") ;
-INSERT INTO Utenti(username, `password`, ruolo ) VALUES("jon.snow", "ins", "insegnante") ;
-INSERT INTO Utenti(username, `password`, ruolo ) VALUES("sansa.stark", "ins", "insegnante") ;
-INSERT INTO Utenti(username, `password`, ruolo ) VALUES("arya.stark", "ins", "insegnante") ;
-INSERT INTO Utenti(username, `password`, ruolo ) VALUES("catelyn.tully", "ins", "insegnante") ;
-INSERT INTO Utenti(username, `password`, ruolo ) VALUES("tyrion.lannister", "ins", "insegnante") ;
-INSERT INTO Utenti(username, `password`, ruolo ) VALUES("daenerys.targaryen", "ins", "insegnante") ;
+INSERT INTO Utenti VALUES ('amministrazione', sha1('amministrazione'), 'amministrazione') ;
+INSERT INTO Utenti VALUES ('segreteria', sha1('segreteria'), 'segreteria') ;
+INSERT INTO Utenti(username, `password`, ruolo ) VALUES("cercei.lannister", sha1('insegnante'), "insegnante") ;
+INSERT INTO Utenti(username, `password`, ruolo ) VALUES("jon.snow", sha1('insegnante'), "insegnante") ;
+INSERT INTO Utenti(username, `password`, ruolo ) VALUES("sansa.stark", sha1('insegnante'), "insegnante") ;
+INSERT INTO Utenti(username, `password`, ruolo ) VALUES("arya.stark", sha1('insegnante'), "insegnante") ;
+INSERT INTO Utenti(username, `password`, ruolo ) VALUES("catelyn.tully", sha1('insegnante'), "insegnante") ;
+INSERT INTO Utenti(username, `password`, ruolo ) VALUES("tyrion.lannister", sha1('insegnante'), "insegnante") ;
+INSERT INTO Utenti(username, `password`, ruolo ) VALUES("daenerys.targaryen", sha1('insegnante'), "insegnante") ;
     
 ## Insegnante
 INSERT INTO Insegnante(nomeInsegnante, nazioneInsegnante, indirizzoInsegnante, username) VALUES ("Cercei Lannister", "Westeros", "Approdo Del Re, Fortezza Rossa", "cercei.lannister") ;

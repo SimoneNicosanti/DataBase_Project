@@ -1,5 +1,19 @@
 #include "AdministrationControllerHeader.h"
 
+#include "../model/Level.h"
+#include "../model/Activity.h"
+#include "../model/Class.h"
+#include "../model/Student.h"
+#include "../model/Teacher.h"
+#include "../model/Lesson.h"
+#include "../model/User.h"
+
+#include "../db/AdministrationDatabaseHeader.h"
+#include "../db/CommonDBHeader.h"
+
+#include "../view/AdministrationViewHeader.h"
+#include "../view/ViewUtilsHeader.h"
+
  
 enum AdministrationControllerOptions {
     ADD_LEVEL = 0,

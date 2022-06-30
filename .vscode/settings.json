@@ -18,6 +18,8 @@
         "databaseutilsheader.h": "c",
         "databaseloginheader.h": "c",
         "loginview.h": "c",
-        "commonviewheader.h": "c"
+        "commonviewheader.h": "c",
+        "errno.h": "c",
+        "ioutils.h": "c"
     }
 }
