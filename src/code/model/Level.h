@@ -7,5 +7,5 @@
 typedef struct {
     char levelName[LEVEL_NAME_MAX_LEN] ;
     char levelBookName[LEVEL_BOOK_NAME_MAX_LEN] ;
-    int levelHasExam ;
+    short int levelHasExam ;
 } Level ;

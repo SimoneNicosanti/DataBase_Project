@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define USERNAME_MAX_SIZE 45 + 1
+#define USERNAME_MAX_SIZE 100 + 1
 #define PASSWORD_MAX_SIZE 45 + 1
 
 //Take one more char for \0

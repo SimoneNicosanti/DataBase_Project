@@ -37,10 +37,7 @@ bool getLevelInfo(Level *levelPtr) {
         return false ;
     }
 
-    if (strcmp(hasExamString, "y") == 0) {
-            levelPtr->levelHasExam = true ;
-            printf("ESAME\n") ;
-        }
+    if (strcmp(hasExamString, "y") == 0) levelPtr->levelHasExam = true ;
     else if (strcmp(hasExamString, "n") == 0) levelPtr->levelHasExam = false ;
     else {
         printError("Opzione Inserita NON Valida") ;
@@ -110,7 +107,7 @@ bool getTeacherAndClassInfo(Teacher *teacherPtr, Class *classPtr) {
 
 
 bool getActivityInfo(CuturalActivity *activityPtr) {
-    printOptionTitle(administrationMenuOptions[4]) ;
+    printOptionTitle(administrationMenuOptions[5]) ;
 
     char activityTypeString[2] ;
     if (!getUserInput("Inserire Tipo Di Attivita [P-C] >>> ", activityTypeString, 2)) {
@@ -161,7 +158,7 @@ bool getActivityInfo(CuturalActivity *activityPtr) {
 } 
 
 bool getCourseLessonInfo(ClassLesson *newLesson) {
-    printOptionTitle("Inserimento Lezione Corso") ;
+    printOptionTitle(administrationMenuOptions[4]) ;
     
     if (!getTimeFromUser(&(newLesson->startTime), "Inserire Orario Inizio Lezione [hh:mm] >>> ")) {
         printError("Errore Presa Data") ;
@@ -175,11 +172,6 @@ bool getCourseLessonInfo(ClassLesson *newLesson) {
 
     if (!getUserInput("Inserire Nome Insegnante >>> ", newLesson->teacherName,  TEACHER_NAME_MAX_LEN)) {
         printError("Impossibile Prendere Nome Insegnante") ;
-        return false ;
-    }
-
-    if (!getUserInput("Inserire Nome Livello >>> ", newLesson->classLevel,  LEVEL_NAME_MAX_LEN)) {
-        printError("Impossibile Leggere Nome Livello") ;
         return false ;
     }
 
@@ -204,6 +196,7 @@ bool getCourseLessonInfo(ClassLesson *newLesson) {
 
  
 bool getTeacherReportInfo(char *teacherName, int *yearPtr, int *monthIndexPtr) {
+    printOptionTitle(administrationMenuOptions[6]) ;
     if (!getUserInput("Inserire Nome Insegnante >>> ", teacherName, TEACHER_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Insegnante") ;
         return false ;
@@ -268,7 +261,7 @@ void printNewClassCode(int *newClassCode) {
 }
 
 bool askRestartConfirm() {
-
+    printOptionTitle(administrationMenuOptions[7]) ;
     char confirm[2] ;
     if (!getUserInput("Confermi di voler riavviare l'anno scolastico [y-n] >>> ", confirm, 2)) {
         printError("Errore lettura conferma") ;
@@ -280,7 +273,7 @@ bool askRestartConfirm() {
  
 
 void printRestartSuccess() {
-    printf("Riavvio Anno Avvenuto Con Successo") ;
+    colorPrint("Riavvio Anno Avvenuto Con Successo", GREEN_TEXT) ;
 }
 
 
@@ -321,5 +314,16 @@ void printAllTeachers(Teacher **teachersArray, int arrayLen) {
     
     printTable(table) ;
 
+    freeTable(table) ;
+}
+
+void printNewActivityCode(int *activityCode) {
+    char *header[] = {"Codice Attivita"} ;
+    enum TableFieldType types[] = {INT} ;
+    Table *table = createTable(1, 1, header, types) ;
+
+    setTableElem(table, 0, 0, activityCode) ;
+
+    printTable(table) ;
     freeTable(table) ;
 }

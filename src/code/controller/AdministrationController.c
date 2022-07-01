@@ -76,9 +76,8 @@ void assignClass() {
     Teacher teacher ;
     Class class ;
 
-    DatabaseResult *courses = selectAllCourses() ;
     getAllTeachers() ;
-    
+    DatabaseResult *courses = selectAllCourses() ;
     if (courses != NULL) {
         printAllCourses((Class **) courses->rowsSet, courses->numRows) ;
         freeDatabaseResult(courses) ;
@@ -90,10 +89,13 @@ void assignClass() {
 
 void organizeActivity() {
     CuturalActivity newActivity ;
-    if (getActivityInfo(&newActivity)) {
-        organizeActivityInDatabase(&newActivity) ;
-    }
+    if (! getActivityInfo(&newActivity)) return ;
 
+    int *activityCode = organizeActivityInDatabase(&newActivity) ;
+    
+    printNewActivityCode(activityCode) ;
+
+    free(activityCode) ;
 }
 
 void getAllTeaching() {

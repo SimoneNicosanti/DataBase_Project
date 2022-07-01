@@ -22,7 +22,7 @@ void printOptionTitle(char *optionName) {
 }
 
 int getUserOption(char *menuOption[], int menuLen) {
-    printf("\n\n") ;
+    printf("\n") ;
     colorPrint("Cosa Posso Fare Per Te??", GREEN_HIGH) ;
     printf("\n") ;
     showMenu(menuOption, menuLen) ;
@@ -51,5 +51,5 @@ void showAppHeader() {
     printHeaderLine(strlen(appTitleHeader)) ;
     printf("\n%s\n", appTitleHeader) ;
     printHeaderLine(strlen(appTitleHeader)) ;
-    printf("\n\n") ;
+    printf("\n") ;
 }

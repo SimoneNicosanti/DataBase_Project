@@ -47,3 +47,5 @@ void printAllLevels(Level **levelArray, int num) ;
 void printAllCoursesAdministration(Class **classArray, int arrayLen) ;
 
 void printAllTeachers() ;
+
+void printNewActivityCode(int *activityCode) ;

@@ -7,13 +7,13 @@ INSERT INTO Livello(nomeLivello, libro, esame) VALUES("Advanced", "Get Insight -
 
 
 ## Corso
-INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALUES (8, "Elementary", NOW(), DEFAULT) ;
-INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALUES (9, "Elementary", NOW(), DEFAULT) ;
-INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALUES (10, "Pre Intermediate", NOW(), DEFAULT) ;
-INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALUES (11, "Intermediate", NOW(), DEFAULT) ;
-INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALUES (12, "Pre Advanced", NOW(), DEFAULT) ;
-INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALUES (13, "Advanced", NOW(), DEFAULT) ;
-INSERT INTO Corso(codiceCorso, nomeLivello, dataAttivazione, numeroAllievi) VALUES (14, "Advanced", NOW(), DEFAULT) ;
+INSERT INTO Corso VALUES (8, "Elementary", NOW(), DEFAULT) ;
+INSERT INTO Corso VALUES (9, "Elementary", NOW(), DEFAULT) ;
+INSERT INTO Corso VALUES (10, "Pre Intermediate", NOW(), DEFAULT) ;
+INSERT INTO Corso VALUES (11, "Intermediate", NOW(), DEFAULT) ;
+INSERT INTO Corso VALUES (12, "Pre Advanced", NOW(), DEFAULT) ;
+INSERT INTO Corso VALUES (13, "Advanced", NOW(), DEFAULT) ;
+INSERT INTO Corso VALUES (14, "Advanced", NOW(), DEFAULT) ;
 
 ## Utenti
 INSERT INTO Utenti VALUES ('amministrazione', sha1('amministrazione'), 'amministrazione') ;
@@ -36,34 +36,34 @@ INSERT INTO Insegnante(nomeInsegnante, nazioneInsegnante, indirizzoInsegnante, u
 INSERT INTO Insegnante(nomeInsegnante, nazioneInsegnante, indirizzoInsegnante, username) VALUES ("Daenerys Targaryen", "Westeros", "Astapor", "daenerys.targaryen") ;
 
 ## Docenze
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (8, "Elementary", "Cercei Lannister") ;
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (8, "Elementary", "Jon Snow") ;
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (9, "Elementary", "Jon Snow") ;
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (9, "Elementary", "Arya Stark") ;
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (10, "Pre Intermediate", "Daenerys Targaryen") ;
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (11, "Intermediate", "Tyrion Lannister") ;
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (12, "Pre Advanced", "Cercei Lannister") ;
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (13, "Advanced", "Jon Snow") ;
-INSERT INTO Docenza(codiceCorso, livelloCorso, nomeInsegnante) VALUES (13, "Advanced", "Catelyn Tully") ;
+INSERT INTO Docenza VALUES (8, "Cercei Lannister") ;
+INSERT INTO Docenza VALUES (8, "Jon Snow") ;
+INSERT INTO Docenza VALUES (9, "Jon Snow") ;
+INSERT INTO Docenza VALUES (9, "Arya Stark") ;
+INSERT INTO Docenza VALUES (10, "Daenerys Targaryen") ;
+INSERT INTO Docenza VALUES (11,  "Tyrion Lannister") ;
+INSERT INTO Docenza VALUES (12,  "Cercei Lannister") ;
+INSERT INTO Docenza VALUES (13,  "Jon Snow") ;
+INSERT INTO Docenza VALUES (13, "Catelyn Tully") ;
 
 ## Lezione Corso
-INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Lun', '09:00:00', 8, "Elementary", 60, "Cercei Lannister") ;
-INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Lun', '12:30:00', 8, "Elementary", 90, "Cercei Lannister") ;
-INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Mar', '10:30:00', 12, "Pre Advanced", 60, "Cercei Lannister") ;
-INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Mer', '15:30:00', 12, "Pre Advanced", 75, "Cercei Lannister") ;
-INSERT INTO LezioneCorso(giornoSettimana, orarioInizio, codiceCorso, livelloCorso, durata, insegnanteLezione) VALUES ('Dom', '15:30:00', 12, "Pre Advanced", 75, "Cercei Lannister") ;
+INSERT INTO LezioneCorso VALUES ('Lun', '09:00:00', 8, 60, "Cercei Lannister") ;
+INSERT INTO LezioneCorso VALUES ('Lun', '12:30:00', 8, 90, "Cercei Lannister") ;
+INSERT INTO LezioneCorso VALUES ('Mar', '10:30:00', 12, 60, "Cercei Lannister") ;
+INSERT INTO LezioneCorso VALUES ('Mer', '15:30:00', 12, 75, "Cercei Lannister") ;
+INSERT INTO LezioneCorso VALUES ('Dom', '15:30:00', 12, 75, "Cercei Lannister") ;
 
 ## Allievo
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Bart Simpson", "3314182627", DEFAULT, NOW(), 8, "Elementary") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Homer Simpson", "3314182627", DEFAULT, NOW(), 8, "Elementary") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Marge Simpson", "3314182627", DEFAULT, NOW(), 9, "Elementary") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Lisa Simpson", "3314182627", DEFAULT, NOW(), 10, "Pre Intermediate") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Maggie Simpson", "3314182627", DEFAULT, NOW(), 10, "Pre Intermediate") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Morgana", "3314182627", DEFAULT, NOW(), 11, "Intermediate") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Artù", "3314182627", DEFAULT, NOW(), 12, "Pre Advanced") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Viviana", "3314182627", DEFAULT, NOW(), 13, "Advanced") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Lancillotto", "3314182627", DEFAULT, NOW(), 13, "Advanced") ;
-INSERT INTO Allievo(nomeAllievo, telefonoAllievo, numeroAssenze, dataIscrizione, codiceCorso, livelloCorso) VALUES ("Ginevra", "3314182627", DEFAULT, NOW(), 13, "Advanced") ;
+INSERT INTO Allievo VALUES ("Bart Simpson", "3314182627", DEFAULT, NOW(), 8) ;
+INSERT INTO Allievo VALUES ("Homer Simpson", "3314182627", DEFAULT, NOW(), 8) ;
+INSERT INTO Allievo VALUES ("Marge Simpson", "3314182627", DEFAULT, NOW(), 9) ;
+INSERT INTO Allievo VALUES ("Lisa Simpson", "3314182627", DEFAULT, NOW(), 10) ;
+INSERT INTO Allievo VALUES ("Maggie Simpson", "3314182627", DEFAULT, NOW(), 10) ;
+INSERT INTO Allievo VALUES ("Morgana", "3314182627", DEFAULT, NOW(), 11) ;
+INSERT INTO Allievo VALUES ("Artù", "3314182627", DEFAULT, NOW(), 12) ;
+INSERT INTO Allievo VALUES ("Viviana", "3314182627", DEFAULT, NOW(), 13) ;
+INSERT INTO Allievo VALUES ("Lancillotto", "3314182627", DEFAULT, NOW(), 13) ;
+INSERT INTO Allievo VALUES ("Ginevra", "3314182627", DEFAULT, NOW(), 13) ;
 
 
 ## LezionePrivata

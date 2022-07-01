@@ -127,7 +127,7 @@ bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) {
     
     MYSQL_BIND param[2] ;
     bindParam(&param[0], MYSQL_TYPE_LONG, &(classPtr->classCode), sizeof(int), false) ;
-    bindParam(&param[1], MYSQL_TYPE_STRING, teacherPtr->teacherName, strlen(classPtr->levelName), false) ;
+    bindParam(&param[1], MYSQL_TYPE_STRING, teacherPtr->teacherName, strlen(teacherPtr->teacherName), false) ;
 
     if (mysql_stmt_bind_param(assignClassProcedure, param) != 0) {
         printStatementError(assignClassProcedure, "Impossibile Bind Parametri di Procedura 'Assegna Corso'") ;
@@ -146,14 +146,14 @@ bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) {
     return true ;
 }
 
-bool organizeActivityInDatabase(CuturalActivity *newActivity) {
+int *organizeActivityInDatabase(CuturalActivity *newActivity) {
     MYSQL_STMT *organizeActivityProcedure ;
-    if (!setupPreparedStatement(&organizeActivityProcedure, "CALL organizza_attivita_culturale(?,?,?,?,?,?,?) ", conn)) {
+    if (!setupPreparedStatement(&organizeActivityProcedure, "CALL organizza_attivita_culturale(?,?,?,?,?,?,?,?) ", conn)) {
         printMysqlError(conn, "Impossibile Preparare Procedura 'Organizza Attività'") ;
-        return false ;
+        return NULL ;
     }
 
-    MYSQL_BIND param[7] ;
+    MYSQL_BIND param[8] ;
 
     MYSQL_TIME mysqlDate ;
     prepareDateParam(&(newActivity->activityDate), &mysqlDate) ;
@@ -163,7 +163,8 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) {
     bindParam(&param[0], MYSQL_TYPE_DATE, &mysqlDate, sizeof(MYSQL_TIME), false) ;
     bindParam(&param[1], MYSQL_TYPE_TIME, &mysqlTime, sizeof(MYSQL_TIME), false) ;
 
-    int activityType ;
+    short int activityType ;
+    int activityCode = 0 ;
     if (newActivity->type == FILM) {
         activityType = 0 ;
         bindParam(&param[3], MYSQL_TYPE_STRING, newActivity->filmTitle, strlen(newActivity->filmTitle), false) ;
@@ -180,23 +181,44 @@ bool organizeActivityInDatabase(CuturalActivity *newActivity) {
         bindParam(&param[5], MYSQL_TYPE_STRING, newActivity->meetingLecturer, strlen(newActivity->meetingLecturer), false) ;
         bindParam(&param[6], MYSQL_TYPE_STRING, newActivity->meetingArgument, strlen(newActivity->meetingArgument), false) ;
     }
-    bindParam(&param[2], MYSQL_TYPE_TINY, &activityType, sizeof(int), false) ;
+    bindParam(&param[2], MYSQL_TYPE_SHORT, &activityType, sizeof(short int), false) ;
+    bindParam(&param[7], MYSQL_TYPE_LONG, &activityCode, sizeof(int), false) ;
 
     if (mysql_stmt_bind_param(organizeActivityProcedure, param) != 0) {
         printStatementError(organizeActivityProcedure, "Impossibile Bind Parametri di Procedura 'Organizza Attività'") ;
         freeStatement(organizeActivityProcedure, false) ;
-        return false ;
+        return NULL ;
     }
 
     if (mysql_stmt_execute(organizeActivityProcedure) != 0) {
         printStatementError(organizeActivityProcedure, "Impossibile Eseguire Procedura 'Organizza Attività'") ;
         freeStatement(organizeActivityProcedure, false) ;
-        return false ;
+        return NULL ;
     }
 
-    freeStatement(organizeActivityProcedure, false) ;
+    mysql_stmt_store_result(organizeActivityProcedure) ;
+    
+    MYSQL_BIND resultParam ;
+    bindParam(&resultParam, MYSQL_TYPE_LONG, &activityCode, sizeof(int), false) ;
 
-    return true ;
+    if (mysql_stmt_bind_result(organizeActivityProcedure, &resultParam) != 0) {
+        printStatementError(organizeActivityProcedure, "Errore Recupero Codice Nuova Attività") ;
+        freeStatement(organizeActivityProcedure, true) ;
+        return NULL ;
+    }
+
+    if (mysql_stmt_fetch(organizeActivityProcedure) != 0) {
+        printStatementError(organizeActivityProcedure, "Errore Fetch del Risultato") ;
+        freeStatement(organizeActivityProcedure, true) ;
+        return NULL ;
+    }
+    
+    freeStatement(organizeActivityProcedure, true) ;
+
+    int *returnCode = (int *)myMalloc(sizeof(int)) ;
+    *returnCode = activityCode ;
+
+    return returnCode ;
 }
 
 void prepareDayOfWeekParam(enum DayOfWeek dayOfWeek, char *dayOfWeekString) {
@@ -284,9 +306,10 @@ DatabaseResult *selectAllTeaching() {
     int classCode ;
     char levelName[LEVEL_NAME_MAX_LEN] ;
     char teacherName[TEACHER_NAME_MAX_LEN] ;
-    MYSQL_BIND returnParam[2] ;
+    MYSQL_BIND returnParam[3] ;
     bindParam(&returnParam[0], MYSQL_TYPE_LONG, &classCode, sizeof(int), false) ;
-    bindParam(&returnParam[1], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
+    bindParam(&returnParam[1], MYSQL_TYPE_STRING, levelName, LEVEL_NAME_MAX_LEN, false) ;
+    bindParam(&returnParam[2], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
 
     //TODO Gestisci bene liberazione memoria se si verifica un errore nel bind
     if (mysql_stmt_bind_result(loadAllTachingProcedure, returnParam) != 0) {

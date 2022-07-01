@@ -55,7 +55,7 @@ void printSeparator(int *widthArray, int colNum) {
 void printHeader(char **headerArray, int *widthArray, int colsNum) {
     putchar('|') ;
     for (int colIndex = 0 ; colIndex < colsNum ; colIndex++) {
-            printf(" %-*s", widthArray[colIndex] - 1, headerArray[colIndex]) ;
+            printf(" \033[96m%-*s\033[m", widthArray[colIndex] - 1, headerArray[colIndex]) ;
             putchar('|') ;
         }
     putchar('\n') ;

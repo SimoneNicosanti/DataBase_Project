@@ -17,7 +17,7 @@ int getSecretaryOption() {
 }
 
 bool getStudentInfo(Student *studentPtr) {
-    printOptionTitle("Inserimento Studente") ;
+    printOptionTitle(secretaryMenuOption[0]) ;
 
     if (!getUserInput("Inserire Nome Nuovo Studente >>> ", studentPtr->studentName, STUDENT_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Studente") ;
@@ -37,12 +37,6 @@ bool getStudentInfo(Student *studentPtr) {
         return false ;
     }
 
-    if (!getUserInput("Inserire Livello Corso >>> ", (studentPtr->studentClass).levelName, LEVEL_NAME_MAX_LEN)) {
-        printError("Errore Inserimeno Nome Livello") ;
-        return false ;
-    }
-
-
     if (!getIntegerFromUser(&(studentPtr->studentClass.classCode), "Inserire Codice Corso >>> ")) {
         printError("Errore Inserimento Codice Corso") ;
         return false ;
@@ -52,7 +46,7 @@ bool getStudentInfo(Student *studentPtr) {
 }
 
 bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
-    printOptionTitle("Aggiungi Partecipazione ad Attività") ;
+    printOptionTitle(secretaryMenuOption[1]) ;
 
     if (!getUserInput("Inserire Nome Allievo >>> ", studentName, STUDENT_NAME_MAX_LEN)) {
         printError("Errore Presa Nome Allievo") ;
@@ -69,7 +63,7 @@ bool getStudentJoinActivityInfo(char *studentName, int *activityCodePtr) {
 
 
 bool getPrivateLessonInfo(PrivateLesson *lesson) {
-    printOptionTitle("Aggiunta Allievo") ;
+    printOptionTitle(secretaryMenuOption[2]) ;
 
     if (!getUserInput("Inserire Nome Allievo >>> ", lesson->lessonStudent, STUDENT_NAME_MAX_LEN)) {
         printError("Errore Lettura Studente") ;
@@ -101,7 +95,7 @@ bool getPrivateLessonInfo(PrivateLesson *lesson) {
 
 
 bool getCourseAbsenceReportInfo(int *courseCode) {
-    printOptionTitle("Reprt Assenze Corso") ;
+    printOptionTitle(secretaryMenuOption[4]) ;
 
     if (!getIntegerFromUser(courseCode, "Inserire Codice Corso >>> ")) {
         printError("Errore Lettura Codice Corso") ;
@@ -112,7 +106,7 @@ bool getCourseAbsenceReportInfo(int *courseCode) {
 }
 
 bool getAbsenceInfo(Absence *absencePtr) {
-    printOptionTitle("Aggiunta Assenza Allievo") ;
+    printOptionTitle(secretaryMenuOption[3]) ;
 
     if (!getUserInput("Inserire Nome Allievo >>> ", absencePtr->studentName, STUDENT_NAME_MAX_LEN)) {
         printError("Errore Lettura Nome Allievo") ;
@@ -134,7 +128,7 @@ bool getAbsenceInfo(Absence *absencePtr) {
 
 
 bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) {
-    printOptionTitle("Report Insegnanti Liberi") ;
+    printOptionTitle(secretaryMenuOption[5]) ;
     if (!getDateFromUser(datePtr, "Inserire Data [yyyy-mm-dd] >>> ")) {
         printError("Errore Lettura Data Lezione") ;
         return false ;

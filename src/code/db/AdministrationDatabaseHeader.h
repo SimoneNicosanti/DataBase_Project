@@ -26,7 +26,7 @@ bool addTeacherToDatabase(Teacher *teacherPtr, char *username) ;
 
 bool assignTeacherToClass(Teacher *teacherPtr, Class *classPtr) ;
 
-bool organizeActivityInDatabase(CuturalActivity *newActivity) ;
+int *organizeActivityInDatabase(CuturalActivity *newActivity) ;
 
 bool addClassLessonToDatabase(ClassLesson *newLesson) ;
 
