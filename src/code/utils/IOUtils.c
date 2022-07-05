@@ -1,7 +1,6 @@
 #include "IOUtils.h"
 
 
-
 void printError(char *errorMessage) {
     colorPrint(errorMessage, RED_TEXT) ;
     printf("\n") ;
@@ -12,7 +11,7 @@ bool getUserInput(char *requestString, char *resultBuffer, int bufferSize) {
     /*
         Function to get user input from stdinput.
         Takes max buffer size from stdin and put them in resultBuffer.
-        bufferSize comprende nel conto lo \n
+        bufferSize comprende nel conto lo \0
     */
 
     printf("%s", requestString) ;
@@ -109,28 +108,28 @@ bool getTimeFromUser(Time *timePtr, char *requestString) {
     return true ;
 }
 
-bool verifyIntegerInput(char *integerString) {
-    for (int i = 0 ; i < (int) strlen(integerString) ; i++) {
-        if (!isdigit(integerString[i])) return false ;
-    }
-    return true ;
-}
 
 bool getIntegerFromUser(int *integerPtr, char *inputMessage) {
-    char integerStringBuff[10 + 1] ;
-    if (!getUserInput(inputMessage, integerStringBuff, 10 + 1)) {
+    char integerStringBuff[11 + 1] ;
+    if (!getUserInput(inputMessage, integerStringBuff, 11 + 1)) {
         printError("Errore Inserimento Codice Numerico") ;
         return false ;
     }
 
-    if (!verifyIntegerInput(integerStringBuff)) return false ;
-    int input = (int) strtol(integerStringBuff, NULL, 10) ;
+    char *checkString = "\0" ;
+    long longInput = strtol(integerStringBuff, &checkString, 10) ;
     if (errno != 0) {
         printError("Numero Non Valido") ;
         errno = 0 ;
         return false ;
     }
-    *integerPtr = input ;
+    if (*checkString != '\0') {
+        printError("Numero Non Valido") ;
+        errno = 0 ;
+        return false ;
+    } ;
+    if (longInput > INT_MAX || longInput < INT_MIN) return false ;
+    *integerPtr = (int) longInput ;
     
     return true ;
 }

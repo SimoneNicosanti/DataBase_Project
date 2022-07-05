@@ -4,7 +4,7 @@
 
 
 
-void showLoginView(User *loginCredentialsPtr) {
+bool showLoginView(User *loginCredentialsPtr) {
 
     /*
         ATTENTO!! Per permettere la lettura di esattamente un massimo di x byte, imposta una dimensione +2 da riservare
@@ -12,7 +12,15 @@ void showLoginView(User *loginCredentialsPtr) {
     */
     printf("Inserire Credenziali Di Accesso\n") ;
 
-    getUserInput("Username >>> ", loginCredentialsPtr->username, USERNAME_MAX_SIZE) ;
-    getUserInput("Password >>> ", loginCredentialsPtr->password, PASSWORD_MAX_SIZE) ;
+    if (!getUserInput("Username >>> ", loginCredentialsPtr->username, USERNAME_MAX_SIZE)) {
+        printError("Errore Lettura Username") ;
+        return false ;
+    }
+    if (!getUserInput("Password >>> ", loginCredentialsPtr->password, PASSWORD_MAX_SIZE)) {
+        printError("Errore Lettura Password") ;
+        return false ;
+    }
+
+    return true ;
 
 }

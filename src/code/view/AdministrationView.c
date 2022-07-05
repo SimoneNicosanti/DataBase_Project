@@ -265,6 +265,7 @@ bool askRestartConfirm() {
     char confirm[2] ;
     if (!getUserInput("Confermi di voler riavviare l'anno scolastico [y-n] >>> ", confirm, 2)) {
         printError("Errore lettura conferma") ;
+        return false ;
     }
 
     if (strcmp(confirm, "y") == 0) return true ;

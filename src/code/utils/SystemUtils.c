@@ -10,7 +10,7 @@ void exitWithError(char *errorMessage) {
 void *myMalloc(size_t allocSize) {
     void *returnPtr = malloc(allocSize) ;
     if (returnPtr == NULL) {
-        exitWithError("IMPOSSIBILE ALLOCARE MEMORIA\n") ;
+        exitWithError("ERRORE ALLOCAZIONE MEMORIA\n") ;
     }
     memset(returnPtr, 0, allocSize) ;
     return returnPtr ;

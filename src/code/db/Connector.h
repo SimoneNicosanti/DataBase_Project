@@ -23,35 +23,6 @@
 
 extern MYSQL *conn ;
 
-/* //Procedure di Login
-//extern MYSQL_STMT *loginProcedure ;
-
-//Procedure Amministrazione
-extern MYSQL_STMT *restartYearProcedure ;
-extern MYSQL_STMT *addLevelProcedure ;
-extern MYSQL_STMT *addClassProcedure ;
-extern MYSQL_STMT *addTeacherProcedure ;
-extern MYSQL_STMT *assignClassProcedure ;
-extern MYSQL_STMT *organizeActivityProcedure ;
-extern MYSQL_STMT *addLessonToClassProcedure ;
-extern MYSQL_STMT *loadAllTachingProcedure ;
-extern MYSQL_STMT *generateTeacherReportProcedure ;
-
-
-//Procedure Segreteria
-extern MYSQL_STMT *addStudentProcedure ;
-extern MYSQL_STMT *addJoinProcedure ;
-extern MYSQL_STMT *loadClassesProcedure ;
-extern MYSQL_STMT *loadAllActivitiesProcedure ;
-extern MYSQL_STMT *addAbsenceProcedure ;
-extern MYSQL_STMT *bookPrivateLessonProcedure ;
-extern MYSQL_STMT *courseAbsenceReportProcedure ;
-extern MYSQL_STMT *loadFreeTeachersProcedure ;
-extern MYSQL_STMT *loadActivityParticipantsProcedure ;
-
-//Procedure Insegnante
-//extern MYSQL_STMT *generateAgendaProcedure ; */
-
 
 bool connectToDatabase() ;
 

@@ -3,16 +3,21 @@
 DatabaseResult *selectAllCourses() {
     MYSQL_STMT *loadClassesProcedure ;
     if (!setupPreparedStatement(&loadClassesProcedure, "CALL recupera_corsi()", conn)) {
-        printStatementError(loadClassesProcedure, "Impossibile Preparare Procedura 'Recupera Corsi'") ;
+        printMysqlError(conn, "Impossibile Preparare Procedura 'Recupera Corsi'") ;
         return NULL ;
     }
 
     if (mysql_stmt_execute(loadClassesProcedure) != 0) {
         printStatementError(loadClassesProcedure, "Impossibile Eseguire 'Recupera Corsi'") ;
+        freeStatement(loadClassesProcedure, false) ;
         return NULL ;
     }
 
-    mysql_stmt_store_result(loadClassesProcedure) ;
+    if (mysql_stmt_store_result(loadClassesProcedure) != 0) {
+        printStatementError(loadClassesProcedure, "Store Risultato Impossibile per 'Recupera Corsi'") ;
+        freeStatement(loadClassesProcedure, true) ;
+        return NULL ;
+    }
      
     int classCode ;
     char classLevelName[LEVEL_NAME_MAX_LEN] ;
@@ -28,6 +33,7 @@ DatabaseResult *selectAllCourses() {
 
     if (mysql_stmt_bind_result(loadClassesProcedure, resultParam) != 0)  {
         printStatementError(loadClassesProcedure, "Impossibile Recuperare Parametri") ;
+        freeStatement(loadClassesProcedure, true) ;
         return NULL ;
     }
    
@@ -50,6 +56,13 @@ DatabaseResult *selectAllCourses() {
         result->rowsSet[i] = class ;
         hasResult = mysql_stmt_fetch(loadClassesProcedure) ;
         i++ ;
+    }
+
+    if (hasResult == 1) {
+        printStatementError(loadClassesProcedure, "Fetch Impossibile Per 'Recupera Corsi'") ;
+        freeDatabaseResult(result) ;
+        freeStatement(loadClassesProcedure, true) ;
+        return NULL ;
     }
 
     freeStatement(loadClassesProcedure, true) ;

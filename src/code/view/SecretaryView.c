@@ -28,9 +28,12 @@ bool getStudentInfo(Student *studentPtr) {
         printError("Errore Lettura Numero di Telefono") ;
         return false ;
     }
-
     for (int i = 0 ; i < (int) strlen(studentPtr->studentTelephone) ; i++) {
         if (!isdigit(studentPtr->studentTelephone[i])) return false ;
+    }
+    if ((int) strlen(studentPtr->studentTelephone) != 10) {
+        printError("I Numeri di Telefono Hanno 10 Cifre") ;
+        return false ;
     }
 
     if (!getDateFromUser(&(studentPtr->studentSubscribeDate), "Inserire Data di Iscrizione [yyyy-mm-dd] >>> ")) {
@@ -118,7 +121,7 @@ bool getAbsenceInfo(Absence *absencePtr) {
         return false ;
     }
 
-    if (!getTimeFromUser(&(absencePtr->startTime), "Inserire Orario Assenza [hh:m] >>> ")) {
+    if (!getTimeFromUser(&(absencePtr->startTime), "Inserire Orario Assenza [hh:mm] >>> ")) {
         printError("Errore Lettura Orario Assenza") ;
         return false ;
     }

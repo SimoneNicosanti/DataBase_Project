@@ -16,8 +16,6 @@ INSERT INTO Corso VALUES (13, "Advanced", NOW(), DEFAULT) ;
 INSERT INTO Corso VALUES (14, "Advanced", NOW(), DEFAULT) ;
 
 ## Utenti
-INSERT INTO Utenti VALUES ('amministrazione', sha1('amministrazione'), 'amministrazione') ;
-INSERT INTO Utenti VALUES ('segreteria', sha1('segreteria'), 'segreteria') ;
 INSERT INTO Utenti(username, `password`, ruolo ) VALUES("cercei.lannister", sha1('insegnante'), "insegnante") ;
 INSERT INTO Utenti(username, `password`, ruolo ) VALUES("jon.snow", sha1('insegnante'), "insegnante") ;
 INSERT INTO Utenti(username, `password`, ruolo ) VALUES("sansa.stark", sha1('insegnante'), "insegnante") ;
@@ -67,8 +65,10 @@ INSERT INTO Allievo VALUES ("Ginevra", "3314182627", DEFAULT, NOW(), 13) ;
 
 
 ## LezionePrivata
+INSERT INTO LezionePrivata VALUES (NOW() - INTERVAL 2 DAY, NOW(), 'Cercei Lannister', 60, "Lancillotto") ;
 INSERT INTO LezionePrivata VALUES (NOW(), NOW(), "Cercei Lannister", 45, "Bart Simpson") ;
 INSERT INTO LezionePrivata VALUES (NOW() + INTERVAL 1 DAY, NOW(), "Cercei Lannister", 45, "Bart Simpson") ;
+INSERT INTO LezionePrivata VALUES (NOW() + INTERVAL 4 DAY, NOW(), "Cercei Lannister", 60, "Marge Simpson") ;
 
 ## Attività
 INSERT INTO AttivitaCulturale VALUES (100, '2022-09-23', '09:00', 0, 'Animali Fantastici, Dove Trovarli', 'Non Lo So', NULL, NULL) ;

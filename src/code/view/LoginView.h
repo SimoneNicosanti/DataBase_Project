@@ -9,4 +9,4 @@
 #include <stdlib.h>
 #include <string.h>
 
-void showLoginView(User *loginCredentialsPtr) ;
+bool showLoginView(User *loginCredentialsPtr) ;

@@ -1,6 +1,6 @@
 #include "TablePrinterHeader.h"
 
-char *nullString = "" ;
+const char *nullString = "" ;
 
 int findColMaxSize(void ***table, char **headerArray, int rowsNum, int colIndex, enum TableFieldType colType) {
     int maxSize = strlen(headerArray[colIndex]) ;
@@ -55,9 +55,9 @@ void printSeparator(int *widthArray, int colNum) {
 void printHeader(char **headerArray, int *widthArray, int colsNum) {
     putchar('|') ;
     for (int colIndex = 0 ; colIndex < colsNum ; colIndex++) {
-            printf(" \033[96m%-*s\033[m", widthArray[colIndex] - 1, headerArray[colIndex]) ;
-            putchar('|') ;
-        }
+        printf(" \033[96m%-*s\033[m", widthArray[colIndex] - 1, headerArray[colIndex]) ;
+        putchar('|') ;
+    }
     putchar('\n') ;
 }
 

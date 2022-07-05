@@ -45,10 +45,15 @@ DatabaseResult *getAllActivitiesFromDatabase() {
 
     if (mysql_stmt_execute(loadAllActivitiesProcedure) != 0) {
         printStatementError(loadAllActivitiesProcedure, "Impossibile Eseguire Procedura Recupera Attività") ;
+        freeStatement(loadAllActivitiesProcedure, false) ;
         return NULL ;
     }
 
-    mysql_stmt_store_result(loadAllActivitiesProcedure) ;
+    if (mysql_stmt_store_result(loadAllActivitiesProcedure) != 0) {
+        printStatementError(loadAllActivitiesProcedure, "Store Risultato Impossibile per 'Recupera Attività'") ;
+        freeStatement(loadAllActivitiesProcedure, false) ;
+        return NULL ;
+    }
 
     int activityCode ;
     char activityFilmTitle[FILM_TITLE_MAX_LEN] ;
@@ -88,7 +93,6 @@ DatabaseResult *getAllActivitiesFromDatabase() {
         getDateParam(&(activity->activityDate), &mysqlDate) ;
         getTimeParam(&(activity->activityTime), &mysqlTime) ;
 
-        //TODO Capire un attimo come fare il recupero di valori nulli
         if (activityType == 0) {
             activity->type = FILM ;
             strcpy(activity->filmTitle, activityFilmTitle) ;
@@ -107,6 +111,13 @@ DatabaseResult *getAllActivitiesFromDatabase() {
         result->rowsSet[i] = activity ;
         hasResult = mysql_stmt_fetch(loadAllActivitiesProcedure) ;
         i++ ;
+    }
+
+    if (hasResult == 1) {
+        printStatementError(loadAllActivitiesProcedure, "Fetch Impossibile Per 'Recupera Attività'") ;
+        freeDatabaseResult(result) ;
+        freeStatement(loadAllActivitiesProcedure, true) ;
+        return NULL ;
     }
 
     freeStatement(loadAllActivitiesProcedure, true) ;
@@ -248,11 +259,6 @@ DatabaseResult *getCourseAbsenceReportDB(int courseCode) {
         return NULL ;
     }
 
-    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
-    result->numRows = mysql_stmt_num_rows(courseAbsenceReportProcedure) ;
-    result->rowsSet = myMalloc(sizeof(Student) * result->numRows) ;
-
-
     char studentName[STUDENT_NAME_MAX_LEN] ;
     int absenceNumber ;
 
@@ -265,6 +271,10 @@ DatabaseResult *getCourseAbsenceReportDB(int courseCode) {
         return NULL ;
     }
 
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(courseAbsenceReportProcedure) ;
+    result->rowsSet = myMalloc(sizeof(Student) * result->numRows) ;
+
     int hasResult = mysql_stmt_fetch(courseAbsenceReportProcedure) ; 
     int i = 0 ;
     while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
@@ -275,6 +285,13 @@ DatabaseResult *getCourseAbsenceReportDB(int courseCode) {
         result->rowsSet[i] = student ;
         hasResult = mysql_stmt_fetch(courseAbsenceReportProcedure) ;
         i++ ;
+    }
+
+    if (hasResult == 1) {
+        printStatementError(courseAbsenceReportProcedure, "Fetch Impossibile Per 'Recupera Attività'") ;
+        freeDatabaseResult(result) ;
+        freeStatement(courseAbsenceReportProcedure, true) ;
+        return NULL ;
     }
 
     freeStatement(courseAbsenceReportProcedure, true) ;
@@ -313,21 +330,19 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
         return NULL ;
     }
 
-    
-
-    mysql_stmt_store_result(loadFreeTeachersProcedure) ;
+    if (mysql_stmt_store_result(loadFreeTeachersProcedure) != 0) {
+        printStatementError(loadFreeTeachersProcedure, "Store Risultato Impossibile per 'Recupera Insegnanti Liberi'") ;
+        freeStatement(loadFreeTeachersProcedure, true) ;
+        return NULL ;
+    }
 
     DatabaseResult *result = (DatabaseResult *) myMalloc(sizeof(DatabaseResult)) ;
-
     result->numRows = mysql_stmt_num_rows(loadFreeTeachersProcedure) ;
     result->rowsSet = (void **) myMalloc(sizeof(char *) * result->numRows) ;
 
     char teacherName[TEACHER_NAME_MAX_LEN] ;
-
     MYSQL_BIND resultParam[1] ;
     bindParam(&resultParam[0], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
-
-    
 
     if (mysql_stmt_bind_result(loadFreeTeachersProcedure, resultParam) != 0) {
         printStatementError(loadFreeTeachersProcedure, "Bind Risultato Impossibile Per 'Recupera Insegnanti Liberi'") ;
@@ -344,6 +359,13 @@ DatabaseResult *loadFreeTeachersFromDB(Date *date, Time *time, int *duration) {
         result->rowsSet[i] = teacher ;
         hasResult = mysql_stmt_fetch(loadFreeTeachersProcedure) ; 
         i++ ;
+    }
+
+    if (hasResult == 1) {
+        printStatementError(loadFreeTeachersProcedure, "Fetch Impossibile Per 'Recupera Insegnanti Liberi'") ;
+        freeDatabaseResult(result) ;
+        freeStatement(loadFreeTeachersProcedure, true) ;
+        return NULL ;
     }
 
     freeStatement(loadFreeTeachersProcedure, true) ;

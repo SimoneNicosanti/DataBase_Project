@@ -13,6 +13,10 @@ bool getAgendaInfo(int *weekIndexPtr) {
         printError("Errore Lettura Indice Settimana") ;
         return false ;
     }
+    if (*weekIndexPtr < 0) {
+        printError("Indice Settimana Non Valido") ;
+        return false ;
+    }
 
     return true ;
 }
@@ -44,4 +48,5 @@ void printAgenda(GeneralLesson **lessonArray, int arrayLen) {
 
     printTable(table) ;
     freeTable(table) ;
+    printf("\n") ;
 }

@@ -23,10 +23,7 @@ void loginController() {
         memset(&loginCredentials, 0, sizeof(User)) ;
         Role loginRole = LOGIN ;
 
-        showLoginView(&loginCredentials) ;
-        
-        if ((int) strlen(loginCredentials.username) == 0 || (int) strlen(loginCredentials.password) == 0) {
-            colorPrint("Username e/o Password Vuoti\n\n", RED_TEXT) ;
+        if (!showLoginView(&loginCredentials)) {
             loginRole = LOGIN ;
         }
         else {

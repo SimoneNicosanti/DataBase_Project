@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <errno.h>
 #include <ctype.h>
+#include <limits.h>
 #include "SystemUtilsHeader.h"
 
 

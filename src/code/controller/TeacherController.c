@@ -6,13 +6,18 @@ void generateAgenda(char *teacherUsername) {
     if (!getAgendaInfo(&weekIndex)) return ;
 
     // Esecuzione DB
-    DatabaseResult *result = generateAgendaFromDatabase(teacherUsername, weekIndex) ;
+    DatabaseResult **resultArray = generateAgendaFromDatabase(teacherUsername, weekIndex) ;
     
-    if (result == NULL) return ;
+    if (resultArray == NULL) return ;
 
-    printAgenda((GeneralLesson **) result->rowsSet, result->numRows) ;
-
-    freeDatabaseResult(result) ;
+    for (int i = 0 ; i < 7 ; i++) {
+        if (resultArray[i] == NULL) break ;
+        DatabaseResult * result = resultArray[i] ;
+        printAgenda((GeneralLesson **) result->rowsSet, result->numRows) ;
+        freeDatabaseResult(result) ;
+    }
+    
+    free(resultArray) ;
 }
 
 

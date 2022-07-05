@@ -63,7 +63,11 @@ int *addClassToDatabase(Class *classPtr) {
         return NULL ;
     }
 
-    mysql_stmt_store_result(addClassProcedure) ;
+    if (mysql_stmt_store_result(addClassProcedure) != 0) {
+        printStatementError(addClassProcedure, "Store Risultato Impossibile per 'Aggiungi Corso'") ;
+        freeStatement(addClassProcedure, true) ;
+        return NULL ;
+    }
     
     MYSQL_BIND resultParam ;
     bindParam(&resultParam, MYSQL_TYPE_LONG, &newClassCode, sizeof(int), false) ;
@@ -196,7 +200,11 @@ int *organizeActivityInDatabase(CuturalActivity *newActivity) {
         return NULL ;
     }
 
-    mysql_stmt_store_result(organizeActivityProcedure) ;
+    if (mysql_stmt_store_result(organizeActivityProcedure) != 0) {
+        printStatementError(organizeActivityProcedure, "Store Risultato Impossibile per 'Organizza Attività'") ;
+        freeStatement(organizeActivityProcedure, true) ;
+        return NULL ;
+    }
     
     MYSQL_BIND resultParam ;
     bindParam(&resultParam, MYSQL_TYPE_LONG, &activityCode, sizeof(int), false) ;
@@ -295,13 +303,15 @@ DatabaseResult *selectAllTeaching() {
     
     if (mysql_stmt_execute(loadAllTachingProcedure) != 0) {
         printStatementError(loadAllTachingProcedure, "Errore Esecuzione Recupero Docenze") ;
+        freeStatement(loadAllTachingProcedure, false) ;
         return NULL ;
     }
 
-    mysql_stmt_store_result(loadAllTachingProcedure) ;
-
-    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
-    result->numRows = mysql_stmt_num_rows(loadAllTachingProcedure) ;
+    if (mysql_stmt_store_result(loadAllTachingProcedure) != 0) {
+        printStatementError(loadAllTachingProcedure, "Store Risultato Impossibile per 'Recupera Docenze'") ;
+        freeStatement(loadAllTachingProcedure, true) ;
+        return NULL ;
+    }
 
     int classCode ;
     char levelName[LEVEL_NAME_MAX_LEN] ;
@@ -311,13 +321,14 @@ DatabaseResult *selectAllTeaching() {
     bindParam(&returnParam[1], MYSQL_TYPE_STRING, levelName, LEVEL_NAME_MAX_LEN, false) ;
     bindParam(&returnParam[2], MYSQL_TYPE_STRING, teacherName, TEACHER_NAME_MAX_LEN, false) ;
 
-    //TODO Gestisci bene liberazione memoria se si verifica un errore nel bind
     if (mysql_stmt_bind_result(loadAllTachingProcedure, returnParam) != 0) {
         printStatementError(loadAllTachingProcedure, "Errore Bind Del Risultato") ;
         freeStatement(loadAllTachingProcedure, false) ;
         return NULL ;
     }
 
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(loadAllTachingProcedure) ;
     result->rowsSet = myMalloc(sizeof(Teaching *) * result->numRows) ;
 
     int hasResult = mysql_stmt_fetch(loadAllTachingProcedure) ;
@@ -331,6 +342,13 @@ DatabaseResult *selectAllTeaching() {
         result->rowsSet[i] = teaching ;
         hasResult = mysql_stmt_fetch(loadAllTachingProcedure) ;
         i++ ;
+    }
+
+    if (hasResult == 1) {
+        printStatementError(loadAllTachingProcedure, "Fetch Risultato Impossibile per 'Recupera Docenze'") ;
+        freeStatement(loadAllTachingProcedure, true) ;
+        freeDatabaseResult(result) ;
+        return NULL ;
     }
 
     freeStatement(loadAllTachingProcedure, true) ;
@@ -359,15 +377,15 @@ DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int
 
     if (mysql_stmt_execute(generateTeacherReportProcedure) != 0) {
         printStatementError(generateTeacherReportProcedure, "Esecuzione Impossibiler Per 'Genera Report Insegnate'") ;
+        freeStatement(generateTeacherReportProcedure, false) ;
         return NULL ;
     }
 
-    mysql_stmt_store_result(generateTeacherReportProcedure) ;
-
-    DatabaseResult *result = (DatabaseResult *) myMalloc(sizeof(DatabaseResult)) ;
-
-    result->numRows = mysql_stmt_num_rows(generateTeacherReportProcedure) ;
-    result->rowsSet = myMalloc(sizeof(ReportLesson *) * result->numRows) ;
+    if (mysql_stmt_store_result(generateTeacherReportProcedure) != 0) {
+        printStatementError(generateTeacherReportProcedure, "Store Risultato Impossibile per 'Genera Report Insegnante'") ;
+        freeStatement(generateTeacherReportProcedure, true) ;
+        return NULL ;
+    }
 
     MYSQL_BIND returnParam[4] ;
     MYSQL_TIME mysqlDate ;
@@ -386,6 +404,10 @@ DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int
         return NULL ;
     }
 
+    DatabaseResult *result = (DatabaseResult *) myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(generateTeacherReportProcedure) ;
+    result->rowsSet = myMalloc(sizeof(ReportLesson *) * result->numRows) ;
+
     int hasResult = mysql_stmt_fetch(generateTeacherReportProcedure) ;
     int i = 0 ;
     while (hasResult != 1 && hasResult != MYSQL_NO_DATA) {
@@ -398,6 +420,13 @@ DatabaseResult *generateTeacherReportFromDB(char *teacherName, int *yearPtr, int
         result->rowsSet[i] = lesson ;
         i++ ;
         hasResult = mysql_stmt_fetch(generateTeacherReportProcedure) ;
+    }
+
+    if (hasResult == 1) {
+        printStatementError(generateTeacherReportProcedure, "Fetch Impossibile per 'Report Insegnante'") ;
+        freeStatement(generateTeacherReportProcedure, true) ;
+        freeDatabaseResult(result) ;
+        return NULL ;
     }
 
     freeStatement(generateTeacherReportProcedure, true) ;
@@ -438,11 +467,11 @@ DatabaseResult *selectAllLevels() {
     }
     
 
-    mysql_stmt_store_result(preparedStatement) ;
-
-    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
-    result->numRows = mysql_stmt_num_rows(preparedStatement) ;
-    result->rowsSet = myMalloc(sizeof(Level *) * result->numRows) ;
+    if (mysql_stmt_store_result(preparedStatement) != 0) {
+        printStatementError(preparedStatement, "Store Risultato Impossibile per 'Recupera Livelli'") ;
+        freeStatement(preparedStatement, true) ;
+        return NULL ;
+    }
 
     MYSQL_BIND returnParam[3] ;
     char levelName[LEVEL_NAME_MAX_LEN] ;
@@ -458,6 +487,10 @@ DatabaseResult *selectAllLevels() {
         freeStatement(preparedStatement, false) ;
         return NULL ;
     }
+
+    DatabaseResult *result = myMalloc(sizeof(DatabaseResult)) ;
+    result->numRows = mysql_stmt_num_rows(preparedStatement) ;
+    result->rowsSet = myMalloc(sizeof(Level *) * result->numRows) ;
     
 
     int hasResult = mysql_stmt_fetch(preparedStatement) ;
@@ -472,6 +505,13 @@ DatabaseResult *selectAllLevels() {
 
         hasResult = mysql_stmt_fetch(preparedStatement) ;
         i++ ;
+    }
+
+    if (hasResult == 1) {
+        printStatementError(preparedStatement, "Fetch Risultato Impossibile per 'Recupera Livelli'") ;
+        freeStatement(preparedStatement, true) ;
+        freeDatabaseResult(result) ;
+        return NULL ;
     }
     
     freeStatement(preparedStatement, true) ;
@@ -493,7 +533,11 @@ DatabaseResult *selectAllTeachers() {
         return NULL ;
     }
 
-    mysql_stmt_store_result(preparedStatement) ;
+    if (mysql_stmt_store_result(preparedStatement) != 0) {
+        printStatementError(preparedStatement, "Store Result Impossibile per 'Recupera Insegnanti'") ;
+        freeStatement(preparedStatement, true) ;
+        return NULL ;
+    }
 
     char teacherName[TEACHER_NAME_MAX_LEN] ;
     char teacherAddress[TEACHER_ADDRESS_MAX_LEN] ;
@@ -526,6 +570,13 @@ DatabaseResult *selectAllTeachers() {
         i++ ;
 
         hasResult = mysql_stmt_fetch(preparedStatement) ;
+    }
+
+    if (hasResult == 1) {
+        printStatementError(preparedStatement, "Fetch Impossibile per 'Recupera Insegnanti'") ;
+        freeStatement(preparedStatement, true) ;
+        freeDatabaseResult(result) ;
+        return NULL ;
     }
 
     freeStatement(preparedStatement, true) ;

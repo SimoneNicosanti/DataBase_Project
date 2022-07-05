@@ -106,6 +106,10 @@ bool setupPreparedStatement(MYSQL_STMT **statement, char *statementCommand, MYSQ
 }
 
 void freeDatabaseResult(DatabaseResult *databaseResultPtr) {
+    if (databaseResultPtr == NULL) {
+        free(databaseResultPtr) ;
+        return ;
+    }
     int numRows = databaseResultPtr->numRows ;
     for (int i = 0 ; i < numRows ; i++) {
         free(databaseResultPtr->rowsSet[i]) ;
@@ -113,3 +117,4 @@ void freeDatabaseResult(DatabaseResult *databaseResultPtr) {
     free(databaseResultPtr->rowsSet) ;
     free(databaseResultPtr) ;
 }
+
