@@ -150,30 +150,7 @@ bool getFreeTeacherReportInfo(Date *datePtr, Time *timePtr, int *durationPtr) {
     return true ;
 }
 
-/* bool getActivityParticipantsReportInfo(int *activityCode) {
-    printOptionTitle("Report Allievi Partecipanti ad Attività") ;
-    if (!getIntegerFromUser(activityCode, "Inserire Codice Attività >>> ")) {
-        printError("Errore Lettura Codice Attività") ;
-        return false ;
-    }
 
-    return true ;
-}
-
-void printActivityParticipantsReport(Partecipation **partecipationArray, int arrayLen) {
-    char *header[] = {"Nome Allievo", "Telefono Allievo"} ;
-    enum TableFieldType types[] = {STRING, STRING} ;
-
-    Table *table = createTable(arrayLen, 2, header, types) ;
-    for (int i = 0 ; i < arrayLen ; i++) {
-        Partecipation *partecipation = partecipationArray[i] ;
-        setTableElem(table, i, 0, partecipation->studentName) ;
-        setTableElem(table, i, 1, partecipation->studentTelephone) ;
-    }
-
-    printTable(table) ;
-    freeTable(table) ;
-} */
 
 void printFreeTeacherReport(char **teacherNameArray, int arrayLen) {
     char *header[] = {"Nome Insegnante"} ;
