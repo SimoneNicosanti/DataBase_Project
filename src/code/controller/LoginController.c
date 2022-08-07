@@ -18,7 +18,6 @@ void successLogin(Role loginRole, char *username) ;
 void loginController() {
     User loginCredentials ;
 
-    
     do {
         memset(&loginCredentials, 0, sizeof(User)) ;
         Role loginRole = LOGIN ;
