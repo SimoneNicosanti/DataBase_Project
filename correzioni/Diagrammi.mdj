@@ -9930,12 +9930,12 @@
 										"$ref": "AAAAAAGCdyyslOyJ3Ns="
 									},
 									"font": "Times New Roman;16;0",
-									"left": 1068,
-									"top": 967,
+									"left": 1143,
+									"top": 958,
 									"width": 158.3203125,
 									"height": 16,
-									"alpha": -0.08740560284596421,
-									"distance": 194.74342094150447,
+									"alpha": -0.21510709066032918,
+									"distance": 121.80722474467596,
 									"hostEdge": {
 										"$ref": "AAAAAAGCdyysluyN1iY="
 									},
@@ -10740,6 +10740,7 @@
 								"$ref": "AAAAAAGCL2a/2v+xerU="
 							},
 							"name": "dataLezione",
+							"type": "",
 							"isID": true
 						},
 						{
@@ -10749,6 +10750,7 @@
 								"$ref": "AAAAAAGCL2a/2v+xerU="
 							},
 							"name": "orarioInizio",
+							"type": "",
 							"isID": true
 						},
 						{
@@ -10757,7 +10759,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGCL2a/2v+xerU="
 							},
-							"name": "durataLezione"
+							"name": "durataLezione",
+							"type": ""
 						}
 					]
 				},
@@ -10777,6 +10780,7 @@
 								"$ref": "AAAAAAGCL2gWSA82LgU="
 							},
 							"name": "dataLezione",
+							"type": "",
 							"isID": true
 						},
 						{
@@ -10786,6 +10790,7 @@
 								"$ref": "AAAAAAGCL2gWSA82LgU="
 							},
 							"name": "orarioInizio",
+							"type": "",
 							"isID": true
 						},
 						{
@@ -10794,7 +10799,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGCL2gWSA82LgU="
 							},
-							"name": "durataLezione"
+							"name": "durataLezione",
+							"type": ""
 						}
 					]
 				}
